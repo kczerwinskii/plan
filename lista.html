@@ -1,0 +1,50 @@
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Podopieczni</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:linear-gradient(180deg,#2A2A36,#1B1B22 60%,#0E0E12) fixed;color:#EFE9DA;font:14px Poppins,Arial,sans-serif;min-height:100vh;padding:40px 20px;box-sizing:border-box}
+.box{max-width:820px;margin:0 auto;background:#232330;border:1px solid #C9A455;border-radius:8px;padding:24px}
+h1{color:#E6CB80;font-size:22px;margin:0 0 6px}
+table{border-collapse:collapse;width:100%;margin-top:14px}th{color:#E6CB80;text-align:left;font-size:11px;letter-spacing:.5px;text-transform:uppercase;padding:8px;border-bottom:2px solid #C9A455}td{padding:8px;border-bottom:1px solid #4A4A5A;vertical-align:top}
+a{color:#E6CB80}input{background:#1A1A24;color:#EFE9DA;border:1px solid #4A4A5A;border-radius:6px;padding:8px 10px;font:14px Poppins}
+button{background:linear-gradient(180deg,#E6CB80,#C9A455 55%,#8E6B2E);color:#0E0E12;border:1px solid #F5E3A6;border-radius:6px;padding:8px 16px;font:600 14px Poppins;cursor:pointer}
+button.szary{background:#1A1A24;color:#EFE9DA;border:1px solid #4A4A5A}.mut{color:#B9AE94;font-size:13px}.pin{font:800 20px Poppins;color:#E6CB80}
+</style></head><body><div class="box" id="box"><h1>Podopieczni</h1><div id="tresc" class="mut">Wczytuję…</div></div>
+<script>var API_URL = "https://script.google.com/macros/s/AKfycbz48qRxFlyvGcVBSltMbjR8kfuQNCbq-8a5g2gYG7oJgtWiU2ZJ-HLEyux6WGc_Xesq1Q/exec";</script>
+<script>
+var HASLO = null; try { HASLO = localStorage.getItem('trener_haslo'); } catch (e) {}
+function api(b) { if (HASLO) b.haslo = HASLO; return fetch(API_URL, { method: 'POST', body: JSON.stringify(b), redirect: 'follow' }).then(function (r) { return r.json(); }).then(function (r) { if (!r.ok) throw new Error(r.error || 'Błąd serwera'); return r.dane; }); }
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+var BAZA = location.href.replace(/lista\.html.*$/, '');
+function pokazHaslo(msg) {
+  document.getElementById('tresc').innerHTML = '<p>Wpisz hasło trenera.</p><input id="h" type="password" style="font-size:18px"> <button id="hb">Wejdź</button><div id="hm" style="color:#E0684A;margin-top:8px">' + esc(msg || '') + '</div>';
+  var go = function () { HASLO = document.getElementById('h').value.trim(); if (HASLO) wczytaj(); };
+  document.getElementById('hb').onclick = go; document.getElementById('h').addEventListener('keydown', function (e) { if (e.key === 'Enter') go(); }); document.getElementById('h').focus();
+}
+function wczytaj() {
+  if (!HASLO) return pokazHaslo();
+  api({ akcja: 'trener' }).then(function (d) { try { localStorage.setItem('trener_haslo', HASLO); } catch (e) {} rysuj(d.lista); }).catch(function (e) { try { localStorage.removeItem('trener_haslo'); } catch (x) {} HASLO = null; pokazHaslo(e.message); });
+}
+function rysuj(lista) {
+  var h = '<div class="mut">Wyślij podopiecznemu link i PIN (np. na Messengerze). Klika link, wpisuje PIN raz, telefon go pamięta. „Nowy link” unieważnia stary. <a href="' + esc(BAZA) + '">← do planu</a></div>';
+  h += '<table><tr><th>Imię</th><th>E-mail</th><th>Link dla podopiecznego</th><th>PIN</th><th></th></tr>';
+  lista.forEach(function (k) {
+    var link = BAZA + '?k=' + k.token;
+    h += '<tr><td><b>' + esc(k.imie) + '</b><br><a href="' + esc(BAZA) + '?klient=' + esc(k.bazaId) + '">otwórz jako trener →</a></td><td>' + esc(k.email) + '</td><td><input readonly value="' + esc(link) + '" style="width:100%;font-size:11px" onclick="this.select()"><br><button class="kop" style="margin-top:6px;padding:4px 10px;font-size:12px" data-l="' + esc(link) + '">kopiuj link</button></td><td class="pin">' + esc(k.pin) + '</td><td><button class="szary nowy" style="padding:4px 10px;font-size:12px" data-b="' + esc(k.bazaId) + '">nowy link</button></td></tr>';
+  });
+  h += '</table><h1 style="font-size:16px;margin-top:22px">Dodaj podopiecznego</h1><div style="display:flex;gap:8px;flex-wrap:wrap"><input id="imie" placeholder="Imię i nazwisko"><input id="mail" placeholder="e-mail (tylko dla Ciebie)"><button id="dodaj">Dodaj i utwórz bazę</button></div><div class="mut" style="margin-top:8px">Nowa baza to pusty plan z 16 partiami. Podopieczny wchodzi linkiem i PIN-em, e-mail jest tylko notatką dla Ciebie.</div><div id="msg" class="mut" style="margin-top:8px"></div><div class="mut" style="margin-top:18px"><a href="#" id="wyloguj">wyloguj trenera na tym urządzeniu</a></div>';
+  var t = document.getElementById('tresc'); t.innerHTML = h;
+  t.addEventListener('click', function (e) {
+    var b = e.target;
+    if (b.classList.contains('kop')) { navigator.clipboard.writeText(b.dataset.l); b.textContent = 'skopiowano'; }
+    if (b.classList.contains('nowy')) { if (confirm('Stary link i PIN przestaną działać. Wygenerować nowe?')) api({ akcja: 'nowyLink', bazaId: b.dataset.b }).then(wczytaj).catch(function (er) { alert(er.message); }); }
+    if (b.id === 'wyloguj') { e.preventDefault(); try { localStorage.removeItem('trener_haslo'); } catch (x) {} HASLO = null; pokazHaslo(); }
+  });
+  document.getElementById('dodaj').onclick = function () {
+    var i = document.getElementById('imie').value.trim(), m = document.getElementById('mail').value.trim();
+    if (!i || !m) { alert('Wpisz imię i e-mail'); return; }
+    document.getElementById('msg').textContent = 'Tworzę bazę…';
+    api({ akcja: 'dodaj', email: m, imie: i }).then(function (id) { location.href = BAZA + '?klient=' + id; }).catch(function (er) { document.getElementById('msg').textContent = 'Błąd: ' + er.message; });
+  };
+}
+wczytaj();
+</script></body></html>
