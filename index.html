@@ -7,13 +7,13 @@ body{background:linear-gradient(180deg,var(--bg1),var(--bg2) 60%,var(--bg3)) fix
 .GOLD{background:linear-gradient(180deg,#B08A3C,#8C6828 55%,#5E4519)}.NAVY{background:linear-gradient(180deg,#2E3F66,#22304F 60%,#161F36)}.BORDO{background:linear-gradient(180deg,#8E3140,#6E2231 60%,#4A1520)}
 .metal{background:linear-gradient(90deg,#5E4519 0%,#B8933F 20%,#DDBE6C 45%,#C9A455 60%,#8E6B2E 85%,#5E4519 100%)}
 .ttl{display:inline-block;background:linear-gradient(180deg,var(--bg1),var(--bg2) 60%,var(--bg3));color:var(--gl);padding:6px 18px 6px 12px;border-radius:4px;border:1px solid #F5E3A6;font-size:18px;font-weight:700;letter-spacing:.6px;box-shadow:0 2px 6px rgba(0,0,0,.6);cursor:pointer;user-select:none}
-.top{padding:14px 28px;display:flex;align-items:center;gap:36px;border-bottom:3px solid;border-image:linear-gradient(90deg,#8E6B2E,#E6CB80,#8E6B2E) 1;flex-wrap:wrap}
+.top{padding:14px 28px;display:flex;align-items:center;gap:26px;border-bottom:3px solid;border-image:linear-gradient(90deg,#8E6B2E,#E6CB80,#8E6B2E) 1;flex-wrap:wrap}
 .sub{color:var(--gm);font-size:11px;letter-spacing:2px;text-transform:uppercase}
-h1{margin:2px 0 0;font-size:22px;font-weight:700}h1 input{font:inherit;color:inherit;background:transparent;border:0;border-bottom:1px dashed transparent;width:520px}h1 input:focus{outline:0;border-bottom-color:var(--gm)}
+h1{margin:2px 0 0;font-size:22px;font-weight:700}h1 input{font:inherit;color:inherit;background:transparent;border:0;border-bottom:1px dashed transparent;width:480px}h1 input:focus{outline:0;border-bottom-color:var(--gm)}
 .weeks span{font-size:15px;color:var(--iv);display:block;margin-bottom:6px}.weeks b{color:var(--gl);font-size:17px}
 .wk{width:30px;height:30px;display:inline-block;border-radius:4px;border:2px solid var(--gm);margin-right:5px;background:#1E1E28;cursor:pointer;text-align:center;line-height:26px;font-size:18px;color:#0E0E12;font-weight:700;vertical-align:middle}.wk.on{background:linear-gradient(180deg,#E6CB80,#C9A455 55%,#8E6B2E);border-color:#8E6B2E}
 .pal{display:flex;align-items:center;gap:10px}.pal .pl{font-size:14px;font-weight:600}.pb{width:38px;height:38px;border-radius:6px;border:2px solid #F5E3A6;box-shadow:0 2px 6px rgba(0,0,0,.6);cursor:pointer;display:inline-block}.pb.x{background:#1E1E28;border-color:#6F6656;color:#B9AE94;text-align:center;line-height:34px;font-weight:700}
-.kpi{display:flex;gap:12px;margin-left:auto}.kpi div{background:linear-gradient(180deg,#2A2A36,#1B1B22);border:1px solid var(--gm);padding:10px 18px;min-width:170px;text-align:center;border-radius:4px}.kpi b{display:block;font-size:24px;color:var(--gl)}.kpi span{font-size:13px;font-weight:600}
+.kpi{display:flex;gap:12px;margin-left:auto}.kpi div{background:linear-gradient(180deg,#2A2A36,#1B1B22);border:1px solid var(--gm);padding:10px 14px;min-width:150px;text-align:center;border-radius:4px}.kpi b{display:block;font-size:24px;color:var(--gl)}.kpi span{font-size:13px;font-weight:600}
 .kpi em{font-style:normal;color:var(--green);font-size:20px;margin-left:4px}.kpi em.up{color:var(--red)}.kpi small{font-size:13px;color:var(--green);margin-left:4px;font-weight:600}.kpi small.up{color:var(--red)}
 .wrap{display:grid;grid-template-columns:minmax(0,1fr) 640px;gap:24px;padding:24px 28px}.wrap.solo{grid-template-columns:1fr}
 .card{background:var(--card);border:1px solid var(--gm);margin-bottom:8px}.card h2{margin:0;padding:8px 18px;font-size:15px;display:flex;align-items:center;gap:12px}.card h2 .ttl{font-size:18px}
@@ -57,6 +57,23 @@ tr.sum td{background:var(--head);border-top:2px solid var(--gm);font-weight:700;
 .hidden{display:none!important}.mut{color:var(--ivd)}
 .status{position:fixed;left:14px;bottom:14px;font-size:12px;color:var(--ivd);background:rgba(20,20,28,.9);border:1px solid var(--line);border-radius:6px;padding:6px 10px;z-index:40}
 .selbar{display:flex;gap:8px;align-items:center;padding:10px 28px 0;font-size:13px}.selbar select{background:var(--card);color:var(--gl);border:1px solid var(--gm);border-radius:6px;padding:6px 10px;font:600 14px Poppins}
+/* ---------- tryb planowania ---------- */
+.pm{width:100%}.pm th{font-size:10px;padding:6px 4px}.pm th.tt{font-size:11px;letter-spacing:1px;border-bottom:1px solid var(--line)}
+.pm td{padding:3px 4px;font-size:13px}.pm td.pn{text-align:left;font-weight:700;padding-left:10px;color:#fff;text-shadow:0 0 3px #000;white-space:nowrap}
+.pm td.pl{color:var(--gl);font-weight:800;font-size:14px;background:var(--head)}
+.pm td.sep,.pm th.sep{border-left:3px solid var(--gm)!important}
+.pm td.off{background:#17171E!important;color:#4A4A5A}.pm td.dk{background:#1A1A24;border-color:#2C2C38}
+.pm input.c{height:26px;width:52px;text-align:center;font-weight:700;padding:0}.pm td.pn{width:1%}.pm th.tt{white-space:nowrap}.pm input.c::placeholder{color:rgba(255,255,255,.45);font-weight:700}
+.pm input[type=checkbox]{width:18px;height:18px;accent-color:#C9A455;cursor:pointer;vertical-align:middle}
+.pm td.roz{color:var(--gl);font-weight:800;background:var(--head)}.pm td.roz.ok{color:var(--green)}
+.pm tr.sum td{background:var(--head);border-top:2px solid var(--gm);font-weight:800;text-align:center}.pm tr.sum td.pn{text-align:left}
+.pm tr.tot td{background:var(--card);padding:8px 4px;vertical-align:top}.pm tr.tot td.pn{text-align:left;color:var(--iv);font-weight:700}
+.tot .gt{display:inline-block;min-width:54px;padding:6px 10px;border-radius:6px;background:linear-gradient(180deg,#E6CB80,#C9A455 55%,#8E6B2E);color:#0E0E12;font-weight:800;font-size:16px;border:1px solid #F5E3A6}
+.tot .gt.off{background:#2A2A36;color:#6F6656;border-color:#4A4A5A}
+.chips{display:flex;flex-direction:column;gap:5px;align-items:center}.chip{display:inline-block;padding:3px 10px;border-radius:12px;font-size:11px;font-weight:700;color:#fff;border:1px solid rgba(255,255,255,.35);white-space:nowrap}.chip b{margin-left:5px;color:var(--gl)}.chip b.q{color:#FFB4A0}
+tr.sel td{box-shadow:inset 0 0 0 2px #F5E3A6}tr.sel td:first-child{background:#F5E3A6!important;color:#0E0E12!important}
+td.nrc{cursor:pointer;user-select:none}
+.pal .cnt2{font-size:12px;color:var(--ivd);min-width:90px}
 /* ---------- telefon ---------- */
 @media (max-width:760px){
  .top{padding:12px 14px;gap:12px}.top h1{font-size:16px}h1 input{width:100%}.kpi{margin-left:0;width:100%;justify-content:space-between}.kpi div{min-width:0;flex:1;padding:8px 6px}.kpi b{font-size:17px}.kpi span{font-size:10px}.pal{display:none}
@@ -99,7 +116,9 @@ var TIPS = {
  P: 'PRIORYTET: co tydzień staraj się dołożyć ciężar przy dobrej technice. Jeśli nie idzie, dołóż powtórzenie.\n\nPrzykład: 3×10. Dokładasz ciężar i trzymasz 10 (albo chociaż 9)? Progresujesz ciężarem. Dołożyłeś, a powtórzenia spadły do 7–8? W następnym tygodniu ten sam ciężar i wracasz do 10.',
  N: 'NEUTRAL: jak w priorytecie, ale rzadziej. Ciężar dokładasz co drugi tydzień, nie co tydzień. Chodzi o to, żeby jak najwięcej „energii adaptacyjnej” w tym bloku poszło na partie priorytetowe.',
  U: 'UTRZYMANIE: dobierasz ciężar do parametrów (powtórzenia, RiR) i trzymasz go bez zmian przez cały blok. Te partie nie mają rosnąć ani spadać, tylko nie zabierać energii priorytetom.',
- tyg: 'Po zakończonym tygodniu treningowym kliknij kolejną kratkę. Dzięki temu wiem, w którym tygodniu bloku jesteś.'
+ tyg: 'Po zakończonym tygodniu treningowym kliknij kolejną kratkę. Dzięki temu wiem, w którym tygodniu bloku jesteś.',
+ plan: 'Tryb planowania: najpierw zaznacz, które partie robisz w danym treningu (kratka „w tr.”), potem wpisz serie: Rozc. = ćwiczenia w rozciągnięciu, Skr. = w skróceniu. Kolumna „Rozpisane” porównuje sumę z planem z kafelków. Wycinek dla jednego treningu widzisz pod tabelą ćwiczeń („Partie treningu”).',
+ kolor: 'Kliknij numer ćwiczenia (kolumna Nr), żeby je zaznaczyć. Możesz zaznaczyć kilka, także w różnych treningach. Potem kliknij kolor: złoto = Priorytet, granat = Neutral, bordo = Utrzymanie. ✕ czyści zaznaczenie.'
 };
 var INSTR = [
  ['Dwie rzeczy po zakończonym tygodniu treningowym', '<b>1. Wyślij raport.</b> Jak go napisać, masz w karcie „Raport” obok.\n<b>2. Odhacz tydzień.</b> Kliknij kolejną kratkę w polu „Blok” na samej górze. Dzięki temu wiem, w którym tygodniu bloku jesteś, i mogę dobrze zaplanować Twój progres.'],
@@ -109,7 +128,9 @@ var INSTR = [
  ['Jak czytać zapis tempa, np. x211', '1. <b>x</b>: ruch koncentryczny (skrócenie mięśnia) jak najszybciej, przy poprawnej technice,\n2. <b>2</b>: ruch ekscentryczny (opuszczanie) przez 2 sekundy,\n3. <b>1</b>: pauza 1 sekunda w maksymalnym skróceniu,\n4. <b>1</b>: pauza 1 sekunda w maksymalnym rozciągnięciu.'],
  ['Legenda', '<b>SS</b> = super seria: dwa ćwiczenia z tym samym numerem robisz jedno po drugim, bez przerwy.\n<b>DS</b> = drop set: po ostatniej serii od razu zmniejszasz ciężar i robisz kolejną.']
 ];
-var open = { t: {}, waz: false, zal: false, obj: TR, ins: {} , part: {} };
+var open = { t: {}, waz: false, zal: false, obj: TR, ins: {} , part: {}, plan: false };
+var SEL = {};
+var NAZWY_BAZA = ['Wyciskanie sztangi leżąc', 'Wyciskanie hantli leżąc', 'Wyciskanie hantli na ławce skośnej', 'Rozpiętki Butterfly', 'Rozpiętki hantlami', 'Rozpiętka dośrodkowa (cz. G)', 'Pompki na poręczach', 'Wyciskanie francuskie', 'Overhead extension', 'Prostowanie ramion na wyciągu', 'Allahy (skrócenie)', 'Wznosy hantli bokiem', 'Wznosy hantlami na bok barku 90°', 'Wznosy T.B wyciąg', 'Wyciskanie hantli nad głowę', 'Wznosy przodem', 'Odwrotne rozpiętki', 'Face pull', 'Podciąganie na drążku', 'Ściąganie drążka wyciągu górnego', 'Wiosłowanie sztangą', 'Wiosłowanie hantlem', 'Wiosłowanie na wyciągu siedząc', 'Uginanie ramion ze sztangą', 'Uginanie hantli siedząc', 'Uginanie młotkowe', 'Uginanie na modlitewniku', 'Zawijanie miednicy w zwisie', 'Unoszenie nóg w zwisie', 'Plank', 'Allahy', 'Uginanie nadgarstków', 'Martwy ciąg', 'Martwy ciąg rumuński', 'Hip thrust', 'Przysiad ze sztangą', 'Przysiad bułgarski', 'Wykroki', 'Wypychanie na suwnicy', 'Prostowanie nóg na maszynie', 'Uginanie nóg leżąc', 'Uginanie nóg siedząc', 'Przywodzenie nóg na maszynie', 'Odwodzenie nóg na maszynie', 'Wspięcia na palce stojąc', 'Wspięcia na palce siedząc', 'Cardio 45 min', 'Cardio 30 min'];
 var mobT = 1;
 function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
 function n(v) { var x = parseFloat(String(v).replace(',', '.')); return isNaN(x) ? 0 : x; }
@@ -168,12 +189,14 @@ function render() {
   html += '<div class="weeks"><span>Blok: <b>' + (TR ? '<input id="blok" class="c" style="width:44px;color:#E6CB80;font-weight:700;text-align:center" value="' + blok + '">' : blok) + '</b> tyg. · zaliczone: <b>' + zal + '</b> ' + I('tyg') + '</span><div id="wks">';
   for (var i = 0; i < blok; i++) html += '<i class="wk ' + (i < zal ? 'on' : '') + '" data-i="' + i + '">' + (i < zal ? '✓' : '') + '</i>';
   html += '</div></div>';
+  if (TR) { var ns = Object.keys(SEL).length; html += '<div class="pal"><span class="pl">Pokoloruj: ' + I('kolor') + '</span><i class="pb GOLD" title="Priorytet" onclick="koloruj(\'Priorytet\')"></i><i class="pb NAVY" title="Neutral" onclick="koloruj(\'Neutral\')"></i><i class="pb BORDO" title="Utrzymanie" onclick="koloruj(\'Utrzymanie\')"></i><i class="pb x" title="Wyczyść zaznaczenie" onclick="koloruj(null)">✕</i><span class="cnt2">' + (ns ? 'zaznaczone: ' + ns : 'zaznacz przez Nr') + '</span></div>'; }
   html += '<div class="kpi"><div><b>' + serieT + '</b><span>Serie / tydzień</span></div><div><b>' + (TR ? '<input id="kcal" class="c" style="width:110px;color:#E6CB80;font-weight:700;font-size:24px;text-align:center" value="' + esc(U('kcal')) + '">' : (U('kcal') || '–')) + '</b><span>Aktualne kcal</span></div><div><b>' + (last != null ? fmt(last) + ' kg' : '–') + (d != null ? '<em class="' + (d > 0 ? 'up' : '') + '">' + (d < 0 ? '▼' : d > 0 ? '▲' : '=') + '</em><small class="' + (d > 0 ? 'up' : '') + '">' + fmt(Math.abs(d).toFixed(1)) + '</small>' : '') + '</b><span>Aktualna waga</span></div></div></div>';
   if (TR && D.lista && D.lista.length) { html += '<div class="selbar desk">Podopieczny: <select id="selK">' + D.lista.map(function (k) { return '<option value="' + esc(k.bazaId) + '"' + (k.bazaId === D.bazaId ? ' selected' : '') + '>' + esc(k.imie) + ' · ' + esc(k.email) + '</option>'; }).join('') + '</select><a class="pbtn" style="margin-left:8px" href="lista.html">lista / dodaj</a></div>'; }
   // ----- telefon: wybór treningu + karty
   html += '<div class="mob"><div class="selbar">Trening: <select id="mobSel">'; for (var t2 = 1; t2 <= akt; t2++) html += '<option value="' + t2 + '"' + (t2 === mobT ? ' selected' : '') + '>Trening ' + t2 + '</option>'; html += '</select><a class="v" style="margin-left:auto" target="_blank" href="' + esc(D.rozgrzewka) + '" title="Rozgrzewka">▶</a></div><div id="mobcards" style="padding-top:10px"></div></div>';
   // ----- komputer
   html += '<div class="wrap desk' + (TR ? '' : ' solo') + '"><div>';
+  if (TR) html += planowanie();
   for (var t3 = 1; t3 <= 5; t3++) {
     var inact = t3 > akt;
     if (inact) { html += '<div class="acc off"><span class="chev">·</span>Trening ' + t3 + '<span class="cnt">Nieaktywny</span></div>'; continue; }
@@ -188,7 +211,7 @@ function render() {
   html += '</div><div>' + (TR ? objetosc() : '') + zalecenia() + '</div></div>';
   html += '<div class="igrid desk">' + INSTR.map(function (x, i) { return open.ins[i] ? '<div class="card"><h2 class="metal"><span class="ttl" onclick="tog(\'ins\',' + i + ')" style="font-size:15px">▾ &nbsp;' + esc(x[0]) + '</span></h2><div class="ibody">' + x[1] + '</div></div>' : '<div class="acc" style="margin:0" onclick="tog(\'ins\',' + i + ')"><span class="chev">▸</span>' + esc(x[0]) + '</div>'; }).join('') + '</div>';
   html += '<div class="mob" style="padding:0 10px 30px">' + INSTR.map(function (x, i) { return open.ins[i] ? '<div class="card"><h2 class="metal"><span class="ttl" onclick="tog(\'ins\',' + i + ')" style="font-size:14px">▾ &nbsp;' + esc(x[0]) + '</span></h2><div class="ibody">' + x[1] + '</div></div>' : '<div class="acc" onclick="tog(\'ins\',' + i + ')"><span class="chev">▸</span>' + esc(x[0]) + '</div>'; }).join('') + '</div>';
-  app.innerHTML = html;
+  app.innerHTML = html + (TR ? datalist() : '');
   bindAll();
   renderMob();
 }
@@ -198,7 +221,7 @@ function tabela(t) {
     var c = rows[i];
     if (!c) { if (!TR) { out += '<tr class="empty"><td>' + (i + 1) + '</td>' + '<td></td>'.repeat(16) + '</tr>'; } else { out += '<tr class="empty"><td>' + (i + 1) + '</td><td class="ex" colspan="16"><button class="btn" style="padding:4px 10px" onclick="dodajCw(' + t + ',' + (i + 1) + ')">+ dodaj ćwiczenie</button></td><td></td></tr>'; } continue; }
     var k = TYP[c.typ] || 'X', sets = n(c.sets);
-    out += '<tr class="r' + k + '" data-id="' + c.id + '"><td>' + (i + 1) + '</td><td class="ex">' + (TR ? '<input class="c" data-f="nazwa" value="' + esc(c.nazwa) + '">' : esc(c.nazwa)) + '</td>';
+    out += '<tr class="r' + k + (TR && SEL[c.id] ? ' sel' : '') + '" data-id="' + c.id + '">' + (TR ? '<td class="nrc" title="Kliknij, żeby zaznaczyć" onclick="zaznacz(\'' + c.id + '\')">' : '<td>') + (i + 1) + '</td><td class="ex">' + (TR ? '<input class="c" data-f="nazwa" list="nazwy" autocomplete="off" value="' + esc(c.nazwa) + '">' : esc(c.nazwa)) + '</td>';
     for (var p = 1; p <= 6; p++) out += '<td class="rep ' + (p <= sets ? 'plan' : '') + '">' + (p <= sets ? '<input class="c" data-f="p' + p + '" inputmode="numeric" value="' + esc(c['p' + p]) + '">' : '') + '</td>';
     out += '<td class="w"><input class="c" data-f="ciezar_akt" inputmode="decimal" value="' + esc(c.ciezar_akt) + '"></td><td class="w">' + (TR ? '<input class="c" data-f="ciezar_start" inputmode="decimal" value="' + esc(c.ciezar_start) + '">' : esc(c.ciezar_start)) + '</td>';
     ['sets', 'reps', 'przerwa', 'rir', 'tempo'].forEach(function (f) { out += '<td>' + (TR ? '<input class="c" data-f="' + f + '" value="' + esc(c[f]) + '" style="width:56px">' : esc(c[f])) + '</td>'; });
@@ -221,7 +244,8 @@ function partieTreningu(t) {
 }
 function rozpisane(p) { var s = 0; for (var t = 1; t <= 5; t++) s += n(p['t' + t + '_r']) + n(p['t' + t + '_s']); return p.plan ? s + ' / ' + p.plan : '–'; }
 function objetosc() {
-  if (!open.obj) return '<div class="acc" onclick="tog(\'obj\')"><span class="chev">▸</span>Objętość na partię · 16 partii</div>';
+  var st = statPlan();
+  if (!open.obj) return '<div class="acc" onclick="tog(\'obj\')"><span class="chev">▸</span>Objętość na partię · 16 partii<span class="cnt">' + st.serie + ' serii · plan rozpisany ' + st.roz + ' / ' + st.plan + '</span></div>';
   var out = '<div class="card"><h2 class="metal"><span class="ttl" onclick="tog(\'obj\')">▾ &nbsp;Objętość na partię · 16 partii</span></h2><div class="grid">';
   D.partieLista.forEach(function (name) {
     var p = D.partie.filter(function (x) { return x.partia === name; })[0]; if (!p) return;
@@ -229,8 +253,67 @@ function objetosc() {
     var k = plan >= 6 ? 'P' : plan > 0 ? 'N' : 'U'; var pct = plan ? Math.min(100, Math.round(s / plan * 100)) : 0;
     out += '<div class="tile ' + k + ' ' + (k === 'P' ? 'GOLD' : k === 'N' ? 'NAVY' : 'BORDO') + '" data-p="' + esc(name) + '"><i class="chk ' + (plan && s >= plan ? 'on' : '') + '">' + (plan && s >= plan ? '✓' : '') + '</i><b><input data-f="plan" inputmode="numeric" value="' + esc(p.plan) + '" placeholder="–"></b><span>' + esc(name) + '</span><small>Region: <input data-f="region" value="' + esc(p.region) + '" placeholder="do ustalenia"></small><div class="alloc"><em style="width:' + pct + '%"></em></div><u>' + (plan ? 'rozpisane ' + s + ' / ' + plan + (s < plan ? ' · brakuje ' + (plan - s) : '') : 'poza planem') + '</u></div>';
   });
-  out += '</div><div class="mut" style="padding:0 12px 12px;font-size:12px">Plan i region wpisujesz tu. Rozpisanie serii na treningi: tryb planowania (następny etap).</div></div>';
+  out += '</div><div class="mut" style="padding:0 12px 12px;font-size:12px">Plan i region wpisujesz tu. Serie na poszczególne treningi rozpisujesz w trybie planowania (na górze, nad treningami).</div></div>';
   return out;
+}
+function klasaP(p) { var plan = n(p.plan); return plan >= 6 ? 'GOLD' : plan > 0 ? 'NAVY' : 'BORDO'; }
+function wTr(p, t) { var v = p['t' + t + '_w']; return v === true || v === 'TRUE' || v === 'true'; }
+function statPlan() {
+  var plan = 0, roz = 0, serie = 0, akt = aktywne();
+  D.partie.forEach(function (p) { plan += n(p.plan); for (var t = 1; t <= 5; t++) { var s = n(p['t' + t + '_r']) + n(p['t' + t + '_s']); roz += s; } });
+  for (var t = 1; t <= akt; t++) serie += serie_(t);
+  return { plan: plan, roz: roz, serie: serie };
+}
+function serie_(t) { return serie(t); }
+function planowanie() {
+  var akt = aktywne();
+  if (!open.plan) return '<div class="acc" onclick="tog(\'plan\')"><span class="chev">▸</span>Tryb planowania · partie × treningi<span class="cnt">16 partii · ' + akt + ' treningów</span></div>';
+  var out = '<div class="card"><h2 class="metal"><span class="ttl" onclick="tog(\'plan\')">▾ &nbsp;Tryb planowania · partie × treningi</span><span class="pbtn" style="cursor:default">' + I('plan') + ' &nbsp;najpierw partie, potem serie</span></h2>';
+  out += '<table class="pm"><tr><th class="l tt" rowspan="2">Partia</th><th class="tt" rowspan="2">Plan</th>';
+  for (var t = 1; t <= 5; t++) out += '<th class="tt sep" colspan="3"' + (t > akt ? ' style="color:#6F6656"' : '') + '>Trening ' + t + (t > akt ? ' · nieakt.' : '') + '</th>';
+  out += '<th class="tt sep" rowspan="2">Rozpisane</th></tr><tr>';
+  for (var t2 = 1; t2 <= 5; t2++) out += '<th class="sep">w tr.</th><th>Rozc.</th><th>Skr.</th>';
+  out += '</tr>';
+  var sumR = [0, 0, 0, 0, 0, 0], sumS = [0, 0, 0, 0, 0, 0], planT = 0, rozT = 0, chips = [[], [], [], [], [], []];
+  D.partieLista.forEach(function (name) {
+    var p = D.partie.filter(function (x) { return x.partia === name; })[0]; if (!p) return;
+    var kl = klasaP(p), plan = n(p.plan), roz = 0;
+    out += '<tr data-p="' + esc(name) + '"><td class="pn ' + kl + '">' + esc(name) + '</td><td class="pl">' + (plan || '–') + '</td>';
+    for (var t3 = 1; t3 <= 5; t3++) {
+      var w = wTr(p, t3), r = p['t' + t3 + '_r'], s = p['t' + t3 + '_s'], rs = n(r) + n(s); roz += rs;
+      if (t3 <= akt) { sumR[t3] += n(r); sumS[t3] += n(s); if (w) chips[t3].push({ name: name, kl: kl, n: rs }); }
+      if (t3 > akt) { out += '<td class="off sep"></td><td class="off"></td><td class="off"></td>'; continue; }
+      out += '<td class="sep ' + (w ? kl : 'dk') + '"><input type="checkbox" data-f="t' + t3 + '_w"' + (w ? ' checked' : '') + '></td>';
+      if (w) out += '<td class="' + kl + '"><input class="c" data-f="t' + t3 + '_r" inputmode="numeric" placeholder="?" value="' + esc(r) + '"></td><td class="' + kl + '"><input class="c" data-f="t' + t3 + '_s" inputmode="numeric" placeholder="?" value="' + esc(s) + '"></td>';
+      else out += '<td class="dk"></td><td class="dk"></td>';
+    }
+    planT += plan; rozT += roz;
+    out += '<td class="roz sep ' + (plan && roz >= plan ? 'ok' : '') + '">' + (plan ? roz + ' / ' + plan : (roz ? roz + ' / –' : '–')) + '</td></tr>';
+  });
+  out += '<tr class="sum"><td class="pn">Suma</td><td>' + planT + '</td>';
+  for (var t4 = 1; t4 <= 5; t4++) out += t4 <= akt ? '<td class="sep"></td><td>' + (sumR[t4] || '') + '</td><td>' + (sumS[t4] || '') + '</td>' : '<td class="sep off"></td><td class="off"></td><td class="off"></td>';
+  out += '<td class="sep">' + rozT + ' / ' + planT + '</td></tr>';
+  out += '<tr class="tot"><td class="pn">Łącznie na treningu</td><td></td>';
+  for (var t5 = 1; t5 <= 5; t5++) { var tot = sumR[t5] + sumS[t5]; out += '<td class="sep" colspan="3"><span class="gt ' + (t5 > akt || !tot ? 'off' : '') + '">' + (t5 > akt ? '–' : (tot || '–')) + '</span></td>'; }
+  out += '<td class="sep"></td></tr>';
+  out += '<tr class="tot"><td class="pn">Partie w treningu</td><td></td>';
+  for (var t6 = 1; t6 <= 5; t6++) { out += '<td class="sep" colspan="3"><div class="chips">' + (t6 > akt ? '<span class="mut">–</span>' : (chips[t6].length ? chips[t6].map(function (c) { return '<span class="chip ' + c.kl + '">' + esc(c.name) + '<b' + (c.n ? '' : ' class="q"') + '>' + (c.n || '?') + '</b></span>'; }).join('') : '<span class="mut">brak</span>')) + '</div></td>'; }
+  out += '<td class="sep"></td></tr></table>';
+  out += '<div class="mut" style="padding:10px 14px;font-size:12px">Kratka „w tr.” przypisuje partię do treningu, potem wpisz serie w rozciągnięciu (Rozc.) i skróceniu (Skr.). Znak ? = partia przypisana, ale bez serii. Kolor wiersza = plan z kafelka: 6+ złoto, 1–5 granat, brak planu bordo.</div></div>';
+  return out;
+}
+function zaznacz(id) { if (SEL[id]) delete SEL[id]; else SEL[id] = true; render(); }
+function koloruj(typ) {
+  var ids = Object.keys(SEL);
+  if (typ === null) { SEL = {}; render(); return; }
+  if (!ids.length) { status('Najpierw kliknij numer ćwiczenia (kolumna Nr), żeby je zaznaczyć.', true, true); return; }
+  ids.forEach(function (id) { var c = D.cwiczenia.filter(function (x) { return x.id === id; })[0]; if (!c) return; c.typ = typ; push({ tab: 'Cwiczenia', id: id, pole: 'typ', wartosc: typ }); });
+  SEL = {}; render();
+}
+function datalist() {
+  var seen = {}, out = '<datalist id="nazwy">';
+  D.cwiczenia.map(function (c) { return String(c.nazwa || '').trim(); }).concat(NAZWY_BAZA).forEach(function (nm) { if (!nm || seen[nm.toLowerCase()]) return; seen[nm.toLowerCase()] = 1; out += '<option value="' + esc(nm) + '">'; });
+  return out + '</datalist>';
 }
 function wazenia() {
   var rows = wazSorted();
@@ -283,6 +366,7 @@ function bindAll() {
     if (tab === 'Wazenia' && (el.dataset.f === 'waga' || el.dataset.f === 'data')) after = function () { clearTimeout(window._kt); window._kt = setTimeout(render, 900); };
     bind(el, o, el.dataset.f, tab, { change: el.tagName === 'SELECT' || el.type === 'date', after: after });
   });
+  document.querySelectorAll('.pm [data-p] [data-f]').forEach(function (el) { var name = el.closest('[data-p]').dataset.p; var o = D.partie.filter(function (p) { return p.partia === name; })[0]; if (!o) return; var cb = el.type === 'checkbox'; bind(el, o, el.dataset.f, 'Partie', { change: cb, after: function () { clearTimeout(window._pm); window._pm = setTimeout(render, cb ? 60 : 900); } }); });
   document.querySelectorAll('.tile [data-f]').forEach(function (el) { var name = el.closest('.tile').dataset.p; var o = D.partie.filter(function (p) { return p.partia === name; })[0]; if (o) bind(el, o, el.dataset.f, 'Partie', { after: function () { clearTimeout(window._pt); window._pt = setTimeout(render, 900); } }); });
   document.querySelectorAll('.wk').forEach(function (el) { el.onclick = function () { var i = n(el.dataset.i); var z = n(U('zaliczone')); var nz = i < z ? i : i + 1; D.ustawienia.zaliczone = nz; push({ tab: 'Ustawienia', klucz: 'zaliczone', wartosc: nz }); render(); }; });
   var cel = document.getElementById('cel'); if (cel) bind(cel, D.ustawienia, 'cel', 'Ustawienia');
@@ -305,8 +389,8 @@ function pinScreen(msg) {
 function wczytajPin(pin) {
   var k0 = D.k;
   api({ akcja: 'wczytaj', k: k0, pin: pin }).then(function (dane) {
-    try { localStorage.setItem('pin_' + k0, pin); } catch (e) {}
-    AUTH = { k: k0, pin: pin }; D = dane; D.url = URL_STRONY; TR = false; render();
+    var pierwszy = false; try { pierwszy = !localStorage.getItem('pin_' + k0); localStorage.setItem('pin_' + k0, pin); } catch (e) {}
+    AUTH = { k: k0, pin: pin }; D = dane; D.url = URL_STRONY; TR = false; render(); if (pierwszy) kartaEkran();
   }).catch(function (e) { try { localStorage.removeItem('pin_' + k0); } catch (x) {} pinScreen(String(e.message || e).replace(/^Error:\s*/, '')); });
 }
 function ladowanie(t) { document.getElementById('app').innerHTML = '<div class="mut" style="padding:60px;text-align:center;font-size:28px">' + t + '</div>'; }
@@ -322,6 +406,16 @@ function wczytajTrenera() {
     try { localStorage.setItem('trener_haslo', HASLO); } catch (e) {}
     D = dane; D.url = URL_STRONY; TR = true; render();
   }).catch(function (e) { try { localStorage.removeItem('trener_haslo'); } catch (x) {} HASLO = null; hasloScreen(String(e.message || e)); });
+}
+// karta „dodaj do ekranu” po pierwszym udanym PIN-ie (raz; iPhone = instrukcja, Android = instrukcja Chrome)
+function kartaEkran() {
+  var ios = /iPhone|iPad/i.test(navigator.userAgent), android = /Android/i.test(navigator.userAgent);
+  if (!ios && !android) return;
+  var tekst = ios ? 'Kliknij <b>ikonę udostępniania</b> (kwadrat ze strzałką w górę, na dole Safari), zjedź niżej i wybierz <b>„Do ekranu początkowego”</b>. Plan pojawi się jako ikonka obok innych aplikacji.' : 'Kliknij <b>trzy kropki</b> w prawym górnym rogu Chrome i wybierz <b>„Dodaj do ekranu głównego”</b> (albo „Zainstaluj aplikację”). Plan pojawi się jako ikonka obok innych aplikacji.';
+  var box = document.createElement('div'); box.id = 'a2hs';
+  box.innerHTML = '<div style="position:fixed;left:0;right:0;bottom:0;z-index:60;padding:28px;background:linear-gradient(180deg,#2E3F66,#161F36);border-top:3px solid var(--gm);box-shadow:0 -8px 30px rgba(0,0,0,.6);font-size:26px;line-height:1.4"><div style="max-width:1100px;margin:0 auto;display:flex;gap:28px;align-items:center;flex-wrap:wrap"><div style="flex:1;min-width:400px"><b style="color:var(--gl);font-size:30px;display:block;margin-bottom:8px">Chcesz mieć plan pod ikonką?</b>' + tekst + '</div><button class="btn" id="a2hsOk" style="height:72px;font-size:26px;padding:0 34px">Nie teraz, wejdę z linku</button></div></div>';
+  document.body.appendChild(box);
+  document.getElementById('a2hsOk').onclick = function () { box.remove(); };
 }
 (function start() {
   var q = new URLSearchParams(location.search), k = q.get('k');
