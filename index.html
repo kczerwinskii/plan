@@ -9,13 +9,13 @@ body{background:linear-gradient(180deg,var(--bg1),var(--bg2) 60%,var(--bg3)) fix
 .ttl{display:inline-block;background:linear-gradient(180deg,var(--bg1),var(--bg2) 60%,var(--bg3));color:var(--gl);padding:6px 18px 6px 12px;border-radius:4px;border:1px solid #F5E3A6;font-size:18px;font-weight:700;letter-spacing:.6px;box-shadow:0 2px 6px rgba(0,0,0,.6);cursor:pointer;user-select:none}
 .top{padding:14px 28px;display:flex;align-items:center;gap:26px;border-bottom:3px solid;border-image:linear-gradient(90deg,#8E6B2E,#E6CB80,#8E6B2E) 1;flex-wrap:wrap}
 .sub{color:var(--gm);font-size:11px;letter-spacing:2px;text-transform:uppercase}
-h1{margin:2px 0 0;font-size:22px;font-weight:700}h1 input{font:inherit;color:inherit;background:transparent;border:0;border-bottom:1px dashed transparent;width:480px}h1 input:focus{outline:0;border-bottom-color:var(--gm)}
+h1{margin:2px 0 0;font-size:22px;font-weight:700}h1 input{font:inherit;color:inherit;background:transparent;border:0;border-bottom:1px dashed transparent;width:100%}.top>div:first-child{flex:1 1 300px;min-width:280px}h1 input:focus{outline:0;border-bottom-color:var(--gm)}
 .weeks span{font-size:15px;color:var(--iv);display:block;margin-bottom:6px}.weeks b{color:var(--gl);font-size:17px}
 .wk{width:30px;height:30px;display:inline-block;border-radius:4px;border:2px solid var(--gm);margin-right:5px;background:#1E1E28;cursor:pointer;text-align:center;line-height:26px;font-size:18px;color:#0E0E12;font-weight:700;vertical-align:middle}.wk.on{background:linear-gradient(180deg,#E6CB80,#C9A455 55%,#8E6B2E);border-color:#8E6B2E}
 .pal{display:flex;align-items:center;gap:10px}.pal .pl{font-size:14px;font-weight:600}.pb{width:38px;height:38px;border-radius:6px;border:2px solid #F5E3A6;box-shadow:0 2px 6px rgba(0,0,0,.6);cursor:pointer;display:inline-block}.pb.x{background:#1E1E28;border-color:#6F6656;color:#B9AE94;text-align:center;line-height:34px;font-weight:700}
 .kpi{display:flex;gap:12px;margin-left:auto}.kpi div{background:linear-gradient(180deg,#2A2A36,#1B1B22);border:1px solid var(--gm);padding:10px 14px;min-width:150px;text-align:center;border-radius:4px}.kpi b{display:block;font-size:24px;color:var(--gl)}.kpi span{font-size:13px;font-weight:600}
 .kpi em{font-style:normal;color:var(--green);font-size:20px;margin-left:4px}.kpi em.up{color:var(--red)}.kpi small{font-size:13px;color:var(--green);margin-left:4px;font-weight:600}.kpi small.up{color:var(--red)}
-.wrap{display:grid;grid-template-columns:minmax(0,1fr) 640px;gap:24px;padding:24px 28px}.wrap.solo{grid-template-columns:1fr}
+.wrap{display:grid;grid-template-columns:minmax(0,1fr) 600px;gap:22px;padding:24px 28px}.wrap.solo{grid-template-columns:1fr}
 .card{background:var(--card);border:1px solid var(--gm);margin-bottom:8px}.card h2{margin:0;padding:8px 18px;font-size:15px;display:flex;align-items:center;gap:12px}.card h2 .ttl{font-size:18px}
 .acc{padding:11px 16px;font-size:15px;font-weight:700;display:flex;gap:12px;align-items:center;margin-bottom:8px;background:var(--card);color:var(--iv);border:1px solid var(--line);border-left:6px solid var(--gm);cursor:pointer;user-select:none}.acc .cnt{margin-left:auto;font-size:12px;font-weight:500;opacity:.8}.chev{color:var(--gl);font-size:16px}
 .acc.off{background:#17171E;color:#6F6656;border-left-color:#4A4A5A;border-style:dashed;border-left-style:solid;cursor:default}.acc.off .chev{color:#4A4A5A}.acc.off .cnt{opacity:1;color:#8A8272;font-weight:600;letter-spacing:.5px;text-transform:uppercase;font-size:11px;border:1px solid #4A4A5A;padding:3px 10px;border-radius:10px}
@@ -57,6 +57,8 @@ tr.sum td{background:var(--head);border-top:2px solid var(--gm);font-weight:700;
 .hidden{display:none!important}.mut{color:var(--ivd)}
 .status{position:fixed;left:14px;bottom:14px;font-size:12px;color:var(--ivd);background:rgba(20,20,28,.9);border:1px solid var(--line);border-radius:6px;padding:6px 10px;z-index:40}
 .selbar{display:flex;gap:8px;align-items:center;padding:10px 28px 0;font-size:13px}.selbar select{background:var(--card);color:var(--gl);border:1px solid var(--gm);border-radius:6px;padding:6px 10px;font:600 14px Poppins}
+/* trener: ciaśniejsza tabela */
+.tr td.ex{min-width:190px}.tr td.rep{width:40px}.tr td.rep input.c{font-size:13px;height:28px}.tr td.w{width:64px}.tr td.w input.c{padding:4px 2px}.tr td.note{min-width:150px}.tr input.c[data-f=sets],.tr input.c[data-f=reps],.tr input.c[data-f=rir]{width:40px!important}.tr input.c[data-f=przerwa],.tr input.c[data-f=tempo]{width:52px!important}.tr td{padding:6px 3px}.tr th{padding:7px 3px;font-size:10px;letter-spacing:.2px}.tr th .inf{width:14px;height:14px;line-height:14px;font-size:10px}.tr input.c[data-f=wideo]{width:50px!important}.tr td.note input.c{padding:4px 2px}
 /* ---------- tryb planowania ---------- */
 .pm{width:100%}.pm th{font-size:10px;padding:6px 4px}.pm th.tt{font-size:11px;letter-spacing:1px;border-bottom:1px solid var(--line)}
 .pm td{padding:3px 4px;font-size:13px}.pm td.pn{text-align:left;font-weight:700;padding-left:10px;color:#fff;text-shadow:0 0 3px #000;white-space:nowrap}
@@ -74,6 +76,10 @@ tr.sum td{background:var(--head);border-top:2px solid var(--gm);font-weight:700;
 tr.sel td{box-shadow:inset 0 0 0 2px #F5E3A6}tr.sel td:first-child{background:#F5E3A6!important;color:#0E0E12!important}
 td.nrc{cursor:pointer;user-select:none}
 .pal .cnt2{font-size:12px;color:var(--ivd);min-width:90px}
+td.act{background:var(--card)!important;border-color:var(--line)!important;padding:2px;white-space:nowrap;width:66px}td.act i{display:inline-block;width:18px;height:18px;line-height:18px;text-align:center;border-radius:3px;font-style:normal;font-size:11px;color:var(--ivd);cursor:pointer;border:1px solid transparent}td.act i:hover{color:var(--gl);border-color:var(--gm)}td.act i.del:hover{color:var(--red);border-color:var(--red)}
+.tn{font-size:13px;color:var(--gl);font-weight:600;margin-left:8px}.tn input{background:transparent;border:0;border-bottom:1px dashed var(--gm);color:var(--gl);font:600 13px Poppins;width:140px}.tn input:focus{outline:0}
+.weeks select.c{background:var(--card);color:var(--gl);border:1px solid var(--gm);border-radius:4px;font:700 15px Poppins;padding:2px 6px;width:auto}
+.sub input{background:transparent;border:0;border-bottom:1px dashed var(--gm);color:var(--gm);font:inherit;letter-spacing:2px;text-transform:uppercase;width:120px}.sub input:focus{outline:0}
 /* ---------- telefon ---------- */
 @media (max-width:760px){
  .top{padding:12px 14px;gap:12px}.top h1{font-size:16px}h1 input{width:100%}.kpi{margin-left:0;width:100%;justify-content:space-between}.kpi div{min-width:0;flex:1;padding:8px 6px}.kpi b{font-size:17px}.kpi span{font-size:10px}.pal{display:none}
@@ -129,7 +135,7 @@ var INSTR = [
  ['Legenda', '<b>SS</b> = super seria: dwa ćwiczenia z tym samym numerem robisz jedno po drugim, bez przerwy.\n<b>DS</b> = drop set: po ostatniej serii od razu zmniejszasz ciężar i robisz kolejną.']
 ];
 var open = { t: {}, waz: false, zal: false, obj: TR, ins: {} , part: {}, plan: false };
-var SEL = {};
+var SEL = {}, SHOW_TYP = false; // kolumna Typ schowana: kolor ustawia „Pokoloruj zaznaczone”
 var NAZWY_BAZA = ['Wyciskanie sztangi leżąc', 'Wyciskanie hantli leżąc', 'Wyciskanie hantli na ławce skośnej', 'Rozpiętki Butterfly', 'Rozpiętki hantlami', 'Rozpiętka dośrodkowa (cz. G)', 'Pompki na poręczach', 'Wyciskanie francuskie', 'Overhead extension', 'Prostowanie ramion na wyciągu', 'Allahy (skrócenie)', 'Wznosy hantli bokiem', 'Wznosy hantlami na bok barku 90°', 'Wznosy T.B wyciąg', 'Wyciskanie hantli nad głowę', 'Wznosy przodem', 'Odwrotne rozpiętki', 'Face pull', 'Podciąganie na drążku', 'Ściąganie drążka wyciągu górnego', 'Wiosłowanie sztangą', 'Wiosłowanie hantlem', 'Wiosłowanie na wyciągu siedząc', 'Uginanie ramion ze sztangą', 'Uginanie hantli siedząc', 'Uginanie młotkowe', 'Uginanie na modlitewniku', 'Zawijanie miednicy w zwisie', 'Unoszenie nóg w zwisie', 'Plank', 'Allahy', 'Uginanie nadgarstków', 'Martwy ciąg', 'Martwy ciąg rumuński', 'Hip thrust', 'Przysiad ze sztangą', 'Przysiad bułgarski', 'Wykroki', 'Wypychanie na suwnicy', 'Prostowanie nóg na maszynie', 'Uginanie nóg leżąc', 'Uginanie nóg siedząc', 'Przywodzenie nóg na maszynie', 'Odwodzenie nóg na maszynie', 'Wspięcia na palce stojąc', 'Wspięcia na palce siedząc', 'Cardio 45 min', 'Cardio 30 min'];
 var mobT = 1;
 function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
@@ -185,8 +191,8 @@ function render() {
   var d = last != null && prev != null ? last - prev : null;
   var serieT = 0; for (var t = 1; t <= akt; t++) serieT += serie(t);
   var html = '';
-  html += '<div class="top"><div><div class="sub">Plan treningowy' + (U('klub') ? ' · ' + esc(U('klub')) : '') + (TR ? ' · <span style="color:#E6CB80">TRENER</span>' : '') + '</div><h1>Cel: ' + (TR ? '<input id="cel" value="' + esc(U('cel')) + '" placeholder="wpisz cel bloku">' : esc(U('cel'))) + '</h1></div>';
-  html += '<div class="weeks"><span>Blok: <b>' + (TR ? '<input id="blok" class="c" style="width:44px;color:#E6CB80;font-weight:700;text-align:center" value="' + blok + '">' : blok) + '</b> tyg. · zaliczone: <b>' + zal + '</b> ' + I('tyg') + '</span><div id="wks">';
+  html += '<div class="top"><div><div class="sub">Plan treningowy · ' + (TR ? '<input id="klub" value="' + esc(U('klub')) + '" placeholder="klub / miejsce" title="Klub lub miejsce treningów">' : (U('klub') ? esc(U('klub')) : '')) + (TR ? ' · <span style="color:#E6CB80">TRENER</span>' : '') + '</div><h1>Cel: ' + (TR ? '<input id="cel" value="' + esc(U('cel')) + '" placeholder="wpisz cel bloku">' : esc(U('cel'))) + '</h1></div>';
+  html += '<div class="weeks"><span>Blok: <b>' + (TR ? '<input id="blok" class="c" style="width:44px;color:#E6CB80;font-weight:700;text-align:center" value="' + blok + '">' : blok) + '</b> tyg. · zaliczone: <b>' + zal + '</b> ' + I('tyg') + (TR ? ' &nbsp;· treningi/tydz.: <select id="treningi" class="c" title="Ile treningów w tygodniu ma ten plan">' + [1, 2, 3, 4, 5].map(function (x) { return '<option' + (x === akt ? ' selected' : '') + '>' + x + '</option>'; }).join('') + '</select>' : '') + '</span><div id="wks">';
   for (var i = 0; i < blok; i++) html += '<i class="wk ' + (i < zal ? 'on' : '') + '" data-i="' + i + '">' + (i < zal ? '✓' : '') + '</i>';
   html += '</div></div>';
   if (TR) { var ns = Object.keys(SEL).length; html += '<div class="pal"><span class="pl">Pokoloruj: ' + I('kolor') + '</span><i class="pb GOLD" title="Priorytet" onclick="koloruj(\'Priorytet\')"></i><i class="pb NAVY" title="Neutral" onclick="koloruj(\'Neutral\')"></i><i class="pb BORDO" title="Utrzymanie" onclick="koloruj(\'Utrzymanie\')"></i><i class="pb x" title="Wyczyść zaznaczenie" onclick="koloruj(null)">✕</i><span class="cnt2">' + (ns ? 'zaznaczone: ' + ns : 'zaznacz przez Nr') + '</span></div>'; }
@@ -201,8 +207,8 @@ function render() {
     var inact = t3 > akt;
     if (inact) { html += '<div class="acc off"><span class="chev">·</span>Trening ' + t3 + '<span class="cnt">Nieaktywny</span></div>'; continue; }
     var isOpen = open.t[t3] == null ? t3 === 1 : open.t[t3];
-    if (!isOpen) { html += '<div class="acc" onclick="tog(\'t\',' + t3 + ')"><span class="chev">▸</span>Trening ' + t3 + '<span class="cnt">' + cw(t3).length + ' ćwiczeń · ' + serie(t3) + ' serii</span></div>'; continue; }
-    html += '<div class="card"><h2 class="metal"><span class="ttl" onclick="tog(\'t\',' + t3 + ')">▾ &nbsp;Trening ' + t3 + '</span>' + (TR ? '<span class="pbtn ' + (open.part[t3] ? 'on' : '') + '" onclick="tog(\'part\',' + t3 + ')">' + (open.part[t3] ? '▾' : '▸') + ' &nbsp;Partie treningu <small>' + (open.part[t3] ? 'ukryj' : 'pokaż') + '</small></span>' : '<span style="margin-left:auto"></span>') + '<a class="pbtn rz" target="_blank" href="' + esc(D.rozgrzewka) + '">▶ &nbsp;Rozgrzewka</a></h2>';
+    if (!isOpen) { html += '<div class="acc" onclick="tog(\'t\',' + t3 + ')"><span class="chev">▸</span>Trening ' + t3 + (U('nazwa_t' + t3) ? ' <span class="tn">· ' + esc(U('nazwa_t' + t3)) + '</span>' : '') + '<span class="cnt">' + cw(t3).length + ' ćwiczeń · ' + serie(t3) + ' serii</span></div>'; continue; }
+    html += '<div class="card"><h2 class="metal"><span class="ttl" onclick="tog(\'t\',' + t3 + ')">▾ &nbsp;Trening ' + t3 + '</span>' + (TR ? '<span class="tn" style="text-shadow:0 0 3px #000">· <input id="nazwa_t' + t3 + '" value="' + esc(U('nazwa_t' + t3)) + '" placeholder="miejsce / nazwa (np. Zdrofit)"></span>' : (U('nazwa_t' + t3) ? '<span class="tn" style="text-shadow:0 0 3px #000">· ' + esc(U('nazwa_t' + t3)) + '</span>' : '')) + (TR ? '<span class="pbtn ' + (open.part[t3] ? 'on' : '') + '" onclick="tog(\'part\',' + t3 + ')">' + (open.part[t3] ? '▾' : '▸') + ' &nbsp;Partie treningu <small>' + (open.part[t3] ? 'ukryj' : 'pokaż') + '</small></span>' : '<span style="margin-left:auto"></span>') + '<a class="pbtn rz" target="_blank" href="' + esc(D.rozgrzewka) + '">▶ &nbsp;Rozgrzewka</a></h2>';
     html += tabela(t3);
     if (TR && open.part[t3]) html += partieTreningu(t3);
     html += '<div class="legend"><span><i class="leg GOLD" onclick="tip(\'P\',event)"></i>Priorytet ' + I('P') + '</span><span><i class="leg NAVY" onclick="tip(\'N\',event)"></i>Neutral ' + I('N') + '</span><span><i class="leg BORDO" onclick="tip(\'U\',event)"></i>Utrzymanie ' + I('U') + '</span><span class="hint">Wszystko ze znaczkiem <i class="inf">i</i> możesz kliknąć. Pokaże się krótki opis: co to znaczy i jak z tym pracować.</span></div></div>';
@@ -216,10 +222,10 @@ function render() {
   renderMob();
 }
 function tabela(t) {
-  var rows = cw(t), out = '<table><tr><th>Nr ' + I('nr') + '</th><th class="l">Ćwiczenie ' + I('cw') + '</th><th colspan="6">Wykonane powtórzenia ' + I('powt') + '</th><th>Ciężar<br>aktualny ' + I('cakt') + '</th><th>Ciężar<br>początkowy ' + I('cst') + '</th><th>Sets ' + I('sets') + '</th><th>Reps ' + I('reps') + '</th><th>Przerwa ' + I('prz') + '</th><th>RiR ' + I('rir') + '</th><th>Tempo ' + I('tempo') + '</th><th>Wideo ' + I('wideo') + '</th><th class="l" style="min-width:220px">Notatka podopiecznego ' + I('nota') + '</th>' + (TR ? '<th>Typ</th>' : '') + '</tr>';
+  var rows = cw(t), out = '<table class="' + (TR ? 'tr' : '') + '"><tr><th>Nr ' + I('nr') + '</th><th class="l">Ćwiczenie ' + I('cw') + '</th><th colspan="6">Wykonane powtórzenia ' + I('powt') + '</th><th>Ciężar<br>aktualny ' + I('cakt') + '</th><th>Ciężar<br>początkowy ' + I('cst') + '</th><th>Sets ' + I('sets') + '</th><th>Reps ' + I('reps') + '</th><th>Przerwa ' + I('prz') + '</th><th>RiR ' + I('rir') + '</th><th>Tempo ' + I('tempo') + '</th><th>Wideo ' + I('wideo') + '</th><th class="l" style="min-width:' + (TR ? 140 : 220) + 'px">Notatka podopiecznego ' + I('nota') + '</th>' + (TR ? (SHOW_TYP ? '<th>Typ</th>' : '') + '<th title="przesuń / usuń"></th>' : '') + '</tr>';
   for (var i = 0; i < 8; i++) {
     var c = rows[i];
-    if (!c) { if (!TR) { out += '<tr class="empty"><td>' + (i + 1) + '</td>' + '<td></td>'.repeat(16) + '</tr>'; } else { out += '<tr class="empty"><td>' + (i + 1) + '</td><td class="ex" colspan="16"><button class="btn" style="padding:4px 10px" onclick="dodajCw(' + t + ',' + (i + 1) + ')">+ dodaj ćwiczenie</button></td><td></td></tr>'; } continue; }
+    if (!c) { if (!TR) { out += '<tr class="empty"><td>' + (i + 1) + '</td>' + '<td></td>'.repeat(16) + '</tr>'; } else { out += '<tr class="empty"><td>' + (i + 1) + '</td><td class="ex" colspan="16"><button class="btn" style="padding:4px 10px" onclick="dodajCw(' + t + ',' + (i + 1) + ')">+ dodaj ćwiczenie</button></td>' + (SHOW_TYP ? '<td></td>' : '') + '<td></td></tr>'; } continue; }
     var k = TYP[c.typ] || 'X', sets = n(c.sets);
     out += '<tr class="r' + k + (TR && SEL[c.id] ? ' sel' : '') + '" data-id="' + c.id + '">' + (TR ? '<td class="nrc" title="Kliknij, żeby zaznaczyć" onclick="zaznacz(\'' + c.id + '\')">' : '<td>') + (i + 1) + '</td><td class="ex">' + (TR ? '<input class="c" data-f="nazwa" list="nazwy" autocomplete="off" value="' + esc(c.nazwa) + '">' : esc(c.nazwa)) + '</td>';
     for (var p = 1; p <= 6; p++) out += '<td class="rep ' + (p <= sets ? 'plan' : '') + '">' + (p <= sets ? '<input class="c" data-f="p' + p + '" inputmode="numeric" value="' + esc(c['p' + p]) + '">' : '') + '</td>';
@@ -227,10 +233,10 @@ function tabela(t) {
     ['sets', 'reps', 'przerwa', 'rir', 'tempo'].forEach(function (f) { out += '<td>' + (TR ? '<input class="c" data-f="' + f + '" value="' + esc(c[f]) + '" style="width:56px">' : esc(c[f])) + '</td>'; });
     out += '<td>' + (TR ? '<input class="c" data-f="wideo" placeholder="▶ link" title="Wklej link do filmu" value="' + esc(c.wideo) + '" style="width:64px;font-size:10px;text-overflow:ellipsis">' : '<a class="v ' + (c.wideo ? '' : 'off') + '" target="_blank" href="' + esc(c.wideo || '#') + '">▶</a>') + '</td>';
     out += '<td class="note"><input class="c" data-f="notatka" value="' + esc(c.notatka) + '" placeholder="…"></td>';
-    if (TR) out += '<td class="typ"><select class="c" data-f="typ"><option value=""></option>' + ['Priorytet', 'Neutral', 'Utrzymanie'].map(function (o) { return '<option' + (c.typ === o ? ' selected' : '') + '>' + o + '</option>'; }).join('') + '</select></td>';
+    if (TR) out += (SHOW_TYP ? '<td class="typ"><select class="c" data-f="typ"><option value=""></option>' + ['Priorytet', 'Neutral', 'Utrzymanie'].map(function (o) { return '<option' + (c.typ === o ? ' selected' : '') + '>' + o + '</option>'; }).join('') + '</select></td>' : '') + '<td class="act"><i title="wyżej" onclick="ruszCw(\'' + c.id + '\',-1)">▲</i><i title="niżej" onclick="ruszCw(\'' + c.id + '\',1)">▼</i><i class="del" title="usuń ćwiczenie" onclick="usunCw(\'' + c.id + '\')">✕</i></td>';
     out += '</tr>';
   }
-  out += '<tr class="sum"><td colspan="' + (TR ? 18 : 17) + '">Suma serii: ' + serie(t) + '</td></tr></table>';
+  out += '<tr class="sum"><td colspan="' + (TR ? (SHOW_TYP ? 19 : 18) : 17) + '">Suma serii: ' + serie(t) + '</td></tr></table>';
   return out;
 }
 function partieTreningu(t) {
@@ -372,11 +378,27 @@ function bindAll() {
   var cel = document.getElementById('cel'); if (cel) bind(cel, D.ustawienia, 'cel', 'Ustawienia');
   var blok = document.getElementById('blok'); if (blok) bind(blok, D.ustawienia, 'blok', 'Ustawienia', { change: true, after: render });
   var kcal = document.getElementById('kcal'); if (kcal) bind(kcal, D.ustawienia, 'kcal', 'Ustawienia');
+  var klub = document.getElementById('klub'); if (klub) bind(klub, D.ustawienia, 'klub', 'Ustawienia');
+  var trn = document.getElementById('treningi'); if (trn) bind(trn, D.ustawienia, 'treningi', 'Ustawienia', { change: true, after: render });
+  for (var ti = 1; ti <= 5; ti++) { var nt = document.getElementById('nazwa_t' + ti); if (nt) bind(nt, D.ustawienia, 'nazwa_t' + ti, 'Ustawienia'); }
   var sk = document.getElementById('selK'); if (sk) sk.onchange = function () { location.href = D.url + '?klient=' + sk.value; };
 }
 function tog(k, i) { if (i == null) open[k] = !open[k]; else open[k][i] = !(open[k][i] == null ? (k === 't' && i === 1) : open[k][i]); render(); }
 function dodajWaz() { var d = new Date(); var iso = d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); var tmp = 'tmp' + Date.now(); var w = { id: tmp, data: iso, waga: '', kcal: U('kcal'), wegle: '', bialko: '', tluszcze: '', sol: '2–5 g', notatka: '' }; D.wazenia.push(w); push({ tab: 'Wazenia', id: 'nowe', tmp: tmp, dane: w }); open.waz = true; render(); setTimeout(function () { var el = document.querySelector('[data-id="' + tmp + '"] [data-f="waga"]'); if (el) el.focus(); }, 50); }
 function usunWaz(id) { if (!confirm('Usunąć to ważenie?')) return; D.wazenia = D.wazenia.filter(function (w) { return w.id !== id; }); push({ tab: 'Wazenia', id: id, usun: true }); render(); }
+function renumeruj(t) { cw(t).forEach(function (c, i) { if (n(c.nr) !== i + 1) { c.nr = i + 1; push({ tab: 'Cwiczenia', id: c.id, pole: 'nr', wartosc: i + 1 }); } }); }
+function ruszCw(id, dir) {
+  var c = D.cwiczenia.filter(function (x) { return x.id === id; })[0]; if (!c) return;
+  var t = n(c.trening); renumeruj(t); var list = cw(t); var i = list.indexOf(c), j = i + dir; if (j < 0 || j >= list.length) return;
+  var o = list[j], a = n(c.nr), b = n(o.nr); c.nr = b; o.nr = a;
+  push({ tab: 'Cwiczenia', id: c.id, pole: 'nr', wartosc: b }); push({ tab: 'Cwiczenia', id: o.id, pole: 'nr', wartosc: a }); render();
+}
+function usunCw(id) {
+  var c = D.cwiczenia.filter(function (x) { return x.id === id; })[0]; if (!c) return;
+  if (!confirm('Usunąć „' + (c.nazwa || 'to ćwiczenie') + '” z planu? Wpisane powtórzenia podopiecznego też znikną.')) return;
+  var t = n(c.trening); D.cwiczenia = D.cwiczenia.filter(function (x) { return x.id !== id; }); delete SEL[id];
+  if (!/^tmp/.test(id)) push({ tab: 'Cwiczenia', id: id, usun: true }); renumeruj(t); render();
+}
 function dodajCw(t, nr) { var tmp = 'tmp' + Date.now(); var c = { id: tmp, trening: t, nr: nr, nazwa: '', typ: 'Neutral', sets: 3, reps: 10, przerwa: '90s', rir: 0, tempo: 'x211', wideo: '', ciezar_start: '', ciezar_akt: '', p1: '', p2: '', p3: '', p4: '', p5: '', p6: '', notatka: '' }; D.cwiczenia.push(c); push({ tab: 'Cwiczenia', id: 'nowe', tmp: tmp, dane: c }); render(); setTimeout(function () { var el = document.querySelector('tr[data-id="' + tmp + '"] [data-f="nazwa"]'); if (el) el.focus(); }, 50); }
 window.addEventListener('beforeunload', function (e) { if (queue.length || pending) { flush(); e.preventDefault(); e.returnValue = ''; } });
 // ---------- ekran PIN (podopieczny) ----------
