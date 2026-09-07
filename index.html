@@ -205,7 +205,7 @@ function render() {
   html += '</div></div>';
   if (TR) { var ns = Object.keys(SEL).length; html += '<div class="pal"><span class="pl">Pokoloruj: ' + I('kolor') + '</span><i class="pb GOLD" title="Priorytet" onclick="koloruj(\'Priorytet\')"></i><i class="pb NAVY" title="Neutral" onclick="koloruj(\'Neutral\')"></i><i class="pb BORDO" title="Utrzymanie" onclick="koloruj(\'Utrzymanie\')"></i><i class="pb x" title="Wyczyść zaznaczenie" onclick="koloruj(null)">✕</i><span class="cnt2">' + (ns ? 'zaznaczone: ' + ns : 'zaznacz przez Nr') + '</span></div>'; }
   html += '<div class="kpi"><div><b>' + serieT + '</b><span>Serie / tydzień</span></div><div><b>' + (TR ? '<input id="kcal" class="c" style="width:110px;color:#E6CB80;font-weight:700;font-size:24px;text-align:center" value="' + esc(U('kcal')) + '">' : (U('kcal') || '–')) + '</b><span>Aktualne kcal</span></div><div><b>' + (last != null ? fmt(last) + ' kg' : '–') + (d != null ? '<em class="' + (d > 0 ? 'up' : '') + '">' + (d < 0 ? '▼' : d > 0 ? '▲' : '=') + '</em><small class="' + (d > 0 ? 'up' : '') + '">' + fmt(Math.abs(d).toFixed(1)) + '</small>' : '') + '</b><span>Aktualna waga</span></div></div></div>';
-  if (TR && D.lista && D.lista.length) { html += '<div class="selbar desk">Podopieczny: <select id="selK">' + D.lista.map(function (k) { return '<option value="' + esc(k.bazaId) + '"' + (k.bazaId === D.bazaId ? ' selected' : '') + '>' + esc(k.imie) + ' · ' + esc(k.email) + '</option>'; }).join('') + '</select><a class="pbtn" style="margin-left:8px" href="lista.html">lista / dodaj</a></div>'; }
+  if (TR && D.lista && D.lista.length) { html += '<div class="selbar desk">Podopieczny: <select id="selK">' + D.lista.map(function (k) { return '<option value="' + esc(k.bazaId) + '"' + (k.bazaId === D.bazaId ? ' selected' : '') + '>' + esc(k.imie) + ' · ' + esc(k.email) + '</option>'; }).join('') + '</select><a class="pbtn" style="margin-left:8px" href="lista.html">lista / dodaj</a><span class="pbtn" style="margin-left:8px" onclick="kopiujLink()" title="Skopiuje gotową wiadomość z linkiem i PIN-em do wysłania podopiecznemu">✉ kopiuj link i PIN</span></div>'; }
   // ----- telefon: wybór treningu + karty
   html += '<div class="mob"><div class="selbar">Trening: <select id="mobSel">'; for (var t2 = 1; t2 <= akt; t2++) html += '<option value="' + t2 + '"' + (t2 === mobT ? ' selected' : '') + '>Trening ' + t2 + '</option>'; html += '</select><a class="v" style="margin-left:auto" target="_blank" href="' + esc(D.rozgrzewka) + '" title="Rozgrzewka">▶</a></div><div id="mobcards" style="padding-top:10px"></div></div>';
   // ----- komputer
@@ -355,6 +355,16 @@ function planowanie() {
   out += '<div class="mut" style="padding:10px 14px;font-size:12px">Kratka „w tr.” przypisuje partię do treningu, potem wpisz serie w rozciągnięciu (Rozc.) i skróceniu (Skr.). Znak ? = partia przypisana, ale bez serii. Kolor wiersza = plan z kafelka: 6+ złoto, 1–5 granat, brak planu bordo.</div></div>';
   return out;
 }
+function kopiujLink() {
+  var k = (D.lista || []).filter(function (x) { return x.bazaId === D.bazaId; })[0];
+  if (!k || !k.token) { status('Brak linku dla tego podopiecznego. Wejdź na listę.', true, true); return; }
+  var base = /^https?:/.test(D.url || '') ? D.url : (location.origin + location.pathname);
+  var imie = String(k.imie || '').split(' ')[0];
+  var txt = 'Cześć' + (imie ? ' ' + imie : '') + '! Tu jest Twój plan treningowy:\n' + base + '?k=' + k.token + '\nPIN: ' + k.pin + '\nOtwórz link w Safari lub Chrome, wpisz PIN raz, telefon go zapamięta. Potem możesz dodać stronę do ekranu głównego, żeby mieć ją pod ikonką.';
+  var done = function () { status('skopiowano wiadomość z linkiem i PIN-em', true); };
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, function () { prompt('Skopiuj ręcznie:', txt); });
+  else prompt('Skopiuj ręcznie:', txt);
+}
 function zaznacz(id) { if (SEL[id]) delete SEL[id]; else SEL[id] = true; render(); }
 function koloruj(typ) {
   var ids = Object.keys(SEL);
@@ -377,7 +387,7 @@ function wagaBlok() {
 }
 function wazenia() {
   var rows = wazSorted();
-  if (!open.waz) { var l = rows[rows.length - 1]; return '<div class="acc" onclick="tog(\'waz\')"><span class="chev">▸</span>Ważenia i kalorie<span class="cnt">' + (l ? 'ostatnie: ' + esc(l.data) + ' · ' + fmt(l.waga) + ' kg' : 'brak ważeń') + '</span></div>'; }
+  if (!open.waz) { var l = ostWaga().slice(-1)[0]; return '<div class="acc" onclick="tog(\'waz\')"><span class="chev">▸</span>Ważenia i kalorie<span class="cnt">' + (l ? 'ostatnie: ' + esc(l.data) + ' · ' + fmt(l.waga) + ' kg' : 'brak ważeń') + '</span></div>'; }
   var out = '<div class="card"><h2 class="metal"><span class="ttl" onclick="tog(\'waz\')">▾ &nbsp;Ważenia i kalorie</span><span class="pbtn" style="font-size:12px">ważenie: środa i sobota, rano, na czysto</span>' + wagaBlok() + '</h2><table class="wt"><tr><th>Dzień</th><th>Waga (kg)</th><th>Zmiana</th><th>Kcal</th><th>Węgle</th><th>Białko</th><th>Tłuszcze</th><th>Sól</th><th class="l">Notatka podopiecznego</th>' + (TR ? '<th></th>' : '') + '</tr>';
   var prev = null;
   rows.forEach(function (w) {
