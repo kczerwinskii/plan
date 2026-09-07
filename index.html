@@ -59,6 +59,11 @@ tr.sum td{background:var(--head);border-top:2px solid var(--gm);font-weight:700;
 .selbar{display:flex;gap:8px;align-items:center;padding:10px 28px 0;font-size:13px}.selbar select{background:var(--card);color:var(--gl);border:1px solid var(--gm);border-radius:6px;padding:6px 10px;font:600 14px Poppins}
 /* trener: ciaśniejsza tabela */
 .tr td.ex{min-width:190px}.tr td.rep{width:40px}.tr td.rep input.c{font-size:13px;height:28px}.tr td.w{width:64px}.tr td.w input.c{padding:4px 2px}.tr td.note{min-width:150px}.tr input.c[data-f=sets],.tr input.c[data-f=reps],.tr input.c[data-f=rir]{width:40px!important}.tr input.c[data-f=przerwa],.tr input.c[data-f=tempo]{width:52px!important}.tr td{padding:6px 3px}.tr th{padding:7px 3px;font-size:10px;letter-spacing:.2px}.tr th .inf{width:14px;height:14px;line-height:14px;font-size:10px}.tr input.c[data-f=wideo]{width:50px!important}.tr td.note input.c{padding:4px 2px}
+/* ---------- historia bloków ---------- */
+.hb{border:1px solid var(--line);border-radius:6px;margin:10px 14px;background:#1E1E28}.hb .hh{display:flex;gap:14px;align-items:center;padding:10px 14px;cursor:pointer;font-weight:700}.hb .hh b{color:var(--gl);font-size:16px}.hb .hh .mut{font-weight:500;font-size:12px}.hb .hh .cnt{margin-left:auto;font-size:12px;color:var(--ivd);font-weight:500}
+.hb table{margin:0}.hb td,.hb th{font-size:12px;padding:5px 6px}.hb td.ex{min-width:160px;text-shadow:none;color:var(--iv)}.hb td.up{color:var(--green);font-weight:800}.hb td.dn{color:var(--red);font-weight:700}
+.hb .kv{display:flex;gap:18px;flex-wrap:wrap;padding:8px 14px;font-size:12px;color:var(--ivd)}.hb .kv b{color:var(--iv)}
+.btn.warnb{background:linear-gradient(180deg,#8E3140,#6E2231 60%,#4A1520);color:#fff;border-color:#C9A455}
 /* ---------- tryb planowania ---------- */
 .pm{width:100%}.pm th{font-size:10px;padding:6px 4px}.pm th.tt{font-size:11px;letter-spacing:1px;border-bottom:1px solid var(--line)}
 .pm td{padding:3px 4px;font-size:13px}.pm td.pn{text-align:left;font-weight:700;padding-left:10px;color:#fff;text-shadow:0 0 3px #000;white-space:nowrap}
@@ -124,6 +129,7 @@ var TIPS = {
  U: 'UTRZYMANIE: dobierasz ciężar do parametrów (powtórzenia, RiR) i trzymasz go bez zmian przez cały blok. Te partie nie mają rosnąć ani spadać, tylko nie zabierać energii priorytetom.',
  tyg: 'Po zakończonym tygodniu treningowym kliknij kolejną kratkę. Dzięki temu wiem, w którym tygodniu bloku jesteś.',
  plan: 'Tryb planowania: najpierw zaznacz, które partie robisz w danym treningu (kratka „w tr.”), potem wpisz serie: Rozc. = ćwiczenia w rozciągnięciu, Skr. = w skróceniu. Kolumna „Rozpisane” porównuje sumę z planem z kafelków. Wycinek dla jednego treningu widzisz pod tabelą ćwiczeń („Partie treningu”).',
+ hist: 'Każdy zamknięty blok zostaje w archiwum: ćwiczenia z ciężarem na start i koniec, wykonane powtórzenia z ostatniego tygodnia, plan partii i waga. Dzięki temu widzisz progres z bloku na blok i możesz wrócić do tego, co działało.',
  kolor: 'Kliknij numer ćwiczenia (kolumna Nr), żeby je zaznaczyć. Możesz zaznaczyć kilka, także w różnych treningach. Potem kliknij kolor: złoto = Priorytet, granat = Neutral, bordo = Utrzymanie. ✕ czyści zaznaczenie.'
 };
 var INSTR = [
@@ -134,7 +140,7 @@ var INSTR = [
  ['Jak czytać zapis tempa, np. x211', '1. <b>x</b>: ruch koncentryczny (skrócenie mięśnia) jak najszybciej, przy poprawnej technice,\n2. <b>2</b>: ruch ekscentryczny (opuszczanie) przez 2 sekundy,\n3. <b>1</b>: pauza 1 sekunda w maksymalnym skróceniu,\n4. <b>1</b>: pauza 1 sekunda w maksymalnym rozciągnięciu.'],
  ['Legenda', '<b>SS</b> = super seria: dwa ćwiczenia z tym samym numerem robisz jedno po drugim, bez przerwy.\n<b>DS</b> = drop set: po ostatniej serii od razu zmniejszasz ciężar i robisz kolejną.']
 ];
-var open = { t: {}, waz: false, zal: false, obj: TR, ins: {} , part: {}, plan: false };
+var open = { t: {}, waz: false, zal: false, obj: TR, ins: {} , part: {}, plan: false, hist: false, hb: {} };
 var SEL = {}, SHOW_TYP = false; // kolumna Typ schowana: kolor ustawia „Pokoloruj zaznaczone”
 var NAZWY_BAZA = ['Wyciskanie sztangi leżąc', 'Wyciskanie hantli leżąc', 'Wyciskanie hantli na ławce skośnej', 'Rozpiętki Butterfly', 'Rozpiętki hantlami', 'Rozpiętka dośrodkowa (cz. G)', 'Pompki na poręczach', 'Wyciskanie francuskie', 'Overhead extension', 'Prostowanie ramion na wyciągu', 'Allahy (skrócenie)', 'Wznosy hantli bokiem', 'Wznosy hantlami na bok barku 90°', 'Wznosy T.B wyciąg', 'Wyciskanie hantli nad głowę', 'Wznosy przodem', 'Odwrotne rozpiętki', 'Face pull', 'Podciąganie na drążku', 'Ściąganie drążka wyciągu górnego', 'Wiosłowanie sztangą', 'Wiosłowanie hantlem', 'Wiosłowanie na wyciągu siedząc', 'Uginanie ramion ze sztangą', 'Uginanie hantli siedząc', 'Uginanie młotkowe', 'Uginanie na modlitewniku', 'Zawijanie miednicy w zwisie', 'Unoszenie nóg w zwisie', 'Plank', 'Allahy', 'Uginanie nadgarstków', 'Martwy ciąg', 'Martwy ciąg rumuński', 'Hip thrust', 'Przysiad ze sztangą', 'Przysiad bułgarski', 'Wykroki', 'Wypychanie na suwnicy', 'Prostowanie nóg na maszynie', 'Uginanie nóg leżąc', 'Uginanie nóg siedząc', 'Przywodzenie nóg na maszynie', 'Odwodzenie nóg na maszynie', 'Wspięcia na palce stojąc', 'Wspięcia na palce siedząc', 'Cardio 45 min', 'Cardio 30 min'];
 var mobT = 1;
@@ -176,6 +182,8 @@ function bind(el, obj, pole, tab, opts) {
   });
 }
 
+// ---------- wywołanie serwera (wersja hostowana podmienia to na api()) ----------
+function wywolaj(nazwa, params) { var b = { akcja: nazwa }; (params || []).forEach(function (v, i) { b['a' + i] = v; }); return api(b); }
 // ---------- dymki ----------
 function tip(key, ev, title) { var b = document.getElementById('tipbox'); document.getElementById('tipc').innerHTML = (title ? '<b>' + esc(title) + '</b>' : '') + esc(TIPS[key] || key); b.classList.remove('hidden'); var x = Math.min(ev.clientX, window.innerWidth - 400), y = ev.clientY + 12; b.style.left = Math.max(8, x) + 'px'; b.style.top = Math.min(y, window.innerHeight - 200) + 'px'; ev.stopPropagation(); }
 function hideTip() { document.getElementById('tipbox').classList.add('hidden'); }
@@ -214,7 +222,7 @@ function render() {
     html += '<div class="legend"><span><i class="leg GOLD" onclick="tip(\'P\',event)"></i>Priorytet ' + I('P') + '</span><span><i class="leg NAVY" onclick="tip(\'N\',event)"></i>Neutral ' + I('N') + '</span><span><i class="leg BORDO" onclick="tip(\'U\',event)"></i>Utrzymanie ' + I('U') + '</span><span class="hint">Wszystko ze znaczkiem <i class="inf">i</i> możesz kliknąć. Pokaże się krótki opis: co to znaczy i jak z tym pracować.</span></div></div>';
   }
   html += wazenia();
-  html += '</div><div>' + (TR ? objetosc() : '') + zalecenia() + '</div></div>';
+  html += '</div><div>' + (TR ? objetosc() : '') + zalecenia() + (TR ? historiaSekcja() : '') + '</div></div>';
   html += '<div class="igrid desk">' + INSTR.map(function (x, i) { return open.ins[i] ? '<div class="card"><h2 class="metal"><span class="ttl" onclick="tog(\'ins\',' + i + ')" style="font-size:15px">▾ &nbsp;' + esc(x[0]) + '</span></h2><div class="ibody">' + x[1] + '</div></div>' : '<div class="acc" style="margin:0" onclick="tog(\'ins\',' + i + ')"><span class="chev">▸</span>' + esc(x[0]) + '</div>'; }).join('') + '</div>';
   html += '<div class="mob" style="padding:0 10px 30px">' + INSTR.map(function (x, i) { return open.ins[i] ? '<div class="card"><h2 class="metal"><span class="ttl" onclick="tog(\'ins\',' + i + ')" style="font-size:14px">▾ &nbsp;' + esc(x[0]) + '</span></h2><div class="ibody">' + x[1] + '</div></div>' : '<div class="acc" onclick="tog(\'ins\',' + i + ')"><span class="chev">▸</span>' + esc(x[0]) + '</div>'; }).join('') + '</div>';
   app.innerHTML = html + (TR ? datalist() : '');
@@ -261,6 +269,45 @@ function objetosc() {
   });
   out += '</div><div class="mut" style="padding:0 12px 12px;font-size:12px">Plan i region wpisujesz tu. Serie na poszczególne treningi rozpisujesz w trybie planowania (na górze, nad treningami).</div></div>';
   return out;
+}
+function historiaSekcja() {
+  var H = D.historia || [];
+  if (!open.hist) return '<div class="acc" onclick="tog(\'hist\')"><span class="chev">▸</span>Historia bloków<span class="cnt">' + (H.length ? H.length + ' zamkn.' : 'brak zamkniętych bloków') + '</span></div>';
+  var out = '<div class="card"><h2 class="metal"><span class="ttl" onclick="tog(\'hist\')">▾ &nbsp;Historia bloków</span><span class="pbtn" style="cursor:default">' + I('hist') + ' &nbsp;' + H.length + ' zamkniętych</span></h2>';
+  out += '<div style="padding:12px 14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap"><button class="btn warnb" onclick="zamknijBlok()">Zamknij blok i zacznij nowy</button><span class="mut" style="font-size:12px">Archiwizuje cały bieżący blok (ćwiczenia, ciężary, powtórzenia, plan partii, waga start→koniec). W nowym bloku ciężar początkowy = aktualny, powtórzenia i notatki wyczyszczone, kratki tygodni od zera. Plan ćwiczeń zostaje, żebyś mógł go zmienić.</span></div>';
+  H.slice().reverse().forEach(function (h, idx) {
+    var d = h.dane || {}, otw = open.hb[h.id];
+    var dw = (d.waga_start !== '' && d.waga_koniec !== '' && d.waga_start != null && d.waga_koniec != null) ? (n(d.waga_koniec) - n(d.waga_start)) : null;
+    out += '<div class="hb"><div class="hh" onclick="tog(\'hb\',\'' + esc(h.id) + '\')"><span class="chev">' + (otw ? '▾' : '▸') + '</span><b>Blok ' + esc(h.blok_nr) + '</b><span>' + esc(h.cel || 'bez celu') + '</span><span class="mut">zamknięty ' + esc(h.zamknieto) + ' · tygodnie ' + esc(h.tygodnie) + (h.kcal ? ' · ' + esc(h.kcal) + ' kcal' : '') + '</span><span class="cnt">' + (dw != null ? 'waga ' + fmt(d.waga_start) + ' → ' + fmt(d.waga_koniec) + ' kg (' + (dw > 0 ? '+' : '') + fmt(dw.toFixed(1)) + ')' : '') + '</span></div>';
+    if (otw) {
+      if (d.notatka) out += '<div class="kv"><span>Notatka trenera: <b>' + esc(d.notatka) + '</b></span></div>';
+      out += '<table><tr><th>Tr.</th><th class="l">Ćwiczenie</th><th>Typ</th><th>Sets×Reps</th><th>Ciężar start</th><th>Ciężar koniec</th><th>Zmiana</th><th class="l">Ostatnie powt.</th></tr>';
+      (d.cwiczenia || []).slice().sort(function (x, y) { return n(x.trening) - n(y.trening) || n(x.nr) - n(y.nr); }).forEach(function (c) {
+        var a0 = c.ciezar_start, a1 = c.ciezar_akt, dz = (a0 !== '' && a1 !== '' && a0 != null && a1 != null) ? n(a1) - n(a0) : null;
+        var pw = [1, 2, 3, 4, 5, 6].map(function (p) { return c['p' + p]; }).filter(function (v) { return v !== '' && v != null; }).join(' · ');
+        out += '<tr><td>' + esc(c.trening) + '</td><td class="ex l">' + esc(c.nazwa) + '</td><td><span class="pill ' + (TYP[c.typ] === 'P' ? 'GOLD' : TYP[c.typ] === 'U' ? 'BORDO' : '') + '">' + esc(c.typ || '–') + '</span></td><td>' + esc(c.sets) + '×' + esc(c.reps) + '</td><td>' + fmt(a0) + '</td><td>' + fmt(a1) + '</td><td class="' + (dz > 0 ? 'up' : dz < 0 ? 'dn' : '') + '">' + (dz == null ? '–' : (dz > 0 ? '+' : '') + fmt(dz)) + '</td><td class="l mut">' + esc(pw) + '</td></tr>';
+      });
+      out += '</table>';
+      var pl = (d.partie || []).filter(function (p) { return p.plan !== '' && p.plan != null; });
+      if (pl.length) out += '<div class="kv">' + pl.map(function (p) { var s = 0; for (var t = 1; t <= 5; t++) s += n(p['t' + t + '_r']) + n(p['t' + t + '_s']); return '<span>' + esc(p.partia) + ': <b>' + s + ' / ' + esc(p.plan) + '</b></span>'; }).join('') + '</div>';
+    }
+    out += '</div>';
+  });
+  if (!H.length) out += '<div class="mut" style="padding:0 14px 14px;font-size:12px">Jeszcze nic tu nie ma. Po zakończeniu bloku kliknij przycisk powyżej, a blok trafi do archiwum z porównaniem ciężarów.</div>';
+  return out + '<div style="height:8px"></div></div>';
+}
+function zamknijBlok() {
+  var zal = n(U('zaliczone')), blok = n(U('blok'));
+  var msg = 'Zamknąć bieżący blok (' + zal + ' / ' + blok + ' tyg.) i zacząć nowy?\n\nDo archiwum trafi wszystko z tego bloku. W nowym: ciężar początkowy = aktualny, powtórzenia i notatki podopiecznego wyczyszczone, kratki tygodni od zera.';
+  if (!confirm(msg)) return;
+  var notatka = prompt('Krótka notatka do archiwum (opcjonalnie): jak poszedł blok, co zmieniasz w następnym.', '') || '';
+  if (queue.length) flush();
+  status('zamykam blok…');
+  wywolaj('zamknijBlok', [D.bazaId, notatka]).then(function (hist) {
+    D.historia = hist || [];
+    D.cwiczenia.forEach(function (c) { if (c.ciezar_akt !== '' && c.ciezar_akt != null) c.ciezar_start = c.ciezar_akt; for (var p = 1; p <= 6; p++) c['p' + p] = ''; c.notatka = ''; });
+    D.ustawienia.zaliczone = 0; open.hist = true; render(); status('blok zamknięty, nowy rozpoczęty', true);
+  }).catch(function (e) { var m = String(e && e.message || e); status(/Nieznana akcja|not a function|is not defined/.test(m) ? 'Zamykanie bloków wymaga wdrożenia nowej wersji serwera (Kuba: Wdróż → Nowa wersja).' : 'błąd: ' + m, false, true); });
 }
 function klasaP(p) { var plan = n(p.plan); return plan >= 6 ? 'GOLD' : plan > 0 ? 'NAVY' : 'BORDO'; }
 function wTr(p, t) { var v = p['t' + t + '_w']; return v === true || v === 'TRUE' || v === 'true'; }
