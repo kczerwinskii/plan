@@ -46,6 +46,8 @@ tr.sum td{background:var(--head);border-top:2px solid var(--gm);font-weight:700;
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:12px}.tile{padding:10px;border-radius:5px;min-height:118px;position:relative;border:2px solid;padding-right:38px}.tile.P{border-color:#F5E3A6;color:#fff}.tile.N{border-color:#6B87C4;color:var(--iv)}.tile.U{border-color:#C9A455;color:var(--iv)}
 .tile b{font-size:24px;display:block}.tile b input{width:60px;font-size:24px;font-weight:700;background:transparent;border:0;color:inherit;border-bottom:1px dashed rgba(255,255,255,.4)}.tile b input:focus{outline:0}
 .tile span{font-weight:700;font-size:12px;display:block}.tile small{display:block;margin-top:3px;font-size:13px;font-weight:600;color:var(--gl);text-shadow:0 0 3px #000}.tile small input{width:100%;background:transparent;border:0;color:inherit;font:inherit;border-bottom:1px dashed rgba(255,255,255,.3)}.tile small input:focus{outline:0}
+.prio{display:flex;gap:6px;margin-top:10px}.prio i{width:22px;height:22px;border-radius:4px;border:2px solid rgba(255,255,255,.35);cursor:pointer;display:inline-block;opacity:.55}.prio i.on{opacity:1;border-color:#F5E3A6;box-shadow:0 0 0 2px rgba(0,0,0,.45)}.prio i:hover{opacity:1}
+.tile{min-height:0}
 .chk{position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:4px;border:2px solid var(--gm);background:#1E1E28;color:#0E0E12;font-style:normal;font-weight:800;text-align:center;line-height:20px;font-size:15px}.chk.on{background:linear-gradient(180deg,#E6CB80,#C9A455 55%,#8E6B2E);border-color:#F5E3A6}
 .alloc{height:6px;background:rgba(0,0,0,.45);border-radius:3px;margin-top:8px;overflow:hidden}.alloc em{display:block;height:100%;background:var(--gl)}.tile u{text-decoration:none;font-size:11px;display:block;margin-top:4px;color:var(--iv);opacity:.9}
 .wt th{background:var(--head)}.wt td{background:var(--card)}.wt td.kg{font-size:15px;font-weight:800;color:#fff;background:#2A2A36}.wt td.dn{color:var(--green);font-weight:800}.wt td.up{color:var(--red);font-weight:800}.wt td.d{color:var(--gl);font-weight:700}
@@ -312,11 +314,10 @@ function objetosc() {
   var out = '<div class="card"><h2 class="metal"><span class="ttl" onclick="tog(\'obj\')">▾ &nbsp;Objętość na partię · 16 partii</span></h2><div class="grid">';
   D.partieLista.forEach(function (name) {
     var p = D.partie.filter(function (x) { return x.partia === name; })[0]; if (!p) return;
-    var plan = n(p.plan), s = 0; for (var t = 1; t <= 5; t++) s += n(p['t' + t + '_r']) + n(p['t' + t + '_s']);
-    var k = plan >= 6 ? 'P' : plan > 0 ? 'N' : 'U'; var pct = plan ? Math.min(100, Math.round(s / plan * 100)) : 0;
-    out += '<div class="tile ' + k + ' ' + (k === 'P' ? 'GOLD' : k === 'N' ? 'NAVY' : 'BORDO') + '" data-p="' + esc(name) + '"><i class="chk ' + (plan && s >= plan ? 'on' : '') + '">' + (plan && s >= plan ? '✓' : '') + '</i><b><input data-f="plan" inputmode="numeric" value="' + esc(p.plan) + '" placeholder="–"></b><span>' + esc(name) + '</span><small>Region: <input data-f="region" value="' + esc(p.region) + '" placeholder="do ustalenia"></small><div class="alloc"><em style="width:' + pct + '%"></em></div><u>' + (plan ? 'rozpisane ' + s + ' / ' + plan + (s < plan ? ' · brakuje ' + (plan - s) : '') : 'poza planem') + '</u></div>';
+    var pr = prio(name), kl = klasaP(p), wyk = p.wykorzystane === true || p.wykorzystane === 'TRUE' || p.wykorzystane === 'true';
+    out += '<div class="tile ' + pr + ' ' + kl + '" data-p="' + esc(name) + '"><i class="chk ' + (wyk ? 'on' : '') + '" title="wykorzystane w planie" onclick="togWyk(\'' + esc(name) + '\')">' + (wyk ? '✓' : '') + '</i><b><input data-f="plan" inputmode="numeric" value="' + esc(p.plan) + '" placeholder="–"></b><span>' + esc(name) + '</span><small>Region: <input data-f="region" value="' + esc(p.region) + '" placeholder="do ustalenia"></small><div class="prio"><i class="GOLD ' + (pr === 'P' ? 'on' : '') + '" title="Priorytet" onclick="setPrio(\'' + esc(name) + '\',\'P\')"></i><i class="NAVY ' + (pr === 'N' ? 'on' : '') + '" title="Neutral" onclick="setPrio(\'' + esc(name) + '\',\'N\')"></i><i class="BORDO ' + (pr === 'U' ? 'on' : '') + '" title="Utrzymanie" onclick="setPrio(\'' + esc(name) + '\',\'U\')"></i></div></div>';
   });
-  out += '</div><div class="mut" style="padding:0 12px 12px;font-size:12px">Plan i region wpisujesz tu. Serie na poszczególne treningi rozpisujesz w trybie planowania (na górze, nad treningami). Strzałki przenoszą między kafelkami ' + I('strzalki') + '</div></div>';
+  out += '</div><div class="mut" style="padding:0 12px 12px;font-size:12px">Plan (serie na tydzień) i region wpisujesz tu, kolor kafelka to priorytet partii: kliknij kwadrat (złoto = Priorytet, granat = Neutral, bordo = Utrzymanie). Kratka w rogu = partia wykorzystana. Rozpisanie serii na treningi jest w trybie planowania. Strzałki przenoszą między kafelkami ' + I('strzalki') + '</div></div>';
   return out;
 }
 function historiaSekcja() {
@@ -358,7 +359,10 @@ function zamknijBlok() {
     D.ustawienia.zaliczone = 0; open.hist = true; render(); status('blok zamknięty, nowy rozpoczęty', true);
   }).catch(function (e) { var m = String(e && e.message || e); status(/Nieznana akcja|not a function|is not defined/.test(m) ? 'Zamykanie bloków wymaga wdrożenia nowej wersji serwera (Kuba: Wdróż → Nowa wersja).' : 'błąd: ' + m, false, true); });
 }
-function klasaP(p) { var plan = n(p.plan); return plan >= 6 ? 'GOLD' : plan > 0 ? 'NAVY' : 'BORDO'; }
+function prio(name) { var v = U('prio_' + name); return v === 'P' || v === 'U' ? v : 'N'; }
+function klasaP(p) { var v = prio(p.partia); return v === 'P' ? 'GOLD' : v === 'U' ? 'BORDO' : 'NAVY'; }
+function setPrio(name, v) { D.ustawienia['prio_' + name] = v; push({ tab: 'Ustawienia', klucz: 'prio_' + name, wartosc: v }); render(); }
+function togWyk(name) { var p = D.partie.filter(function (x) { return x.partia === name; })[0]; if (!p) return; var v = !(p.wykorzystane === true || p.wykorzystane === 'TRUE' || p.wykorzystane === 'true'); p.wykorzystane = v; push({ tab: 'Partie', id: name, pole: 'wykorzystane', wartosc: v }); render(); }
 function wTr(p, t) { var v = p['t' + t + '_w']; return v === true || v === 'TRUE' || v === 'true'; }
 function statPlan() {
   var plan = 0, roz = 0, serie = 0, akt = aktywne();
@@ -401,7 +405,7 @@ function planowanie() {
   out += '<tr class="tot"><td class="pn">Partie w treningu</td><td></td>';
   for (var t6 = 1; t6 <= 5; t6++) { out += '<td class="sep" colspan="3"><div class="chips">' + (t6 > akt ? '<span class="mut">–</span>' : (chips[t6].length ? chips[t6].map(function (c) { return '<span class="chip ' + c.kl + '">' + esc(c.name) + '<b' + (c.n ? '' : ' class="q"') + '>' + (c.n || '?') + '</b></span>'; }).join('') : '<span class="mut">brak</span>')) + '</div></td>'; }
   out += '<td class="sep"></td></tr></table>';
-  out += '<div class="mut" style="padding:10px 14px;font-size:12px">Kratka „w tr.” przypisuje partię do treningu, potem wpisz serie w rozciągnięciu (Rozc.) i skróceniu (Skr.). Znak ? = partia przypisana, ale bez serii. Kolor wiersza = plan z kafelka: 6+ złoto, 1–5 granat, brak planu bordo.</div></div>';
+  out += '<div class="mut" style="padding:10px 14px;font-size:12px">Kratka „w tr.” przypisuje partię do treningu, potem wpisz serie w rozciągnięciu (Rozc.) i skróceniu (Skr.). Znak ? = partia przypisana, ale bez serii. Kolor wiersza = priorytet partii ustawiony w kafelku.</div></div>';
   return out;
 }
 function kopiujLink() {
