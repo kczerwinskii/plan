@@ -130,6 +130,7 @@ var TIPS = {
  tyg: 'Po zakończonym tygodniu treningowym kliknij kolejną kratkę. Dzięki temu wiem, w którym tygodniu bloku jesteś.',
  plan: 'Tryb planowania: najpierw zaznacz, które partie robisz w danym treningu (kratka „w tr.”), potem wpisz serie: Rozc. = ćwiczenia w rozciągnięciu, Skr. = w skróceniu. Kolumna „Rozpisane” porównuje sumę z planem z kafelków. Wycinek dla jednego treningu widzisz pod tabelą ćwiczeń („Partie treningu”).',
  hist: 'Każdy zamknięty blok zostaje w archiwum: ćwiczenia z ciężarem na start i koniec, wykonane powtórzenia z ostatniego tygodnia, plan partii i waga. Dzięki temu widzisz progres z bloku na blok i możesz wrócić do tego, co działało.',
+ strzalki: 'Między polami poruszasz się strzałkami: w kafelkach prawo/lewo/góra/dół między partiami, w tabelach po wierszu i kolumnie. Enter = następne pole. Wpisz liczbę i od razu strzałka w prawo.',
  kolor: 'Kliknij numer ćwiczenia (kolumna Nr), żeby je zaznaczyć. Możesz zaznaczyć kilka, także w różnych treningach. Potem kliknij kolor: złoto = Priorytet, granat = Neutral, bordo = Utrzymanie. ✕ czyści zaznaczenie.'
 };
 function INSTR() { return [
@@ -184,6 +185,38 @@ function bind(el, obj, pole, tab, opts) {
 
 // ---------- wywołanie serwera (wersja hostowana podmienia to na api()) ----------
 function wywolaj(nazwa, params) { var b = { akcja: nazwa }; (params || []).forEach(function (v, i) { b['a' + i] = v; }); return api(b); }
+// ---------- nawigacja strzałkami ----------
+// kafelki: pola o tym samym data-f w kolejnych kafelkach (4 kolumny); tabele: pola w tym samym wierszu / tej samej kolumnie
+function poleEdyt(el) { return el && (el.tagName === 'INPUT' && el.type !== 'checkbox' && el.type !== 'date' || el.tagName === 'SELECT'); }
+function skoczDo(el) { if (!el) return; el.focus(); if (el.select && el.tagName === 'INPUT') el.select(); }
+document.addEventListener('keydown', function (e) {
+  var el = document.activeElement; if (!poleEdyt(el) || !el.closest('#app')) return;
+  var k = e.key; if (['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown', 'Enter'].indexOf(k) < 0) return;
+  if (el.tagName === 'SELECT' && (k === 'ArrowUp' || k === 'ArrowDown')) return;
+  var len = (el.value || '').length, s = el.selectionStart, en = el.selectionEnd, caly = s === 0 && en === len && len > 0;
+  if (k === 'ArrowRight' && !caly && el.tagName === 'INPUT' && s != null && en < len) return;
+  if (k === 'ArrowLeft' && !caly && el.tagName === 'INPUT' && s != null && s > 0) return;
+  var cel = null;
+  var tile = el.closest('.tile');
+  if (tile) {
+    var wsz = Array.prototype.slice.call(document.querySelectorAll('.grid .tile [data-f="' + el.dataset.f + '"]')), i = wsz.indexOf(el);
+    var krok = k === 'ArrowRight' || k === 'Enter' ? 1 : k === 'ArrowLeft' ? -1 : k === 'ArrowDown' ? 4 : -4;
+    cel = wsz[i + krok];
+  } else {
+    var td = el.closest('td'), tr = td && td.closest('tr');
+    if (!tr) return;
+    if (k === 'ArrowRight' || k === 'ArrowLeft' || k === 'Enter') {
+      var wRz = Array.prototype.slice.call(tr.querySelectorAll('input,select')).filter(poleEdyt), j = wRz.indexOf(el);
+      cel = wRz[j + (k === 'ArrowLeft' ? -1 : 1)];
+      if (!cel && k === 'Enter') { var nastTr = tr.nextElementSibling; while (nastTr && !nastTr.querySelector('input,select')) nastTr = nastTr.nextElementSibling; if (nastTr) cel = Array.prototype.slice.call(nastTr.querySelectorAll('input,select')).filter(poleEdyt)[0]; }
+    } else {
+      var ci = td.cellIndex, t2 = tr, dir = k === 'ArrowDown' ? 'nextElementSibling' : 'previousElementSibling';
+      while ((t2 = t2[dir])) { var c2 = t2.cells[ci]; var f = c2 && Array.prototype.slice.call(c2.querySelectorAll('input,select')).filter(poleEdyt)[0]; if (f) { cel = f; break; } }
+    }
+  }
+  if (cel) { e.preventDefault(); skoczDo(cel); }
+});
+document.addEventListener('focusin', function (e) { var el = e.target; if (el.tagName === 'INPUT' && el.type !== 'checkbox' && el.type !== 'date' && el.closest('#app') && (el.closest('.tile') || el.closest('.pm') || el.closest('td.rep') || el.closest('td.w'))) { try { el.select(); } catch (x) {} } });
 // ---------- dymki ----------
 function tip(key, ev, title) { var b = document.getElementById('tipbox'); document.getElementById('tipc').innerHTML = (title ? '<b>' + esc(title) + '</b>' : '') + esc(TIPS[key] || key); b.classList.remove('hidden'); var x = Math.min(ev.clientX, window.innerWidth - 400), y = ev.clientY + 12; b.style.left = Math.max(8, x) + 'px'; b.style.top = Math.min(y, window.innerHeight - 200) + 'px'; ev.stopPropagation(); }
 function hideTip() { document.getElementById('tipbox').classList.add('hidden'); }
@@ -267,7 +300,7 @@ function objetosc() {
     var k = plan >= 6 ? 'P' : plan > 0 ? 'N' : 'U'; var pct = plan ? Math.min(100, Math.round(s / plan * 100)) : 0;
     out += '<div class="tile ' + k + ' ' + (k === 'P' ? 'GOLD' : k === 'N' ? 'NAVY' : 'BORDO') + '" data-p="' + esc(name) + '"><i class="chk ' + (plan && s >= plan ? 'on' : '') + '">' + (plan && s >= plan ? '✓' : '') + '</i><b><input data-f="plan" inputmode="numeric" value="' + esc(p.plan) + '" placeholder="–"></b><span>' + esc(name) + '</span><small>Region: <input data-f="region" value="' + esc(p.region) + '" placeholder="do ustalenia"></small><div class="alloc"><em style="width:' + pct + '%"></em></div><u>' + (plan ? 'rozpisane ' + s + ' / ' + plan + (s < plan ? ' · brakuje ' + (plan - s) : '') : 'poza planem') + '</u></div>';
   });
-  out += '</div><div class="mut" style="padding:0 12px 12px;font-size:12px">Plan i region wpisujesz tu. Serie na poszczególne treningi rozpisujesz w trybie planowania (na górze, nad treningami).</div></div>';
+  out += '</div><div class="mut" style="padding:0 12px 12px;font-size:12px">Plan i region wpisujesz tu. Serie na poszczególne treningi rozpisujesz w trybie planowania (na górze, nad treningami). Strzałki przenoszą między kafelkami ' + I('strzalki') + '</div></div>';
   return out;
 }
 function historiaSekcja() {
