@@ -5,6 +5,7 @@
 *{box-sizing:border-box}html,body{margin:0}
 body{background:linear-gradient(180deg,var(--bg1),var(--bg2) 60%,var(--bg3)) fixed;color:var(--iv);font:13px/1.35 Poppins,Arial,sans-serif;min-height:100vh}
 .GOLD{background:linear-gradient(180deg,#B08A3C,#8C6828 55%,#5E4519)}.NAVY{background:linear-gradient(180deg,#2E3F66,#22304F 60%,#161F36)}.BORDO{background:linear-gradient(180deg,#8E3140,#6E2231 60%,#4A1520)}
+.GREY{background:linear-gradient(180deg,#3C3C48,#2A2A34 60%,#1E1E28)}.tile.GREY{border-color:#4A4A5A;color:#8A8272}.tile.GREY b,.tile.GREY small,.tile.GREY span{color:#8A8272;text-shadow:none}.tile.GREY .prio{opacity:.3}.tile.GREY .chk{opacity:.4}.pm td.pn.GREY{color:#8A8272;text-shadow:none}.tile .nu{position:absolute;left:10px;bottom:8px;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#8A8272}
 .metal{background:linear-gradient(90deg,#5E4519 0%,#B8933F 20%,#DDBE6C 45%,#C9A455 60%,#8E6B2E 85%,#5E4519 100%)}
 .ttl{display:inline-block;background:linear-gradient(180deg,var(--bg1),var(--bg2) 60%,var(--bg3));color:var(--gl);padding:6px 18px 6px 12px;border-radius:4px;border:1px solid #F5E3A6;font-size:18px;font-weight:700;letter-spacing:.6px;box-shadow:0 2px 6px rgba(0,0,0,.6);cursor:pointer;user-select:none}
 .top{padding:14px 28px;display:flex;align-items:center;gap:26px;border-bottom:3px solid;border-image:linear-gradient(90deg,#8E6B2E,#E6CB80,#8E6B2E) 1;flex-wrap:wrap}
@@ -318,9 +319,10 @@ function objetosc() {
   D.partieLista.forEach(function (name) {
     var p = D.partie.filter(function (x) { return x.partia === name; })[0]; if (!p) return;
     var pr = prio(name), kl = klasaP(p), wyk = p.wykorzystane === true || p.wykorzystane === 'TRUE' || p.wykorzystane === 'true';
-    out += '<div class="tile ' + pr + ' ' + kl + '" data-p="' + esc(name) + '"><i class="chk ' + (wyk ? 'on' : '') + '" title="wykorzystane w planie" onclick="togWyk(\'' + esc(name) + '\')">' + (wyk ? '✓' : '') + '</i><b><input data-f="plan" inputmode="numeric" value="' + esc(p.plan) + '" placeholder="–"></b><span>' + esc(name) + '</span><small>Region: <textarea data-f="region" rows="1" placeholder="do ustalenia">' + esc(p.region) + '</textarea></small><div class="prio"><i class="GOLD ' + (pr === 'P' ? 'on' : '') + '" title="Priorytet" onclick="setPrio(\'' + esc(name) + '\',\'P\')"></i><i class="NAVY ' + (pr === 'N' ? 'on' : '') + '" title="Neutral" onclick="setPrio(\'' + esc(name) + '\',\'N\')"></i><i class="BORDO ' + (pr === 'U' ? 'on' : '') + '" title="Utrzymanie" onclick="setPrio(\'' + esc(name) + '\',\'U\')"></i></div></div>';
+    var szara = nieuzyta(p);
+    out += '<div class="tile ' + pr + ' ' + kl + '" data-p="' + esc(name) + '"' + (szara ? ' title="Partia niewykorzystana w tym bloku (plan 0 / X)"' : '') + '><i class="chk ' + (wyk ? 'on' : '') + '" title="wykorzystane w planie" onclick="togWyk(\'' + esc(name) + '\')">' + (wyk ? '✓' : '') + '</i><b><input data-f="plan" inputmode="numeric" value="' + esc(p.plan) + '" placeholder="–"></b><span>' + esc(name) + '</span><small>Region: <textarea data-f="region" rows="1" placeholder="do ustalenia">' + esc(p.region) + '</textarea></small><div class="prio"><i class="GOLD ' + (pr === 'P' ? 'on' : '') + '" title="Priorytet" onclick="setPrio(\'' + esc(name) + '\',\'P\')"></i><i class="NAVY ' + (pr === 'N' ? 'on' : '') + '" title="Neutral" onclick="setPrio(\'' + esc(name) + '\',\'N\')"></i><i class="BORDO ' + (pr === 'U' ? 'on' : '') + '" title="Utrzymanie" onclick="setPrio(\'' + esc(name) + '\',\'U\')"></i></div></div>';
   });
-  out += '</div><div class="mut" style="padding:0 12px 12px;font-size:12px">Plan (serie na tydzień) i region wpisujesz tu, kolor kafelka to priorytet partii: kliknij kwadrat (złoto = Priorytet, granat = Neutral, bordo = Utrzymanie). Kratka w rogu = partia wykorzystana. Rozpisanie serii na treningi jest w trybie planowania. Strzałki przenoszą między kafelkami ' + I('strzalki') + '</div></div>';
+  out += '</div><div class="mut" style="padding:0 12px 12px;font-size:12px">Plan (serie na tydzień) i region wpisujesz tu, kolor kafelka to priorytet partii: kliknij kwadrat (złoto = Priorytet, granat = Neutral, bordo = Utrzymanie). Kratka w rogu = partia wykorzystana. Plan 0 albo X = partia szara, niewykorzystana w tym bloku. Rozpisanie serii na treningi jest w trybie planowania. Strzałki przenoszą między kafelkami ' + I('strzalki') + '</div></div>';
   return out;
 }
 function historiaSekcja() {
@@ -363,7 +365,8 @@ function zamknijBlok() {
   }).catch(function (e) { var m = String(e && e.message || e); status(/Nieznana akcja|not a function|is not defined/.test(m) ? 'Zamykanie bloków wymaga wdrożenia nowej wersji serwera (Kuba: Wdróż → Nowa wersja).' : 'błąd: ' + m, false, true); });
 }
 function prio(name) { var v = U('prio_' + name); return v === 'P' || v === 'U' ? v : 'N'; }
-function klasaP(p) { var v = prio(p.partia); return v === 'P' ? 'GOLD' : v === 'U' ? 'BORDO' : 'NAVY'; }
+function nieuzyta(p) { var v = String(p.plan == null ? '' : p.plan).trim(); return v === '0' || /^x+$/i.test(v) || /^-+$/.test(v); }
+function klasaP(p) { if (nieuzyta(p)) return 'GREY'; var v = prio(p.partia); return v === 'P' ? 'GOLD' : v === 'U' ? 'BORDO' : 'NAVY'; }
 function setPrio(name, v) { D.ustawienia['prio_' + name] = v; push({ tab: 'Ustawienia', klucz: 'prio_' + name, wartosc: v }); render(); }
 function togWyk(name) { var p = D.partie.filter(function (x) { return x.partia === name; })[0]; if (!p) return; var v = !(p.wykorzystane === true || p.wykorzystane === 'TRUE' || p.wykorzystane === 'true'); p.wykorzystane = v; push({ tab: 'Partie', id: name, pole: 'wykorzystane', wartosc: v }); render(); }
 function wTr(p, t) { var v = p['t' + t + '_w']; return v === true || v === 'TRUE' || v === 'true'; }
@@ -390,7 +393,7 @@ function planowanie() {
     out += '<tr data-p="' + esc(name) + '"><td class="pn ' + kl + '">' + esc(name) + '</td><td class="pl">' + (plan || '–') + '</td>';
     for (var t3 = 1; t3 <= 5; t3++) {
       var w = wTr(p, t3), r = p['t' + t3 + '_r'], s = p['t' + t3 + '_s'], rs = n(r) + n(s); roz += rs;
-      if (t3 <= akt) { sumR[t3] += n(r); sumS[t3] += n(s); if (w) chips[t3].push({ name: name, kl: kl, n: rs }); }
+      if (t3 <= akt) { sumR[t3] += n(r); sumS[t3] += n(s); if (w && !nieuzyta(p)) chips[t3].push({ name: name, kl: kl, n: rs }); }
       if (t3 > akt) { out += '<td class="off sep"></td><td class="off"></td><td class="off"></td>'; continue; }
       out += '<td class="sep ' + (w ? kl : 'dk') + '"><input type="checkbox" data-f="t' + t3 + '_w"' + (w ? ' checked' : '') + '></td>';
       if (w) out += '<td class="' + kl + '"><input class="c" data-f="t' + t3 + '_r" inputmode="numeric" placeholder="?" value="' + esc(r) + '"></td><td class="' + kl + '"><input class="c" data-f="t' + t3 + '_s" inputmode="numeric" placeholder="?" value="' + esc(s) + '"></td>';
