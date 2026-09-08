@@ -46,6 +46,7 @@ tr.sum td{background:var(--head);border-top:2px solid var(--gm);font-weight:700;
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:12px}.tile{padding:10px;border-radius:5px;min-height:118px;position:relative;border:2px solid;padding-right:38px}.tile.P{border-color:#F5E3A6;color:#fff}.tile.N{border-color:#6B87C4;color:var(--iv)}.tile.U{border-color:#C9A455;color:var(--iv)}
 .tile b{font-size:24px;display:block}.tile b input{width:60px;font-size:24px;font-weight:700;background:transparent;border:0;color:inherit;border-bottom:1px dashed rgba(255,255,255,.4)}.tile b input:focus{outline:0}
 .tile span{font-weight:700;font-size:12px;display:block}.tile small{display:block;margin-top:3px;font-size:13px;font-weight:600;color:var(--gl);text-shadow:0 0 3px #000}.tile small input{width:100%;background:transparent;border:0;color:inherit;font:inherit;border-bottom:1px dashed rgba(255,255,255,.3)}.tile small input:focus{outline:0}
+.tile small textarea{display:block;width:100%;background:transparent;border:0;border-bottom:1px dashed rgba(255,255,255,.3);color:inherit;font:inherit;line-height:1.3;resize:none;overflow:hidden;padding:0;margin-top:2px;min-height:18px}.tile small textarea:focus{outline:0;border-bottom-color:#F5E3A6}
 .prio{display:flex;gap:6px;margin-top:10px}.prio i{width:22px;height:22px;border-radius:4px;border:2px solid rgba(255,255,255,.35);cursor:pointer;display:inline-block;opacity:.55}.prio i.on{opacity:1;border-color:#F5E3A6;box-shadow:0 0 0 2px rgba(0,0,0,.45)}.prio i:hover{opacity:1}
 .tile{min-height:0}
 .chk{position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:4px;border:2px solid var(--gm);background:#1E1E28;color:#0E0E12;font-style:normal;font-weight:800;text-align:center;line-height:20px;font-size:15px}.chk.on{background:linear-gradient(180deg,#E6CB80,#C9A455 55%,#8E6B2E);border-color:#F5E3A6}
@@ -189,15 +190,17 @@ function bind(el, obj, pole, tab, opts) {
 function wywolaj(nazwa, params) { var b = { akcja: nazwa }; (params || []).forEach(function (v, i) { b['a' + i] = v; }); return api(b); }
 // ---------- nawigacja strzałkami ----------
 // kafelki: pola o tym samym data-f w kolejnych kafelkach (4 kolumny); tabele: pola w tym samym wierszu / tej samej kolumnie
-function poleEdyt(el) { return el && (el.tagName === 'INPUT' && el.type !== 'checkbox' && el.type !== 'date' || el.tagName === 'SELECT'); }
-function skoczDo(el) { if (!el) return; el.focus(); if (el.select && el.tagName === 'INPUT') el.select(); }
+function poleEdyt(el) { return el && (el.tagName === 'INPUT' && el.type !== 'checkbox' && el.type !== 'date' || el.tagName === 'SELECT' || el.tagName === 'TEXTAREA'); }
+function skoczDo(el) { if (!el) return; el.focus(); if (el.select && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA')) el.select(); }
 document.addEventListener('keydown', function (e) {
   var el = document.activeElement; if (!poleEdyt(el) || !el.closest('#app')) return;
   var k = e.key; if (['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown', 'Enter'].indexOf(k) < 0) return;
   if (el.tagName === 'SELECT' && (k === 'ArrowUp' || k === 'ArrowDown')) return;
   var len = (el.value || '').length, s = el.selectionStart, en = el.selectionEnd, caly = s === 0 && en === len && len > 0;
-  if (k === 'ArrowRight' && !caly && el.tagName === 'INPUT' && s != null && en < len) return;
-  if (k === 'ArrowLeft' && !caly && el.tagName === 'INPUT' && s != null && s > 0) return;
+  var tekstowe = el.tagName === 'INPUT' || el.tagName === 'TEXTAREA';
+  if (k === 'ArrowRight' && !caly && tekstowe && s != null && en < len) return;
+  if (k === 'ArrowLeft' && !caly && tekstowe && s != null && s > 0) return;
+  if ((k === 'ArrowUp' || k === 'ArrowDown') && el.tagName === 'TEXTAREA' && (el.value || '').indexOf('\n') >= 0) return;
   var cel = null;
   var tile = el.closest('.tile');
   if (tile) {
@@ -315,7 +318,7 @@ function objetosc() {
   D.partieLista.forEach(function (name) {
     var p = D.partie.filter(function (x) { return x.partia === name; })[0]; if (!p) return;
     var pr = prio(name), kl = klasaP(p), wyk = p.wykorzystane === true || p.wykorzystane === 'TRUE' || p.wykorzystane === 'true';
-    out += '<div class="tile ' + pr + ' ' + kl + '" data-p="' + esc(name) + '"><i class="chk ' + (wyk ? 'on' : '') + '" title="wykorzystane w planie" onclick="togWyk(\'' + esc(name) + '\')">' + (wyk ? '✓' : '') + '</i><b><input data-f="plan" inputmode="numeric" value="' + esc(p.plan) + '" placeholder="–"></b><span>' + esc(name) + '</span><small>Region: <input data-f="region" value="' + esc(p.region) + '" placeholder="do ustalenia"></small><div class="prio"><i class="GOLD ' + (pr === 'P' ? 'on' : '') + '" title="Priorytet" onclick="setPrio(\'' + esc(name) + '\',\'P\')"></i><i class="NAVY ' + (pr === 'N' ? 'on' : '') + '" title="Neutral" onclick="setPrio(\'' + esc(name) + '\',\'N\')"></i><i class="BORDO ' + (pr === 'U' ? 'on' : '') + '" title="Utrzymanie" onclick="setPrio(\'' + esc(name) + '\',\'U\')"></i></div></div>';
+    out += '<div class="tile ' + pr + ' ' + kl + '" data-p="' + esc(name) + '"><i class="chk ' + (wyk ? 'on' : '') + '" title="wykorzystane w planie" onclick="togWyk(\'' + esc(name) + '\')">' + (wyk ? '✓' : '') + '</i><b><input data-f="plan" inputmode="numeric" value="' + esc(p.plan) + '" placeholder="–"></b><span>' + esc(name) + '</span><small>Region: <textarea data-f="region" rows="1" placeholder="do ustalenia">' + esc(p.region) + '</textarea></small><div class="prio"><i class="GOLD ' + (pr === 'P' ? 'on' : '') + '" title="Priorytet" onclick="setPrio(\'' + esc(name) + '\',\'P\')"></i><i class="NAVY ' + (pr === 'N' ? 'on' : '') + '" title="Neutral" onclick="setPrio(\'' + esc(name) + '\',\'N\')"></i><i class="BORDO ' + (pr === 'U' ? 'on' : '') + '" title="Utrzymanie" onclick="setPrio(\'' + esc(name) + '\',\'U\')"></i></div></div>';
   });
   out += '</div><div class="mut" style="padding:0 12px 12px;font-size:12px">Plan (serie na tydzień) i region wpisujesz tu, kolor kafelka to priorytet partii: kliknij kwadrat (złoto = Priorytet, granat = Neutral, bordo = Utrzymanie). Kratka w rogu = partia wykorzystana. Rozpisanie serii na treningi jest w trybie planowania. Strzałki przenoszą między kafelkami ' + I('strzalki') + '</div></div>';
   return out;
@@ -490,6 +493,7 @@ function bindAll() {
     bind(el, o, el.dataset.f, tab, { change: el.tagName === 'SELECT' || el.type === 'date', after: after });
   });
   document.querySelectorAll('.pm [data-p] [data-f]').forEach(function (el) { var name = el.closest('[data-p]').dataset.p; var o = D.partie.filter(function (p) { return p.partia === name; })[0]; if (!o) return; var cb = el.type === 'checkbox'; bind(el, o, el.dataset.f, 'Partie', { change: cb, after: function () { clearTimeout(window._pm); window._pm = setTimeout(render, cb ? 60 : 900); } }); });
+  document.querySelectorAll('.tile textarea').forEach(function (ta) { var fit = function () { ta.style.height = 'auto'; ta.style.height = (ta.scrollHeight || 18) + 'px'; }; fit(); ta.addEventListener('input', fit); });
   document.querySelectorAll('.tile [data-f]').forEach(function (el) { var name = el.closest('.tile').dataset.p; var o = D.partie.filter(function (p) { return p.partia === name; })[0]; if (o) bind(el, o, el.dataset.f, 'Partie', { after: function () { clearTimeout(window._pt); window._pt = setTimeout(render, 900); } }); });
   document.querySelectorAll('.wk').forEach(function (el) { el.onclick = function () { var i = n(el.dataset.i); var z = n(U('zaliczone')); var nz = i < z ? i : i + 1; D.ustawienia.zaliczone = nz; push({ tab: 'Ustawienia', klucz: 'zaliczone', wartosc: nz }); render(); }; });
   var cel = document.getElementById('cel'); if (cel) bind(cel, D.ustawienia, 'cel', 'Ustawienia');
