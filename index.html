@@ -224,8 +224,23 @@ document.addEventListener('click', function (e) { if (!e.target.closest('#tipbox
 function I(k, t) { return '<i class="inf" onclick="tip(\'' + k + '\',event,\'' + esc(t || '') + '\')">i</i>'; }
 
 // ---------- render ----------
+function zapamietajFokus() {
+  var ae = document.activeElement; if (!ae || !ae.closest || !ae.closest('#app') || !poleEdyt(ae) && ae.type !== 'checkbox') return null;
+  var owner = ae.closest('[data-p],[data-id]');
+  var f = { id: ae.id || '', f: ae.dataset.f || '', p: owner ? owner.dataset.p || '' : '', rid: owner ? owner.dataset.id || '' : '', tile: !!ae.closest('.tile'), pm: !!ae.closest('.pm'), desk: !!ae.closest('.desk'), s: null, e: null };
+  try { f.s = ae.selectionStart; f.e = ae.selectionEnd; } catch (x) {}
+  return f;
+}
+function przywrocFokus(f) {
+  if (!f) return;
+  var q = f.id ? '#' + f.id : f.tile ? '.tile[data-p="' + f.p + '"] [data-f="' + f.f + '"]' : f.pm ? '.pm [data-p="' + f.p + '"] [data-f="' + f.f + '"]' : f.rid ? (f.desk ? '.desk ' : '') + '[data-id="' + f.rid + '"] [data-f="' + f.f + '"]' : null;
+  var el = q ? document.querySelector(q) : null; if (!el) return;
+  el.focus({ preventScroll: true });
+  if (f.s != null && el.setSelectionRange && el.type !== 'checkbox') { try { el.setSelectionRange(f.s, f.e); } catch (x) {} }
+}
 function render() {
   var app = document.getElementById('app');
+  var fokus = zapamietajFokus();
   var akt = aktywne();
   var blok = Math.max(1, Math.min(8, n(U('blok')) || 6)), zal = n(U('zaliczone'));
   var w = ostWaga(); var last = w.length ? n(w[w.length - 1].waga) : null, prev = w.length > 1 ? n(w[w.length - 2].waga) : null;
@@ -261,6 +276,7 @@ function render() {
   app.innerHTML = html + (TR ? datalist() : '');
   bindAll();
   renderMob();
+  przywrocFokus(fokus);
 }
 function tabela(t) {
   var rows = cw(t), out = '<table class="' + (TR ? 'tr' : '') + '"><tr><th>Nr ' + I('nr') + '</th><th class="l">Ćwiczenie ' + I('cw') + '</th><th colspan="6">Wykonane powtórzenia ' + I('powt') + '</th><th>Ciężar<br>aktualny ' + I('cakt') + '</th><th>Ciężar<br>początkowy ' + I('cst') + '</th><th>Sets ' + I('sets') + '</th><th>Reps ' + I('reps') + '</th><th>Przerwa ' + I('prz') + '</th><th>RiR ' + I('rir') + '</th><th>Tempo ' + I('tempo') + '</th><th>Wideo ' + I('wideo') + '</th><th class="l" style="min-width:' + (TR ? 140 : 220) + 'px">Notatka podopiecznego ' + I('nota') + '</th>' + (TR ? (SHOW_TYP ? '<th>Typ</th>' : '') + '<th title="przesuń / usuń"></th>' : '') + '</tr>';
