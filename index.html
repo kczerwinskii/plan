@@ -311,7 +311,8 @@ function partieTreningu(t) {
   out += '<tr class="sum"><td colspan="5">Łącznie serii: ' + sum + '</td></tr></table></div>';
   return out;
 }
-function rozpisane(p) { var s = 0; for (var t = 1; t <= 5; t++) s += n(p['t' + t + '_r']) + n(p['t' + t + '_s']); return p.plan ? s + ' / ' + p.plan : '–'; }
+function serieP(p) { var s = 0; for (var t = 1; t <= 5; t++) if (wTr(p, t)) s += n(p['t' + t + '_r']) + n(p['t' + t + '_s']); return s; }
+function rozpisane(p) { var s = serieP(p); return p.plan ? s + ' / ' + p.plan : '–'; }
 function objetosc() {
   var st = statPlan();
   if (!open.obj) return '<div class="acc" onclick="tog(\'obj\')"><span class="chev">▸</span>Objętość na partię · 16 partii<span class="cnt">' + st.serie + ' serii · plan rozpisany ' + st.roz + ' / ' + st.plan + '</span></div>';
@@ -344,7 +345,7 @@ function historiaSekcja() {
       });
       out += '</table>';
       var pl = (d.partie || []).filter(function (p) { return p.plan !== '' && p.plan != null; });
-      if (pl.length) out += '<div class="kv">' + pl.map(function (p) { var s = 0; for (var t = 1; t <= 5; t++) s += n(p['t' + t + '_r']) + n(p['t' + t + '_s']); return '<span>' + esc(p.partia) + ': <b>' + s + ' / ' + esc(p.plan) + '</b></span>'; }).join('') + '</div>';
+      if (pl.length) out += '<div class="kv">' + pl.map(function (p) { var s = 0; for (var t = 1; t <= 5; t++) s += n(p['t' + t + '_r']) + n(p['t' + t + '_s']); return '<span>' + esc(p.partia) + ': <b>' + serieP(p) + ' / ' + esc(p.plan) + '</b></span>'; }).join('') + '</div>';
     }
     out += '</div>';
   });
@@ -372,7 +373,7 @@ function togWyk(name) { var p = D.partie.filter(function (x) { return x.partia =
 function wTr(p, t) { var v = p['t' + t + '_w']; return v === true || v === 'TRUE' || v === 'true'; }
 function statPlan() {
   var plan = 0, roz = 0, serie = 0, akt = aktywne();
-  D.partie.forEach(function (p) { plan += n(p.plan); for (var t = 1; t <= 5; t++) { var s = n(p['t' + t + '_r']) + n(p['t' + t + '_s']); roz += s; } });
+  D.partie.forEach(function (p) { plan += n(p.plan); roz += serieP(p); });
   for (var t = 1; t <= akt; t++) serie += serie_(t);
   return { plan: plan, roz: roz, serie: serie };
 }
@@ -392,8 +393,8 @@ function planowanie() {
     var kl = klasaP(p), plan = n(p.plan), roz = 0;
     out += '<tr data-p="' + esc(name) + '"><td class="pn ' + kl + '">' + esc(name) + '</td><td class="pl">' + (plan || '–') + '</td>';
     for (var t3 = 1; t3 <= 5; t3++) {
-      var w = wTr(p, t3), r = p['t' + t3 + '_r'], s = p['t' + t3 + '_s'], rs = n(r) + n(s); roz += rs;
-      if (t3 <= akt) { sumR[t3] += n(r); sumS[t3] += n(s); if (w && !nieuzyta(p)) chips[t3].push({ name: name, kl: kl, n: rs }); }
+      var w = wTr(p, t3), r = w ? p['t' + t3 + '_r'] : '', s = w ? p['t' + t3 + '_s'] : '', rs = n(r) + n(s); roz += rs;
+      if (t3 <= akt && w) { sumR[t3] += n(r); sumS[t3] += n(s); if (!nieuzyta(p)) chips[t3].push({ name: name, kl: kl, n: rs }); }
       if (t3 > akt) { out += '<td class="off sep"></td><td class="off"></td><td class="off"></td>'; continue; }
       out += '<td class="sep ' + (w ? kl : 'dk') + '"><input type="checkbox" data-f="t' + t3 + '_w"' + (w ? ' checked' : '') + '></td>';
       if (w) out += '<td class="' + kl + '"><input class="c" data-f="t' + t3 + '_r" inputmode="numeric" placeholder="?" value="' + esc(r) + '"></td><td class="' + kl + '"><input class="c" data-f="t' + t3 + '_s" inputmode="numeric" placeholder="?" value="' + esc(s) + '"></td>';
@@ -495,7 +496,9 @@ function bindAll() {
     if (tab === 'Wazenia' && (el.dataset.f === 'waga' || el.dataset.f === 'data')) after = function () { clearTimeout(window._kt); window._kt = setTimeout(render, 900); };
     bind(el, o, el.dataset.f, tab, { change: el.tagName === 'SELECT' || el.type === 'date', after: after });
   });
-  document.querySelectorAll('.pm [data-p] [data-f]').forEach(function (el) { var name = el.closest('[data-p]').dataset.p; var o = D.partie.filter(function (p) { return p.partia === name; })[0]; if (!o) return; var cb = el.type === 'checkbox'; bind(el, o, el.dataset.f, 'Partie', { change: cb, after: function () { clearTimeout(window._pm); window._pm = setTimeout(render, cb ? 60 : 900); } }); });
+  document.querySelectorAll('.pm [data-p] [data-f]').forEach(function (el) { var name = el.closest('[data-p]').dataset.p; var o = D.partie.filter(function (p) { return p.partia === name; })[0]; if (!o) return; var cb = el.type === 'checkbox'; bind(el, o, el.dataset.f, 'Partie', { change: cb, after: function () {
+    if (cb && !el.checked) { var t = el.dataset.f.replace(/\D/g, ''); ['_r', '_s'].forEach(function (suf) { var f = 't' + t + suf; if (o[f] !== '' && o[f] != null) { o[f] = ''; push({ tab: 'Partie', id: name, pole: f, wartosc: '' }); } }); }
+    clearTimeout(window._pm); window._pm = setTimeout(render, cb ? 60 : 900); } }); });
   document.querySelectorAll('.tile textarea').forEach(function (ta) { var fit = function () { ta.style.height = 'auto'; ta.style.height = (ta.scrollHeight || 18) + 'px'; }; fit(); ta.addEventListener('input', fit); });
   document.querySelectorAll('.tile [data-f]').forEach(function (el) { var name = el.closest('.tile').dataset.p; var o = D.partie.filter(function (p) { return p.partia === name; })[0]; if (o) bind(el, o, el.dataset.f, 'Partie', { after: function () { clearTimeout(window._pt); window._pt = setTimeout(render, 900); } }); });
   document.querySelectorAll('.wk').forEach(function (el) { el.onclick = function () { var i = n(el.dataset.i); var z = n(U('zaliczone')); var nz = i < z ? i : i + 1; D.ustawienia.zaliczone = nz; push({ tab: 'Ustawienia', klucz: 'zaliczone', wartosc: nz }); render(); }; });
