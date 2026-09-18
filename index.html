@@ -137,6 +137,15 @@ body.prosty #a2hs>div{padding:14px!important;font-size:14px!important}body.prost
 .g4{grid-template-columns:repeat(4,1fr);gap:6px;padding:8px 0 0}.g4 .tile{padding:6px 24px 6px 8px;min-height:0}.g4 .tile b{font-size:17px;line-height:1.1}.g4 .tile b input{font-size:17px;height:22px}.g4 .tile>span{font-size:11px;line-height:1.2;display:block}.g4 .tile small{font-size:10px}.g4 .tile small textarea{font-size:10px}.g4 .tile .prio i{width:14px;height:14px}.g4 .tile .prio{margin-top:4px}.g4 .tile .chk{width:14px;height:14px;font-size:10px;top:6px;right:6px}
 .wyk .ttl{font-size:15px}.wyk svg text{font-family:Poppins,sans-serif}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
+.ank{max-width:760px;margin:30px auto;padding:0 16px 40px}.ankh{display:flex;justify-content:space-between;align-items:center}.ankh .sub{font-size:16px}.ankp{color:var(--ivd);font-size:16px;font-weight:700}.ankbar{height:4px;background:#2A2A36;border-radius:2px;margin:10px 0 22px;overflow:hidden}.ankbar i{display:block;height:100%;background:linear-gradient(90deg,#8E6B2E,#C9A455)}.anks{font-size:34px;margin:0 0 14px}.ankw{font-size:18px;line-height:1.5;margin:0 0 18px}
+.ap{background:var(--card);border:1px solid var(--line);border-left:3px solid #8E6B2E;border-radius:8px;padding:18px 20px;margin-bottom:14px}.ap.ukryte{display:none}.ap.brak{border-color:var(--red);border-left-color:var(--red)}.apt{font-size:19px;font-weight:700;color:var(--iv);line-height:1.35}.apt small{font-weight:500;color:var(--ivd);font-size:13px;margin-left:6px}.apo{color:var(--ivd);font-size:15px;line-height:1.5;margin-top:6px}
+.ap input,.ap textarea{display:block;width:100%;margin-top:12px;background:#1A1A24;color:var(--iv);border:1px solid var(--gm);border-radius:6px;padding:12px 14px;font:16px Poppins;box-sizing:border-box;letter-spacing:0!important;height:auto!important;text-align:left}.ap textarea{min-height:90px;resize:vertical;line-height:1.45}.ap input::placeholder,.ap textarea::placeholder{color:#7C7462}
+.apw{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.apw.kol{flex-direction:column}.apc{display:inline-block;padding:10px 16px;border:1px solid var(--gm);border-radius:8px;color:var(--iv);cursor:pointer;font-size:15px;font-weight:600;background:#1A1A24;user-select:none}.apc.on{background:linear-gradient(180deg,#2E3F66,#22304F);border-color:var(--gl);color:#fff}
+.aps{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;margin-top:12px}.aps .apc{padding:10px 0;text-align:center}.apl{display:flex;justify-content:space-between;color:var(--ivd);font-size:12px;margin-top:6px}
+.apz{display:flex;gap:12px;align-items:flex-start;margin-top:12px;cursor:pointer;font-size:14px;line-height:1.5;color:var(--iv)}.apz i{flex:0 0 26px;height:26px;border:2px solid var(--gm);border-radius:6px;display:inline-flex;align-items:center;justify-content:center;font-style:normal;font-weight:800;color:var(--gl);background:#1A1A24}.apz.on i{background:linear-gradient(180deg,#2E3F66,#22304F)}
+.ankn{display:flex;justify-content:space-between;gap:12px;margin-top:22px}.ankn .btn{height:54px;font-size:17px;padding:0 26px}.ankn .btn.szary{background:#1A1A24;color:var(--iv);border-color:var(--line)}.ank .err{color:var(--red);min-height:22px;margin-top:10px;font-weight:600;text-align:center}
+body:not(.prosty) .ank{max-width:900px}body:not(.prosty) .apt{font-size:22px}body:not(.prosty) .apo{font-size:17px}body:not(.prosty) .ap input,body:not(.prosty) .ap textarea{font-size:19px}body:not(.prosty) .apc{font-size:17px}body:not(.prosty) .anks{font-size:40px}body:not(.prosty) .ankw{font-size:20px}body:not(.prosty) .ankn .btn{height:64px;font-size:20px}
+body.prosty .pinbox.lg input{letter-spacing:0!important;height:52px!important;font-size:17px!important}
 </style></head><body>
 <div id="app"></div>
 <div id="tipbox" class="tip hidden"><span class="x" onclick="hideTip()">✕</span><div id="tipc"></div></div>
@@ -883,6 +892,97 @@ function odswiezCicho() {
 }
 document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible') odswiezCicho(); });
 window.addEventListener('focus', odswiezCicho);
+
+// ---------- ankieta startowa (po rejestracji, przed zatwierdzeniem) ----------
+var ANKIETA = [
+  { s: 'Na start', p: [
+    { id: 'imie', t: 'Imię i nazwisko', typ: 'text', req: 1, ph: 'Jan Kowalski' },
+    { id: 'wiek', t: 'Ile masz lat?', o: 'Wiek ma znaczenie przy planowaniu regeneracji.', typ: 'number', req: 1, ph: 'np. 28' },
+    { id: 'cel', t: 'Jaki jest Twój cel?', o: 'Napisz, jak chcesz wyglądać i czuć się za kilka miesięcy lub co chcesz osiągnąć. Może być konkretnie („zrobić pierwsze podciągnięcie”) albo ogólnie, oba są ok.', typ: 'area', req: 1 },
+    { id: 'oczekiwania', t: 'Czego oczekujesz od planu i od naszej współpracy?', typ: 'area', req: 1 } ] },
+  { s: 'Twoje doświadczenie', p: [
+    { id: 'staz', t: 'Opowiedz o swoim stażu treningowym', o: 'Ile trenujesz, jak (siłownia, sporty, zajęcia grupowe, samodzielnie czy z trenerem), jakie były przerwy. Jeśli zaczynasz od zera, po prostu napisz.', typ: 'area', req: 1 },
+    { id: 'poziom', t: 'Jak oceniasz swój obecny poziom wytrenowania?', typ: 'skala', min: 1, max: 10, lewo: 'Zaczynam od zera', prawo: 'Poziom zaawansowany', req: 1 },
+    { id: 'pojecia', t: 'Które z tych pojęć znasz?', o: 'Zaznacz wszystkie, które kojarzysz. Nie musisz ich opisywać.', typ: 'multi', opcje: ['RIR (reps in reserve)', 'RPE (skala odczuwanego wysiłku)', 'Upadek mięśniowy / praca blisko upadku', 'Upadek techniczny', 'Żadnego z powyższych'], req: 1 },
+    { id: 'mocne_slabe', t: 'Jakie są Twoje mocne i słabe strony?', o: 'Nie tylko treningowe. Chodzi też o Ciebie jako osobę: np. „dużo zaangażowania, ale brak regularności”, „ciekawość i chęć próbowania nowych rzeczy”, „problem z motywacją”. Im lepiej Cię poznam, tym lepiej wykorzystam to w planie.', typ: 'area', req: 1 } ] },
+  { s: 'Logistyka treningu', p: [
+    { id: 'treningi_tydz', t: 'Ile treningów w tygodniu realnie zrobisz? Czy możesz trenować w stałe dni, jakie?', o: 'Chodzi o realną liczbę, nie ambitną. Np. „3 treningi, na pewno pon, śr, pt” albo „2-3, dni różne”.', typ: 'area', req: 1 },
+    { id: 'czas_treningu', t: 'Ile czasu możesz przeznaczyć na jeden trening?', typ: 'area', req: 1 },
+    { id: 'godzina', t: 'O której godzinie zazwyczaj będziesz trenować?', typ: 'text', req: 1, ph: 'np. rano ok. 7:00 / wieczorem po pracy' },
+    { id: 'ulubione', t: 'Masz ulubione ćwiczenia, które chcesz mieć w planie?', o: 'Nie obiecuję, że będą, ale wezmę pod uwagę.', typ: 'area', req: 0 } ] },
+  { s: 'Zdrowie', intro: 'Ta część jest najważniejsza, bo od niej zależy, czy plan będzie bezpieczny. Nic z tego nie wychodzi poza nas.', p: [
+    { id: 'choroby', t: 'Czy masz jakieś choroby, kontuzje, wady postawy albo zaburzenia hormonalne?', o: 'Np. osteoporoza, hiperlordoza, problemy z kolanem lub barkiem, niedoczynność tarczycy, Hashimoto, insulinooporność, cukrzyca, choroby autoimmunologiczne.', typ: 'taknie', req: 1 },
+    { id: 'choroby_opis', t: 'Opisz, co dokładnie', o: 'Co to jest, od kiedy, czy jest leczone, czy coś Ci na co dzień przeszkadza.', typ: 'area', req: 1, gdy: ['choroby', 'Tak'] },
+    { id: 'zakazane', t: 'Czy są ćwiczenia, których nie możesz wykonywać ze względów zdrowotnych?', typ: 'area', req: 1, gdy: ['choroby', 'Tak'] },
+    { id: 'zalecenia', t: 'Czy masz zalecenia od lekarza lub fizjoterapeuty dotyczące ćwiczeń?', o: 'Np. zakaz konkretnych ćwiczeń, limit obciążenia, zalecenia po operacji lub rehabilitacji.', typ: 'taknie', req: 1 },
+    { id: 'zalecenia_opis', t: 'Jakie to zalecenia?', o: 'Opisz je krótko własnymi słowami.', typ: 'area', req: 1, gdy: ['zalecenia', 'Tak'] },
+    { id: 'bol', t: 'Czy coś Cię obecnie boli albo sztywnieje na co dzień?', o: 'Plecy, kark, kolana, barki. Nawet jeśli to „tylko” po siedzeniu w pracy, napisz. Jeśli nic, napisz „nie”.', typ: 'area', req: 1 },
+    { id: 'leki', t: 'Czy przyjmujesz na stałe jakieś leki?', typ: 'taknie', req: 1 },
+    { id: 'leki_opis', t: 'Jakie i w jakim celu?', typ: 'area', req: 1, gdy: ['leki', 'Tak'] },
+    { id: 'suplementy', t: 'Czy bierzesz obecnie jakieś suplementy? Jakie i po co?', o: 'Jeśli nic nie bierzesz, napisz „nie”.', typ: 'area', req: 1 },
+    { id: 'rozpiska', t: 'Chcesz dostać ode mnie też rozpiskę suplementacji?', typ: 'taknie', req: 1 },
+    { id: 'budzet', t: 'Jaki budżet miesięcznie chcesz na to przeznaczyć?', typ: 'text', req: 1, ph: 'np. 100-150 zł miesięcznie', gdy: ['rozpiska', 'Tak'] },
+    { id: 'sterydy', t: 'Czy zdarzyło Ci się stosować środki anaboliczne (sterydy), teraz lub w przeszłości?', o: 'Pytam, bo to zmienia sposób planowania. Bez oceniania.', typ: 'taknie', req: 1 },
+    { id: 'sterydy_opis', t: 'Co, kiedy i jak długo?', typ: 'area', req: 1, gdy: ['sterydy', 'Tak'] } ] },
+  { s: 'Regeneracja i styl życia', p: [
+    { id: 'sen', t: 'Od której do której zwykle śpisz? Czy to stałe godziny?', o: 'Sen to podstawa regeneracji, więc muszę wiedzieć, na czym stoimy.', typ: 'text', req: 1, ph: 'np. od 23:00 do 6:30, w weekendy dłużej' },
+    { id: 'przebudzenie', t: 'Jak się czujesz po przebudzeniu?', typ: 'single', opcje: ['Pełna energia, gotowość do działania', 'Tak sobie, rozkręcam się po chwili', 'Zmęczenie, jakby nocy w ogóle nie było'], req: 1 },
+    { id: 'kofeina', t: 'Ile kofeiny pijesz w ciągu dnia i o której?', o: 'Kawa, energetyki, przedtreningówki, ale też herbata i cola. Wiele osób nie wie, że te dwa ostatnie też mają kofeinę. Napisz, co pijesz, ile i o której.', typ: 'area', req: 1 },
+    { id: 'alkohol', t: 'Alkohol?', typ: 'single', opcje: ['Nie piję', 'Okazjonalnie, kilka razy w roku', 'Raz w tygodniu lub co dwa', 'Częściej'], req: 1 },
+    { id: 'dieta', t: 'Jak obecnie wygląda Twoja dieta?', o: 'Bez upiększania. Ile posiłków, co zwykle jesz, czy coś liczysz, gdzie się sypie.', typ: 'area', req: 1 },
+    { id: 'styl_zycia', t: 'Jak wygląda Twój styl życia?', o: 'Opisz poziom stresu, ile masz czasu w ciągu dnia i czy praca obciąża Cię fizycznie lub psychicznie. Dzięki temu będę wiedział, ile realnie masz siły na trening i jak szybko się regenerujesz.', typ: 'area', req: 1 },
+    { id: 'zajecie', t: 'Czym się zajmujesz?', o: 'Nie musisz odpowiadać, jeśli nie chcesz. Ale jeśli napiszesz, łatwiej mi ocenić, jak regeneruje się Twój organizm i dobrać do tego trening.', typ: 'area', req: 0 } ] },
+  { s: 'Na koniec', p: [
+    { id: 'cos_jeszcze', t: 'Czy jest coś jeszcze, co może przeszkadzać w treningu albo o czym powinienem wiedzieć?', o: 'Cokolwiek: życie, praca, plany na najbliższe miesiące, słaby sen, obawy.', typ: 'area', req: 0 },
+    { id: 'oswiadczenie', t: 'Zanim zaczniemy', o: 'Dwie formalności, dla Twojego bezpieczeństwa.', typ: 'zgoda', req: 1, tekst: 'Potwierdzam, że podane informacje są zgodne z prawdą i nie pominąłem/am niczego, co dotyczy mojego zdrowia i może wpłynąć na bezpieczeństwo treningu. Będę na bieżąco informować trenera o zmianach stanu zdrowia, urazach i zaleceniach lekarskich. Wiem, że plan wykonuję samodzielnie i na własną odpowiedzialność.' },
+    { id: 'rodo', t: 'Zgoda na przetwarzanie danych', typ: 'zgoda', req: 1, tekst: 'Wyrażam zgodę na przetwarzanie moich danych osobowych, w tym danych o zdrowiu, w celu przygotowania planu treningowego i prowadzenia współpracy trenerskiej. Wiem, że mogę ją w każdej chwili wycofać.' } ] }
+];
+var ANK = { krok: 0, odp: {} };
+try { ANK.odp = JSON.parse(localStorage.getItem('ankieta_draft') || '{}') || {}; } catch (e) {}
+function ankWidoczne(p) { if (!p.gdy) return true; var v = ANK.odp[p.gdy[0]]; return v === p.gdy[1]; }
+function ankZapiszDraft() { try { localStorage.setItem('ankieta_draft', JSON.stringify(ANK.odp)); } catch (e) {} }
+function ankPole(p) {
+  var v = ANK.odp[p.id], h = '<div class="ap' + (ankWidoczne(p) ? '' : ' ukryte') + '" data-id="' + p.id + '"><div class="apt">' + esc(p.t) + (p.req ? '' : ' <small>opcjonalnie</small>') + '</div>' + (p.o ? '<div class="apo">' + esc(p.o) + '</div>' : '');
+  if (p.typ === 'text' || p.typ === 'number') h += '<input data-a="' + p.id + '" type="' + (p.typ === 'number' ? 'number' : 'text') + '" inputmode="' + (p.typ === 'number' ? 'numeric' : 'text') + '" placeholder="' + esc(p.ph || '') + '" value="' + esc(v == null ? '' : v) + '">';
+  else if (p.typ === 'area') h += '<textarea data-a="' + p.id + '" rows="3" placeholder="Twoja odpowiedź…">' + esc(v == null ? '' : v) + '</textarea>';
+  else if (p.typ === 'taknie' || p.typ === 'single') h += '<div class="apw">' + (p.typ === 'taknie' ? ['Tak', 'Nie'] : p.opcje).map(function (o) { return '<span class="apc' + (v === o ? ' on' : '') + '" onclick="ankWybierz(\'' + p.id + '\',\'' + esc(o).replace(/'/g, '&#39;') + '\')">' + esc(o) + '</span>'; }).join('') + '</div>';
+  else if (p.typ === 'multi') { var arr = Array.isArray(v) ? v : []; h += '<div class="apw kol">' + p.opcje.map(function (o) { return '<span class="apc' + (arr.indexOf(o) >= 0 ? ' on' : '') + '" onclick="ankMulti(\'' + p.id + '\',\'' + esc(o).replace(/'/g, '&#39;') + '\')">' + (arr.indexOf(o) >= 0 ? '✓ ' : '') + esc(o) + '</span>'; }).join('') + '</div>'; }
+  else if (p.typ === 'skala') { h += '<div class="aps">'; for (var i = p.min; i <= p.max; i++) h += '<span class="apc' + (String(v) === String(i) ? ' on' : '') + '" onclick="ankWybierz(\'' + p.id + '\',\'' + i + '\')">' + i + '</span>'; h += '</div><div class="apl"><span>' + esc(p.lewo) + '</span><span>' + esc(p.prawo) + '</span></div>'; }
+  else if (p.typ === 'zgoda') h += '<label class="apz' + (v === true ? ' on' : '') + '" onclick="ankZgoda(\'' + p.id + '\')"><i>' + (v === true ? '✓' : '') + '</i><span>' + esc(p.tekst) + '</span></label>';
+  return h + '<div class="apb" data-b="' + p.id + '"></div></div>';
+}
+function ankWybierz(id, v) { ANK.odp[id] = v; ankZapiszDraft(); ekranAnkiety(); }
+function ankMulti(id, v) { var arr = Array.isArray(ANK.odp[id]) ? ANK.odp[id].slice() : []; var i = arr.indexOf(v); if (i >= 0) arr.splice(i, 1); else { if (v === 'Żadnego z powyższych') arr = []; else arr = arr.filter(function (x) { return x !== 'Żadnego z powyższych'; }); arr.push(v); } ANK.odp[id] = arr; ankZapiszDraft(); ekranAnkiety(); }
+function ankZgoda(id) { ANK.odp[id] = !(ANK.odp[id] === true); ankZapiszDraft(); ekranAnkiety(); }
+function ankZbierz() { document.querySelectorAll('[data-a]').forEach(function (el) { ANK.odp[el.dataset.a] = el.value; }); ankZapiszDraft(); }
+function ankBraki(sek) {
+  var braki = [];
+  sek.p.forEach(function (p) { if (!p.req || !ankWidoczne(p)) return; var v = ANK.odp[p.id]; var puste = v == null || v === '' || v === false || (Array.isArray(v) && !v.length); if (puste) braki.push(p.id); });
+  return braki;
+}
+function ekranAnkiety(braki) {
+  braki = braki || [];
+  var k = ANK.krok, sek = ANKIETA[k], n = ANKIETA.length;
+  var h = '<div class="ank"><div class="ankh"><span class="sub">Ankieta startowa</span><span class="ankp">' + (k + 1) + ' / ' + n + '</span></div><div class="ankbar"><i style="width:' + Math.round((k + 1) / n * 100) + '%"></i></div>';
+  if (k === 0) h += '<p class="mut ankw">Cześć! Zanim ułożę Ci plan, muszę Cię trochę poznać. Odpowiadaj szczerze i tak, jak Ci wygodnie. Im więcej mi powiesz, tym lepiej dopasuję trening do Twojego życia. Zajmie Ci to jakieś 15 minut. Nie ma tu złych odpowiedzi.</p>';
+  h += '<h1 class="anks">' + esc(sek.s) + '</h1>' + (sek.intro ? '<p class="mut ankw">' + esc(sek.intro) + '</p>' : '');
+  h += sek.p.map(ankPole).join('');
+  h += '<div class="ankn">' + (k > 0 ? '<button class="btn szary" id="ank-wstecz">← Wstecz</button>' : '<span></span>') + '<button class="btn" id="ank-dalej">' + (k === n - 1 ? 'Wyślij ankietę' : 'Dalej →') + '</button></div><div class="err" id="ank-msg"></div><p class="mut" style="font-size:14px;margin-top:18px;text-align:center"><a class="lnk" onclick="wylogujKonto()">Wyloguj</a> · odpowiedzi zapisują się na tym urządzeniu, możesz wrócić później</p></div>';
+  document.getElementById('app').innerHTML = h;
+  braki.forEach(function (id) { var el = document.querySelector('.ap[data-id="' + id + '"]'); if (el) el.classList.add('brak'); });
+  if (braki.length) { document.getElementById('ank-msg').textContent = 'Uzupełnij zaznaczone pytania.'; var f = document.querySelector('.ap.brak'); if (f) f.scrollIntoView({ behavior: 'smooth', block: 'center' }); } else window.scrollTo(0, 0);
+  document.querySelectorAll('[data-a]').forEach(function (el) { el.addEventListener('input', function () { ANK.odp[el.dataset.a] = el.value; ankZapiszDraft(); var ap = el.closest('.ap'); if (ap) ap.classList.remove('brak'); }); });
+  document.querySelectorAll('textarea[data-a]').forEach(function (ta) { var fit = function () { ta.style.height = 'auto'; ta.style.height = Math.max(90, ta.scrollHeight + 4) + 'px'; }; fit(); ta.addEventListener('input', fit); });
+  var w = document.getElementById('ank-wstecz'); if (w) w.onclick = function () { ankZbierz(); ANK.krok--; ekranAnkiety(); };
+  document.getElementById('ank-dalej').onclick = function () {
+    ankZbierz(); var b = ankBraki(sek); if (b.length) { ekranAnkiety(b); return; }
+    if (k < n - 1) { ANK.krok++; ekranAnkiety(); return; }
+    var out = {}; ANKIETA.forEach(function (s) { s.p.forEach(function (p) { if (!ankWidoczne(p)) return; var v = ANK.odp[p.id]; if (v == null || v === '' || (Array.isArray(v) && !v.length)) return; out[p.id] = { p: p.typ === 'zgoda' ? p.tekst : p.t, o: v === true ? 'Tak' : (Array.isArray(v) ? v.join(', ') : String(v)) }; }); });
+    document.getElementById('ank-dalej').textContent = 'Wysyłam…';
+    api({ akcja: 'ankietaZapisz', sesja: SESJA, odpowiedzi: out }).then(function (r) { try { localStorage.removeItem('ankieta_draft'); } catch (e) {} ANK.krok = 0; ekranStatusu({ imie: (ANK.odp.imie || ''), status: r.status || 'czeka', email: '' }); }).catch(function (e) { document.getElementById('ank-dalej').textContent = 'Wyślij ankietę'; document.getElementById('ank-msg').textContent = String(e.message || e); });
+  };
+}
+
 // ---------- konto podopiecznego: logowanie, rejestracja, sesja ----------
 var SESJA = null; try { SESJA = localStorage.getItem('sesja'); } catch (e) {}
 function ekranKarta(tytul, tresc) {
@@ -908,12 +1008,12 @@ function ekranRejestracji(msg, dane) {
 }
 function ekranStatusu(konto) {
   var im = esc(String(konto.imie || '').split(' ')[0]), st = konto.status, t = '';
-  if (st === 'ankieta') t = '<p class="mut">Konto gotowe. Następny krok to <b style="color:var(--iv)">ankieta startowa</b>: kilka pytań o cel, zdrowie i doświadczenie, żeby plan był pod Ciebie.</p><p class="mut">Ankieta jest w przygotowaniu i pojawi się tutaj wkrótce. Kuba już widzi Twoje konto.</p>';
+  if (st === 'ankieta') t = '<p class="mut">Konto gotowe. Następny krok to <b style="color:var(--iv)">ankieta startowa</b>: pytania o cel, zdrowie, doświadczenie i codzienność, żeby plan był pod Ciebie. Zajmie ok. 15 minut, odpowiedzi zapisują się w trakcie.</p>';
   else if (st === 'czeka') t = '<p class="mut">Dzięki za ankietę. Kuba ją przegląda i zatwierdza Twoje konto. Plan pojawi się tutaj, w tym samym miejscu.</p>';
   else if (st === 'odrzucone') t = '<p class="mut">To konto nie jest aktywne. Napisz do Kuby na Instagramie.</p>';
   else t = '<p class="mut">Twój plan jest już gotowy.</p>';
-  ekranKarta('Cześć' + (im ? ', ' + im : '') + '!', t + '<button class="btn" id="st-btn">' + (st === 'aktywne' ? 'Otwórz plan' : 'Sprawdź ponownie') + '</button><p class="mut" style="font-size:16px;margin-top:22px"><a class="lnk" onclick="wylogujKonto()">Wyloguj</a> · ' + esc(konto.email || '') + '</p>');
-  document.getElementById('st-btn').onclick = function () { ladowanie('Sprawdzam…'); wczytajSesja(); };
+  ekranKarta('Cześć' + (im ? ', ' + im : '') + '!', t + '<button class="btn" id="st-btn">' + (st === 'aktywne' ? 'Otwórz plan' : st === 'ankieta' ? 'Wypełnij ankietę' : 'Sprawdź ponownie') + '</button><p class="mut" style="font-size:16px;margin-top:22px"><a class="lnk" onclick="wylogujKonto()">Wyloguj</a> · ' + esc(konto.email || '') + '</p>');
+  document.getElementById('st-btn').onclick = function () { if (st === 'ankieta') { if (!ANK.odp.imie && konto.imie) ANK.odp.imie = konto.imie; ekranAnkiety(); return; } ladowanie('Sprawdzam…'); wczytajSesja(); };
 }
 function wczytajSesja() {
   api({ akcja: 'wczytaj', sesja: SESJA }).then(function (dane) {
