@@ -136,6 +136,8 @@ body.prosty #a2hs>div{padding:14px!important;font-size:14px!important}body.prost
 .pm-row{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start;padding:4px 12px 14px}.pm-l{flex:0 0 620px;max-width:100%}.pm-r{flex:1 1 640px;min-width:0;overflow:auto}.pm-r .pm{margin-top:8px}.pm td.dk[colspan]{text-align:left;padding-left:14px}
 .g4{grid-template-columns:repeat(4,1fr);gap:6px;padding:8px 0 0}.g4 .tile{padding:6px 24px 6px 8px;min-height:0}.g4 .tile b{font-size:17px;line-height:1.1}.g4 .tile b input{font-size:17px;height:22px}.g4 .tile>span{font-size:11px;line-height:1.2;display:block}.g4 .tile small{font-size:10px}.g4 .tile small textarea{font-size:10px}.g4 .tile .prio i{width:14px;height:14px}.g4 .tile .prio{margin-top:4px}.g4 .tile .chk{width:14px;height:14px;font-size:10px;top:6px;right:6px}
 .wyk .ttl{font-size:15px}.wyk svg text{font-family:Poppins,sans-serif}
+/* zaokrąglenia (18.09, zaakceptowane) */
+.card{border-radius:14px;overflow:hidden}.acc,.acc.off{border-radius:12px}.kpi>div{border-radius:14px}.btn,.pbtn{border-radius:10px}.tile{border-radius:12px}.mcard{border-radius:16px;overflow:hidden}.mcard .mr input,.mcard .mw input,.mcard .mt button{border-radius:10px}.wk{border-radius:8px!important}.bar .sw span{border-radius:8px}.bar .hb3{border-radius:10px}.bar .sw{border-radius:10px;overflow:hidden}.status{border-radius:12px}table.tr,table.wt,table.zt,.pm{border-radius:12px;overflow:hidden;border-collapse:separate;border-spacing:0}.card h2.metal .ttl{border-radius:10px}.pm td.pn{border-radius:8px 0 0 8px}.gt,.chip,.pill,.legend .hint{border-radius:12px}.mm span{border-radius:8px}.top .pal .pb{border-radius:8px}select,input.c,.c{border-radius:6px}.leg{border-radius:6px}.ap{border-radius:14px}.apc{border-radius:10px}.lg input,.ap input,.ap textarea{border-radius:10px}.rp{border-radius:12px}.menu{border-radius:0 16px 16px 0}.wyk{border-radius:14px}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
 .ank{max-width:760px;margin:30px auto;padding:0 16px 40px}.ankh{display:flex;justify-content:space-between;align-items:center}.ankh .sub{font-size:16px}.ankp{color:var(--ivd);font-size:16px;font-weight:700}.ankbar{height:4px;background:#2A2A36;border-radius:2px;margin:10px 0 22px;overflow:hidden}.ankbar i{display:block;height:100%;background:linear-gradient(90deg,#8E6B2E,#C9A455)}.anks{font-size:34px;margin:0 0 14px}.ankw{font-size:18px;line-height:1.5;margin:0 0 18px}
 .ap{background:var(--card);border:1px solid var(--line);border-left:3px solid #8E6B2E;border-radius:8px;padding:18px 20px;margin-bottom:14px}.ap.ukryte{display:none}.ap.brak{border-color:var(--red);border-left-color:var(--red)}.apt{font-size:19px;font-weight:700;color:var(--iv);line-height:1.35}.apt small{font-weight:500;color:var(--ivd);font-size:13px;margin-left:6px}.apo{color:var(--ivd);font-size:15px;line-height:1.5;margin-top:6px}
@@ -384,7 +386,7 @@ function render() {
   html += '</div></div>';
   if (TR && WIDOK === 'treningi') { var ns = Object.keys(SEL).length; html += '<div class="pal"><span class="pl">Pokoloruj: ' + I('kolor') + '</span><i class="pb GOLD" title="Priorytet" onclick="koloruj(\'Priorytet\')"></i><i class="pb NAVY" title="Neutral" onclick="koloruj(\'Neutral\')"></i><i class="pb BORDO" title="Utrzymanie" onclick="koloruj(\'Utrzymanie\')"></i><i class="pb x" title="Wyczyść zaznaczenie" onclick="koloruj(null)">✕</i><span class="cnt2">' + (ns ? 'zaznaczone: ' + ns : 'zaznacz przez Nr') + '</span></div>'; }
   html += '<div class="kpi"><div><b>' + serieT + '</b><span>Serie / tydzień</span></div><div><b>' + (TR ? '<input id="kcal" class="c" style="width:82px;color:#E6CB80;font-weight:700;font-size:22px;text-align:center" value="' + esc(U('kcal')) + '" placeholder="–" title="kcal w dni treningowe"><span style="color:var(--ivd);font-size:16px"> / </span><input id="kcal2" class="c" style="width:82px;color:var(--iv);font-weight:700;font-size:18px;text-align:center" value="' + esc(U('kcal2')) + '" placeholder="–" title="kcal w dni nietreningowe (opcjonalnie)">' : (U('kcal') ? esc(U('kcal')) + (U('kcal2') ? '<span style="color:var(--ivd);font-size:16px"> / </span><span style="font-size:18px;color:var(--iv)">' + esc(U('kcal2')) + '</span>' : '') : '–')) + '</b><span>' + (U('kcal2') ? 'kcal: trening / bez treningu ' + I('kcal2') : 'Aktualne kcal' + (TR ? ' ' + I('kcal2') : '')) + '</span></div><div><b>' + (last != null ? fmt(last) + ' kg' : '–') + (d != null ? '<em class="' + (d > 0 ? 'up' : '') + '">' + (d < 0 ? '▼' : d > 0 ? '▲' : '=') + '</em><small class="' + (d > 0 ? 'up' : '') + '">' + fmt(Math.abs(d).toFixed(1)) + '</small>' : '') + '</b><span>Aktualna waga</span></div></div></div>';
-  if (TR && D.lista && D.lista.length) { html += '<div class="selbar desk">Podopieczny: <select id="selK">' + D.lista.map(function (k) { return '<option value="' + esc(k.bazaId) + '"' + (k.bazaId === D.bazaId ? ' selected' : '') + '>' + esc(k.imie) + ' · ' + esc(k.email) + '</option>'; }).join('') + '</select><a class="pbtn" style="margin-left:8px" href="lista.html">lista / dodaj</a><span class="pbtn" style="margin-left:8px" onclick="kopiujLink()" title="Skopiuje gotową wiadomość z linkiem i PIN-em do wysłania podopiecznemu">✉ kopiuj link i PIN</span></div>'; }
+  if (TR && D.lista && D.lista.length) { html += '<div class="selbar desk">Podopieczny: <select id="selK">' + D.lista.map(function (k) { return '<option value="' + esc(k.bazaId) + '"' + (k.bazaId === D.bazaId ? ' selected' : '') + '>' + esc(k.imie) + ' · ' + esc(k.email) + '</option>'; }).join('') + '</select><a class="pbtn" style="margin-left:8px" href="lista.html">lista / dodaj</a></div>'; }
   if (WIDOK !== 'treningi') html += widokInny(); else {
   // ----- telefon: wybór treningu + karty
   html += '<div class="mob"><div class="selbar">Trening: <select id="mobSel">'; for (var t2 = 1; t2 <= akt; t2++) html += '<option value="' + t2 + '"' + (t2 === mobT ? ' selected' : '') + '>Trening ' + t2 + '</option>'; html += '</select><a class="v" style="margin-left:auto" target="_blank" href="' + esc(D.rozgrzewka) + '" title="Rozgrzewka">▶</a></div><div id="mobcards" style="padding-top:10px"></div></div>';
@@ -577,16 +579,6 @@ function planowanie() {
   out += '<td class="sep"></td></tr></table>';
   out += '</div></div></div>';
   return out;
-}
-function kopiujLink() {
-  var k = (D.lista || []).filter(function (x) { return x.bazaId === D.bazaId; })[0];
-  if (!k || !k.token) { status('Brak linku dla tego podopiecznego. Wejdź na listę.', true, true); return; }
-  var base = /^https?:/.test(D.url || '') ? D.url : (location.origin + location.pathname);
-  var imie = String(k.imie || '').split(' ')[0];
-  var txt = 'Cześć' + (imie ? ' ' + imie : '') + '! Tu jest Twój plan treningowy:\n' + base + '?k=' + k.token + '\nPIN: ' + k.pin + '\nOtwórz link w Safari lub Chrome, wpisz PIN raz, telefon go zapamięta. Potem możesz dodać stronę do ekranu głównego, żeby mieć ją pod ikonką.';
-  var done = function () { status('skopiowano wiadomość z linkiem i PIN-em', true); };
-  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(done, function () { prompt('Skopiuj ręcznie:', txt); });
-  else prompt('Skopiuj ręcznie:', txt);
 }
 function zaznacz(id) { if (SEL[id]) delete SEL[id]; else SEL[id] = true; render(); }
 function koloruj(typ) {
@@ -837,27 +829,6 @@ function dodajCw(t, nr) { var tmp = 'tmp' + Date.now(); var c = { id: tmp, treni
 window.addEventListener('beforeunload', function (e) { if (queue.length || pending) { flush(true); e.preventDefault(); e.returnValue = ''; } });
 document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden' && queue.length) { clearTimeout(timer); flush(true); } });
 window.addEventListener('pagehide', function () { if (queue.length) { clearTimeout(timer); flush(true); } });
-// ---------- ekran PIN (podopieczny) ----------
-function pinScreen(msg) {
-  document.getElementById('app').innerHTML = '<div class="pinbox" style="max-width:760px;margin:120px auto;padding:0 16px"><div class="card" style="padding:44px;border-radius:12px"><div class="sub" style="font-size:20px">Plan treningowy</div><h1 style="margin:8px 0 22px;font-size:44px">Cześć' + (D.imie ? ', ' + esc(String(D.imie).split(' ')[0]) : '') + '!</h1><p style="color:var(--ivd);margin:0 0 24px;font-size:24px">Wpisz 4-cyfrowy PIN od Kuby. Telefon go zapamięta.</p><input id="pin" inputmode="numeric" maxlength="4" autocomplete="one-time-code" style="width:100%;height:100px;font:800 56px Poppins;text-align:center;letter-spacing:24px;background:#1A1A24;color:var(--gl);border:2px solid var(--gm);border-radius:8px"><button class="btn" id="pinbtn" style="width:100%;margin-top:24px;height:84px;font-size:30px">Wejdź</button><div id="pinmsg" style="color:var(--red);min-height:32px;margin-top:16px;font-weight:600;font-size:22px">' + (msg || '') + '</div></div></div>';
-  var inp = document.getElementById('pin'); inp.focus();
-  var go = function () { var v = inp.value.trim(); if (v.length < 4) return; document.getElementById('pinbtn').textContent = 'Wczytuję…'; wczytajPin(v); };
-  document.getElementById('pinbtn').onclick = go; inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') go(); });
-}
-function wczytajPin(pin) {
-  var k0 = D.k;
-  api({ akcja: 'wczytaj', k: k0, pin: pin }).then(function (dane) {
-    var pierwszy = false; try { pierwszy = !localStorage.getItem('pin_' + k0); localStorage.setItem('pin_' + k0, pin); } catch (e) {}
-    AUTH = { k: k0, pin: pin }; D = dane; D.url = URL_STRONY; TR = false; OST_WCZYT = Date.now(); render(); if (pierwszy) kartaEkran();
-    try { localStorage.setItem('cache_' + k0, JSON.stringify({ t: Date.now(), d: dane })); } catch (e) {}
-  }).catch(function (e) {
-    var msg = String(e.message || e).replace(/^Error:\s*/, '');
-    if (bledLogowania(e)) { try { localStorage.removeItem('pin_' + k0); } catch (x) {} pinScreen(msg); return; }
-    var c = null; try { c = JSON.parse(localStorage.getItem('cache_' + k0) || 'null'); } catch (x) {}
-    if (c && c.d) { AUTH = { k: k0, pin: pin }; D = c.d; D.url = URL_STRONY; TR = false; render(); status('Brak sieci. Pokazuję plan z ' + new Date(c.t).toLocaleString('pl-PL', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) + '. Wpisy zapiszę, gdy wróci internet.', false, true); }
-    else pinScreen(msg);
-  });
-}
 function ladowanie(t) { document.getElementById('app').innerHTML = '<div class="mut" style="padding:60px;text-align:center;font-size:28px">' + t + '</div>'; }
 function hasloScreen(msg) {
   document.getElementById('app').innerHTML = '<div class="pinbox" style="max-width:760px;margin:120px auto;padding:0 16px"><div class="card" style="padding:44px;border-radius:12px"><div class="sub" style="font-size:20px">Plan treningowy</div><h1 style="margin:8px 0 22px;font-size:44px">Panel trenera</h1><p style="color:var(--ivd);margin:0 0 24px;font-size:24px">Wpisz hasło trenera. Przeglądarka je zapamięta.</p><input id="haslo" type="password" autocomplete="current-password" style="width:100%;height:100px;font:800 40px Poppins;text-align:center;background:#1A1A24;color:var(--gl);border:2px solid var(--gm);border-radius:8px"><button class="btn" id="haslobtn" style="width:100%;margin-top:24px;height:84px;font-size:30px">Wejdź</button><div id="haslomsg" style="color:var(--red);min-height:32px;margin-top:16px;font-weight:600;font-size:22px">' + (msg || '') + '</div><p style="color:var(--ivd);font-size:20px;margin-top:20px">Podopieczny? <a class="lnk" onclick="ekranLogowania()">Zaloguj się tutaj</a>.</p></div></div>';
@@ -872,7 +843,7 @@ function wczytajTrenera() {
     D = dane; D.url = URL_STRONY; TR = true; OST_WCZYT = Date.now(); render();
   }).catch(function (e) { var msg = String(e.message || e).replace(/^Error:\s*/, ''); if (bledLogowania(e)) { try { localStorage.removeItem('trener_haslo'); } catch (x) {} HASLO = null; } hasloScreen(msg + (bledLogowania(e) ? '' : ' Wpisz hasło i spróbuj jeszcze raz.')); });
 }
-// karta „dodaj do ekranu” po pierwszym udanym PIN-ie (raz; iPhone = instrukcja, Android = instrukcja Chrome)
+// karta „dodaj do ekranu” po pierwszym logowaniu (raz; iPhone = instrukcja, Android = instrukcja Chrome)
 function kartaEkran() {
   var ios = /iPhone|iPad/i.test(navigator.userAgent), android = /Android/i.test(navigator.userAgent);
   if (!ios && !android) return;
@@ -886,9 +857,9 @@ var OST_WCZYT = Date.now();
 function odswiezCicho() {
   if (!D || !D.bazaId || queue.length || pending || Date.now() - OST_WCZYT < 5 * 60 * 1000) return;
   var ae = document.activeElement; if (ae && (ae.tagName === 'INPUT' || ae.tagName === 'TEXTAREA' || ae.tagName === 'SELECT')) return;
-  var p = TR ? api({ akcja: 'plan', bazaId: D.bazaId }) : (AUTH ? api(AUTH.sesja ? { akcja: 'wczytaj', sesja: AUTH.sesja } : { akcja: 'wczytaj', k: AUTH.k, pin: AUTH.pin }) : null);
+  var p = TR ? api({ akcja: 'plan', bazaId: D.bazaId }) : (AUTH && AUTH.sesja ? api({ akcja: 'wczytaj', sesja: AUTH.sesja }) : null);
   if (!p) return; OST_WCZYT = Date.now();
-  p.then(function (dane) { if (queue.length || pending) return; dane.url = URL_STRONY; D = dane; render(); status('odświeżono', true); if (AUTH) { try { localStorage.setItem('cache_' + (AUTH.k || 'sesja'), JSON.stringify({ t: Date.now(), d: dane })); } catch (e) {} } }).catch(function () {});
+  p.then(function (dane) { if (queue.length || pending) return; dane.url = URL_STRONY; D = dane; render(); status('odświeżono', true); if (AUTH) { try { localStorage.setItem('cache_sesja', JSON.stringify({ t: Date.now(), d: dane })); } catch (e) {} } }).catch(function () {});
 }
 document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible') odswiezCicho(); });
 window.addEventListener('focus', odswiezCicho);
@@ -1037,13 +1008,8 @@ function wylogujKonto(cicho) {
 }
 (function start() {
   var q = new URLSearchParams(location.search), k = q.get('k');
-  if (k) {
-    D = { tryb: 'pin', k: k };
-    var saved = null; try { saved = localStorage.getItem('pin_' + k); } catch (e) {}
-    if (saved) { ladowanie('Wczytuję Twój plan…'); wczytajPin(saved); } else pinScreen();
-    return;
-  }
   try { HASLO = localStorage.getItem('trener_haslo'); } catch (e) {}
+  if (k) { history.replaceState(null, '', location.pathname + location.hash); if (!HASLO && !SESJA) { ekranLogowania('Linki z PIN-em już nie działają. Zaloguj się kontem albo załóż je poniżej.'); return; } }
   if (HASLO) { ladowanie('Wczytuję…'); wczytajTrenera(); return; }
   if (SESJA) { ladowanie('Wczytuję Twój plan…'); wczytajSesja(); return; }
   if (q.get('klient') != null || q.get('trener') != null) hasloScreen(); else ekranLogowania();
