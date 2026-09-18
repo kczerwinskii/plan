@@ -20,7 +20,7 @@ button.szary{background:#1A1A24;color:#EFE9DA;border:1px solid #4A4A5A}.mut{colo
 <script>var API_URL = "https://script.google.com/macros/s/AKfycbz48qRxFlyvGcVBSltMbjR8kfuQNCbq-8a5g2gYG7oJgtWiU2ZJ-HLEyux6WGc_Xesq1Q/exec";</script>
 <script>
 var HASLO = null; try { HASLO = localStorage.getItem('trener_haslo'); } catch (e) {}
-function api(b) { if (HASLO) b.haslo = HASLO; return fetch(API_URL, { method: 'POST', body: JSON.stringify(b), redirect: 'follow' }).then(function (r) { return r.json(); }).then(function (r) { if (!r.ok) throw new Error(r.error || 'Błąd serwera'); return r.dane; }); }
+function api(b) { if (HASLO) b.haslo = HASLO; return fetch(API_URL, { method: 'POST', body: JSON.stringify(b), redirect: 'follow' }).then(function (r) { return r.text(); }, function () { throw new Error('Brak połączenia z serwerem. Sprawdź internet i spróbuj ponownie.'); }).then(function (t) { try { return JSON.parse(t); } catch (e) { throw new Error('Serwer odpowiedział nieprawidłowo, spróbuj za chwilę.'); } }).then(function (r) { if (!r.ok) throw new Error(r.error || 'Błąd serwera'); return r.dane; }); }
 function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
 var BAZA = location.href.replace(/lista\.html.*$/, '');
 function pokazHaslo(msg) {
@@ -31,7 +31,7 @@ function pokazHaslo(msg) {
 function wczytaj() {
   if (!HASLO) return pokazHaslo();
   document.getElementById('tresc').textContent = 'Wczytuję podopiecznych…';
-  api({ akcja: 'pulpit' }).then(function (lista) { try { localStorage.setItem('trener_haslo', HASLO); } catch (e) {} rysuj(lista); }).catch(function (e) { try { localStorage.removeItem('trener_haslo'); } catch (x) {} HASLO = null; pokazHaslo(e.message); });
+  api({ akcja: 'pulpit' }).then(function (lista) { try { localStorage.setItem('trener_haslo', HASLO); } catch (e) {} rysuj(lista); }).catch(function (e) { if (/hasło/i.test(e.message)) { try { localStorage.removeItem('trener_haslo'); } catch (x) {} HASLO = null; pokazHaslo(e.message); } else { document.getElementById('tresc').innerHTML = '<span style="color:#E0684A">' + String(e.message).replace(/[<>&]/g, '') + '</span> <button class="btn" onclick="wczytaj()" style="margin-left:10px">Spróbuj ponownie</button>'; } });
 }
 function dni(iso) { if (!iso) return null; var d = new Date(String(iso).slice(0, 10)); if (isNaN(d)) return null; return Math.floor((Date.now() - d.getTime()) / 86400000); }
 function fmt(v) { return v === '' || v == null ? '–' : String(v).replace('.', ','); }
