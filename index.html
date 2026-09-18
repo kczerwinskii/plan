@@ -63,6 +63,14 @@ tr.sum td{background:var(--head);border-top:2px solid var(--gm);font-weight:700;
 .selbar{display:flex;gap:8px;align-items:center;padding:10px 28px 0;font-size:13px}.selbar select{background:var(--card);color:var(--gl);border:1px solid var(--gm);border-radius:6px;padding:6px 10px;font:600 14px Poppins}
 /* trener: ciaśniejsza tabela */
 .tr td.ex{min-width:190px}.tr td.rep{width:40px}.tr td.rep input.c{font-size:13px;height:28px}.tr td.w{width:64px}.tr td.w input.c{padding:4px 2px}.tr td.note{min-width:150px}.tr input.c[data-f=sets],.tr input.c[data-f=reps],.tr input.c[data-f=rir]{width:40px!important}.tr input.c[data-f=przerwa],.tr input.c[data-f=tempo]{width:52px!important}.tr td{padding:6px 3px}.tr th{padding:7px 3px;font-size:10px;letter-spacing:.2px}.tr th .inf{width:14px;height:14px;line-height:14px;font-size:10px}.tr input.c[data-f=wideo]{width:50px!important}.tr td.note input.c{padding:4px 2px}
+/* ---------- raporty ---------- */
+.rp{border:1px solid var(--line);border-radius:8px;margin:10px 14px;background:#1E1E28;overflow:hidden}.rp .rh{display:flex;gap:12px;align-items:center;padding:10px 14px;background:linear-gradient(180deg,#2E3F66,#161F36);color:#fff;font-weight:700}.rp .rh b{color:var(--gl);font-size:15px}.rp .rh .mut{font-size:12px;font-weight:500;color:#C9C2AE}.rp .rh .x{margin-left:auto;display:flex;gap:8px}
+.rp .rt{padding:12px 14px;font-size:14px;line-height:1.5;white-space:pre-line;color:var(--iv)}.rp .rt textarea{width:100%;min-height:90px;background:#14141C;color:var(--iv);border:1px solid var(--gm);border-radius:6px;padding:8px;font:14px/1.5 Poppins;resize:vertical}
+.rp .rf{display:flex;gap:10px;flex-wrap:wrap;padding:0 14px 12px}.rp .rf .f{border:1px solid var(--line);border-radius:6px;background:#14141C;padding:6px 10px;font-size:12px;color:var(--iv);cursor:pointer;display:flex;gap:8px;align-items:center}.rp .rf .f:hover{border-color:var(--gm)}.rp .rf .f b{color:var(--gl)}.rp .rf img{max-width:100%;max-height:70vh;border-radius:6px;border:1px solid var(--gm);display:block}.rp .rf video{max-width:100%;max-height:70vh;border-radius:6px;display:block}
+.rp .ro{margin:0 14px 12px;padding:10px 14px;border-left:4px solid var(--gm);background:linear-gradient(180deg,#3A3320,#2A2518);border-radius:0 6px 6px 0;font-size:14px;line-height:1.5;white-space:pre-line}.rp .ro small{display:block;color:var(--gl);font-size:11px;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px;font-weight:700}.rp .ro textarea{width:100%;min-height:70px;background:#14141C;color:var(--iv);border:1px solid var(--gm);border-radius:6px;padding:8px;font:14px/1.5 Poppins;resize:vertical}
+.rform{padding:12px 14px}.rform textarea{width:100%;min-height:130px;background:#14141C;color:var(--iv);border:1px solid var(--gm);border-radius:6px;padding:10px;font:14px/1.5 Poppins;resize:vertical}.rform .row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:10px}.rform .row label{font-size:13px;color:var(--ivd)}.rform input[type=number]{width:64px;background:#14141C;color:var(--gl);border:1px solid var(--gm);border-radius:6px;padding:6px;font:700 15px Poppins;text-align:center}
+.rform .zal{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.rform .zal span{border:1px solid var(--line);border-radius:6px;background:#14141C;padding:5px 10px;font-size:12px;color:var(--iv)}.rform .zal span i{cursor:pointer;color:var(--red);margin-left:6px;font-style:normal;font-weight:800}.rform .pick{display:inline-block;border:1px dashed var(--gm);border-radius:6px;padding:7px 12px;font-size:13px;color:var(--gl);cursor:pointer}.rform input[type=file]{display:none}
+body.prosty .rp{margin:8px 0}body.prosty .rform{padding:10px}
 /* ---------- historia bloków ---------- */
 .hb{border:1px solid var(--line);border-radius:6px;margin:10px 14px;background:#1E1E28}.hb .hh{display:flex;gap:14px;align-items:center;padding:10px 14px;cursor:pointer;font-weight:700}.hb .hh b{color:var(--gl);font-size:16px}.hb .hh .mut{font-weight:500;font-size:12px}.hb .hh .cnt{margin-left:auto;font-size:12px;color:var(--ivd);font-weight:500}
 .hb table{margin:0;table-layout:fixed;width:100%}.hb td,.hb th{font-size:11px;padding:4px 4px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.hb td.ex{text-shadow:none;color:var(--iv);font-weight:600;white-space:normal;min-width:0;padding-left:6px}.hb .dotT{display:inline-block;width:12px;height:12px;border-radius:3px;border:1px solid rgba(255,255,255,.4);vertical-align:-1px}.hb td.up{color:var(--green);font-weight:800}.hb td.dn{color:var(--red);font-weight:700}
@@ -88,7 +96,8 @@ tr.sum td{background:var(--head);border-top:2px solid var(--gm);font-weight:700;
 tr.sel td{box-shadow:inset 0 0 0 2px #F5E3A6}tr.sel td:first-child{background:#F5E3A6!important;color:#0E0E12!important}
 td.nrc{cursor:pointer;user-select:none}
 .pal .cnt2{font-size:12px;color:var(--ivd);min-width:90px}
-td.act{background:var(--card)!important;border-color:var(--line)!important;padding:2px;white-space:nowrap;width:66px}td.act i{display:inline-block;width:18px;height:18px;line-height:18px;text-align:center;border-radius:3px;font-style:normal;font-size:11px;color:var(--ivd);cursor:pointer;border:1px solid transparent}td.act i:hover{color:var(--gl);border-color:var(--gm)}td.act i.del:hover{color:var(--red);border-color:var(--red)}
+.ssb{display:inline-block;margin-left:6px;padding:1px 6px;border-radius:8px;font-size:10px;font-weight:800;letter-spacing:.5px;background:#F5E3A6;color:#0E0E12;vertical-align:1px;text-shadow:none}td.act i.ss{font-size:9px;font-weight:800;letter-spacing:.3px;width:22px}td.act i.ss.on{color:#0E0E12;background:#F5E3A6;border-color:#F5E3A6}.mh .ssb{margin-left:0}
+td.act{background:var(--card)!important;border-color:var(--line)!important;padding:2px;white-space:nowrap;width:112px}td.act i{display:inline-block;width:18px;height:18px;line-height:18px;text-align:center;border-radius:3px;font-style:normal;font-size:11px;color:var(--ivd);cursor:pointer;border:1px solid transparent}td.act i:hover{color:var(--gl);border-color:var(--gm)}td.act i.del:hover{color:var(--red);border-color:var(--red)}
 .tn{font-size:13px;color:var(--gl);font-weight:600;margin-left:8px}.tn input{background:transparent;border:0;border-bottom:1px dashed var(--gm);color:var(--gl);font:600 13px Poppins;width:200px}.tn input:focus{outline:0}
 .weeks select.c{background:var(--card);color:var(--gl);border:1px solid var(--gm);border-radius:4px;font:700 15px Poppins;padding:2px 6px;width:auto}
 .sub input{background:transparent;border:0;border-bottom:1px dashed var(--gm);color:var(--gm);font:inherit;letter-spacing:2px;text-transform:uppercase;width:120px}.sub input:focus{outline:0}
@@ -135,7 +144,7 @@ function api(b) {
 }
 var TYP = { Priorytet: 'P', Neutral: 'N', Utrzymanie: 'U' };
 var TIPS = {
- nr: 'Kolejność ćwiczeń. Ten sam numer przy dwóch ćwiczeniach z dopiskiem (SS) = super seria.',
+ nr: 'Kolejność ćwiczeń. Znaczek SS przy nazwie = superseria: to ćwiczenie i następne robisz jedno po drugim, bez przerwy między nimi.',
  cw: 'Nazwa ćwiczenia. Kolor wiersza mówi, jaki to priorytet: złoto = Priorytet, granat = Neutral, bordo = Utrzymanie. Kliknij kwadraty w legendzie, żeby przeczytać, jak zarządzać każdym z nich.',
  powt: 'Wpisz, ile powtórzeń zrobiłeś w każdej serii. Kolorowe pola = tyle serii jest zaplanowanych. Ciemnych nie wypełniasz.',
  cakt: 'Ciężar, którym robisz ćwiczenie teraz. Aktualizuj, gdy dokładasz.',
@@ -151,6 +160,7 @@ var TIPS = {
  N: 'NEUTRAL: jak w priorytecie, ale rzadziej. Ciężar dokładasz co drugi tydzień, nie co tydzień. Chodzi o to, żeby jak najwięcej „energii adaptacyjnej” w tym bloku poszło na partie priorytetowe.',
  U: 'UTRZYMANIE: dobierasz ciężar do parametrów (powtórzenia, RiR) i trzymasz go bez zmian przez cały blok. Te partie nie mają rosnąć ani spadać, tylko nie zabierać energii priorytetom.',
  tyg: 'Po zakończonym tygodniu treningowym kliknij kolejną kratkę. Dzięki temu wiem, w którym tygodniu bloku jesteś.',
+ raport: 'Raport tygodniowy piszesz tu, po ostatnim treningu w tygodniu. Możesz dołączyć zdjęcia (np. sylwetka) albo krótki film z techniką. Raport zostaje w Twojej historii, Kuba odpowiada pod nim.',
  plan: 'Tryb planowania: najpierw zaznacz, które partie robisz w danym treningu (kratka „w tr.”), potem wpisz serie: Rozc. = ćwiczenia w rozciągnięciu, Skr. = w skróceniu. Kolumna „Rozpisane” porównuje sumę z planem z kafelków. Wycinek dla jednego treningu widzisz pod tabelą ćwiczeń („Partie treningu”).',
  hist: 'Każdy zamknięty blok zostaje w archiwum: ćwiczenia z ciężarem na start i koniec, wykonane powtórzenia z ostatniego tygodnia, plan partii i waga. Dzięki temu widzisz progres z bloku na blok i możesz wrócić do tego, co działało.',
  strzalki: 'Między polami poruszasz się strzałkami: w kafelkach prawo/lewo/góra/dół między partiami, w tabelach po wierszu i kolumnie. Enter = następne pole. Wpisz liczbę i od razu strzałka w prawo.',
@@ -158,13 +168,14 @@ var TIPS = {
 };
 function INSTR() { return [
  ['Dwie rzeczy po zakończonym tygodniu treningowym', '<b>1. Wyślij raport.</b> Jak go napisać, masz w karcie „Raport” obok.\n<b>2. Odhacz tydzień.</b> Kliknij kolejną kratkę w polu „Blok” na samej górze. Dzięki temu wiem, w którym tygodniu bloku jesteś, i mogę dobrze zaplanować Twój progres.'],
- ['Raport: czym jest i jak go zrobić', 'Raport to krótki opis samopoczucia po całym tygodniu treningowym, czyli gdy zrobisz wszystkie zaplanowane treningi. Napisz w nim:\n• jak się czujesz po tym tygodniu,\n• czy pojawiły się jakieś problemy na treningach,\n• czy zostawiasz mi coś w „Notatce podopiecznego” przy ćwiczeniu,\n• co chcesz ze mną przegadać, treningowo albo zdrowotnie,\n• że wpisałeś wagę do tabeli „Ważenia i kalorie”,\n• wszystko, co jeszcze przyjdzie Ci do głowy.\n\n<b>Gdzie:</b> e-mail <b>' + (D.raportMail || '') + '</b>. W temacie wpisz numer tygodnia.\n<a class="pbtn rz" style="display:inline-block;margin:8px 0 0" href="mailto:' + (D.raportMail || '') + '?subject=' + encodeURIComponent('Raport – tydzień ' + (n((D.ustawienia || {}).zaliczone) + 1) + (D.klient && D.klient.imie ? ' – ' + D.klient.imie : '')) + '">✉ &nbsp;Wyślij raport (tydzień ' + (n((D.ustawienia || {}).zaliczone) + 1) + ')</a>\n<b>Do kiedy:</b> najlepiej od razu po ostatnim treningu, najpóźniej w piątek do 23:59. Odpisuję do niedzieli 23:59.\n<b>Pilne sprawy:</b> pisz na Instagramie albo Messengerze, odpowiadam do 24 h. Nie bój się pytać, od tego jestem.\n<span class="warn">Raport jest warunkiem dalszych wskazówek treningowych.</span>'],
+ ['Raport: czym jest i jak go zrobić', 'Raport to krótki opis samopoczucia po całym tygodniu treningowym, czyli gdy zrobisz wszystkie zaplanowane treningi. Napisz w nim:\n• jak się czujesz po tym tygodniu,\n• czy pojawiły się jakieś problemy na treningach,\n• czy zostawiasz mi coś w „Notatce podopiecznego” przy ćwiczeniu,\n• co chcesz ze mną przegadać, treningowo albo zdrowotnie,\n• że wpisałeś wagę do tabeli „Ważenia i kalorie”,\n• wszystko, co jeszcze przyjdzie Ci do głowy.\n\n<b>Gdzie:</b> w sekcji <b>Raporty</b> (menu ≡ → Raporty tygodniowe). Możesz dołączyć zdjęcia albo krótki film. Jeśli coś nie działa, wyślij mailem na <b>' + (D.raportMail || '') + '</b> (w temacie numer tygodnia).\n<a class="pbtn rz" style="display:inline-block;margin:8px 0 0" href="mailto:' + (D.raportMail || '') + '?subject=' + encodeURIComponent('Raport – tydzień ' + (n((D.ustawienia || {}).zaliczone) + 1) + (D.klient && D.klient.imie ? ' – ' + D.klient.imie : '')) + '">✉ &nbsp;Wyślij raport (tydzień ' + (n((D.ustawienia || {}).zaliczone) + 1) + ')</a>\n<b>Do kiedy:</b> najlepiej od razu po ostatnim treningu, najpóźniej w piątek do 23:59. Odpisuję do niedzieli 23:59.\n<b>Pilne sprawy:</b> pisz na Instagramie albo Messengerze, odpowiadam do 24 h. Nie bój się pytać, od tego jestem.\n<span class="warn">Raport jest warunkiem dalszych wskazówek treningowych.</span>'],
  ['Jak wykonać prawidłową rozgrzewkę', 'Rozgrzewka przed każdym treningiem, według filmu. Przycisk „▶ Rozgrzewka” masz też w nagłówku każdego treningu.\n<a class="pbtn rz" style="display:inline-block;margin:8px 0 0" target="_blank" href="' + (D.rozgrzewka || '#') + '">▶ &nbsp;Film z rozgrzewką</a>'],
  ['Czym jest upadek mięśniowy (RiR 0)', 'To moment, w którym nie jesteś w stanie zrobić kolejnego powtórzenia z braku siły, mimo poprawnej techniki. RiR 0 w tabeli oznacza: seria do upadku.'],
  ['Jak czytać zapis tempa, np. x211', '1. <b>x</b>: ruch koncentryczny (skrócenie mięśnia) jak najszybciej, przy poprawnej technice,\n2. <b>2</b>: ruch ekscentryczny (opuszczanie) przez 2 sekundy,\n3. <b>1</b>: pauza 1 sekunda w maksymalnym skróceniu,\n4. <b>1</b>: pauza 1 sekunda w maksymalnym rozciągnięciu.'],
  ['Legenda', '<b>SS</b> = super seria: dwa ćwiczenia z tym samym numerem robisz jedno po drugim, bez przerwy.\n<b>DS</b> = drop set: po ostatniej serii od razu zmniejszasz ciężar i robisz kolejną.']
 ]; }
-var open = { t: {}, waz: false, zal: false, obj: TR, ins: {} , part: {}, plan: TR, hist: false, hb: {} };
+var open = { t: {}, waz: false, zal: false, obj: TR, ins: {} , part: {}, plan: TR, hist: false, hb: {}, rap: false, rapEd: {} };
+var RF = { pliki: [], wysylam: false, tresc: '', tydzien: null }; // formularz raportu (trzyma stan między renderami)
 var SEL = {}, SHOW_TYP = false;
 // tryb: 'prosty' (karty, telefon) albo 'pelny' (tabele); zapamiętany w localStorage, domyślnie po szerokości ekranu
 var TRYB = (function () { var z = null; try { z = localStorage.getItem('tryb'); } catch (e) {} if (z === 'prosty' || z === 'pelny') return z; var coarse = false; try { coarse = window.matchMedia('(pointer: coarse)').matches; } catch (e) {} var sw = window.screen ? window.screen.width : 1920; return (coarse && sw < 1000) || sw < 600 ? 'prosty' : 'pelny'; })();
@@ -189,6 +200,7 @@ function rysujMenu() {
   h += '<div class="mgr">Treningi</div>';
   for (var t = 1; t <= akt; t++) h += '<span class="mi" onclick="idz(\'t\',' + t + ')">Trening ' + t + (U('nazwa_t' + t) ? '<small>' + esc(U('nazwa_t' + t)) + '</small>' : '<small>' + cw(t).length + ' ćwiczeń · ' + serie(t) + ' serii</small>') + '</span>';
   if (TR) h += '<div class="mgr">Trener</div><span class="mi" onclick="idz(\'plan\')">Tryb planowania<small>objętość, partie × treningi</small></span><span class="mi" onclick="idz(\'hist\')">Historia bloków</span>';
+  h += '<div class="mgr">Raporty</div><span class="mi" onclick="idz(\'rap\')">Raporty tygodniowe<small>' + ((D.raporty || []).length ? (D.raporty || []).length + ' wysłanych' : 'napisz pierwszy') + '</small></span>';
   h += '<div class="mgr">Ciało i dieta</div><span class="mi" onclick="idz(\'waz\')">Ważenia i kalorie' + (ostWaga().length ? '<small>ostatnie ' + fmt(ostWaga().slice(-1)[0].waga) + ' kg</small>' : '') + '</span><span class="mi" onclick="idz(\'zal\')">Zalecenia i suplementy</span>';
   h += '<div class="mgr">Jak korzystać</div>' + INSTR().map(function (x, i) { return '<span class="mi" onclick="idz(\'ins\',' + i + ')">' + esc(x[0]) + '</span>'; }).join('');
   h += '</div>';
@@ -333,12 +345,13 @@ function render() {
     html += '<div class="legend"><span><i class="leg GOLD" onclick="tip(\'P\',event)"></i>Priorytet ' + I('P') + '</span><span><i class="leg NAVY" onclick="tip(\'N\',event)"></i>Neutral ' + I('N') + '</span><span><i class="leg BORDO" onclick="tip(\'U\',event)"></i>Utrzymanie ' + I('U') + '</span><span class="hint">Wszystko ze znaczkiem <i class="inf">i</i> możesz kliknąć. Pokaże się krótki opis: co to znaczy i jak z tym pracować.</span></div></div>';
   }
   html += wazenia();
-  html += '</div><div>' + zalecenia() + (TR ? historiaSekcja() : '') + '</div></div>';
+  html += '</div><div>' + (TRYB === 'prosty' ? '' : raporty()) + zalecenia() + (TR ? historiaSekcja() : '') + '</div></div>';
   html += '<div class="igrid desk">' + INSTR().map(function (x, i) { return open.ins[i] ? '<div class="card" id="sek-ins' + i + '"><h2 class="metal"><span class="ttl" onclick="tog(\'ins\',' + i + ')" style="font-size:15px">▾ &nbsp;' + esc(x[0]) + '</span></h2><div class="ibody">' + x[1] + '</div></div>' : '<div class="acc" id="sek-ins' + i + '" style="margin:0" onclick="tog(\'ins\',' + i + ')"><span class="chev">▸</span>' + esc(x[0]) + '</div>'; }).join('') + '</div>';
   html += '<div class="mob" style="padding:0 10px 30px">' + INSTR().map(function (x, i) { return open.ins[i] ? '<div class="card" id="sek-ins' + i + '"><h2 class="metal"><span class="ttl" onclick="tog(\'ins\',' + i + ')" style="font-size:14px">▾ &nbsp;' + esc(x[0]) + '</span></h2><div class="ibody">' + x[1] + '</div></div>' : '<div class="acc" id="sek-ins' + i + '" onclick="tog(\'ins\',' + i + ')"><span class="chev">▸</span>' + esc(x[0]) + '</div>'; }).join('') + '</div>';
   app.innerHTML = html + (TR ? datalist() : '');
   bindAll();
   renderMob();
+  bindRaporty();
   przywrocFokus(fokus);
   rysujMenu();
 }
@@ -348,13 +361,13 @@ function tabela(t) {
     var c = rows[i];
     if (!c) { if (!TR) { out += '<tr class="empty"><td>' + (i + 1) + '</td>' + '<td></td>'.repeat(16) + '</tr>'; } else { out += '<tr class="empty"><td>' + (i + 1) + '</td><td class="ex" colspan="16"><button class="btn" style="padding:4px 10px" onclick="dodajCw(' + t + ',' + (i + 1) + ')">+ dodaj ćwiczenie</button></td>' + (SHOW_TYP ? '<td></td>' : '') + '<td></td></tr>'; } continue; }
     var k = TYP[c.typ] || 'X', sets = n(c.sets);
-    out += '<tr class="r' + k + (TR && SEL[c.id] ? ' sel' : '') + '" data-id="' + c.id + '">' + (TR ? '<td class="nrc" title="Kliknij, żeby zaznaczyć" onclick="zaznacz(\'' + c.id + '\')">' : '<td>') + (i + 1) + '</td><td class="ex">' + (TR ? '<input class="c" data-f="nazwa" list="nazwy" autocomplete="off" value="' + esc(c.nazwa) + '">' : esc(c.nazwa)) + '</td>';
+    out += '<tr class="r' + k + (TR && SEL[c.id] ? ' sel' : '') + '" data-id="' + c.id + '">' + (TR ? '<td class="nrc" title="Kliknij, żeby zaznaczyć" onclick="zaznacz(\'' + c.id + '\')">' : '<td>') + (i + 1) + '</td><td class="ex">' + (TR ? '<input class="c" data-f="nazwa" list="nazwy" autocomplete="off" value="' + esc(c.nazwa) + '">' : esc(c.nazwa)) + (jestSS(c) ? '<span class="ssb" title="Superseria: to i następne ćwiczenie robisz jedno po drugim, bez przerwy">SS</span>' : '') + '</td>';
     for (var p = 1; p <= 6; p++) out += '<td class="rep ' + (p <= sets ? 'plan' : '') + '">' + (p <= sets ? '<input class="c" data-f="p' + p + '" inputmode="numeric" value="' + esc(c['p' + p]) + '">' : '') + '</td>';
     out += '<td class="w"><input class="c" data-f="ciezar_akt" inputmode="decimal" value="' + esc(c.ciezar_akt) + '"></td><td class="w">' + (TR ? '<input class="c" data-f="ciezar_start" inputmode="decimal" value="' + esc(c.ciezar_start) + '">' : esc(c.ciezar_start)) + '</td>';
     ['sets', 'reps', 'przerwa', 'rir', 'tempo'].forEach(function (f) { out += '<td>' + (TR ? '<input class="c" data-f="' + f + '" value="' + esc(c[f]) + '" style="width:56px">' : esc(c[f])) + '</td>'; });
     out += '<td>' + (TR ? '<input class="c" data-f="wideo" placeholder="▶ link" title="Wklej link do filmu" value="' + esc(c.wideo) + '" style="width:64px;font-size:10px;text-overflow:ellipsis">' : '<a class="v ' + (c.wideo ? '' : 'off') + '" target="_blank" href="' + esc(c.wideo || '#') + '">▶</a>') + '</td>';
     out += '<td class="note"><input class="c" data-f="notatka" value="' + esc(c.notatka) + '" placeholder="…"></td>';
-    if (TR) out += (SHOW_TYP ? '<td class="typ"><select class="c" data-f="typ"><option value=""></option>' + ['Priorytet', 'Neutral', 'Utrzymanie'].map(function (o) { return '<option' + (c.typ === o ? ' selected' : '') + '>' + o + '</option>'; }).join('') + '</select></td>' : '') + '<td class="act"><i title="wyżej" onclick="ruszCw(\'' + c.id + '\',-1)">▲</i><i title="niżej" onclick="ruszCw(\'' + c.id + '\',1)">▼</i><i class="del" title="usuń ćwiczenie" onclick="usunCw(\'' + c.id + '\')">✕</i></td>';
+    if (TR) out += (SHOW_TYP ? '<td class="typ"><select class="c" data-f="typ"><option value=""></option>' + ['Priorytet', 'Neutral', 'Utrzymanie'].map(function (o) { return '<option' + (c.typ === o ? ' selected' : '') + '>' + o + '</option>'; }).join('') + '</select></td>' : '') + '<td class="act"><i title="wyżej" onclick="ruszCw(\'' + c.id + '\',-1)">▲</i><i title="niżej" onclick="ruszCw(\'' + c.id + '\',1)">▼</i><i class="ss ' + (jestSS(c) ? 'on' : '') + '" title="Superseria z następnym ćwiczeniem (bez przerwy między nimi)" onclick="togSS(\'' + c.id + '\')">SS</i><i title="duplikuj (także do innego treningu)" onclick="duplikujCw(\'' + c.id + '\')">⧉</i><i class="del" title="usuń ćwiczenie" onclick="usunCw(\'' + c.id + '\')">✕</i></td>';
     out += '</tr>';
   }
   out += '<tr class="sum"><td colspan="' + (TR ? (SHOW_TYP ? 19 : 18) : 17) + '">Suma serii: ' + serie(t) + '</td></tr></table>';
@@ -520,6 +533,97 @@ function wazenia() {
   out += '</table><div style="padding:12px 14px;display:flex;gap:12px;align-items:center"><button class="btn" onclick="dodajWaz()">+ Dodaj dzisiejsze ważenie</button><span class="mut" style="font-size:12px">Data wpisuje się sama, możesz ją poprawić. Zmiana liczy się automatycznie.</span></div></div>';
   return out;
 }
+function raporty() {
+  var L = (D.raporty || []).slice().sort(function (x, y) { return String(y.data).localeCompare(String(x.data)); });
+  if (!open.rap) return '<div class="acc" id="sek-rap" onclick="tog(\'rap\')"><span class="chev">▸</span>Raporty tygodniowe<span class="cnt">' + (L.length ? L.length + ' wysł. · ostatni: tydz. ' + esc(L[0].tydzien) + (L[0].odp ? ' · odpowiedź ✓' : (TR ? ' · bez odpowiedzi' : '')) : 'brak raportów') + '</span></div>';
+  var tyg = RF.tydzien != null ? RF.tydzien : (n(U('zaliczone')) + 1);
+  var out = '<div class="card" id="sek-rap"><h2 class="metal"><span class="ttl" onclick="tog(\'rap\')">▾ &nbsp;Raporty tygodniowe</span><span class="pbtn" style="cursor:default">' + I('raport') + ' &nbsp;' + L.length + ' wysłanych</span></h2>';
+  // formularz
+  out += '<div class="rform"><textarea id="rf-tresc" placeholder="Jak się czujesz po tym tygodniu? Problemy na treningach? Coś zostawiasz w notatkach przy ćwiczeniach? Waga wpisana? Co chcesz przegadać?">' + esc(RF.tresc) + '</textarea>';
+  out += '<div class="row"><label>Tydzień <input type="number" id="rf-tyg" min="1" max="20" value="' + esc(tyg) + '"></label><label class="pick" for="rf-file">📎 dodaj zdjęcie / film</label><input type="file" id="rf-file" multiple accept="image/*,video/*"><span class="mut" style="font-size:12px">zdjęcia zmniejszam automatycznie, film do ok. 12 MB</span></div>';
+  out += '<div class="zal" id="rf-zal">' + RF.pliki.map(function (p, i) { return '<span>' + (p.typ.indexOf('image') === 0 ? '🖼 ' : '🎬 ') + esc(p.nazwa) + ' <em style="color:var(--ivd);font-style:normal">' + rozmiarTxt(p.rozmiar) + '</em><i onclick="rfUsun(' + i + ')" title="usuń załącznik">✕</i></span>'; }).join('') + '</div>';
+  out += '<div class="row"><button class="btn" id="rf-send" onclick="wyslijRaport()"' + (RF.wysylam ? ' disabled' : '') + ' style="height:42px;font-size:15px;padding:0 22px">' + (RF.wysylam ? 'Wysyłam…' : '✉ Wyślij raport') + '</button><span class="mut" style="font-size:12px">Raport zostaje tutaj, w Twojej historii. Kuba odpowiada pod nim.</span></div></div>';
+  // historia
+  L.forEach(function (r) {
+    var ed = open.rapEd[r.id];
+    out += '<div class="rp" data-rid="' + esc(r.id) + '"><div class="rh"><b>Tydzień ' + esc(r.tydzien || '?') + '</b><span class="mut">' + esc(r.data) + '</span><span class="x">' + (ed ? '<span class="pbtn" style="margin:0;font-size:12px" onclick="zapiszEdycje(\'' + esc(r.id) + '\')">zapisz</span><span class="pbtn" style="margin:0;font-size:12px" onclick="togEd(\'' + esc(r.id) + '\')">anuluj</span>' : '<span class="pbtn" style="margin:0;font-size:12px" onclick="togEd(\'' + esc(r.id) + '\')">edytuj</span>') + (TR ? '<span class="pbtn" style="margin:0;font-size:12px;color:var(--red)" onclick="usunRaport(\'' + esc(r.id) + '\')">usuń</span>' : '') + '</span></div>';
+    out += '<div class="rt">' + (ed ? '<textarea id="re-' + esc(r.id) + '">' + esc(r.tresc) + '</textarea>' : (r.tresc ? esc(r.tresc) : '<span class="mut">(bez treści)</span>')) + '</div>';
+    if (r.pliki && r.pliki.length) out += '<div class="rf">' + r.pliki.map(function (p) { return '<div class="f" data-pid="' + esc(p.id) + '" onclick="pokazPlik(\'' + esc(r.id) + '\',\'' + esc(p.id) + '\')">' + (String(p.typ).indexOf('image') === 0 ? '🖼' : '🎬') + ' <b>' + esc(p.nazwa) + '</b> <span class="mut">' + rozmiarTxt(p.rozmiar) + ' · kliknij</span></div>'; }).join('') + '</div>';
+    if (TR) out += '<div class="ro"><small>Odpowiedź trenera' + (r.odp_data ? ' · ' + esc(r.odp_data) : '') + '</small><textarea data-odp="' + esc(r.id) + '" placeholder="Napisz odpowiedź, zapisze się sama po wyjściu z pola">' + esc(r.odp || '') + '</textarea></div>';
+    else if (r.odp) out += '<div class="ro"><small>Odpowiedź Kuby · ' + esc(r.odp_data) + '</small>' + esc(r.odp) + '</div>';
+    else out += '<div class="mut" style="padding:0 14px 12px;font-size:12px">Kuba jeszcze nie odpowiedział.</div>';
+    out += '</div>';
+  });
+  if (!L.length) out += '<div class="mut" style="padding:0 14px 14px;font-size:12px">Tu pojawią się wysłane raporty razem z odpowiedziami Kuby.</div>';
+  return out + '<div style="height:8px"></div></div>';
+}
+function bindRaporty() {
+  var rff = document.getElementById('rf-file'); if (rff) rff.onchange = function () { if (rff.files && rff.files.length) rfDodajPliki(rff.files); rff.value = ''; };
+  var rft = document.getElementById('rf-tresc'); if (rft) rft.addEventListener('input', function () { RF.tresc = rft.value; });
+  var rfy = document.getElementById('rf-tyg'); if (rfy) rfy.addEventListener('input', function () { RF.tydzien = rfy.value; });
+  document.querySelectorAll('textarea[data-odp]').forEach(function (ta) { var r0 = (D.raporty || []).filter(function (x) { return x.id === ta.dataset.odp; })[0]; ta.addEventListener('blur', function () { if (r0 && String(r0.odp || '') !== ta.value) zapiszOdp(ta.dataset.odp, ta.value); }); });
+}
+function rozmiarTxt(b) { b = n(b); return b > 1048576 ? (b / 1048576).toFixed(1).replace('.', ',') + ' MB' : b > 1024 ? Math.round(b / 1024) + ' kB' : b + ' B'; }
+function rfUsun(i) { RF.pliki.splice(i, 1); render(); }
+function togEd(id) { open.rapEd[id] = !open.rapEd[id]; render(); }
+function rfZbierz() { var t = document.getElementById('rf-tresc'), y = document.getElementById('rf-tyg'); if (t) RF.tresc = t.value; if (y) RF.tydzien = y.value; }
+// zmniejszenie zdjęcia: max 1600 px, JPEG 0.82; film bez zmian (limit 12 MB)
+function przygotujPlik(file) {
+  return new Promise(function (res, rej) {
+    var czytaj = function (blob, nazwa, typ) { var fr = new FileReader(); fr.onload = function () { var d = String(fr.result).split(',')[1] || ''; res({ nazwa: nazwa, typ: typ, rozmiar: blob.size, dane: d }); }; fr.onerror = function () { rej(new Error('Nie udało się odczytać pliku ' + nazwa)); }; fr.readAsDataURL(blob); };
+    if (file.type.indexOf('image') === 0) {
+      var img = new Image(), url = URL.createObjectURL(file);
+      img.onload = function () {
+        var max = 1600, w = img.width, h = img.height, sk = Math.min(1, max / Math.max(w, h)); var cv = document.createElement('canvas'); cv.width = Math.round(w * sk); cv.height = Math.round(h * sk);
+        cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height); URL.revokeObjectURL(url);
+        cv.toBlob(function (b) { if (!b || b.size >= file.size) czytaj(file, file.name, file.type); else czytaj(b, file.name.replace(/\.[^.]+$/, '') + '.jpg', 'image/jpeg'); }, 'image/jpeg', 0.82);
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); czytaj(file, file.name, file.type); };
+      img.src = url;
+    } else {
+      if (file.size > 12 * 1048576) { rej(new Error('Film „' + file.name + '” jest za duży (' + rozmiarTxt(file.size) + '). Limit ok. 12 MB: nagraj krótszy albo wyślij na Messengerze.')); return; }
+      czytaj(file, file.name, file.type || 'application/octet-stream');
+    }
+  });
+}
+function rfDodajPliki(lista) {
+  rfZbierz(); var ps = []; for (var i = 0; i < lista.length; i++) ps.push(przygotujPlik(lista[i]));
+  status('przygotowuję załączniki…');
+  Promise.all(ps.map(function (p) { return p.then(function (x) { return x; }, function (e) { status(e.message, false, true); return null; }); })).then(function (xs) { xs.forEach(function (x) { if (x) RF.pliki.push(x); }); render(); if (xs.every(Boolean)) status('załączniki gotowe', true); });
+}
+function wyslijRaport() {
+  rfZbierz(); var tresc = String(RF.tresc || '').trim();
+  if (!tresc && !RF.pliki.length) { status('Napisz kilka słów albo dodaj zdjęcie, zanim wyślesz.', true, true); return; }
+  var razem = 0; RF.pliki.forEach(function (p) { razem += p.dane.length; });
+  if (razem > 24000000) { status('Za dużo załączników naraz (limit ok. 15 MB). Usuń część albo wyślij w dwóch raportach.', false, true); return; }
+  RF.wysylam = true; render(); status('wysyłam raport…');
+  wywolaj('raportZapisz', [D.bazaId, { tydzien: RF.tydzien || (n(U('zaliczone')) + 1), tresc: tresc }, RF.pliki, AUTH]).then(function (lista) {
+    D.raporty = lista || []; RF = { pliki: [], wysylam: false, tresc: '', tydzien: null }; open.rap = true; render(); status('raport wysłany, dziękuję!', true);
+  }).catch(function (e) { RF.wysylam = false; render(); status('nie udało się wysłać: ' + String(e && e.message || e), false, true); });
+}
+function zapiszEdycje(id) {
+  var ta = document.getElementById('re-' + id); if (!ta) return; var r = (D.raporty || []).filter(function (x) { return x.id === id; })[0]; if (!r) return;
+  status('zapisuję…');
+  wywolaj('raportZapisz', [D.bazaId, { id: id, tydzien: r.tydzien, tresc: ta.value }, [], AUTH]).then(function (lista) { D.raporty = lista || []; open.rapEd[id] = false; render(); status('zapisano', true); }).catch(function (e) { status('błąd: ' + String(e && e.message || e), false, true); });
+}
+function usunRaport(id) {
+  if (!confirm('Usunąć ten raport razem z załącznikami?')) return;
+  wywolaj('raportUsun', [D.bazaId, id]).then(function (lista) { D.raporty = lista || []; render(); status('raport usunięty', true); }).catch(function (e) { status('błąd: ' + String(e && e.message || e), false, true); });
+}
+function zapiszOdp(id, txt) {
+  status('zapisuję odpowiedź…');
+  wywolaj('raportOdp', [D.bazaId, id, txt]).then(function (lista) { D.raporty = lista || []; var f = zapamietajFokus(); render(); przywrocFokus(f); status('odpowiedź zapisana', true); }).catch(function (e) { status('błąd: ' + String(e && e.message || e), false, true); });
+}
+var PLIKI = {};
+function pokazPlik(rid, pid) {
+  var box = document.querySelector('.rp[data-rid="' + rid + '"] .f[data-pid="' + pid + '"]'); if (!box) return;
+  if (box.dataset.open) { box.innerHTML = box.dataset.label; delete box.dataset.open; return; }
+  var wstaw = function (p) { var src = 'data:' + (p.typ || 'application/octet-stream') + ';base64,' + p.dane; box.dataset.label = box.innerHTML; box.dataset.open = '1'; box.style.cursor = 'default';
+    box.innerHTML = '<div style="width:100%"><div style="display:flex;gap:10px;align-items:center;margin-bottom:6px"><b>' + esc(p.nazwa) + '</b><a class="pbtn" style="margin:0;font-size:12px" download="' + esc(p.nazwa) + '" href="' + src + '">pobierz</a><span class="pbtn" style="margin:0;font-size:12px" onclick="event.stopPropagation();pokazPlik(\'' + rid + '\',\'' + pid + '\')">zwiń</span></div>' + (String(p.typ).indexOf('image') === 0 ? '<img src="' + src + '" alt="">' : String(p.typ).indexOf('video') === 0 ? '<video src="' + src + '" controls playsinline></video>' : '<span class="mut">plik do pobrania</span>') + '</div>'; };
+  if (PLIKI[pid]) { wstaw(PLIKI[pid]); return; }
+  box.innerHTML = '<span class="mut">wczytuję…</span>';
+  wywolaj('plik', [D.bazaId, pid, AUTH]).then(function (p) { PLIKI[pid] = p; wstaw(p); }).catch(function (e) { box.innerHTML = '<span style="color:var(--red)">nie udało się wczytać: ' + esc(e && e.message || e) + '</span>'; });
+}
 function zalecenia() {
   if (!open.zal) return '<div class="acc" id="sek-zal" onclick="tog(\'zal\')"><span class="chev">▸</span>Zalecenia i suplementy<span class="cnt">' + D.zalecenia.length + ' zalec. · ' + D.suplementy.length + ' supl.</span></div>';
   var out = '<div class="card" id="sek-zal"><h2 class="metal"><span class="ttl" onclick="tog(\'zal\')">▾ &nbsp;Zalecenia i suplementy</span></h2><div style="padding:12px 14px 6px;font-size:12px;font-weight:700;color:#E6CB80;letter-spacing:1px">ZALECENIA</div><table class="zt"><tr><th class="l">Zalecenie</th><th>Jak często</th></tr>';
@@ -535,14 +639,14 @@ function renderMob() {
   rows.forEach(function (c, i) {
     var k = TYP[c.typ] || 'N', sets = Math.max(0, n(c.sets));
     var zrobione = sets > 0; for (var q = 1; q <= sets && q <= 6; q++) if (c['p' + q] === '' || c['p' + q] == null) zrobione = false;
-    out += '<div class="mcard' + (zrobione ? ' done' : '') + '" data-id="' + c.id + '"><div class="mh ' + (k === 'P' ? 'GOLD' : k === 'U' ? 'BORDO' : 'NAVY') + '"><span class="mn">' + (i + 1) + '</span><b>' + esc(c.nazwa) + '</b><a class="v ' + (c.wideo ? '' : 'off') + '" target="_blank" href="' + esc(c.wideo || '#') + '">▶</a></div><div class="mm"><span>' + esc(c.sets) + ' × ' + esc(c.reps) + '</span>' + (c.przerwa ? '<span>' + esc(c.przerwa) + '</span>' : '') + (c.rir !== '' ? '<span>RiR ' + esc(c.rir) + '</span>' : '') + (c.tempo ? '<span>' + esc(c.tempo) + '</span>' : '') + '</div><div class="mr">';
+    out += '<div class="mcard' + (zrobione ? ' done' : '') + '" data-id="' + c.id + '"><div class="mh ' + (k === 'P' ? 'GOLD' : k === 'U' ? 'BORDO' : 'NAVY') + '"><span class="mn">' + (i + 1) + '</span><b>' + esc(c.nazwa) + (jestSS(c) ? ' <span class="ssb">SS</span>' : '') + '</b><a class="v ' + (c.wideo ? '' : 'off') + '" target="_blank" href="' + esc(c.wideo || '#') + '">▶</a></div><div class="mm"><span>' + esc(c.sets) + ' × ' + esc(c.reps) + '</span>' + (c.przerwa ? '<span>' + esc(c.przerwa) + '</span>' : '') + (c.rir !== '' ? '<span>RiR ' + esc(c.rir) + '</span>' : '') + (c.tempo ? '<span>' + esc(c.tempo) + '</span>' : '') + '</div><div class="mr">';
     for (var p = 1; p <= sets && p <= 6; p++) out += '<input data-f="p' + p + '" inputmode="numeric" placeholder="powt." value="' + esc(c['p' + p]) + '">';
     out += '</div><div class="mw"><label class="kg">Ciężar<input data-f="ciezar_akt" inputmode="decimal" value="' + esc(c.ciezar_akt) + '"></label><label>Notatka<input data-f="notatka" placeholder="dla trenera" value="' + esc(c.notatka) + '"></label></div>';
     var sek = sekundy(c.przerwa); if (sek) out += '<div class="mt"><button id="tm-' + c.id + '" onclick="minutnik(\'' + c.id + '\',' + sek + ')">' + tekstMinutnika(c.id, sek) + '</button></div>';
     out += '</div>';
   });
   if (!rows.length) out = '<div class="mut" style="padding:20px">Brak ćwiczeń w tym treningu.</div>';
-  out += '<div style="margin:6px 10px 0" id="mob-zal">' + zalecenia() + '</div>';
+  out += '<div style="margin:6px 10px 0" id="mob-rap">' + (TRYB === 'prosty' ? raporty() : '') + '</div><div style="margin:6px 10px 0" id="mob-zal">' + zalecenia() + '</div>';
   out += '<div style="margin:6px 10px 16px"><div class="acc" onclick="tog(\'waz\')" style="margin:0"><span class="chev">▸</span>Ważenia<span class="cnt">' + (ostWaga().length ? fmt(ostWaga().slice(-1)[0].waga) + ' kg' : '') + '</span></div>' + (open.waz ? '<div class="card" style="margin-top:8px"><div style="padding:10px"><button class="btn" onclick="dodajWaz()">+ Dodaj dzisiejsze ważenie</button></div>' + wazSorted().slice(-5).reverse().map(function (w) { return '<div class="mw" data-id="' + w.id + '" style="padding:6px 12px"><label>Dzień<input type="date" data-f="data" value="' + esc(w.data) + '"></label><label class="kg">Waga<input data-f="waga" inputmode="decimal" value="' + esc(fmt(w.waga)) + '"></label><label>Notatka<input data-f="notatka" value="' + esc(w.notatka) + '"></label></div>'; }).join('') + '</div>' : '') + '</div>';
   box.innerHTML = out;
   box.querySelectorAll('[data-id] [data-f]').forEach(function (el) { var id = el.closest('[data-id]').dataset.id; var o = D.cwiczenia.filter(function (c) { return c.id === id; })[0]; var tab = 'Cwiczenia'; if (!o) { o = D.wazenia.filter(function (c) { return c.id === id; })[0]; tab = 'Wazenia'; } if (o) bind(el, o, el.dataset.f, tab, { change: el.type === 'date', after: tab === 'Wazenia' ? function () { updateKpi(); } : (/^p\d$/.test(el.dataset.f) ? function () { var card = el.closest('.mcard'); var sets = Math.max(0, n(o.sets)), ok = sets > 0; for (var q = 1; q <= sets && q <= 6; q++) if (o['p' + q] === '' || o['p' + q] == null) ok = false; if (card) card.classList.toggle('done', ok); } : null) }); });
@@ -573,6 +677,7 @@ function bindAll() {
     if (!o) return;
     var after = null;
     if (tab === 'Cwiczenia' && (el.dataset.f === 'typ' || el.dataset.f === 'sets')) after = function () { render(); };
+    if (tab === 'Cwiczenia' && el.dataset.f === 'nazwa') after = function () { clearTimeout(window._nz); window._nz = setTimeout(function () { podpowiedzCiezar(o); }, 400); };
     if (tab === 'Wazenia' && (el.dataset.f === 'waga' || el.dataset.f === 'data')) after = function () { clearTimeout(window._kt); window._kt = setTimeout(render, 900); };
     bind(el, o, el.dataset.f, tab, { change: el.tagName === 'SELECT' || el.type === 'date', after: after });
   });
@@ -589,10 +694,40 @@ function bindAll() {
   var trn = document.getElementById('treningi'); if (trn) bind(trn, D.ustawienia, 'treningi', 'Ustawienia', { change: true, after: render });
   for (var ti = 1; ti <= 5; ti++) { var nt = document.getElementById('nazwa_t' + ti); if (nt) bind(nt, D.ustawienia, 'nazwa_t' + ti, 'Ustawienia'); }
   var sk = document.getElementById('selK'); if (sk) sk.onchange = function () { location.href = D.url + '?klient=' + sk.value; };
+
 }
 function tog(k, i) { if (i == null) open[k] = !open[k]; else open[k][i] = !(open[k][i] == null ? (k === 't' && i === 1) : open[k][i]); render(); }
 function dodajWaz() { var d = new Date(); var iso = d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); var tmp = 'tmp' + Date.now(); var w = { id: tmp, data: iso, waga: '', kcal: U('kcal'), wegle: '', bialko: '', tluszcze: '', sol: '2–5 g', notatka: '' }; D.wazenia.push(w); push({ tab: 'Wazenia', id: 'nowe', tmp: tmp, dane: w }); open.waz = true; render(); setTimeout(function () { var el = document.querySelector('[data-id="' + tmp + '"] [data-f="waga"]'); if (el) el.focus(); }, 50); }
 function usunWaz(id) { if (!confirm('Usunąć to ważenie?')) return; D.wazenia = D.wazenia.filter(function (w) { return w.id !== id; }); push({ tab: 'Wazenia', id: id, usun: true }); render(); }
+function jestSS(c) { var v = c.ss; return v === true || v === 'TRUE' || v === 'true' || v === 1 || v === '1'; }
+function togSS(id) { var c = D.cwiczenia.filter(function (x) { return x.id === id; })[0]; if (!c) return; var v = !jestSS(c); c.ss = v; push({ tab: 'Cwiczenia', id: id, pole: 'ss', wartosc: v }); render(); }
+function norm(s) { return String(s || '').toLowerCase().replace(/\s+/g, ' ').replace(/[„”"']/g, '').trim(); }
+// ostatni ciężar tego ćwiczenia z zamkniętych bloków (najnowszy blok najpierw)
+function ciezarZHistorii(nazwa) {
+  var nz = norm(nazwa); if (!nz || !D.historia || !D.historia.length) return null;
+  for (var i = D.historia.length - 1; i >= 0; i--) {
+    var h = D.historia[i], cw = (h.dane && h.dane.cwiczenia) || [];
+    for (var j = 0; j < cw.length; j++) { if (norm(cw[j].nazwa) === nz) { var w = cw[j].ciezar_akt !== '' && cw[j].ciezar_akt != null ? cw[j].ciezar_akt : cw[j].ciezar_start; if (w !== '' && w != null) return { w: w, blok: h.blok_nr }; } }
+  }
+  return null;
+}
+function podpowiedzCiezar(c) {
+  if (c.ciezar_start !== '' && c.ciezar_start != null) return;
+  var z = ciezarZHistorii(c.nazwa); if (!z) return;
+  c.ciezar_start = z.w; push({ tab: 'Cwiczenia', id: c.id, pole: 'ciezar_start', wartosc: z.w });
+  if (c.ciezar_akt === '' || c.ciezar_akt == null) { c.ciezar_akt = z.w; push({ tab: 'Cwiczenia', id: c.id, pole: 'ciezar_akt', wartosc: z.w }); }
+  var fokus = zapamietajFokus(); render(); przywrocFokus(fokus);
+  status('ciężar ' + fmt(z.w) + ' kg pobrany z bloku ' + z.blok + ' (to samo ćwiczenie)', true);
+}
+function duplikujCw(id) {
+  var c = D.cwiczenia.filter(function (x) { return x.id === id; })[0]; if (!c) return;
+  var akt = aktywne(), odp = prompt('Do którego treningu skopiować „' + (c.nazwa || 'ćwiczenie') + '”? Wpisz numer 1–' + akt + ' (Enter = ten sam trening).', String(n(c.trening)));
+  if (odp === null) return; var t = Math.max(1, Math.min(akt, n(odp) || n(c.trening)));
+  if (cw(t).length >= 8) { status('Trening ' + t + ' ma już 8 ćwiczeń.', true, true); return; }
+  var tmp = 'tmp' + Date.now(), k = { id: tmp, trening: t, nr: cw(t).length + 1, nazwa: c.nazwa, typ: c.typ, sets: c.sets, reps: c.reps, przerwa: c.przerwa, rir: c.rir, tempo: c.tempo, wideo: c.wideo, ciezar_start: c.ciezar_start, ciezar_akt: c.ciezar_akt, p1: '', p2: '', p3: '', p4: '', p5: '', p6: '', notatka: '', ss: jestSS(c) };
+  D.cwiczenia.push(k); push({ tab: 'Cwiczenia', id: 'nowe', tmp: tmp, dane: k }); open.t[t] = true; render();
+  status('skopiowano do treningu ' + t, true);
+}
 function renumeruj(t) { cw(t).forEach(function (c, i) { if (n(c.nr) !== i + 1) { c.nr = i + 1; push({ tab: 'Cwiczenia', id: c.id, pole: 'nr', wartosc: i + 1 }); } }); }
 function ruszCw(id, dir) {
   var c = D.cwiczenia.filter(function (x) { return x.id === id; })[0]; if (!c) return;
@@ -606,7 +741,7 @@ function usunCw(id) {
   var t = n(c.trening); D.cwiczenia = D.cwiczenia.filter(function (x) { return x.id !== id; }); delete SEL[id];
   if (!/^tmp/.test(id)) push({ tab: 'Cwiczenia', id: id, usun: true }); renumeruj(t); render();
 }
-function dodajCw(t, nr) { var tmp = 'tmp' + Date.now(); var c = { id: tmp, trening: t, nr: nr, nazwa: '', typ: 'Neutral', sets: 3, reps: 10, przerwa: '90s', rir: 0, tempo: 'x211', wideo: '', ciezar_start: '', ciezar_akt: '', p1: '', p2: '', p3: '', p4: '', p5: '', p6: '', notatka: '' }; D.cwiczenia.push(c); push({ tab: 'Cwiczenia', id: 'nowe', tmp: tmp, dane: c }); render(); setTimeout(function () { var el = document.querySelector('tr[data-id="' + tmp + '"] [data-f="nazwa"]'); if (el) el.focus(); }, 50); }
+function dodajCw(t, nr) { var tmp = 'tmp' + Date.now(); var c = { id: tmp, trening: t, nr: nr, nazwa: '', typ: 'Neutral', sets: 3, reps: 10, przerwa: '90s', rir: 0, tempo: 'x211', wideo: '', ciezar_start: '', ciezar_akt: '', p1: '', p2: '', p3: '', p4: '', p5: '', p6: '', notatka: '', ss: false }; D.cwiczenia.push(c); push({ tab: 'Cwiczenia', id: 'nowe', tmp: tmp, dane: c }); render(); setTimeout(function () { var el = document.querySelector('tr[data-id="' + tmp + '"] [data-f="nazwa"]'); if (el) el.focus(); }, 50); }
 window.addEventListener('beforeunload', function (e) { if (queue.length || pending) { flush(); e.preventDefault(); e.returnValue = ''; } });
 // ---------- ekran PIN (podopieczny) ----------
 function pinScreen(msg) {
