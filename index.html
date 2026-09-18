@@ -102,7 +102,7 @@ td.act{background:var(--card)!important;border-color:var(--line)!important;paddi
 .weeks select.c{background:var(--card);color:var(--gl);border:1px solid var(--gm);border-radius:4px;font:700 15px Poppins;padding:2px 6px;width:auto}
 .sub input{background:transparent;border:0;border-bottom:1px dashed var(--gm);color:var(--gm);font:inherit;letter-spacing:2px;text-transform:uppercase;width:120px}.sub input:focus{outline:0}
 /* ---------- telefon ---------- */
-body.prosty .top{padding:12px 14px;gap:12px}.top h1{font-size:16px}h1 input{width:100%}.kpi{margin-left:0;width:100%;justify-content:space-between}.kpi div{min-width:0;flex:1;padding:8px 6px}.kpi b{font-size:17px}.kpi span{font-size:10px}.pal{display:none}
+body.prosty .top{padding:12px 14px;gap:12px}body.prosty h1 input{width:100%}
 body.prosty .wrap{grid-template-columns:1fr;padding:12px;gap:12px}body.prosty .igrid{grid-template-columns:1fr;padding:0 12px 12px;gap:10px}body.prosty .card h2 .ttl{font-size:15px}
  .mcard{margin:0 10px 12px;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,.25)}.mh{display:flex;align-items:center;gap:10px;padding:10px 12px;font-size:15px;font-weight:700;color:#fff;text-shadow:0 0 3px #000}.mh b{flex:1}.mn{width:24px;height:24px;border-radius:50%;background:rgba(0,0,0,.35);text-align:center;line-height:24px;font-size:12px;font-weight:700}
  .mm{display:flex;gap:6px;padding:8px 12px;background:#1A1A24;font-size:12px;flex-wrap:wrap}.mm span{background:#2A2A36;border:1px solid #4A4A5A;border-radius:10px;padding:2px 9px;color:var(--gl);font-weight:600}
@@ -111,7 +111,7 @@ body.prosty .wrap{grid-template-columns:1fr;padding:12px;gap:12px}body.prosty .i
 body.prosty .legend{gap:14px;font-size:14px;padding:10px}body.prosty .leg{width:24px;height:24px;vertical-align:-7px}body.prosty .hint{font-size:12px}
 body.prosty .desk{display:none!important}
 body:not(.prosty) .mob{display:none!important}
-body.prosty h1{white-space:normal;font-size:15px;line-height:1.3}body.prosty .kpi b{white-space:nowrap;font-size:15px}body.prosty .kpi em{font-size:15px}body.prosty .kpi small{font-size:11px}body.prosty .weeks span{font-size:13px}body.prosty .wk{width:26px;height:26px;line-height:22px;font-size:15px}body.prosty .kpi{margin-left:0;width:100%;justify-content:space-between}body.prosty .kpi div{min-width:0;flex:1;padding:8px 6px}body.prosty .kpi b{font-size:17px}body.prosty .kpi span{font-size:10px}body.prosty .pal{display:none}body.prosty .top h1{font-size:16px}
+body.prosty h1{white-space:normal;font-size:15px;line-height:1.3}body.prosty .kpi b{white-space:nowrap;font-size:15px}body.prosty .kpi em{font-size:15px}body.prosty .kpi small{font-size:11px}body.prosty .weeks span{font-size:13px}body.prosty .wk{width:26px;height:26px;line-height:22px;font-size:15px}body.prosty .kpi{margin-left:0;width:100%;justify-content:space-between}body.prosty .kpi div{min-width:0;flex:1;padding:8px 6px}body.prosty .kpi b{font-size:17px}body.prosty .kpi span{font-size:10px}body.prosty .pal{display:none}body.prosty .top h1{font-size:16px}body.prosty .status{left:50%;right:auto;bottom:auto;top:54px;transform:translateX(-50%);font-size:14px;padding:8px 16px;border-radius:20px;border-color:var(--gm);color:var(--gl);white-space:nowrap;max-width:92vw;overflow:hidden;text-overflow:ellipsis}
 /* pasek: menu ≡ + przełącznik trybu */
 .bar{display:flex;align-items:center;gap:12px;padding:6px 14px;background:#14141C;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:45}
 .bar .hb3{width:36px;height:32px;border:1px solid var(--gm);border-radius:6px;background:linear-gradient(180deg,#2A2A36,#0E0E12);color:var(--gl);font-size:18px;line-height:30px;text-align:center;cursor:pointer;user-select:none}
@@ -136,12 +136,18 @@ body.prosty #a2hs>div{padding:14px!important;font-size:14px!important}body.prost
 <script>var API_URL = "https://script.google.com/macros/s/AKfycbz48qRxFlyvGcVBSltMbjR8kfuQNCbq-8a5g2gYG7oJgtWiU2ZJ-HLEyux6WGc_Xesq1Q/exec";</script>
 <script>
 var D = {}, TR = false, AUTH = null, HASLO = null, URL_STRONY = location.pathname;
-function api(b) {
-  if (HASLO) b.haslo = HASLO;
-  return fetch(API_URL, { method: 'POST', body: JSON.stringify(b), redirect: 'follow' })
-    .then(function (r) { return r.json(); })
-    .then(function (r) { if (!r.ok) throw new Error(r.error || 'Błąd serwera'); return r.dane; });
+var BRAK_SIECI = 'Brak połączenia z serwerem. Sprawdź internet i spróbuj ponownie.';
+function api(b, opts) {
+  opts = opts || {}; if (HASLO) b.haslo = HASLO;
+  var ac = window.AbortController ? new AbortController() : null, tm = ac ? setTimeout(function () { ac.abort(); }, opts.timeout || 60000) : null;
+  var body = JSON.stringify(b);
+  var init = { method: 'POST', body: body, redirect: 'follow' }; if (ac) init.signal = ac.signal; if (opts.keepalive && body.length < 60000) init.keepalive = true;
+  return fetch(API_URL, init)
+    .then(function (r) { return r.text(); }, function () { throw new Error(BRAK_SIECI); })
+    .then(function (t) { var r; try { r = JSON.parse(t); } catch (e) { throw new Error('Serwer odpowiedział nieprawidłowo (spróbuj za chwilę).'); } if (!r.ok) throw new Error(r.error || 'Błąd serwera'); return r.dane; })
+    .finally(function () { if (tm) clearTimeout(tm); });
 }
+function bledLogowania(e) { return /PIN|nieaktywn|hasło|dostęp/i.test(String(e && e.message || e)); }
 var TYP = { Priorytet: 'P', Neutral: 'N', Utrzymanie: 'U' };
 var TIPS = {
  nr: 'Kolejność ćwiczeń. Znaczek SS przy nazwie = superseria: to ćwiczenie i następne robisz jedno po drugim, bez przerwy między nimi.',
@@ -214,11 +220,13 @@ function idz(k, i) {
   else open[k] = true;
   render();
   var id = k === 't' ? (TRYB === 'prosty' ? 'mobcards' : 'sek-t' + i) : 'sek-' + k + (i != null ? i : '');
-  var el = document.getElementById(id); if (el) setTimeout(function () { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 30);
+  var el = null; document.querySelectorAll('[id="' + id + '"]').forEach(function (e) { if (!el && (e.offsetParent !== null || e.getClientRects().length)) el = e; });
+  if (el) setTimeout(function () { var y = el.getBoundingClientRect().top + window.pageYOffset - 56; window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' }); }, 60);
 } // kolumna Typ schowana: kolor ustawia „Pokoloruj zaznaczone”
 var NAZWY_BAZA = ['Wyciskanie sztangi leżąc', 'Wyciskanie hantli leżąc', 'Wyciskanie hantli na ławce skośnej', 'Rozpiętki Butterfly', 'Rozpiętki hantlami', 'Rozpiętka dośrodkowa (cz. G)', 'Pompki na poręczach', 'Wyciskanie francuskie', 'Overhead extension', 'Prostowanie ramion na wyciągu', 'Allahy (skrócenie)', 'Wznosy hantli bokiem', 'Wznosy hantlami na bok barku 90°', 'Wznosy T.B wyciąg', 'Wyciskanie hantli nad głowę', 'Wznosy przodem', 'Odwrotne rozpiętki', 'Face pull', 'Podciąganie na drążku', 'Ściąganie drążka wyciągu górnego', 'Wiosłowanie sztangą', 'Wiosłowanie hantlem', 'Wiosłowanie na wyciągu siedząc', 'Uginanie ramion ze sztangą', 'Uginanie hantli siedząc', 'Uginanie młotkowe', 'Uginanie na modlitewniku', 'Zawijanie miednicy w zwisie', 'Unoszenie nóg w zwisie', 'Plank', 'Allahy', 'Uginanie nadgarstków', 'Martwy ciąg', 'Martwy ciąg rumuński', 'Hip thrust', 'Przysiad ze sztangą', 'Przysiad bułgarski', 'Wykroki', 'Wypychanie na suwnicy', 'Prostowanie nóg na maszynie', 'Uginanie nóg leżąc', 'Uginanie nóg siedząc', 'Przywodzenie nóg na maszynie', 'Odwodzenie nóg na maszynie', 'Wspięcia na palce stojąc', 'Wspięcia na palce siedząc', 'Cardio 45 min', 'Cardio 30 min'];
-var mobT = 1;
-function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+var mobT = 1; try { mobT = Math.max(1, parseInt(localStorage.getItem('mobT'), 10) || 1); } catch (e) {}
+function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+function bezpUrl(u) { u = String(u == null ? '' : u).trim(); return /^https?:\/\//i.test(u) ? u : ''; }
 function n(v) { var x = parseFloat(String(v).replace(',', '.')); return isNaN(x) ? 0 : x; }
 function fmt(v) { return v === '' || v == null ? '' : String(v).replace('.', ','); }
 function U(k) { return D.ustawienia[k] == null ? '' : D.ustawienia[k]; }
@@ -229,19 +237,38 @@ function wazSorted() { return D.wazenia.slice().sort(function (a, b) { return St
 function ostWaga() { var w = wazSorted().filter(function (x) { return x.waga !== '' && x.waga != null; }); return w; }
 
 // ---------- zapis ----------
-var queue = [], timer = null, pending = 0;
+var queue = [], timer = null, pending = 0, retryN = 0, USUN_PO = {};
 function push(z, el) {
   queue.push(z); if (el) { el.classList.add('saving'); markDot(el, 'wait'); }
   clearTimeout(timer); timer = setTimeout(flush, 700);
 }
+function zapiszPaczke(batch) { return api({ akcja: 'zapisz', bazaId: D.bazaId, zmiany: batch, auth: AUTH }, { keepalive: true }); }
+function usunWpis(tab, id) {
+  if (/^tmp/.test(id)) { queue = queue.filter(function (z) { return z.tmp !== id && z.id !== id; }); USUN_PO[id] = true; }
+  else push({ tab: tab, id: id, usun: true });
+}
 function markDot(el, st) { var d = el.querySelector('.dot'); if (!d) { d = document.createElement('i'); d.className = 'dot'; el.appendChild(d); } d.className = 'dot' + (st === 'ok' ? ' on' : st === 'err' ? ' err' : ''); if (st === 'ok') setTimeout(function () { d.className = 'dot'; }, 1500); }
-function flush() {
-  if (!queue.length) return; var batch = queue; queue = []; pending++; status('zapisuję…');
+function flush(sila) {
+  if (!queue.length) return;
+  if (pending && !sila) { clearTimeout(timer); timer = setTimeout(flush, 500); return; } // jedna paczka naraz: kolejność zmian i tmp→id
+  var batch = queue; queue = []; pending++; status('zapisuję…');
   var cells = document.querySelectorAll('.saving');
-  api({ akcja: 'zapisz', bazaId: D.bazaId, zmiany: batch, auth: AUTH }).then(function (res) {
-    pending--; (res || []).forEach(function (r) { D.wazenia.concat(D.cwiczenia).forEach(function (o) { if (o.id === r.tmp) o.id = r.id; }); });
+  zapiszPaczke(batch).then(function (res) {
+    pending--; retryN = 0;
+    (res || []).forEach(function (r) {
+      D.wazenia.concat(D.cwiczenia).forEach(function (o) { if (o.id === r.tmp) o.id = r.id; });
+      queue.forEach(function (z) { if (z.id === r.tmp) z.id = r.id; });
+      if (USUN_PO[r.tmp]) { delete USUN_PO[r.tmp]; queue.push({ tab: batch.filter(function (z) { return z.tmp === r.tmp; }).map(function (z) { return z.tab; })[0] || 'Cwiczenia', id: r.id, usun: true }); }
+    });
     cells.forEach(function (c) { c.classList.remove('saving'); markDot(c, 'ok'); }); status(pending ? 'zapisuję…' : 'zapisano', true);
-  }).catch(function (e) { pending--; cells.forEach(function (c) { markDot(c, 'err'); }); status('błąd zapisu: ' + e.message, false, true); });
+    if (queue.length) { clearTimeout(timer); timer = setTimeout(flush, 100); }
+  }).catch(function (e) {
+    pending--; queue = batch.concat(queue); retryN++;
+    var op = [3000, 6000, 15000, 30000][Math.min(retryN - 1, 3)];
+    cells.forEach(function (c) { markDot(c, 'err'); });
+    status('nie zapisano (' + String(e.message || e).replace(/^Error:\s*/, '') + '). Próbuję ponownie za ' + Math.round(op / 1000) + ' s…', false, true);
+    clearTimeout(timer); timer = setTimeout(flush, op);
+  });
 }
 function status(t, fade, err) { var s = document.getElementById('status'); s.textContent = t; s.style.color = err ? '#E0684A' : ''; s.classList.remove('hidden'); if (fade) setTimeout(function () { if (!pending) s.classList.add('hidden'); }, 1800); }
 function bind(el, obj, pole, tab, opts) {
@@ -266,6 +293,7 @@ document.addEventListener('keydown', function (e) {
   var el = document.activeElement; if (!poleEdyt(el) || !el.closest('#app')) return;
   var k = e.key; if (['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown', 'Enter'].indexOf(k) < 0) return;
   if (el.tagName === 'SELECT' && (k === 'ArrowUp' || k === 'ArrowDown')) return;
+  var mc = el.closest('#mobcards'); if (mc) { if (k !== 'Enter') return; var wsz0 = Array.prototype.slice.call(mc.querySelectorAll('input')).filter(poleEdyt), i0 = wsz0.indexOf(el); e.preventDefault(); if (wsz0[i0 + 1]) skoczDo(wsz0[i0 + 1]); else el.blur(); return; }
   var len = (el.value || '').length, s = el.selectionStart, en = el.selectionEnd, caly = s === 0 && en === len && len > 0;
   var tekstowe = el.tagName === 'INPUT' || el.tagName === 'TEXTAREA';
   if (k === 'ArrowRight' && !caly && tekstowe && s != null && en < len) return;
@@ -318,7 +346,7 @@ function render() {
   var app = document.getElementById('app');
   var fokus = zapamietajFokus();
   if (TR && open.planAuto == null) { open.planAuto = true; open.plan = true; } // wersja hostowana: TR znane dopiero po wczytaniu
-  var akt = aktywne();
+  var akt = aktywne(); if (mobT > akt || mobT < 1) mobT = 1;
   var blok = Math.max(1, Math.min(8, n(U('blok')) || 6)), zal = n(U('zaliczone'));
   var w = ostWaga(); var last = w.length ? n(w[w.length - 1].waga) : null, prev = w.length > 1 ? n(w[w.length - 2].waga) : null;
   var d = last != null && prev != null ? last - prev : null;
@@ -367,7 +395,7 @@ function tabela(t) {
     for (var p = 1; p <= 6; p++) out += '<td class="rep ' + (p <= sets ? 'plan' : '') + '">' + (p <= sets ? '<input class="c" data-f="p' + p + '" inputmode="numeric" value="' + esc(c['p' + p]) + '">' : '') + '</td>';
     out += '<td class="w"><input class="c" data-f="ciezar_akt" inputmode="decimal" value="' + esc(c.ciezar_akt) + '"></td><td class="w">' + (TR ? '<input class="c" data-f="ciezar_start" inputmode="decimal" value="' + esc(c.ciezar_start) + '">' : esc(c.ciezar_start)) + '</td>';
     ['sets', 'reps', 'przerwa', 'rir', 'tempo'].forEach(function (f) { out += '<td>' + (TR ? '<input class="c" data-f="' + f + '" value="' + esc(c[f]) + '" style="width:56px">' : esc(c[f])) + '</td>'; });
-    out += '<td>' + (TR ? '<input class="c" data-f="wideo" placeholder="▶ link" title="Wklej link do filmu" value="' + esc(c.wideo) + '" style="width:64px;font-size:10px;text-overflow:ellipsis">' : '<a class="v ' + (c.wideo ? '' : 'off') + '" target="_blank" href="' + esc(c.wideo || '#') + '">▶</a>') + '</td>';
+    out += '<td>' + (TR ? '<input class="c" data-f="wideo" placeholder="▶ link" title="Wklej link do filmu" value="' + esc(c.wideo) + '" style="width:64px;font-size:10px;text-overflow:ellipsis">' : '<a class="v ' + (bezpUrl(c.wideo) ? '' : 'off') + '" target="_blank" rel="noopener" href="' + esc(bezpUrl(c.wideo) || '#') + '">▶</a>') + '</td>';
     out += '<td class="note"><input class="c" data-f="notatka" value="' + esc(c.notatka) + '" placeholder="…"></td>';
     if (TR) out += (SHOW_TYP ? '<td class="typ"><select class="c" data-f="typ"><option value=""></option>' + ['Priorytet', 'Neutral', 'Utrzymanie'].map(function (o) { return '<option' + (c.typ === o ? ' selected' : '') + '>' + o + '</option>'; }).join('') + '</select></td>' : '') + '<td class="act"><i title="wyżej" onclick="ruszCw(\'' + c.id + '\',-1)">▲</i><i title="niżej" onclick="ruszCw(\'' + c.id + '\',1)">▼</i><i class="ss ' + (jestSS(c) ? 'on' : '') + '" title="Superseria z następnym ćwiczeniem (bez przerwy między nimi)" onclick="togSS(\'' + c.id + '\')">SS</i><i title="duplikuj (także do innego treningu)" onclick="duplikujCw(\'' + c.id + '\')">⧉</i><i class="del" title="usuń ćwiczenie" onclick="usunCw(\'' + c.id + '\')">✕</i></td>';
     out += '</tr>';
@@ -548,7 +576,7 @@ function raporty() {
   // historia
   L.forEach(function (r) {
     var ed = open.rapEd[r.id];
-    out += '<div class="rp" data-rid="' + esc(r.id) + '"><div class="rh"><b>Tydzień ' + esc(r.tydzien || '?') + '</b><span class="mut">' + esc(r.data) + '</span><span class="x">' + (ed ? '<span class="pbtn" style="margin:0;font-size:12px" onclick="zapiszEdycje(\'' + esc(r.id) + '\')">zapisz</span><span class="pbtn" style="margin:0;font-size:12px" onclick="togEd(\'' + esc(r.id) + '\')">anuluj</span>' : '<span class="pbtn" style="margin:0;font-size:12px" onclick="togEd(\'' + esc(r.id) + '\')">edytuj</span>') + (TR ? '<span class="pbtn" style="margin:0;font-size:12px;color:var(--red)" onclick="usunRaport(\'' + esc(r.id) + '\')">usuń</span>' : '') + '</span></div>';
+    out += '<div class="rp" data-rid="' + esc(r.id) + '"><div class="rh"><b>Tydzień ' + esc(r.tydzien || '?') + '</b><span class="mut">' + esc(r.data) + '</span><span class="x">' + (ed ? '<span class="pbtn" style="margin:0;font-size:12px" onclick="zapiszEdycje(\'' + esc(r.id) + '\')">zapisz</span><span class="pbtn" style="margin:0;font-size:12px" onclick="togEd(\'' + esc(r.id) + '\')">anuluj</span>' : (r.odp && !TR ? '' : '<span class="pbtn" style="margin:0;font-size:12px" onclick="togEd(\'' + esc(r.id) + '\')">edytuj</span>')) + (TR ? '<span class="pbtn" style="margin:0;font-size:12px;color:var(--red)" onclick="usunRaport(\'' + esc(r.id) + '\')">usuń</span>' : '') + '</span></div>';
     out += '<div class="rt">' + (ed ? '<textarea id="re-' + esc(r.id) + '">' + esc(r.tresc) + '</textarea>' : (r.tresc ? esc(r.tresc) : '<span class="mut">(bez treści)</span>')) + '</div>';
     if (r.pliki && r.pliki.length) out += '<div class="rf">' + r.pliki.map(function (p) { return '<div class="f" data-pid="' + esc(p.id) + '" onclick="pokazPlik(\'' + esc(r.id) + '\',\'' + esc(p.id) + '\')">' + (String(p.typ).indexOf('image') === 0 ? '🖼' : '🎬') + ' <b>' + esc(p.nazwa) + '</b> <span class="mut">' + rozmiarTxt(p.rozmiar) + ' · kliknij</span></div>'; }).join('') + '</div>';
     if (TR) out += '<div class="ro"><small>Odpowiedź trenera' + (r.odp_data ? ' · ' + esc(r.odp_data) : '') + '</small><textarea data-odp="' + esc(r.id) + '" placeholder="Napisz odpowiedź, zapisze się sama po wyjściu z pola">' + esc(r.odp || '') + '</textarea></div>';
@@ -641,18 +669,18 @@ function renderMob() {
   rows.forEach(function (c, i) {
     var k = TYP[c.typ] || 'N', sets = Math.max(0, n(c.sets));
     var zrobione = sets > 0; for (var q = 1; q <= sets && q <= 6; q++) if (c['p' + q] === '' || c['p' + q] == null) zrobione = false;
-    out += '<div class="mcard' + (zrobione ? ' done' : '') + '" data-id="' + c.id + '"><div class="mh ' + (k === 'P' ? 'GOLD' : k === 'U' ? 'BORDO' : 'NAVY') + '"><span class="mn">' + (i + 1) + '</span><b>' + esc(c.nazwa) + (jestSS(c) ? ' <span class="ssb">SS</span>' : '') + '</b><a class="v ' + (c.wideo ? '' : 'off') + '" target="_blank" href="' + esc(c.wideo || '#') + '">▶</a></div><div class="mm"><span>' + esc(c.sets) + ' × ' + esc(c.reps) + '</span>' + (c.przerwa ? '<span>' + esc(c.przerwa) + '</span>' : '') + (c.rir !== '' ? '<span>RiR ' + esc(c.rir) + '</span>' : '') + (c.tempo ? '<span>' + esc(c.tempo) + '</span>' : '') + '</div><div class="mr">';
-    for (var p = 1; p <= sets && p <= 6; p++) out += '<input data-f="p' + p + '" inputmode="numeric" placeholder="powt." value="' + esc(c['p' + p]) + '">';
-    out += '</div><div class="mw"><label class="kg">Ciężar<input data-f="ciezar_akt" inputmode="decimal" value="' + esc(c.ciezar_akt) + '"></label><label>Notatka<input data-f="notatka" placeholder="dla trenera" value="' + esc(c.notatka) + '"></label></div>';
-    var sek = sekundy(c.przerwa); if (sek) out += '<div class="mt"><button id="tm-' + c.id + '" onclick="minutnik(\'' + c.id + '\',' + sek + ')">' + tekstMinutnika(c.id, sek) + '</button></div>';
+    out += '<div class="mcard' + (zrobione ? ' done' : '') + '" data-id="' + c.id + '"><div class="mh ' + (k === 'P' ? 'GOLD' : k === 'U' ? 'BORDO' : 'NAVY') + '"><span class="mn">' + (i + 1) + '</span><b>' + esc(c.nazwa) + (jestSS(c) ? ' <span class="ssb">SS</span>' : '') + '</b><a class="v ' + (bezpUrl(c.wideo) ? '' : 'off') + '" target="_blank" rel="noopener" href="' + esc(bezpUrl(c.wideo) || '#') + '">▶</a></div><div class="mm"><span>' + esc(c.sets) + ' × ' + esc(c.reps) + '</span>' + (c.przerwa ? '<span>' + esc(c.przerwa) + '</span>' : '') + (c.rir !== '' ? '<span>RiR ' + esc(c.rir) + '</span>' : '') + (c.tempo ? '<span>' + esc(c.tempo) + '</span>' : '') + '</div><div class="mr">';
+    for (var p = 1; p <= sets && p <= 6; p++) out += '<input data-f="p' + p + '" inputmode="numeric" enterkeyhint="next" placeholder="powt." value="' + esc(c['p' + p]) + '">';
+    out += '</div><div class="mw"><label class="kg">Ciężar<input data-f="ciezar_akt" inputmode="decimal" enterkeyhint="next" value="' + esc(c.ciezar_akt) + '"></label><label>Notatka<input data-f="notatka" enterkeyhint="done" placeholder="dla trenera" value="' + esc(c.notatka) + '"></label></div>';
+    var sek = sekundy(c.przerwa); if (sek) out += '<div class="mt"><button id="tm-' + c.id + '" class="' + (TM.id === c.id ? (TM.koniec > Date.now() ? 'run' : 'end') : '') + '" onclick="minutnik(\'' + c.id + '\',' + sek + ')">' + tekstMinutnika(c.id, sek) + '</button></div>';
     out += '</div>';
   });
   if (!rows.length) out = '<div class="mut" style="padding:20px">Brak ćwiczeń w tym treningu.</div>';
   out += '<div style="margin:6px 10px 0" id="mob-rap">' + (TRYB === 'prosty' ? raporty() : '') + '</div><div style="margin:6px 10px 0" id="mob-zal">' + zalecenia() + '</div>';
-  out += '<div style="margin:6px 10px 16px"><div class="acc" onclick="tog(\'waz\')" style="margin:0"><span class="chev">▸</span>Ważenia<span class="cnt">' + (ostWaga().length ? fmt(ostWaga().slice(-1)[0].waga) + ' kg' : '') + '</span></div>' + (open.waz ? '<div class="card" style="margin-top:8px"><div style="padding:10px"><button class="btn" onclick="dodajWaz()">+ Dodaj dzisiejsze ważenie</button></div>' + wazSorted().slice(-5).reverse().map(function (w) { return '<div class="mw" data-id="' + w.id + '" style="padding:6px 12px"><label>Dzień<input type="date" data-f="data" value="' + esc(w.data) + '"></label><label class="kg">Waga<input data-f="waga" inputmode="decimal" value="' + esc(fmt(w.waga)) + '"></label><label>Notatka<input data-f="notatka" value="' + esc(w.notatka) + '"></label></div>'; }).join('') + '</div>' : '') + '</div>';
+  out += '<div style="margin:6px 10px 16px" id="sek-waz"><div class="acc" onclick="tog(\'waz\')" style="margin:0"><span class="chev">▸</span>Ważenia<span class="cnt">' + (ostWaga().length ? fmt(ostWaga().slice(-1)[0].waga) + ' kg' : '') + '</span></div>' + (open.waz ? '<div class="card" style="margin-top:8px"><div style="padding:10px"><button class="btn" onclick="dodajWaz()">+ Dodaj dzisiejsze ważenie</button></div>' + wazSorted().slice(-5).reverse().map(function (w) { return '<div class="mw" data-id="' + w.id + '" style="padding:6px 12px"><label>Dzień<input type="date" data-f="data" value="' + esc(w.data) + '"></label><label class="kg">Waga<input data-f="waga" inputmode="decimal" value="' + esc(fmt(w.waga)) + '"></label><label>Notatka<input data-f="notatka" value="' + esc(w.notatka) + '"></label></div>'; }).join('') + '</div>' : '') + '</div>';
   box.innerHTML = out;
-  box.querySelectorAll('[data-id] [data-f]').forEach(function (el) { var id = el.closest('[data-id]').dataset.id; var o = D.cwiczenia.filter(function (c) { return c.id === id; })[0]; var tab = 'Cwiczenia'; if (!o) { o = D.wazenia.filter(function (c) { return c.id === id; })[0]; tab = 'Wazenia'; } if (o) bind(el, o, el.dataset.f, tab, { change: el.type === 'date', after: tab === 'Wazenia' ? function () { updateKpi(); } : (/^p\d$/.test(el.dataset.f) ? function () { var card = el.closest('.mcard'); var sets = Math.max(0, n(o.sets)), ok = sets > 0; for (var q = 1; q <= sets && q <= 6; q++) if (o['p' + q] === '' || o['p' + q] == null) ok = false; if (card) card.classList.toggle('done', ok); } : null) }); });
-  var sel = document.getElementById('mobSel'); if (sel) sel.onchange = function () { mobT = n(sel.value); renderMob(); };
+  box.querySelectorAll('[data-id] [data-f]').forEach(function (el) { var id = el.closest('[data-id]').dataset.id; var o = D.cwiczenia.filter(function (c) { return c.id === id; })[0]; var tab = 'Cwiczenia'; if (!o) { o = D.wazenia.filter(function (c) { return c.id === id; })[0]; tab = 'Wazenia'; } if (o) bind(el, o, el.dataset.f, tab, { change: el.type === 'date' || tab === 'Wazenia', after: tab === 'Wazenia' ? function () { updateKpi(); } : (/^p\d$/.test(el.dataset.f) ? function () { var card = el.closest('.mcard'); var sets = Math.max(0, n(o.sets)), ok = sets > 0; for (var q = 1; q <= sets && q <= 6; q++) if (o['p' + q] === '' || o['p' + q] == null) ok = false; if (card) card.classList.toggle('done', ok); } : null) }); });
+  var sel = document.getElementById('mobSel'); if (sel) sel.onchange = function () { mobT = n(sel.value); try { localStorage.setItem('mobT', mobT); } catch (e) {} renderMob(); bindRaporty(); };
 }
 function updateKpi() { render(); }
 // ---------- minutnik przerwy (karty „Dziś”) ----------
@@ -663,15 +691,17 @@ function tekstMinutnika(id, sek) { if (TM.id !== id) return '⏱ przerwa ' + fmt
 function minutnik(id, sek) {
   if (TM.id === id && TM.koniec > Date.now()) { zatrzymajMinutnik(); return; }
   zatrzymajMinutnik(true); TM.id = id; TM.sek = sek; TM.koniec = Date.now() + sek * 1000;
+  try { var AC = window.AudioContext || window.webkitAudioContext; if (AC && !TM.ctx) TM.ctx = new AC(); if (TM.ctx && TM.ctx.state === 'suspended') TM.ctx.resume(); } catch (e) {}
+  try { if (navigator.wakeLock && !TM.wl) navigator.wakeLock.request('screen').then(function (w) { TM.wl = w; w.addEventListener('release', function () { TM.wl = null; }); }).catch(function () {}); } catch (e) {}
   var b = document.getElementById('tm-' + id); if (b) { b.className = 'run'; b.textContent = tekstMinutnika(id, sek); }
   TM.tick = setInterval(function () {
     var el = document.getElementById('tm-' + TM.id); var left = TM.koniec - Date.now();
-    if (left <= 0) { clearInterval(TM.tick); TM.tick = null; if (el) { el.className = 'end'; el.textContent = tekstMinutnika(TM.id, TM.sek); } try { if (navigator.vibrate) navigator.vibrate([200, 100, 200, 100, 400]); } catch (e) {} dzwonek(); setTimeout(function () { if (TM.koniec <= Date.now()) { var e2 = document.getElementById('tm-' + TM.id); TM.id = null; if (e2) { e2.className = ''; e2.textContent = '⏱ przerwa ' + fmtCzas(TM.sek); } } }, 6000); return; }
+    if (left <= 0) { clearInterval(TM.tick); TM.tick = null; try { if (TM.wl) { TM.wl.release(); TM.wl = null; } } catch (e) {} if (el) { el.className = 'end'; el.textContent = tekstMinutnika(TM.id, TM.sek); } try { if (navigator.vibrate) navigator.vibrate([200, 100, 200, 100, 400]); } catch (e) {} dzwonek(); setTimeout(function () { if (TM.koniec <= Date.now()) { var e2 = document.getElementById('tm-' + TM.id); TM.id = null; if (e2) { e2.className = ''; e2.textContent = '⏱ przerwa ' + fmtCzas(TM.sek); } } }, 6000); return; }
     if (el) el.textContent = tekstMinutnika(TM.id, TM.sek);
   }, 250);
 }
-function zatrzymajMinutnik(cicho) { if (TM.tick) clearInterval(TM.tick); TM.tick = null; var el = TM.id ? document.getElementById('tm-' + TM.id) : null; var sek = TM.sek; TM.id = null; TM.koniec = 0; if (el && !cicho) { el.className = ''; el.textContent = '⏱ przerwa ' + fmtCzas(sek); } else if (el) { el.className = ''; el.textContent = '⏱ przerwa ' + fmtCzas(sek); } }
-function dzwonek() { try { var AC = window.AudioContext || window.webkitAudioContext; if (!AC) return; var ctx = new AC(); [0, 0.25, 0.5].forEach(function (t) { var o = ctx.createOscillator(), g = ctx.createGain(); o.type = 'sine'; o.frequency.value = 880; g.gain.value = 0.25; o.connect(g); g.connect(ctx.destination); o.start(ctx.currentTime + t); o.stop(ctx.currentTime + t + 0.15); }); } catch (e) {} }
+function zatrzymajMinutnik(cicho) { if (TM.tick) clearInterval(TM.tick); TM.tick = null; try { if (TM.wl) { TM.wl.release(); TM.wl = null; } } catch (e) {} var el = TM.id ? document.getElementById('tm-' + TM.id) : null; var sek = TM.sek; TM.id = null; TM.koniec = 0; if (el && !cicho) { el.className = ''; el.textContent = '⏱ przerwa ' + fmtCzas(sek); } else if (el) { el.className = ''; el.textContent = '⏱ przerwa ' + fmtCzas(sek); } }
+function dzwonek() { try { var AC = window.AudioContext || window.webkitAudioContext; if (!AC) return; var ctx = TM.ctx || new AC(); if (ctx.state === 'suspended') ctx.resume(); [0, 0.25, 0.5].forEach(function (t) { var o = ctx.createOscillator(), g = ctx.createGain(); o.type = 'sine'; o.frequency.value = 880; g.gain.value = 0.25; o.connect(g); g.connect(ctx.destination); o.start(ctx.currentTime + t); o.stop(ctx.currentTime + t + 0.15); }); } catch (e) {} }
 function bindAll() {
   document.querySelectorAll('.desk tr[data-id] [data-f]').forEach(function (el) {
     var id = el.closest('tr').dataset.id; var o = D.cwiczenia.filter(function (c) { return c.id === id; })[0]; var tab = 'Cwiczenia';
@@ -701,7 +731,7 @@ function bindAll() {
 }
 function tog(k, i) { if (i == null) open[k] = !open[k]; else open[k][i] = !(open[k][i] == null ? (k === 't' && i === 1) : open[k][i]); render(); }
 function dodajWaz() { var d = new Date(); var iso = d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); var tmp = 'tmp' + Date.now(); var w = { id: tmp, data: iso, waga: '', kcal: U('kcal'), wegle: '', bialko: '', tluszcze: '', sol: '2–5 g', notatka: '' }; D.wazenia.push(w); push({ tab: 'Wazenia', id: 'nowe', tmp: tmp, dane: w }); open.waz = true; render(); setTimeout(function () { var el = document.querySelector('[data-id="' + tmp + '"] [data-f="waga"]'); if (el) el.focus(); }, 50); }
-function usunWaz(id) { if (!confirm('Usunąć to ważenie?')) return; D.wazenia = D.wazenia.filter(function (w) { return w.id !== id; }); push({ tab: 'Wazenia', id: id, usun: true }); render(); }
+function usunWaz(id) { if (!confirm('Usunąć to ważenie?')) return; D.wazenia = D.wazenia.filter(function (w) { return w.id !== id; }); usunWpis('Wazenia', id); render(); }
 function jestSS(c) { var v = c.ss; return v === true || v === 'TRUE' || v === 'true' || v === 1 || v === '1'; }
 function togSS(id) { var c = D.cwiczenia.filter(function (x) { return x.id === id; })[0]; if (!c) return; var v = !jestSS(c); c.ss = v; push({ tab: 'Cwiczenia', id: id, pole: 'ss', wartosc: v }); render(); }
 function norm(s) { return String(s || '').toLowerCase().replace(/\s+/g, ' ').replace(/[„”"']/g, '').trim(); }
@@ -742,10 +772,12 @@ function usunCw(id) {
   var c = D.cwiczenia.filter(function (x) { return x.id === id; })[0]; if (!c) return;
   if (!confirm('Usunąć „' + (c.nazwa || 'to ćwiczenie') + '” z planu? Wpisane powtórzenia podopiecznego też znikną.')) return;
   var t = n(c.trening); D.cwiczenia = D.cwiczenia.filter(function (x) { return x.id !== id; }); delete SEL[id];
-  if (!/^tmp/.test(id)) push({ tab: 'Cwiczenia', id: id, usun: true }); renumeruj(t); render();
+  usunWpis('Cwiczenia', id); renumeruj(t); render();
 }
 function dodajCw(t, nr) { var tmp = 'tmp' + Date.now(); var c = { id: tmp, trening: t, nr: nr, nazwa: '', typ: 'Neutral', sets: 3, reps: 10, przerwa: '90s', rir: 0, tempo: 'x211', wideo: '', ciezar_start: '', ciezar_akt: '', p1: '', p2: '', p3: '', p4: '', p5: '', p6: '', notatka: '', ss: false }; D.cwiczenia.push(c); push({ tab: 'Cwiczenia', id: 'nowe', tmp: tmp, dane: c }); render(); setTimeout(function () { var el = document.querySelector('tr[data-id="' + tmp + '"] [data-f="nazwa"]'); if (el) el.focus(); }, 50); }
-window.addEventListener('beforeunload', function (e) { if (queue.length || pending) { flush(); e.preventDefault(); e.returnValue = ''; } });
+window.addEventListener('beforeunload', function (e) { if (queue.length || pending) { flush(true); e.preventDefault(); e.returnValue = ''; } });
+document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden' && queue.length) { clearTimeout(timer); flush(true); } });
+window.addEventListener('pagehide', function () { if (queue.length) { clearTimeout(timer); flush(true); } });
 // ---------- ekran PIN (podopieczny) ----------
 function pinScreen(msg) {
   document.getElementById('app').innerHTML = '<div class="pinbox" style="max-width:760px;margin:120px auto;padding:0 16px"><div class="card" style="padding:44px;border-radius:12px"><div class="sub" style="font-size:20px">Plan treningowy</div><h1 style="margin:8px 0 22px;font-size:44px">Cześć' + (D.imie ? ', ' + esc(String(D.imie).split(' ')[0]) : '') + '!</h1><p style="color:var(--ivd);margin:0 0 24px;font-size:24px">Wpisz 4-cyfrowy PIN od Kuby. Telefon go zapamięta.</p><input id="pin" inputmode="numeric" maxlength="4" autocomplete="one-time-code" style="width:100%;height:100px;font:800 56px Poppins;text-align:center;letter-spacing:24px;background:#1A1A24;color:var(--gl);border:2px solid var(--gm);border-radius:8px"><button class="btn" id="pinbtn" style="width:100%;margin-top:24px;height:84px;font-size:30px">Wejdź</button><div id="pinmsg" style="color:var(--red);min-height:32px;margin-top:16px;font-weight:600;font-size:22px">' + (msg || '') + '</div></div></div>';
@@ -758,11 +790,18 @@ function wczytajPin(pin) {
   api({ akcja: 'wczytaj', k: k0, pin: pin }).then(function (dane) {
     var pierwszy = false; try { pierwszy = !localStorage.getItem('pin_' + k0); localStorage.setItem('pin_' + k0, pin); } catch (e) {}
     AUTH = { k: k0, pin: pin }; D = dane; D.url = URL_STRONY; TR = false; render(); if (pierwszy) kartaEkran();
-  }).catch(function (e) { try { localStorage.removeItem('pin_' + k0); } catch (x) {} pinScreen(String(e.message || e).replace(/^Error:\s*/, '')); });
+    try { localStorage.setItem('cache_' + k0, JSON.stringify({ t: Date.now(), d: dane })); } catch (e) {}
+  }).catch(function (e) {
+    var msg = String(e.message || e).replace(/^Error:\s*/, '');
+    if (bledLogowania(e)) { try { localStorage.removeItem('pin_' + k0); } catch (x) {} pinScreen(msg); return; }
+    var c = null; try { c = JSON.parse(localStorage.getItem('cache_' + k0) || 'null'); } catch (x) {}
+    if (c && c.d) { AUTH = { k: k0, pin: pin }; D = c.d; D.url = URL_STRONY; TR = false; render(); status('Brak sieci. Pokazuję plan z ' + new Date(c.t).toLocaleString('pl-PL', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) + '. Wpisy zapiszę, gdy wróci internet.', false, true); }
+    else pinScreen(msg);
+  });
 }
 function ladowanie(t) { document.getElementById('app').innerHTML = '<div class="mut" style="padding:60px;text-align:center;font-size:28px">' + t + '</div>'; }
 function hasloScreen(msg) {
-  document.getElementById('app').innerHTML = '<div class="pinbox" style="max-width:760px;margin:120px auto;padding:0 16px"><div class="card" style="padding:44px;border-radius:12px"><div class="sub" style="font-size:20px">Plan treningowy</div><h1 style="margin:8px 0 22px;font-size:44px">Panel trenera</h1><p style="color:var(--ivd);margin:0 0 24px;font-size:24px">Wpisz hasło trenera. Przeglądarka je zapamięta.</p><input id="haslo" type="password" autocomplete="current-password" style="width:100%;height:100px;font:800 40px Poppins;text-align:center;background:#1A1A24;color:var(--gl);border:2px solid var(--gm);border-radius:8px"><button class="btn" id="haslobtn" style="width:100%;margin-top:24px;height:84px;font-size:30px">Wejdź</button><div id="haslomsg" style="color:var(--red);min-height:32px;margin-top:16px;font-weight:600;font-size:22px">' + (msg || '') + '</div><p style="color:var(--ivd);font-size:20px;margin-top:20px">Podopieczna? Wejdź swoim linkiem od Kuby (kończy się na ?k=…).</p></div></div>';
+  document.getElementById('app').innerHTML = '<div class="pinbox" style="max-width:760px;margin:120px auto;padding:0 16px"><div class="card" style="padding:44px;border-radius:12px"><div class="sub" style="font-size:20px">Plan treningowy</div><h1 style="margin:8px 0 22px;font-size:44px">Panel trenera</h1><p style="color:var(--ivd);margin:0 0 24px;font-size:24px">Wpisz hasło trenera. Przeglądarka je zapamięta.</p><input id="haslo" type="password" autocomplete="current-password" style="width:100%;height:100px;font:800 40px Poppins;text-align:center;background:#1A1A24;color:var(--gl);border:2px solid var(--gm);border-radius:8px"><button class="btn" id="haslobtn" style="width:100%;margin-top:24px;height:84px;font-size:30px">Wejdź</button><div id="haslomsg" style="color:var(--red);min-height:32px;margin-top:16px;font-weight:600;font-size:22px">' + (msg || '') + '</div><p style="color:var(--ivd);font-size:20px;margin-top:20px">Masz link od Kuby? Wejdź nim (kończy się na ?k=…), hasło nie jest potrzebne.</p></div></div>';
   var inp = document.getElementById('haslo'); inp.focus();
   var go = function () { var v = inp.value.trim(); if (!v) return; HASLO = v; document.getElementById('haslobtn').textContent = 'Wczytuję…'; wczytajTrenera(); };
   document.getElementById('haslobtn').onclick = go; inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') go(); });
@@ -772,7 +811,7 @@ function wczytajTrenera() {
   api({ akcja: 'plan', bazaId: q.get('klient') || '' }).then(function (dane) {
     try { localStorage.setItem('trener_haslo', HASLO); } catch (e) {}
     D = dane; D.url = URL_STRONY; TR = true; render();
-  }).catch(function (e) { try { localStorage.removeItem('trener_haslo'); } catch (x) {} HASLO = null; hasloScreen(String(e.message || e)); });
+  }).catch(function (e) { var msg = String(e.message || e).replace(/^Error:\s*/, ''); if (bledLogowania(e)) { try { localStorage.removeItem('trener_haslo'); } catch (x) {} HASLO = null; } hasloScreen(msg + (bledLogowania(e) ? '' : ' Wpisz hasło i spróbuj jeszcze raz.')); });
 }
 // karta „dodaj do ekranu” po pierwszym udanym PIN-ie (raz; iPhone = instrukcja, Android = instrukcja Chrome)
 function kartaEkran() {
