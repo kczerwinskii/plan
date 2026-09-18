@@ -789,7 +789,7 @@ function wczytajPin(pin) {
   var k0 = D.k;
   api({ akcja: 'wczytaj', k: k0, pin: pin }).then(function (dane) {
     var pierwszy = false; try { pierwszy = !localStorage.getItem('pin_' + k0); localStorage.setItem('pin_' + k0, pin); } catch (e) {}
-    AUTH = { k: k0, pin: pin }; D = dane; D.url = URL_STRONY; TR = false; render(); if (pierwszy) kartaEkran();
+    AUTH = { k: k0, pin: pin }; D = dane; D.url = URL_STRONY; TR = false; OST_WCZYT = Date.now(); render(); if (pierwszy) kartaEkran();
     try { localStorage.setItem('cache_' + k0, JSON.stringify({ t: Date.now(), d: dane })); } catch (e) {}
   }).catch(function (e) {
     var msg = String(e.message || e).replace(/^Error:\s*/, '');
@@ -810,7 +810,7 @@ function wczytajTrenera() {
   var q = new URLSearchParams(location.search);
   api({ akcja: 'plan', bazaId: q.get('klient') || '' }).then(function (dane) {
     try { localStorage.setItem('trener_haslo', HASLO); } catch (e) {}
-    D = dane; D.url = URL_STRONY; TR = true; render();
+    D = dane; D.url = URL_STRONY; TR = true; OST_WCZYT = Date.now(); render();
   }).catch(function (e) { var msg = String(e.message || e).replace(/^Error:\s*/, ''); if (bledLogowania(e)) { try { localStorage.removeItem('trener_haslo'); } catch (x) {} HASLO = null; } hasloScreen(msg + (bledLogowania(e) ? '' : ' Wpisz hasło i spróbuj jeszcze raz.')); });
 }
 // karta „dodaj do ekranu” po pierwszym udanym PIN-ie (raz; iPhone = instrukcja, Android = instrukcja Chrome)
@@ -823,6 +823,16 @@ function kartaEkran() {
   document.body.appendChild(box);
   document.getElementById('a2hsOk').onclick = function () { box.remove(); };
 }
+var OST_WCZYT = Date.now();
+function odswiezCicho() {
+  if (!D || !D.bazaId || queue.length || pending || Date.now() - OST_WCZYT < 5 * 60 * 1000) return;
+  var ae = document.activeElement; if (ae && (ae.tagName === 'INPUT' || ae.tagName === 'TEXTAREA' || ae.tagName === 'SELECT')) return;
+  var p = TR ? api({ akcja: 'plan', bazaId: D.bazaId }) : (AUTH ? api({ akcja: 'wczytaj', k: AUTH.k, pin: AUTH.pin }) : null);
+  if (!p) return; OST_WCZYT = Date.now();
+  p.then(function (dane) { if (queue.length || pending) return; dane.url = URL_STRONY; D = dane; render(); status('odświeżono', true); if (AUTH) { try { localStorage.setItem('cache_' + AUTH.k, JSON.stringify({ t: Date.now(), d: dane })); } catch (e) {} } }).catch(function () {});
+}
+document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible') odswiezCicho(); });
+window.addEventListener('focus', odswiezCicho);
 (function start() {
   var q = new URLSearchParams(location.search), k = q.get('k');
   if (k) {
