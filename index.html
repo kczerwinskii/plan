@@ -136,6 +136,7 @@ body.prosty #a2hs>div{padding:14px!important;font-size:14px!important}body.prost
 .pm-row{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start;padding:4px 12px 14px}.pm-l{flex:0 0 620px;max-width:100%}.pm-r{flex:1 1 640px;min-width:0;overflow:auto}.pm-r .pm{margin-top:8px}.pm td.dk[colspan]{text-align:left;padding-left:14px}
 .g4{grid-template-columns:repeat(4,1fr);gap:6px;padding:8px 0 0}.g4 .tile{padding:6px 24px 6px 8px;min-height:0}.g4 .tile b{font-size:17px;line-height:1.1}.g4 .tile b input{font-size:17px;height:22px}.g4 .tile>span{font-size:11px;line-height:1.2;display:block}.g4 .tile small{font-size:10px}.g4 .tile small textarea{font-size:10px}.g4 .tile .prio i{width:14px;height:14px}.g4 .tile .prio{margin-top:4px}.g4 .tile .chk{width:14px;height:14px;font-size:10px;top:6px;right:6px}
 .wyk .ttl{font-size:15px}.wyk svg text{font-family:Poppins,sans-serif}
+.lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
 </style></head><body>
 <div id="app"></div>
 <div id="tipbox" class="tip hidden"><span class="x" onclick="hideTip()">✕</span><div id="tipc"></div></div>
@@ -217,6 +218,7 @@ function rysujMenu() {
   h += '<div class="mgr">Raporty</div><span class="mi' + mAkt('rap') + '" onclick="idz(\'rap\')">Raporty tygodniowe<small>' + ((D.raporty || []).length ? (D.raporty || []).length + ' wysłanych' : 'napisz pierwszy') + '</small></span>';
   h += '<div class="mgr">Ciało i dieta</div><span class="mi' + mAkt('waz') + '" onclick="idz(\'waz\')">Ważenia i kalorie' + (ostWaga().length ? '<small>ostatnie ' + fmt(ostWaga().slice(-1)[0].waga) + ' kg</small>' : '') + '</span><span class="mi' + mAkt('zal') + '" onclick="idz(\'zal\')">Zalecenia i suplementy</span>';
   h += '<div class="mgr">Jak korzystać</div>' + INSTR().map(function (x, i) { return '<span class="mi' + mAkt('ins' + i) + '" onclick="idz(\'ins\',' + i + ')">' + esc(x[0]) + '</span>'; }).join('');
+  if (AUTH && AUTH.sesja) h += '<div class="mgr">Konto</div><span class="mi" onclick="wylogujKonto()">Wyloguj<small>' + esc(D.konto ? D.konto.email : '') + '</small></span>';
   h += '</div>';
   var box = document.createElement('div'); box.innerHTML = h; while (box.firstChild) document.body.appendChild(box.firstChild);
 }
@@ -849,7 +851,7 @@ function wczytajPin(pin) {
 }
 function ladowanie(t) { document.getElementById('app').innerHTML = '<div class="mut" style="padding:60px;text-align:center;font-size:28px">' + t + '</div>'; }
 function hasloScreen(msg) {
-  document.getElementById('app').innerHTML = '<div class="pinbox" style="max-width:760px;margin:120px auto;padding:0 16px"><div class="card" style="padding:44px;border-radius:12px"><div class="sub" style="font-size:20px">Plan treningowy</div><h1 style="margin:8px 0 22px;font-size:44px">Panel trenera</h1><p style="color:var(--ivd);margin:0 0 24px;font-size:24px">Wpisz hasło trenera. Przeglądarka je zapamięta.</p><input id="haslo" type="password" autocomplete="current-password" style="width:100%;height:100px;font:800 40px Poppins;text-align:center;background:#1A1A24;color:var(--gl);border:2px solid var(--gm);border-radius:8px"><button class="btn" id="haslobtn" style="width:100%;margin-top:24px;height:84px;font-size:30px">Wejdź</button><div id="haslomsg" style="color:var(--red);min-height:32px;margin-top:16px;font-weight:600;font-size:22px">' + (msg || '') + '</div><p style="color:var(--ivd);font-size:20px;margin-top:20px">Masz link od Kuby? Wejdź nim (kończy się na ?k=…), hasło nie jest potrzebne.</p></div></div>';
+  document.getElementById('app').innerHTML = '<div class="pinbox" style="max-width:760px;margin:120px auto;padding:0 16px"><div class="card" style="padding:44px;border-radius:12px"><div class="sub" style="font-size:20px">Plan treningowy</div><h1 style="margin:8px 0 22px;font-size:44px">Panel trenera</h1><p style="color:var(--ivd);margin:0 0 24px;font-size:24px">Wpisz hasło trenera. Przeglądarka je zapamięta.</p><input id="haslo" type="password" autocomplete="current-password" style="width:100%;height:100px;font:800 40px Poppins;text-align:center;background:#1A1A24;color:var(--gl);border:2px solid var(--gm);border-radius:8px"><button class="btn" id="haslobtn" style="width:100%;margin-top:24px;height:84px;font-size:30px">Wejdź</button><div id="haslomsg" style="color:var(--red);min-height:32px;margin-top:16px;font-weight:600;font-size:22px">' + (msg || '') + '</div><p style="color:var(--ivd);font-size:20px;margin-top:20px">Podopieczny? <a class="lnk" onclick="ekranLogowania()">Zaloguj się tutaj</a>.</p></div></div>';
   var inp = document.getElementById('haslo'); inp.focus();
   var go = function () { var v = inp.value.trim(); if (!v) return; HASLO = v; document.getElementById('haslobtn').textContent = 'Wczytuję…'; wczytajTrenera(); };
   document.getElementById('haslobtn').onclick = go; inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') go(); });
@@ -875,21 +877,75 @@ var OST_WCZYT = Date.now();
 function odswiezCicho() {
   if (!D || !D.bazaId || queue.length || pending || Date.now() - OST_WCZYT < 5 * 60 * 1000) return;
   var ae = document.activeElement; if (ae && (ae.tagName === 'INPUT' || ae.tagName === 'TEXTAREA' || ae.tagName === 'SELECT')) return;
-  var p = TR ? api({ akcja: 'plan', bazaId: D.bazaId }) : (AUTH ? api({ akcja: 'wczytaj', k: AUTH.k, pin: AUTH.pin }) : null);
+  var p = TR ? api({ akcja: 'plan', bazaId: D.bazaId }) : (AUTH ? api(AUTH.sesja ? { akcja: 'wczytaj', sesja: AUTH.sesja } : { akcja: 'wczytaj', k: AUTH.k, pin: AUTH.pin }) : null);
   if (!p) return; OST_WCZYT = Date.now();
-  p.then(function (dane) { if (queue.length || pending) return; dane.url = URL_STRONY; D = dane; render(); status('odświeżono', true); if (AUTH) { try { localStorage.setItem('cache_' + AUTH.k, JSON.stringify({ t: Date.now(), d: dane })); } catch (e) {} } }).catch(function () {});
+  p.then(function (dane) { if (queue.length || pending) return; dane.url = URL_STRONY; D = dane; render(); status('odświeżono', true); if (AUTH) { try { localStorage.setItem('cache_' + (AUTH.k || 'sesja'), JSON.stringify({ t: Date.now(), d: dane })); } catch (e) {} } }).catch(function () {});
 }
 document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible') odswiezCicho(); });
 window.addEventListener('focus', odswiezCicho);
+// ---------- konto podopiecznego: logowanie, rejestracja, sesja ----------
+var SESJA = null; try { SESJA = localStorage.getItem('sesja'); } catch (e) {}
+function ekranKarta(tytul, tresc) {
+  document.getElementById('app').innerHTML = '<div class="pinbox lg" style="max-width:760px;margin:90px auto;padding:0 16px"><div class="card" style="padding:44px;border-radius:12px"><div class="sub" style="font-size:20px">Plan treningowy</div><h1 style="margin:8px 0 22px;font-size:44px">' + tytul + '</h1>' + tresc + '</div></div>';
+}
+function ekranLogowania(msg, email) {
+  ekranKarta('Zaloguj się', '<input id="lg-email" type="email" autocomplete="username" inputmode="email" placeholder="e-mail" value="' + esc(email || '') + '"><input id="lg-haslo" type="password" autocomplete="current-password" placeholder="hasło"><button class="btn" id="lg-btn">Wejdź</button><div class="err" id="lg-msg">' + esc(msg || '') + '</div><p class="mut">Nie masz jeszcze konta? <a class="lnk" onclick="ekranRejestracji()">Załóż konto</a></p><p class="mut" style="font-size:16px"><a class="lnk" onclick="hasloScreen()">Panel trenera</a></p>');
+  var go = function () { var em = document.getElementById('lg-email').value.trim(), ha = document.getElementById('lg-haslo').value; if (!em || !ha) { document.getElementById('lg-msg').textContent = 'Wpisz e-mail i hasło.'; return; } document.getElementById('lg-btn').textContent = 'Sprawdzam…'; api({ akcja: 'logowanie', email: em, haslo: ha }).then(function (r) { SESJA = r.sesja; try { localStorage.setItem('sesja', SESJA); } catch (e) {} ladowanie('Wczytuję Twój plan…'); wczytajSesja(); }).catch(function (e) { ekranLogowania(String(e.message || e), em); }); };
+  document.getElementById('lg-btn').onclick = go; document.getElementById('lg-haslo').addEventListener('keydown', function (e) { if (e.key === 'Enter') go(); });
+  (document.getElementById(email ? 'lg-haslo' : 'lg-email') || {}).focus && document.getElementById(email ? 'lg-haslo' : 'lg-email').focus();
+}
+function ekranRejestracji(msg, dane) {
+  dane = dane || {};
+  ekranKarta('Załóż konto', '<input id="rg-imie" autocomplete="name" placeholder="imię i nazwisko" value="' + esc(dane.imie || '') + '"><input id="rg-email" type="email" autocomplete="username" inputmode="email" placeholder="e-mail" value="' + esc(dane.email || '') + '"><input id="rg-haslo" type="password" autocomplete="new-password" placeholder="hasło (min. 8 znaków)"><input id="rg-haslo2" type="password" autocomplete="new-password" placeholder="powtórz hasło"><button class="btn" id="rg-btn">Załóż konto</button><div class="err" id="rg-msg">' + esc(msg || '') + '</div><p class="mut">Po założeniu konta wypełnisz krótką ankietę startową, a Kuba zatwierdzi Cię i przygotuje plan.</p><p class="mut">Masz już konto? <a class="lnk" onclick="ekranLogowania()">Zaloguj się</a></p>');
+  var go = function () {
+    var im = document.getElementById('rg-imie').value.trim(), em = document.getElementById('rg-email').value.trim(), h1 = document.getElementById('rg-haslo').value, h2 = document.getElementById('rg-haslo2').value, m = document.getElementById('rg-msg');
+    if (im.length < 2) { m.textContent = 'Podaj imię i nazwisko.'; return; } if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)) { m.textContent = 'Podaj poprawny e-mail.'; return; } if (h1.length < 8) { m.textContent = 'Hasło musi mieć co najmniej 8 znaków.'; return; } if (h1 !== h2) { m.textContent = 'Hasła się różnią.'; return; }
+    document.getElementById('rg-btn').textContent = 'Zakładam…';
+    api({ akcja: 'rejestracja', email: em, haslo: h1, imie: im }).then(function (r) { SESJA = r.sesja; try { localStorage.setItem('sesja', SESJA); } catch (e) {} ekranStatusu({ imie: im, email: em, status: r.status }); }).catch(function (e) { ekranRejestracji(String(e.message || e), { imie: im, email: em }); });
+  };
+  document.getElementById('rg-btn').onclick = go; document.getElementById('rg-haslo2').addEventListener('keydown', function (e) { if (e.key === 'Enter') go(); });
+  document.getElementById('rg-imie').focus();
+}
+function ekranStatusu(konto) {
+  var im = esc(String(konto.imie || '').split(' ')[0]), st = konto.status, t = '';
+  if (st === 'ankieta') t = '<p class="mut">Konto gotowe. Następny krok to <b style="color:var(--iv)">ankieta startowa</b>: kilka pytań o cel, zdrowie i doświadczenie, żeby plan był pod Ciebie.</p><p class="mut">Ankieta jest w przygotowaniu i pojawi się tutaj wkrótce. Kuba już widzi Twoje konto.</p>';
+  else if (st === 'czeka') t = '<p class="mut">Dzięki za ankietę. Kuba ją przegląda i zatwierdza Twoje konto. Plan pojawi się tutaj, w tym samym miejscu.</p>';
+  else if (st === 'odrzucone') t = '<p class="mut">To konto nie jest aktywne. Napisz do Kuby na Instagramie.</p>';
+  else t = '<p class="mut">Twój plan jest już gotowy.</p>';
+  ekranKarta('Cześć' + (im ? ', ' + im : '') + '!', t + '<button class="btn" id="st-btn">' + (st === 'aktywne' ? 'Otwórz plan' : 'Sprawdź ponownie') + '</button><p class="mut" style="font-size:16px;margin-top:22px"><a class="lnk" onclick="wylogujKonto()">Wyloguj</a> · ' + esc(konto.email || '') + '</p>');
+  document.getElementById('st-btn').onclick = function () { ladowanie('Sprawdzam…'); wczytajSesja(); };
+}
+function wczytajSesja() {
+  api({ akcja: 'wczytaj', sesja: SESJA }).then(function (dane) {
+    if (dane.bezPlanu) { ekranStatusu(dane.konto); return; }
+    var pierwszy = false; try { pierwszy = !localStorage.getItem('cache_sesja'); } catch (e) {}
+    AUTH = { sesja: SESJA }; D = dane; D.url = URL_STRONY; TR = false; OST_WCZYT = Date.now(); render(); if (pierwszy) kartaEkran();
+    try { localStorage.setItem('cache_sesja', JSON.stringify({ t: Date.now(), d: dane })); } catch (e) {}
+  }).catch(function (e) {
+    var msg = String(e.message || e).replace(/^Error:\s*/, '');
+    if (/sesja|zaloguj|hasło/i.test(msg)) { wylogujKonto(true); ekranLogowania(msg); return; }
+    var c = null; try { c = JSON.parse(localStorage.getItem('cache_sesja') || 'null'); } catch (x) {}
+    if (c && c.d) { AUTH = { sesja: SESJA }; D = c.d; D.url = URL_STRONY; TR = false; render(); status('Brak sieci. Pokazuję plan z ' + new Date(c.t).toLocaleString('pl-PL', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) + '. Wpisy zapiszę, gdy wróci internet.', false, true); }
+    else ekranLogowania(msg);
+  });
+}
+function wylogujKonto(cicho) {
+  var s = SESJA; SESJA = null; AUTH = null; MENU = false;
+  try { localStorage.removeItem('sesja'); localStorage.removeItem('cache_sesja'); } catch (e) {}
+  if (s && !cicho) api({ akcja: 'wyloguj', sesja: s }).catch(function () {});
+  if (!cicho) ekranLogowania();
+}
 (function start() {
   var q = new URLSearchParams(location.search), k = q.get('k');
   if (k) {
     D = { tryb: 'pin', k: k };
     var saved = null; try { saved = localStorage.getItem('pin_' + k); } catch (e) {}
     if (saved) { ladowanie('Wczytuję Twój plan…'); wczytajPin(saved); } else pinScreen();
-  } else {
-    try { HASLO = localStorage.getItem('trener_haslo'); } catch (e) {}
-    if (HASLO) { ladowanie('Wczytuję…'); wczytajTrenera(); } else hasloScreen();
+    return;
   }
+  try { HASLO = localStorage.getItem('trener_haslo'); } catch (e) {}
+  if (HASLO) { ladowanie('Wczytuję…'); wczytajTrenera(); return; }
+  if (SESJA) { ladowanie('Wczytuję Twój plan…'); wczytajSesja(); return; }
+  if (q.get('klient') != null || q.get('trener') != null) hasloScreen(); else ekranLogowania();
 })();
 </script></body></html>
