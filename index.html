@@ -69,6 +69,9 @@ tr.sum td{background:var(--head);border-top:2px solid var(--gm);font-weight:700;
 .hb .kv{display:flex;gap:18px;flex-wrap:wrap;padding:8px 14px;font-size:12px;color:var(--ivd)}.hb .kv b{color:var(--iv)}
 .btn.warnb{background:linear-gradient(180deg,#8E3140,#6E2231 60%,#4A1520);color:#fff;border-color:#C9A455}
 /* ---------- tryb planowania ---------- */
+.grid.g8{grid-template-columns:repeat(8,1fr);gap:8px;padding:10px 12px 4px}.g8 .tile{padding:8px 8px 8px;padding-right:30px;min-height:0}.g8 .tile b{font-size:20px}.g8 .tile b input{width:48px;font-size:20px}.g8 .tile span{font-size:11px;line-height:1.2}.g8 .tile small{font-size:11px;margin-top:2px}.g8 .tile small textarea{line-height:1.25;min-height:15px}.g8 .chk{width:20px;height:20px;line-height:16px;font-size:13px;top:6px;right:6px}.g8 .prio{margin-top:6px;gap:4px}.g8 .prio i{width:18px;height:18px}
+.pm-sekcja{display:flex;align-items:center;gap:10px;padding:10px 14px 0;font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gl)}.pm-sekcja .mut{font-weight:500;letter-spacing:0;text-transform:none;font-size:12px}
+.pm-sekcja .step{display:inline-block;width:22px;height:22px;border-radius:50%;background:linear-gradient(180deg,#E6CB80,#C9A455 55%,#8E6B2E);color:#0E0E12;text-align:center;line-height:22px;font-size:12px;font-weight:800;border:1px solid #F5E3A6}
 .pm{width:100%}.pm th{font-size:10px;padding:6px 4px}.pm th.tt{font-size:11px;letter-spacing:1px;border-bottom:1px solid var(--line)}
 .pm td{padding:3px 4px;font-size:13px}.pm td.pn{text-align:left;font-weight:700;padding-left:10px;color:#fff;text-shadow:0 0 3px #000;white-space:nowrap}
 .pm td.pl{color:var(--gl);font-weight:800;font-size:14px;background:var(--head)}
@@ -145,7 +148,7 @@ function INSTR() { return [
  ['Jak czytać zapis tempa, np. x211', '1. <b>x</b>: ruch koncentryczny (skrócenie mięśnia) jak najszybciej, przy poprawnej technice,\n2. <b>2</b>: ruch ekscentryczny (opuszczanie) przez 2 sekundy,\n3. <b>1</b>: pauza 1 sekunda w maksymalnym skróceniu,\n4. <b>1</b>: pauza 1 sekunda w maksymalnym rozciągnięciu.'],
  ['Legenda', '<b>SS</b> = super seria: dwa ćwiczenia z tym samym numerem robisz jedno po drugim, bez przerwy.\n<b>DS</b> = drop set: po ostatniej serii od razu zmniejszasz ciężar i robisz kolejną.']
 ]; }
-var open = { t: {}, waz: false, zal: false, obj: TR, ins: {} , part: {}, plan: false, hist: false, hb: {} };
+var open = { t: {}, waz: false, zal: false, obj: TR, ins: {} , part: {}, plan: TR, hist: false, hb: {} };
 var SEL = {}, SHOW_TYP = false; // kolumna Typ schowana: kolor ustawia „Pokoloruj zaznaczone”
 var NAZWY_BAZA = ['Wyciskanie sztangi leżąc', 'Wyciskanie hantli leżąc', 'Wyciskanie hantli na ławce skośnej', 'Rozpiętki Butterfly', 'Rozpiętki hantlami', 'Rozpiętka dośrodkowa (cz. G)', 'Pompki na poręczach', 'Wyciskanie francuskie', 'Overhead extension', 'Prostowanie ramion na wyciągu', 'Allahy (skrócenie)', 'Wznosy hantli bokiem', 'Wznosy hantlami na bok barku 90°', 'Wznosy T.B wyciąg', 'Wyciskanie hantli nad głowę', 'Wznosy przodem', 'Odwrotne rozpiętki', 'Face pull', 'Podciąganie na drążku', 'Ściąganie drążka wyciągu górnego', 'Wiosłowanie sztangą', 'Wiosłowanie hantlem', 'Wiosłowanie na wyciągu siedząc', 'Uginanie ramion ze sztangą', 'Uginanie hantli siedząc', 'Uginanie młotkowe', 'Uginanie na modlitewniku', 'Zawijanie miednicy w zwisie', 'Unoszenie nóg w zwisie', 'Plank', 'Allahy', 'Uginanie nadgarstków', 'Martwy ciąg', 'Martwy ciąg rumuński', 'Hip thrust', 'Przysiad ze sztangą', 'Przysiad bułgarski', 'Wykroki', 'Wypychanie na suwnicy', 'Prostowanie nóg na maszynie', 'Uginanie nóg leżąc', 'Uginanie nóg siedząc', 'Przywodzenie nóg na maszynie', 'Odwodzenie nóg na maszynie', 'Wspięcia na palce stojąc', 'Wspięcia na palce siedząc', 'Cardio 45 min', 'Cardio 30 min'];
 var mobT = 1;
@@ -206,7 +209,8 @@ document.addEventListener('keydown', function (e) {
   var tile = el.closest('.tile');
   if (tile) {
     var wsz = Array.prototype.slice.call(document.querySelectorAll('.grid .tile [data-f="' + el.dataset.f + '"]')), i = wsz.indexOf(el);
-    var krok = k === 'ArrowRight' || k === 'Enter' ? 1 : k === 'ArrowLeft' ? -1 : k === 'ArrowDown' ? 4 : -4;
+    var kol = tile.closest('.grid.g8') ? 8 : 4;
+    var krok = k === 'ArrowRight' || k === 'Enter' ? 1 : k === 'ArrowLeft' ? -1 : k === 'ArrowDown' ? kol : -kol;
     cel = wsz[i + krok];
   } else {
     var td = el.closest('td'), tr = td && td.closest('tr');
@@ -276,7 +280,7 @@ function render() {
     html += '<div class="legend"><span><i class="leg GOLD" onclick="tip(\'P\',event)"></i>Priorytet ' + I('P') + '</span><span><i class="leg NAVY" onclick="tip(\'N\',event)"></i>Neutral ' + I('N') + '</span><span><i class="leg BORDO" onclick="tip(\'U\',event)"></i>Utrzymanie ' + I('U') + '</span><span class="hint">Wszystko ze znaczkiem <i class="inf">i</i> możesz kliknąć. Pokaże się krótki opis: co to znaczy i jak z tym pracować.</span></div></div>';
   }
   html += wazenia();
-  html += '</div><div>' + (TR ? objetosc() : '') + zalecenia() + (TR ? historiaSekcja() : '') + '</div></div>';
+  html += '</div><div>' + zalecenia() + (TR ? historiaSekcja() : '') + '</div></div>';
   html += '<div class="igrid desk">' + INSTR().map(function (x, i) { return open.ins[i] ? '<div class="card"><h2 class="metal"><span class="ttl" onclick="tog(\'ins\',' + i + ')" style="font-size:15px">▾ &nbsp;' + esc(x[0]) + '</span></h2><div class="ibody">' + x[1] + '</div></div>' : '<div class="acc" style="margin:0" onclick="tog(\'ins\',' + i + ')"><span class="chev">▸</span>' + esc(x[0]) + '</div>'; }).join('') + '</div>';
   html += '<div class="mob" style="padding:0 10px 30px">' + INSTR().map(function (x, i) { return open.ins[i] ? '<div class="card"><h2 class="metal"><span class="ttl" onclick="tog(\'ins\',' + i + ')" style="font-size:14px">▾ &nbsp;' + esc(x[0]) + '</span></h2><div class="ibody">' + x[1] + '</div></div>' : '<div class="acc" onclick="tog(\'ins\',' + i + ')"><span class="chev">▸</span>' + esc(x[0]) + '</div>'; }).join('') + '</div>';
   app.innerHTML = html + (TR ? datalist() : '');
@@ -313,17 +317,15 @@ function partieTreningu(t) {
 }
 function serieP(p) { var s = 0; for (var t = 1; t <= 5; t++) if (wTr(p, t)) s += n(p['t' + t + '_r']) + n(p['t' + t + '_s']); return s; }
 function rozpisane(p) { var s = serieP(p); return p.plan ? s + ' / ' + p.plan : '–'; }
-function objetosc() {
-  var st = statPlan();
-  if (!open.obj) return '<div class="acc" onclick="tog(\'obj\')"><span class="chev">▸</span>Objętość na partię · 16 partii<span class="cnt">' + st.serie + ' serii · plan rozpisany ' + st.roz + ' / ' + st.plan + '</span></div>';
-  var out = '<div class="card"><h2 class="metal"><span class="ttl" onclick="tog(\'obj\')">▾ &nbsp;Objętość na partię · 16 partii</span></h2><div class="grid">';
+function kafelki() {
+  var out = '<div class="grid g8">';
   D.partieLista.forEach(function (name) {
     var p = D.partie.filter(function (x) { return x.partia === name; })[0]; if (!p) return;
     var pr = prio(name), kl = klasaP(p), wyk = p.wykorzystane === true || p.wykorzystane === 'TRUE' || p.wykorzystane === 'true';
     var szara = nieuzyta(p);
     out += '<div class="tile ' + pr + ' ' + kl + '" data-p="' + esc(name) + '"' + (szara ? ' title="Partia niewykorzystana w tym bloku (plan 0 / X)"' : '') + '><i class="chk ' + (wyk ? 'on' : '') + '" title="wykorzystane w planie" onclick="togWyk(\'' + esc(name) + '\')">' + (wyk ? '✓' : '') + '</i><b><input data-f="plan" inputmode="numeric" value="' + esc(p.plan) + '" placeholder="–"></b><span>' + esc(name) + '</span><small>Region: <textarea data-f="region" rows="1" placeholder="do ustalenia">' + esc(p.region) + '</textarea></small><div class="prio"><i class="GOLD ' + (pr === 'P' ? 'on' : '') + '" title="Priorytet" onclick="setPrio(\'' + esc(name) + '\',\'P\')"></i><i class="NAVY ' + (pr === 'N' ? 'on' : '') + '" title="Neutral" onclick="setPrio(\'' + esc(name) + '\',\'N\')"></i><i class="BORDO ' + (pr === 'U' ? 'on' : '') + '" title="Utrzymanie" onclick="setPrio(\'' + esc(name) + '\',\'U\')"></i></div></div>';
   });
-  out += '</div><div class="mut" style="padding:0 12px 12px;font-size:12px">Plan (serie na tydzień) i region wpisujesz tu, kolor kafelka to priorytet partii: kliknij kwadrat (złoto = Priorytet, granat = Neutral, bordo = Utrzymanie). Kratka w rogu = partia wykorzystana. Plan 0 albo X = partia szara, niewykorzystana w tym bloku. Rozpisanie serii na treningi jest w trybie planowania. Strzałki przenoszą między kafelkami ' + I('strzalki') + '</div></div>';
+  out += '</div><div class="mut" style="padding:4px 14px 6px;font-size:12px">Plan = serie na tydzień. Kolor kafelka = priorytet partii: kliknij kwadrat (złoto Priorytet, granat Neutral, bordo Utrzymanie). Kratka w rogu = partia wykorzystana. Plan 0 albo X = partia szara, niewykorzystana w tym bloku. Strzałki przenoszą między kafelkami ' + I('strzalki') + '</div>';
   return out;
 }
 function historiaSekcja() {
@@ -380,9 +382,12 @@ function statPlan() {
 function serie_(t) { return serie(t); }
 function planowanie() {
   var akt = aktywne();
-  if (!open.plan) return '<div class="acc" onclick="tog(\'plan\')"><span class="chev">▸</span>Tryb planowania · partie × treningi<span class="cnt">16 partii · ' + akt + ' treningów</span></div>';
-  var out = '<div class="card"><h2 class="metal"><span class="ttl" onclick="tog(\'plan\')">▾ &nbsp;Tryb planowania · partie × treningi</span><span class="pbtn" style="cursor:default">' + I('plan') + ' &nbsp;najpierw partie, potem serie</span></h2>';
-  out += '<table class="pm"><tr><th class="l tt" rowspan="2">Partia</th><th class="tt" rowspan="2">Plan</th>';
+  var st = statPlan();
+  if (!open.plan) return '<div class="acc" onclick="tog(\'plan\')"><span class="chev">▸</span>Tryb planowania · objętość i partie × treningi<span class="cnt">' + st.serie + ' serii/tydz. · plan rozpisany ' + st.roz + ' / ' + st.plan + ' · ' + akt + ' treningów</span></div>';
+  var out = '<div class="card"><h2 class="metal"><span class="ttl" onclick="tog(\'plan\')">▾ &nbsp;Tryb planowania</span><span class="pbtn" style="cursor:default">' + I('plan') + ' &nbsp;1. plan i priorytet partii · 2. partie do treningów · 3. serie</span></h2>';
+  out += '<div class="pm-sekcja"><span class="step">1</span>Objętość na partię · 16 partii<span class="mut">plan serii na tydzień, region, priorytet</span></div>' + kafelki();
+  out += '<div class="pm-sekcja" style="padding-top:6px"><span class="step">2</span>Partie × treningi<span class="mut">kratka „w tr.” przypisuje partię, potem Rozc. i Skr.</span></div>';
+  out += '<table class="pm" style="margin-top:8px"><tr><th class="l tt" rowspan="2">Partia</th><th class="tt" rowspan="2">Plan</th>';
   for (var t = 1; t <= 5; t++) out += '<th class="tt sep" colspan="3"' + (t > akt ? ' style="color:#6F6656"' : '') + '>Trening ' + t + (t > akt ? ' · nieakt.' : '') + '</th>';
   out += '<th class="tt sep" rowspan="2">Rozpisane</th></tr><tr>';
   for (var t2 = 1; t2 <= 5; t2++) out += '<th class="sep">w tr.</th><th>Rozc.</th><th>Skr.</th>';
