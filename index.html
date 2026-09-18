@@ -317,6 +317,7 @@ function przywrocFokus(f) {
 function render() {
   var app = document.getElementById('app');
   var fokus = zapamietajFokus();
+  if (TR && open.planAuto == null) { open.planAuto = true; open.plan = true; } // wersja hostowana: TR znane dopiero po wczytaniu
   var akt = aktywne();
   var blok = Math.max(1, Math.min(8, n(U('blok')) || 6)), zal = n(U('zaliczone'));
   var w = ostWaga(); var last = w.length ? n(w[w.length - 1].waga) : null, prev = w.length > 1 ? n(w[w.length - 2].waga) : null;
