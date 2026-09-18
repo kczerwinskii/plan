@@ -8,6 +8,14 @@ table{border-collapse:collapse;width:100%;margin-top:14px}th{color:#E6CB80;text-
 a{color:#E6CB80}input{background:#1A1A24;color:#EFE9DA;border:1px solid #4A4A5A;border-radius:6px;padding:8px 10px;font:14px Poppins}
 button{background:linear-gradient(180deg,#E6CB80,#C9A455 55%,#8E6B2E);color:#0E0E12;border:1px solid #F5E3A6;border-radius:6px;padding:8px 16px;font:600 14px Poppins;cursor:pointer}
 button.szary{background:#1A1A24;color:#EFE9DA;border:1px solid #4A4A5A}.mut{color:#B9AE94;font-size:13px}.pin{font:800 20px Poppins;color:#E6CB80}
+.box{max-width:1100px}
+.pk{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin-top:14px}
+.k{background:linear-gradient(180deg,#2A2A36,#1B1B22);border:1px solid #C9A455;border-radius:8px;padding:14px 16px;position:relative}.k h2{margin:0 0 2px;font-size:18px;color:#fff}.k h2 small{display:block;font-size:12px;color:#B9AE94;font-weight:400}.k .cel{font-size:13px;color:#E6CB80;margin:6px 0 10px;min-height:18px}
+.k .st{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.k .st div{background:#14141C;border:1px solid #4A4A5A;border-radius:6px;padding:8px 6px;text-align:center}.k .st b{display:block;font-size:18px;color:#E6CB80}.k .st span{font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:#B9AE94}
+.k .bd{position:absolute;top:12px;right:12px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:10px;border:1px solid rgba(255,255,255,.3)}.bd.ok{background:linear-gradient(180deg,#2E3F66,#161F36);color:#fff}.bd.al{background:linear-gradient(180deg,#8E3140,#6E2231 60%,#4A1520);color:#fff}.bd.new{background:linear-gradient(180deg,#E6CB80,#C9A455 55%,#8E6B2E);color:#0E0E12}
+.k .ln{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}.k .ln a,.k .ln button{font-size:12px;padding:5px 10px}.k .ln .pin{font-size:16px}.k .wk{display:flex;gap:3px;margin-top:6px}.k .wk i{width:14px;height:14px;border:1px solid #C9A455;border-radius:3px;background:#1E1E28;display:inline-block}.k .wk i.on{background:linear-gradient(180deg,#E6CB80,#C9A455 55%,#8E6B2E)}
+.k .ws{font-size:12px;color:#B9AE94;margin-top:8px;line-height:1.5}.k .ws b{color:#EFE9DA}.k .ws .warn{color:#E0684A;font-weight:700}
+.dod{margin-top:22px;border-top:1px solid #4A4A5A;padding-top:14px}
 </style></head><body><div class="box" id="box"><h1>Podopieczni</h1><div id="tresc" class="mut">Wczytuję…</div></div>
 <script>var API_URL = "https://script.google.com/macros/s/AKfycbz48qRxFlyvGcVBSltMbjR8kfuQNCbq-8a5g2gYG7oJgtWiU2ZJ-HLEyux6WGc_Xesq1Q/exec";</script>
 <script>
@@ -22,20 +30,32 @@ function pokazHaslo(msg) {
 }
 function wczytaj() {
   if (!HASLO) return pokazHaslo();
-  api({ akcja: 'trener' }).then(function (d) { try { localStorage.setItem('trener_haslo', HASLO); } catch (e) {} rysuj(d.lista); }).catch(function (e) { try { localStorage.removeItem('trener_haslo'); } catch (x) {} HASLO = null; pokazHaslo(e.message); });
+  document.getElementById('tresc').textContent = 'Wczytuję podopiecznych…';
+  api({ akcja: 'pulpit' }).then(function (lista) { try { localStorage.setItem('trener_haslo', HASLO); } catch (e) {} rysuj(lista); }).catch(function (e) { try { localStorage.removeItem('trener_haslo'); } catch (x) {} HASLO = null; pokazHaslo(e.message); });
 }
+function dni(iso) { if (!iso) return null; var d = new Date(String(iso).slice(0, 10)); if (isNaN(d)) return null; return Math.floor((Date.now() - d.getTime()) / 86400000); }
+function fmt(v) { return v === '' || v == null ? '–' : String(v).replace('.', ','); }
 function rysuj(lista) {
-  var h = '<div class="mut">Wyślij podopiecznemu link i PIN (np. na Messengerze). Klika link, wpisuje PIN raz, telefon go pamięta. „Nowy link” unieważnia stary. <a href="' + esc(BAZA) + '">← do planu</a></div>';
-  h += '<table><tr><th>Imię</th><th>E-mail</th><th>Link dla podopiecznego</th><th>PIN</th><th></th></tr>';
+  var h = '<div class="mut">Pulpit: jeden rzut oka, kto zalega. Czerwona plakietka = od ponad 8 dni bez ważenia i bez raportu, albo raport czeka na odpowiedź. <a href="' + esc(BAZA) + '">← do planu</a></div><div class="pk">';
   lista.forEach(function (k) {
-    var link = BAZA + '?k=' + k.token;
-    h += '<tr><td><b>' + esc(k.imie) + '</b><br><a href="' + esc(BAZA) + '?klient=' + esc(k.bazaId) + '">otwórz jako trener →</a></td><td>' + esc(k.email) + '</td><td><input readonly value="' + esc(link) + '" style="width:100%;font-size:11px" onclick="this.select()"><br><button class="kop" style="margin-top:6px;padding:4px 10px;font-size:12px" data-l="' + esc(link) + '">kopiuj link</button></td><td class="pin">' + esc(k.pin) + '</td><td><button class="szary nowy" style="padding:4px 10px;font-size:12px" data-b="' + esc(k.bazaId) + '">nowy link</button></td></tr>';
+    var link = BAZA + '?k=' + k.token, dw = dni(k.wagaData), dr = dni(k.raportOst);
+    var ostatni = Math.min(dw == null ? 999 : dw, dr == null ? 999 : dr);
+    var zalega = ostatni > 8, bezOdp = (k.raportBezOdp || 0) > 0;
+    var badge = k.blad ? '<span class="bd al">błąd bazy</span>' : bezOdp ? '<span class="bd new">raport czeka na odpowiedź</span>' : zalega ? '<span class="bd al">' + (ostatni === 999 ? 'brak wpisów' : ostatni + ' dni bez wpisu') + '</span>' : '<span class="bd ok">aktywny</span>';
+    var blok = parseInt(k.blok, 10) || 0, zal = parseInt(k.zaliczone, 10) || 0, wk = ''; for (var i = 0; i < blok; i++) wk += '<i class="' + (i < zal ? 'on' : '') + '"></i>';
+    var dwaga = (k.waga !== '' && k.wagaStart !== '' && k.waga != null) ? (parseFloat(k.waga) - parseFloat(k.wagaStart)) : null;
+    h += '<div class="k">' + badge + '<h2>' + esc(k.imie) + '<small>' + esc(k.email) + (k.klub ? ' · ' + esc(k.klub) : '') + '</small></h2><div class="cel">' + (k.cel ? 'Cel: ' + esc(k.cel) : '<span class="mut">bez celu</span>') + '</div>';
+    h += '<div class="st"><div><b>' + (blok ? zal + ' / ' + blok : '–') + '</b><span>tydzień bloku</span></div><div><b>' + fmt(k.waga) + (k.waga !== '' && k.waga != null ? ' kg' : '') + '</b><span>waga' + (dwaga != null && dwaga !== 0 ? ' (' + (dwaga > 0 ? '+' : '') + fmt(dwaga.toFixed(1)) + ')' : '') + '</span></div><div><b>' + (k.cwPlan ? k.cwWpisane + ' / ' + k.cwPlan : '–') + '</b><span>ćw. wpisane</span></div></div>';
+    if (blok) h += '<div class="wk">' + wk + '</div>';
+    h += '<div class="ws">ostatnie ważenie: <b>' + (k.wagaData ? esc(k.wagaData) + ' (' + dw + ' dni)' : '<span class="warn">brak</span>') + '</b><br>ostatni raport: <b>' + (k.raportOst ? 'tydz. ' + esc(k.raportTyg) + ' · ' + esc(String(k.raportOst).slice(0, 10)) + (bezOdp ? ' <span class="warn">· bez odpowiedzi</span>' : '') : '<span class="warn">brak</span>') + '</b>' + (k.hist ? '<br>zamknięte bloki: <b>' + k.hist + '</b>' : '') + '</div>';
+    h += '<div class="ln"><a href="' + esc(BAZA) + '?klient=' + esc(k.bazaId) + '"><button>otwórz plan →</button></a><span class="pin" title="PIN podopiecznego">PIN ' + esc(k.pin) + '</span><button class="szary kop" data-l="' + esc(link) + '">kopiuj link</button><button class="szary kop2" data-l="' + esc(link) + '" data-p="' + esc(k.pin) + '" data-i="' + esc(String(k.imie || '').split(' ')[0]) + '">kopiuj wiadomość</button><button class="szary nowy" data-b="' + esc(k.bazaId) + '">nowy link</button></div></div>';
   });
-  h += '</table><h1 style="font-size:16px;margin-top:22px">Dodaj podopiecznego</h1><div style="display:flex;gap:8px;flex-wrap:wrap"><input id="imie" placeholder="Imię i nazwisko"><input id="mail" placeholder="e-mail (tylko dla Ciebie)"><button id="dodaj">Dodaj i utwórz bazę</button></div><div class="mut" style="margin-top:8px">Nowa baza to pusty plan z 16 partiami. Podopieczny wchodzi linkiem i PIN-em, e-mail jest tylko notatką dla Ciebie.</div><div id="msg" class="mut" style="margin-top:8px"></div><div class="mut" style="margin-top:18px"><a href="#" id="wyloguj">wyloguj trenera na tym urządzeniu</a></div>';
+  h += '</div><div class="dod"><h1 style="font-size:16px">Dodaj podopiecznego</h1><div style="display:flex;gap:8px;flex-wrap:wrap"><input id="imie" placeholder="Imię i nazwisko"><input id="mail" placeholder="e-mail (tylko dla Ciebie)"><button id="dodaj">Dodaj i utwórz bazę</button></div><div class="mut" style="margin-top:8px">Nowa baza to pusty plan z 16 partiami. Podopieczny wchodzi linkiem i PIN-em, e-mail jest tylko notatką dla Ciebie.</div><div id="msg" class="mut" style="margin-top:8px"></div><div class="mut" style="margin-top:18px"><a href="#" id="wyloguj">wyloguj trenera na tym urządzeniu</a></div></div>';
   var t = document.getElementById('tresc'); t.innerHTML = h;
   t.addEventListener('click', function (e) {
     var b = e.target;
     if (b.classList.contains('kop')) { navigator.clipboard.writeText(b.dataset.l); b.textContent = 'skopiowano'; }
+    if (b.classList.contains('kop2')) { var txt = 'Cześć' + (b.dataset.i ? ' ' + b.dataset.i : '') + '! Tu jest Twój plan treningowy:\n' + b.dataset.l + '\nPIN: ' + b.dataset.p + '\nOtwórz link w Safari lub Chrome, wpisz PIN raz, telefon go zapamięta. Potem możesz dodać stronę do ekranu głównego, żeby mieć ją pod ikonką.'; navigator.clipboard.writeText(txt); b.textContent = 'skopiowano'; }
     if (b.classList.contains('nowy')) { if (confirm('Stary link i PIN przestaną działać. Wygenerować nowe?')) api({ akcja: 'nowyLink', bazaId: b.dataset.b }).then(wczytaj).catch(function (er) { alert(er.message); }); }
     if (b.id === 'wyloguj') { e.preventDefault(); try { localStorage.removeItem('trener_haslo'); } catch (x) {} HASLO = null; pokazHaslo(); }
   });
