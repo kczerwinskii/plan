@@ -93,17 +93,33 @@ td.act{background:var(--card)!important;border-color:var(--line)!important;paddi
 .weeks select.c{background:var(--card);color:var(--gl);border:1px solid var(--gm);border-radius:4px;font:700 15px Poppins;padding:2px 6px;width:auto}
 .sub input{background:transparent;border:0;border-bottom:1px dashed var(--gm);color:var(--gm);font:inherit;letter-spacing:2px;text-transform:uppercase;width:120px}.sub input:focus{outline:0}
 /* ---------- telefon ---------- */
-@media (max-width:760px){
- .top{padding:12px 14px;gap:12px}.top h1{font-size:16px}h1 input{width:100%}.kpi{margin-left:0;width:100%;justify-content:space-between}.kpi div{min-width:0;flex:1;padding:8px 6px}.kpi b{font-size:17px}.kpi span{font-size:10px}.pal{display:none}
- .wrap{grid-template-columns:1fr;padding:12px;gap:12px}.igrid{grid-template-columns:1fr;padding:0 12px 12px;gap:10px}.card h2 .ttl{font-size:15px}
+body.prosty .top{padding:12px 14px;gap:12px}.top h1{font-size:16px}h1 input{width:100%}.kpi{margin-left:0;width:100%;justify-content:space-between}.kpi div{min-width:0;flex:1;padding:8px 6px}.kpi b{font-size:17px}.kpi span{font-size:10px}.pal{display:none}
+body.prosty .wrap{grid-template-columns:1fr;padding:12px;gap:12px}body.prosty .igrid{grid-template-columns:1fr;padding:0 12px 12px;gap:10px}body.prosty .card h2 .ttl{font-size:15px}
  .mcard{margin:0 10px 12px;border-radius:8px;overflow:hidden;border:1px solid rgba(255,255,255,.25)}.mh{display:flex;align-items:center;gap:10px;padding:10px 12px;font-size:15px;font-weight:700;color:#fff;text-shadow:0 0 3px #000}.mh b{flex:1}.mn{width:24px;height:24px;border-radius:50%;background:rgba(0,0,0,.35);text-align:center;line-height:24px;font-size:12px;font-weight:700}
  .mm{display:flex;gap:6px;padding:8px 12px;background:#1A1A24;font-size:12px;flex-wrap:wrap}.mm span{background:#2A2A36;border:1px solid #4A4A5A;border-radius:10px;padding:2px 9px;color:var(--gl);font-weight:600}
  .mr{display:flex;gap:8px;padding:10px 12px;background:var(--card)}.mr input{flex:1;height:46px;border-radius:6px;border:2px solid var(--gm);background:#F4EFE0;color:#0E0E12;font:700 18px Poppins;text-align:center;min-width:0}
  .mw{display:flex;gap:8px;padding:0 12px 12px;background:var(--card)}.mw label{flex:1;font-size:11px;color:var(--ivd)}.mw input{display:block;width:100%;height:38px;border-radius:6px;border:1px solid var(--line);background:#1A1A24;color:var(--iv);font:600 14px Poppins;padding:0 10px;margin-top:3px}.mw label.kg input{color:var(--gl);font-weight:800}
- .legend{gap:14px;font-size:14px;padding:10px}.leg{width:24px;height:24px;vertical-align:-7px}.hint{font-size:12px}
- .desk{display:none!important}
-}
-@media (min-width:761px){.mob{display:none!important}}
+body.prosty .legend{gap:14px;font-size:14px;padding:10px}body.prosty .leg{width:24px;height:24px;vertical-align:-7px}body.prosty .hint{font-size:12px}
+body.prosty .desk{display:none!important}
+body:not(.prosty) .mob{display:none!important}
+body.prosty h1{white-space:normal;font-size:15px;line-height:1.3}body.prosty .kpi b{white-space:nowrap;font-size:15px}body.prosty .kpi em{font-size:15px}body.prosty .kpi small{font-size:11px}body.prosty .weeks span{font-size:13px}body.prosty .wk{width:26px;height:26px;line-height:22px;font-size:15px}body.prosty .kpi{margin-left:0;width:100%;justify-content:space-between}body.prosty .kpi div{min-width:0;flex:1;padding:8px 6px}body.prosty .kpi b{font-size:17px}body.prosty .kpi span{font-size:10px}body.prosty .pal{display:none}body.prosty .top h1{font-size:16px}
+/* pasek: menu ≡ + przełącznik trybu */
+.bar{display:flex;align-items:center;gap:12px;padding:6px 14px;background:#14141C;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:45}
+.bar .hb3{width:36px;height:32px;border:1px solid var(--gm);border-radius:6px;background:linear-gradient(180deg,#2A2A36,#0E0E12);color:var(--gl);font-size:18px;line-height:30px;text-align:center;cursor:pointer;user-select:none}
+.bar .ttx{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gm);font-weight:600;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sw{display:flex;border:1px solid var(--gm);border-radius:6px;overflow:hidden;font-size:12px;font-weight:700}.sw span{padding:6px 12px;cursor:pointer;color:var(--ivd);background:#1A1A24;user-select:none}.sw span.on{background:linear-gradient(180deg,#E6CB80,#C9A455 55%,#8E6B2E);color:#0E0E12}
+.menu{position:fixed;left:0;top:0;bottom:0;width:min(320px,86vw);background:linear-gradient(180deg,#2A2A36,#1B1B22 60%,#0E0E12);border-right:2px solid var(--gm);z-index:70;padding:14px 0;overflow:auto;box-shadow:6px 0 24px rgba(0,0,0,.6)}
+.menu .mtt{padding:6px 18px 12px;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gm);font-weight:700;display:flex;align-items:center}.menu .mtt .x{margin-left:auto;cursor:pointer;color:var(--iv);font-size:18px}
+.menu .mi{display:block;padding:11px 18px;font-size:15px;font-weight:600;color:var(--iv);border-left:4px solid transparent;cursor:pointer}.menu .mi:hover{background:rgba(255,255,255,.05);border-left-color:var(--gm)}.menu .mi small{display:block;font-size:11px;color:var(--ivd);font-weight:500}
+.menu .mgr{padding:12px 18px 4px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ivd)}
+.tlo{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:65}
+body.prosty .bar .ttx{font-size:11px}
+/* karty „Dziś”: zrobione + minutnik */
+.mcard.done{opacity:.55}.mcard.done .mh b::after{content:' ✓';color:var(--gl)}
+.mt{display:flex;gap:8px;align-items:center;padding:0 12px 10px;background:var(--card)}.mt button{flex:1;height:40px;border-radius:6px;border:1px solid var(--gm);background:linear-gradient(180deg,#2A2A36,#0E0E12);color:var(--gl);font:700 14px Poppins;cursor:pointer}.mt button.run{background:linear-gradient(180deg,#2E3F66,#161F36);color:#fff;border-color:#F5E3A6}.mt button.end{background:linear-gradient(180deg,#E6CB80,#C9A455 55%,#8E6B2E);color:#0E0E12}
+/* ekrany PIN / hasło / karta ekranu w trybie prostym */
+body.prosty .pinbox{margin:40px auto!important}body.prosty .pinbox .card{padding:22px!important}body.prosty .pinbox h1{font-size:26px!important;margin:4px 0 12px!important}body.prosty .pinbox p{font-size:15px!important;margin:0 0 12px!important}body.prosty .pinbox input{height:60px!important;font-size:30px!important;letter-spacing:12px!important}body.prosty .pinbox input[type=password]{letter-spacing:4px!important;font-size:22px!important}body.prosty .pinbox button{height:52px!important;font-size:18px!important;margin-top:12px!important}body.prosty .pinbox div[id$=msg]{font-size:14px!important}body.prosty .pinbox .sub{font-size:12px!important}
+body.prosty #a2hs>div{padding:14px!important;font-size:14px!important}body.prosty #a2hs b{font-size:17px!important}body.prosty #a2hs button{height:44px!important;font-size:14px!important;padding:0 16px!important}body.prosty #a2hs>div>div>div{min-width:0!important}
 </style></head><body>
 <div id="app"></div>
 <div id="tipbox" class="tip hidden"><span class="x" onclick="hideTip()">✕</span><div id="tipc"></div></div>
@@ -149,7 +165,44 @@ function INSTR() { return [
  ['Legenda', '<b>SS</b> = super seria: dwa ćwiczenia z tym samym numerem robisz jedno po drugim, bez przerwy.\n<b>DS</b> = drop set: po ostatniej serii od razu zmniejszasz ciężar i robisz kolejną.']
 ]; }
 var open = { t: {}, waz: false, zal: false, obj: TR, ins: {} , part: {}, plan: TR, hist: false, hb: {} };
-var SEL = {}, SHOW_TYP = false; // kolumna Typ schowana: kolor ustawia „Pokoloruj zaznaczone”
+var SEL = {}, SHOW_TYP = false;
+// tryb: 'prosty' (karty, telefon) albo 'pelny' (tabele); zapamiętany w localStorage, domyślnie po szerokości ekranu
+var TRYB = (function () { var z = null; try { z = localStorage.getItem('tryb'); } catch (e) {} if (z === 'prosty' || z === 'pelny') return z; var coarse = false; try { coarse = window.matchMedia('(pointer: coarse)').matches; } catch (e) {} var sw = window.screen ? window.screen.width : 1920; return (coarse && sw < 1000) || sw < 600 ? 'prosty' : 'pelny'; })();
+var MENU = false;
+function ustawTryb(t, zapisz) {
+  TRYB = t; if (zapisz) { try { localStorage.setItem('tryb', t); } catch (e) {} }
+  document.body.classList.toggle('prosty', t === 'prosty');
+  var vp = document.querySelector('meta[name=viewport]'); if (!vp) { vp = document.createElement('meta'); vp.name = 'viewport'; document.head.appendChild(vp); }
+  vp.setAttribute('content', t === 'prosty' ? 'width=device-width, initial-scale=1, maximum-scale=1' : 'width=1280');
+}
+ustawTryb(TRYB, false);
+function zmienTryb(t) { if (t === TRYB) return; ustawTryb(t, true); MENU = false; if (D && D.cwiczenia) render(); else if (document.getElementById('pin') || document.getElementById('haslo')) { /* ekran logowania: tylko CSS */ } window.scrollTo(0, 0); }
+function pasek() {
+  var imie = D && D.klient && D.klient.imie ? ' · ' + esc(D.klient.imie) : '';
+  return '<div class="bar"><span class="hb3" onclick="togMenu()" title="Menu: skok do sekcji">≡</span><span class="ttx">Plan treningowy' + imie + '</span><span class="sw" title="Prosty = karty, jedna rzecz na ekranie. Pełny = tabele, wszystko naraz."><span class="' + (TRYB === 'prosty' ? 'on' : '') + '" onclick="zmienTryb(\'prosty\')">Prosty</span><span class="' + (TRYB === 'pelny' ? 'on' : '') + '" onclick="zmienTryb(\'pelny\')">Pełny</span></span></div>';
+}
+function togMenu() { MENU = !MENU; rysujMenu(); }
+function rysujMenu() {
+  var old = document.getElementById('menu'); if (old) old.remove(); var tlo = document.getElementById('tlo'); if (tlo) tlo.remove();
+  if (!MENU) return;
+  var akt = aktywne(), h = '<div class="tlo" id="tlo" onclick="togMenu()"></div><div class="menu" id="menu"><div class="mtt">Menu<span class="x" onclick="togMenu()">✕</span></div>';
+  h += '<div class="mgr">Treningi</div>';
+  for (var t = 1; t <= akt; t++) h += '<span class="mi" onclick="idz(\'t\',' + t + ')">Trening ' + t + (U('nazwa_t' + t) ? '<small>' + esc(U('nazwa_t' + t)) + '</small>' : '<small>' + cw(t).length + ' ćwiczeń · ' + serie(t) + ' serii</small>') + '</span>';
+  if (TR) h += '<div class="mgr">Trener</div><span class="mi" onclick="idz(\'plan\')">Tryb planowania<small>objętość, partie × treningi</small></span><span class="mi" onclick="idz(\'hist\')">Historia bloków</span>';
+  h += '<div class="mgr">Ciało i dieta</div><span class="mi" onclick="idz(\'waz\')">Ważenia i kalorie' + (ostWaga().length ? '<small>ostatnie ' + fmt(ostWaga().slice(-1)[0].waga) + ' kg</small>' : '') + '</span><span class="mi" onclick="idz(\'zal\')">Zalecenia i suplementy</span>';
+  h += '<div class="mgr">Jak korzystać</div>' + INSTR().map(function (x, i) { return '<span class="mi" onclick="idz(\'ins\',' + i + ')">' + esc(x[0]) + '</span>'; }).join('');
+  h += '</div>';
+  var box = document.createElement('div'); box.innerHTML = h; while (box.firstChild) document.body.appendChild(box.firstChild);
+}
+function idz(k, i) {
+  MENU = false;
+  if (k === 't') { if (TRYB === 'prosty') mobT = i; else open.t[i] = true; }
+  else if (k === 'ins') open.ins[i] = true;
+  else open[k] = true;
+  render();
+  var id = k === 't' ? (TRYB === 'prosty' ? 'mobcards' : 'sek-t' + i) : 'sek-' + k + (i != null ? i : '');
+  var el = document.getElementById(id); if (el) setTimeout(function () { el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 30);
+} // kolumna Typ schowana: kolor ustawia „Pokoloruj zaznaczone”
 var NAZWY_BAZA = ['Wyciskanie sztangi leżąc', 'Wyciskanie hantli leżąc', 'Wyciskanie hantli na ławce skośnej', 'Rozpiętki Butterfly', 'Rozpiętki hantlami', 'Rozpiętka dośrodkowa (cz. G)', 'Pompki na poręczach', 'Wyciskanie francuskie', 'Overhead extension', 'Prostowanie ramion na wyciągu', 'Allahy (skrócenie)', 'Wznosy hantli bokiem', 'Wznosy hantlami na bok barku 90°', 'Wznosy T.B wyciąg', 'Wyciskanie hantli nad głowę', 'Wznosy przodem', 'Odwrotne rozpiętki', 'Face pull', 'Podciąganie na drążku', 'Ściąganie drążka wyciągu górnego', 'Wiosłowanie sztangą', 'Wiosłowanie hantlem', 'Wiosłowanie na wyciągu siedząc', 'Uginanie ramion ze sztangą', 'Uginanie hantli siedząc', 'Uginanie młotkowe', 'Uginanie na modlitewniku', 'Zawijanie miednicy w zwisie', 'Unoszenie nóg w zwisie', 'Plank', 'Allahy', 'Uginanie nadgarstków', 'Martwy ciąg', 'Martwy ciąg rumuński', 'Hip thrust', 'Przysiad ze sztangą', 'Przysiad bułgarski', 'Wykroki', 'Wypychanie na suwnicy', 'Prostowanie nóg na maszynie', 'Uginanie nóg leżąc', 'Uginanie nóg siedząc', 'Przywodzenie nóg na maszynie', 'Odwodzenie nóg na maszynie', 'Wspięcia na palce stojąc', 'Wspięcia na palce siedząc', 'Cardio 45 min', 'Cardio 30 min'];
 var mobT = 1;
 function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
@@ -256,7 +309,7 @@ function render() {
   var w = ostWaga(); var last = w.length ? n(w[w.length - 1].waga) : null, prev = w.length > 1 ? n(w[w.length - 2].waga) : null;
   var d = last != null && prev != null ? last - prev : null;
   var serieT = 0; for (var t = 1; t <= akt; t++) serieT += serie(t);
-  var html = '';
+  var html = pasek();
   html += '<div class="top"><div><div class="sub">Plan treningowy · ' + (TR ? '<input id="klub" value="' + esc(U('klub')) + '" placeholder="klub / miejsce" title="Klub lub miejsce treningów">' : (U('klub') ? esc(U('klub')) : '')) + (TR ? ' · <span style="color:#E6CB80">TRENER</span>' : '') + '</div><h1>Cel: ' + (TR ? '<input id="cel" value="' + esc(U('cel')) + '" placeholder="wpisz cel bloku">' : esc(U('cel'))) + '</h1></div>';
   html += '<div class="weeks"><span>Blok: <b>' + (TR ? '<input id="blok" class="c" style="width:44px;color:#E6CB80;font-weight:700;text-align:center" value="' + blok + '">' : blok) + '</b> tyg. · zaliczone: <b>' + zal + '</b> ' + I('tyg') + (TR ? ' &nbsp;· treningi/tydz.: <select id="treningi" class="c" title="Ile treningów w tygodniu ma ten plan">' + [1, 2, 3, 4, 5].map(function (x) { return '<option' + (x === akt ? ' selected' : '') + '>' + x + '</option>'; }).join('') + '</select>' : '') + '</span><div id="wks">';
   for (var i = 0; i < blok; i++) html += '<i class="wk ' + (i < zal ? 'on' : '') + '" data-i="' + i + '">' + (i < zal ? '✓' : '') + '</i>';
@@ -273,20 +326,21 @@ function render() {
     var inact = t3 > akt;
     if (inact) { html += '<div class="acc off"><span class="chev">·</span>Trening ' + t3 + '<span class="cnt">Nieaktywny</span></div>'; continue; }
     var isOpen = open.t[t3] == null ? t3 === 1 : open.t[t3];
-    if (!isOpen) { html += '<div class="acc" onclick="tog(\'t\',' + t3 + ')"><span class="chev">▸</span>Trening ' + t3 + (U('nazwa_t' + t3) ? ' <span class="tn">· ' + esc(U('nazwa_t' + t3)) + '</span>' : '') + '<span class="cnt">' + cw(t3).length + ' ćwiczeń · ' + serie(t3) + ' serii</span></div>'; continue; }
-    html += '<div class="card"><h2 class="metal"><span class="ttl" onclick="tog(\'t\',' + t3 + ')">▾ &nbsp;Trening ' + t3 + '</span>' + (TR ? '<span class="tn" style="text-shadow:0 0 3px #000">· <input id="nazwa_t' + t3 + '" value="' + esc(U('nazwa_t' + t3)) + '" placeholder="miejsce / nazwa treningu"></span>' : (U('nazwa_t' + t3) ? '<span class="tn" style="text-shadow:0 0 3px #000">· ' + esc(U('nazwa_t' + t3)) + '</span>' : '')) + (TR ? '<span class="pbtn ' + (open.part[t3] ? 'on' : '') + '" onclick="tog(\'part\',' + t3 + ')">' + (open.part[t3] ? '▾' : '▸') + ' &nbsp;Partie treningu <small>' + (open.part[t3] ? 'ukryj' : 'pokaż') + '</small></span>' : '<span style="margin-left:auto"></span>') + '<a class="pbtn rz" target="_blank" href="' + esc(D.rozgrzewka) + '">▶ &nbsp;Rozgrzewka</a></h2>';
+    if (!isOpen) { html += '<div class="acc" id="sek-t' + t3 + '" onclick="tog(\'t\',' + t3 + ')"><span class="chev">▸</span>Trening ' + t3 + (U('nazwa_t' + t3) ? ' <span class="tn">· ' + esc(U('nazwa_t' + t3)) + '</span>' : '') + '<span class="cnt">' + cw(t3).length + ' ćwiczeń · ' + serie(t3) + ' serii</span></div>'; continue; }
+    html += '<div class="card" id="sek-t' + t3 + '"><h2 class="metal"><span class="ttl" onclick="tog(\'t\',' + t3 + ')">▾ &nbsp;Trening ' + t3 + '</span>' + (TR ? '<span class="tn" style="text-shadow:0 0 3px #000">· <input id="nazwa_t' + t3 + '" value="' + esc(U('nazwa_t' + t3)) + '" placeholder="miejsce / nazwa treningu"></span>' : (U('nazwa_t' + t3) ? '<span class="tn" style="text-shadow:0 0 3px #000">· ' + esc(U('nazwa_t' + t3)) + '</span>' : '')) + (TR ? '<span class="pbtn ' + (open.part[t3] ? 'on' : '') + '" onclick="tog(\'part\',' + t3 + ')">' + (open.part[t3] ? '▾' : '▸') + ' &nbsp;Partie treningu <small>' + (open.part[t3] ? 'ukryj' : 'pokaż') + '</small></span>' : '<span style="margin-left:auto"></span>') + '<a class="pbtn rz" target="_blank" href="' + esc(D.rozgrzewka) + '">▶ &nbsp;Rozgrzewka</a></h2>';
     html += tabela(t3);
     if (TR && open.part[t3]) html += partieTreningu(t3);
     html += '<div class="legend"><span><i class="leg GOLD" onclick="tip(\'P\',event)"></i>Priorytet ' + I('P') + '</span><span><i class="leg NAVY" onclick="tip(\'N\',event)"></i>Neutral ' + I('N') + '</span><span><i class="leg BORDO" onclick="tip(\'U\',event)"></i>Utrzymanie ' + I('U') + '</span><span class="hint">Wszystko ze znaczkiem <i class="inf">i</i> możesz kliknąć. Pokaże się krótki opis: co to znaczy i jak z tym pracować.</span></div></div>';
   }
   html += wazenia();
   html += '</div><div>' + zalecenia() + (TR ? historiaSekcja() : '') + '</div></div>';
-  html += '<div class="igrid desk">' + INSTR().map(function (x, i) { return open.ins[i] ? '<div class="card"><h2 class="metal"><span class="ttl" onclick="tog(\'ins\',' + i + ')" style="font-size:15px">▾ &nbsp;' + esc(x[0]) + '</span></h2><div class="ibody">' + x[1] + '</div></div>' : '<div class="acc" style="margin:0" onclick="tog(\'ins\',' + i + ')"><span class="chev">▸</span>' + esc(x[0]) + '</div>'; }).join('') + '</div>';
-  html += '<div class="mob" style="padding:0 10px 30px">' + INSTR().map(function (x, i) { return open.ins[i] ? '<div class="card"><h2 class="metal"><span class="ttl" onclick="tog(\'ins\',' + i + ')" style="font-size:14px">▾ &nbsp;' + esc(x[0]) + '</span></h2><div class="ibody">' + x[1] + '</div></div>' : '<div class="acc" onclick="tog(\'ins\',' + i + ')"><span class="chev">▸</span>' + esc(x[0]) + '</div>'; }).join('') + '</div>';
+  html += '<div class="igrid desk">' + INSTR().map(function (x, i) { return open.ins[i] ? '<div class="card" id="sek-ins' + i + '"><h2 class="metal"><span class="ttl" onclick="tog(\'ins\',' + i + ')" style="font-size:15px">▾ &nbsp;' + esc(x[0]) + '</span></h2><div class="ibody">' + x[1] + '</div></div>' : '<div class="acc" id="sek-ins' + i + '" style="margin:0" onclick="tog(\'ins\',' + i + ')"><span class="chev">▸</span>' + esc(x[0]) + '</div>'; }).join('') + '</div>';
+  html += '<div class="mob" style="padding:0 10px 30px">' + INSTR().map(function (x, i) { return open.ins[i] ? '<div class="card" id="sek-ins' + i + '"><h2 class="metal"><span class="ttl" onclick="tog(\'ins\',' + i + ')" style="font-size:14px">▾ &nbsp;' + esc(x[0]) + '</span></h2><div class="ibody">' + x[1] + '</div></div>' : '<div class="acc" id="sek-ins' + i + '" onclick="tog(\'ins\',' + i + ')"><span class="chev">▸</span>' + esc(x[0]) + '</div>'; }).join('') + '</div>';
   app.innerHTML = html + (TR ? datalist() : '');
   bindAll();
   renderMob();
   przywrocFokus(fokus);
+  rysujMenu();
 }
 function tabela(t) {
   var rows = cw(t), out = '<table class="' + (TR ? 'tr' : '') + '"><tr><th>Nr ' + I('nr') + '</th><th class="l">Ćwiczenie ' + I('cw') + '</th><th colspan="6">Wykonane powtórzenia ' + I('powt') + '</th><th>Ciężar<br>aktualny ' + I('cakt') + '</th><th>Ciężar<br>początkowy ' + I('cst') + '</th><th>Sets ' + I('sets') + '</th><th>Reps ' + I('reps') + '</th><th>Przerwa ' + I('prz') + '</th><th>RiR ' + I('rir') + '</th><th>Tempo ' + I('tempo') + '</th><th>Wideo ' + I('wideo') + '</th><th class="l" style="min-width:' + (TR ? 140 : 220) + 'px">Notatka podopiecznego ' + I('nota') + '</th>' + (TR ? (SHOW_TYP ? '<th>Typ</th>' : '') + '<th title="przesuń / usuń"></th>' : '') + '</tr>';
@@ -330,8 +384,8 @@ function kafelki() {
 }
 function historiaSekcja() {
   var H = D.historia || [];
-  if (!open.hist) return '<div class="acc" onclick="tog(\'hist\')"><span class="chev">▸</span>Historia bloków<span class="cnt">' + (H.length ? H.length + ' zamkn.' : 'brak zamkniętych bloków') + '</span></div>';
-  var out = '<div class="card"><h2 class="metal"><span class="ttl" onclick="tog(\'hist\')">▾ &nbsp;Historia bloków</span><span class="pbtn" style="cursor:default">' + I('hist') + ' &nbsp;' + H.length + ' zamkniętych</span></h2>';
+  if (!open.hist) return '<div class="acc" id="sek-hist" onclick="tog(\'hist\')"><span class="chev">▸</span>Historia bloków<span class="cnt">' + (H.length ? H.length + ' zamkn.' : 'brak zamkniętych bloków') + '</span></div>';
+  var out = '<div class="card" id="sek-hist"><h2 class="metal"><span class="ttl" onclick="tog(\'hist\')">▾ &nbsp;Historia bloków</span><span class="pbtn" style="cursor:default">' + I('hist') + ' &nbsp;' + H.length + ' zamkniętych</span></h2>';
   out += '<div style="padding:12px 14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap"><button class="btn warnb" onclick="zamknijBlok()">Zamknij blok i zacznij nowy</button><span class="mut" style="font-size:12px">Archiwizuje cały bieżący blok (ćwiczenia, ciężary, powtórzenia, plan partii, waga start→koniec). W nowym bloku ciężar początkowy = aktualny, powtórzenia i notatki wyczyszczone, kratki tygodni od zera. Plan ćwiczeń zostaje, żebyś mógł go zmienić.</span></div>';
   H.slice().reverse().forEach(function (h, idx) {
     var d = h.dane || {}, otw = open.hb[h.id];
@@ -383,8 +437,8 @@ function serie_(t) { return serie(t); }
 function planowanie() {
   var akt = aktywne();
   var st = statPlan();
-  if (!open.plan) return '<div class="acc" onclick="tog(\'plan\')"><span class="chev">▸</span>Tryb planowania · objętość i partie × treningi<span class="cnt">' + st.serie + ' serii/tydz. · plan rozpisany ' + st.roz + ' / ' + st.plan + ' · ' + akt + ' treningów</span></div>';
-  var out = '<div class="card"><h2 class="metal"><span class="ttl" onclick="tog(\'plan\')">▾ &nbsp;Tryb planowania</span><span class="pbtn" style="cursor:default">' + I('plan') + ' &nbsp;1. plan i priorytet partii · 2. partie do treningów · 3. serie</span></h2>';
+  if (!open.plan) return '<div class="acc" id="sek-plan" onclick="tog(\'plan\')"><span class="chev">▸</span>Tryb planowania · objętość i partie × treningi<span class="cnt">' + st.serie + ' serii/tydz. · plan rozpisany ' + st.roz + ' / ' + st.plan + ' · ' + akt + ' treningów</span></div>';
+  var out = '<div class="card" id="sek-plan"><h2 class="metal"><span class="ttl" onclick="tog(\'plan\')">▾ &nbsp;Tryb planowania</span><span class="pbtn" style="cursor:default">' + I('plan') + ' &nbsp;1. plan i priorytet partii · 2. partie do treningów · 3. serie</span></h2>';
   out += '<div class="pm-sekcja"><span class="step">1</span>Objętość na partię · 16 partii<span class="mut">plan serii na tydzień, region, priorytet</span></div>' + kafelki();
   out += '<div class="pm-sekcja" style="padding-top:6px"><span class="step">2</span>Partie × treningi<span class="mut">kratka „w tr.” przypisuje partię, potem Rozc. i Skr.</span></div>';
   out += '<table class="pm" style="margin-top:8px"><tr><th class="l tt" rowspan="2">Partia</th><th class="tt" rowspan="2">Plan</th>';
@@ -452,8 +506,8 @@ function wagaBlok() {
 }
 function wazenia() {
   var rows = wazSorted();
-  if (!open.waz) { var l = ostWaga().slice(-1)[0]; return '<div class="acc" onclick="tog(\'waz\')"><span class="chev">▸</span>Ważenia i kalorie<span class="cnt">' + (l ? 'ostatnie: ' + esc(l.data) + ' · ' + fmt(l.waga) + ' kg' : 'brak ważeń') + '</span></div>'; }
-  var out = '<div class="card"><h2 class="metal"><span class="ttl" onclick="tog(\'waz\')">▾ &nbsp;Ważenia i kalorie</span><span class="pbtn" style="font-size:12px">ważenie: środa i sobota, rano, na czysto</span>' + wagaBlok() + '</h2><table class="wt"><tr><th>Dzień</th><th>Waga (kg)</th><th>Zmiana</th><th>Kcal</th><th>Węgle</th><th>Białko</th><th>Tłuszcze</th><th>Sól</th><th class="l">Notatka podopiecznego</th>' + (TR ? '<th></th>' : '') + '</tr>';
+  if (!open.waz) { var l = ostWaga().slice(-1)[0]; return '<div class="acc" id="sek-waz" onclick="tog(\'waz\')"><span class="chev">▸</span>Ważenia i kalorie<span class="cnt">' + (l ? 'ostatnie: ' + esc(l.data) + ' · ' + fmt(l.waga) + ' kg' : 'brak ważeń') + '</span></div>'; }
+  var out = '<div class="card" id="sek-waz"><h2 class="metal"><span class="ttl" onclick="tog(\'waz\')">▾ &nbsp;Ważenia i kalorie</span><span class="pbtn" style="font-size:12px">ważenie: środa i sobota, rano, na czysto</span>' + wagaBlok() + '</h2><table class="wt"><tr><th>Dzień</th><th>Waga (kg)</th><th>Zmiana</th><th>Kcal</th><th>Węgle</th><th>Białko</th><th>Tłuszcze</th><th>Sól</th><th class="l">Notatka podopiecznego</th>' + (TR ? '<th></th>' : '') + '</tr>';
   var prev = null;
   rows.forEach(function (w) {
     var v = w.waga === '' ? null : n(w.waga); var dz = '';
@@ -467,8 +521,8 @@ function wazenia() {
   return out;
 }
 function zalecenia() {
-  if (!open.zal) return '<div class="acc" onclick="tog(\'zal\')"><span class="chev">▸</span>Zalecenia i suplementy<span class="cnt">' + D.zalecenia.length + ' zalec. · ' + D.suplementy.length + ' supl.</span></div>';
-  var out = '<div class="card"><h2 class="metal"><span class="ttl" onclick="tog(\'zal\')">▾ &nbsp;Zalecenia i suplementy</span></h2><div style="padding:12px 14px 6px;font-size:12px;font-weight:700;color:#E6CB80;letter-spacing:1px">ZALECENIA</div><table class="zt"><tr><th class="l">Zalecenie</th><th>Jak często</th></tr>';
+  if (!open.zal) return '<div class="acc" id="sek-zal" onclick="tog(\'zal\')"><span class="chev">▸</span>Zalecenia i suplementy<span class="cnt">' + D.zalecenia.length + ' zalec. · ' + D.suplementy.length + ' supl.</span></div>';
+  var out = '<div class="card" id="sek-zal"><h2 class="metal"><span class="ttl" onclick="tog(\'zal\')">▾ &nbsp;Zalecenia i suplementy</span></h2><div style="padding:12px 14px 6px;font-size:12px;font-weight:700;color:#E6CB80;letter-spacing:1px">ZALECENIA</div><table class="zt"><tr><th class="l">Zalecenie</th><th>Jak często</th></tr>';
   D.zalecenia.forEach(function (z) { out += '<tr><td class="l">' + esc(z.tresc) + '</td><td><span class="pill">' + esc(z.czesto) + '</span></td></tr>'; });
   out += '</table><div style="padding:12px 14px 6px;font-size:12px;font-weight:700;color:#E6CB80;letter-spacing:1px">SUPLEMENTY</div><table class="zt"><tr><th class="l">Suplement</th><th>Dawka</th><th>Pora dnia</th><th class="l">Uwagi</th></tr>';
   D.suplementy.forEach(function (s) { out += '<tr><td class="l sn">' + esc(s.nazwa) + '</td><td class="dz">' + esc(s.dawka) + '</td><td><span class="pill ' + (/rano/i.test(s.pora) ? 'GOLD' : '') + '">' + esc(s.pora) + '</span></td><td class="l mut" style="font-style:italic;font-weight:400">' + esc(s.uwagi) + '</td></tr>'; });
@@ -480,17 +534,38 @@ function renderMob() {
   var rows = cw(mobT), out = '';
   rows.forEach(function (c, i) {
     var k = TYP[c.typ] || 'N', sets = Math.max(0, n(c.sets));
-    out += '<div class="mcard" data-id="' + c.id + '"><div class="mh ' + (k === 'P' ? 'GOLD' : k === 'U' ? 'BORDO' : 'NAVY') + '"><span class="mn">' + (i + 1) + '</span><b>' + esc(c.nazwa) + '</b><a class="v ' + (c.wideo ? '' : 'off') + '" target="_blank" href="' + esc(c.wideo || '#') + '">▶</a></div><div class="mm"><span>' + esc(c.sets) + ' × ' + esc(c.reps) + '</span>' + (c.przerwa ? '<span>' + esc(c.przerwa) + '</span>' : '') + (c.rir !== '' ? '<span>RiR ' + esc(c.rir) + '</span>' : '') + (c.tempo ? '<span>' + esc(c.tempo) + '</span>' : '') + '</div><div class="mr">';
+    var zrobione = sets > 0; for (var q = 1; q <= sets && q <= 6; q++) if (c['p' + q] === '' || c['p' + q] == null) zrobione = false;
+    out += '<div class="mcard' + (zrobione ? ' done' : '') + '" data-id="' + c.id + '"><div class="mh ' + (k === 'P' ? 'GOLD' : k === 'U' ? 'BORDO' : 'NAVY') + '"><span class="mn">' + (i + 1) + '</span><b>' + esc(c.nazwa) + '</b><a class="v ' + (c.wideo ? '' : 'off') + '" target="_blank" href="' + esc(c.wideo || '#') + '">▶</a></div><div class="mm"><span>' + esc(c.sets) + ' × ' + esc(c.reps) + '</span>' + (c.przerwa ? '<span>' + esc(c.przerwa) + '</span>' : '') + (c.rir !== '' ? '<span>RiR ' + esc(c.rir) + '</span>' : '') + (c.tempo ? '<span>' + esc(c.tempo) + '</span>' : '') + '</div><div class="mr">';
     for (var p = 1; p <= sets && p <= 6; p++) out += '<input data-f="p' + p + '" inputmode="numeric" placeholder="powt." value="' + esc(c['p' + p]) + '">';
-    out += '</div><div class="mw"><label class="kg">Ciężar<input data-f="ciezar_akt" inputmode="decimal" value="' + esc(c.ciezar_akt) + '"></label><label>Notatka<input data-f="notatka" placeholder="dla trenera" value="' + esc(c.notatka) + '"></label></div></div>';
+    out += '</div><div class="mw"><label class="kg">Ciężar<input data-f="ciezar_akt" inputmode="decimal" value="' + esc(c.ciezar_akt) + '"></label><label>Notatka<input data-f="notatka" placeholder="dla trenera" value="' + esc(c.notatka) + '"></label></div>';
+    var sek = sekundy(c.przerwa); if (sek) out += '<div class="mt"><button id="tm-' + c.id + '" onclick="minutnik(\'' + c.id + '\',' + sek + ')">' + tekstMinutnika(c.id, sek) + '</button></div>';
+    out += '</div>';
   });
   if (!rows.length) out = '<div class="mut" style="padding:20px">Brak ćwiczeń w tym treningu.</div>';
+  out += '<div style="margin:6px 10px 0" id="mob-zal">' + zalecenia() + '</div>';
   out += '<div style="margin:6px 10px 16px"><div class="acc" onclick="tog(\'waz\')" style="margin:0"><span class="chev">▸</span>Ważenia<span class="cnt">' + (ostWaga().length ? fmt(ostWaga().slice(-1)[0].waga) + ' kg' : '') + '</span></div>' + (open.waz ? '<div class="card" style="margin-top:8px"><div style="padding:10px"><button class="btn" onclick="dodajWaz()">+ Dodaj dzisiejsze ważenie</button></div>' + wazSorted().slice(-5).reverse().map(function (w) { return '<div class="mw" data-id="' + w.id + '" style="padding:6px 12px"><label>Dzień<input type="date" data-f="data" value="' + esc(w.data) + '"></label><label class="kg">Waga<input data-f="waga" inputmode="decimal" value="' + esc(fmt(w.waga)) + '"></label><label>Notatka<input data-f="notatka" value="' + esc(w.notatka) + '"></label></div>'; }).join('') + '</div>' : '') + '</div>';
   box.innerHTML = out;
-  box.querySelectorAll('[data-id] [data-f]').forEach(function (el) { var id = el.closest('[data-id]').dataset.id; var o = D.cwiczenia.filter(function (c) { return c.id === id; })[0]; var tab = 'Cwiczenia'; if (!o) { o = D.wazenia.filter(function (c) { return c.id === id; })[0]; tab = 'Wazenia'; } if (o) bind(el, o, el.dataset.f, tab, { change: el.type === 'date', after: tab === 'Wazenia' ? function () { updateKpi(); } : null }); });
+  box.querySelectorAll('[data-id] [data-f]').forEach(function (el) { var id = el.closest('[data-id]').dataset.id; var o = D.cwiczenia.filter(function (c) { return c.id === id; })[0]; var tab = 'Cwiczenia'; if (!o) { o = D.wazenia.filter(function (c) { return c.id === id; })[0]; tab = 'Wazenia'; } if (o) bind(el, o, el.dataset.f, tab, { change: el.type === 'date', after: tab === 'Wazenia' ? function () { updateKpi(); } : (/^p\d$/.test(el.dataset.f) ? function () { var card = el.closest('.mcard'); var sets = Math.max(0, n(o.sets)), ok = sets > 0; for (var q = 1; q <= sets && q <= 6; q++) if (o['p' + q] === '' || o['p' + q] == null) ok = false; if (card) card.classList.toggle('done', ok); } : null) }); });
   var sel = document.getElementById('mobSel'); if (sel) sel.onchange = function () { mobT = n(sel.value); renderMob(); };
 }
 function updateKpi() { render(); }
+// ---------- minutnik przerwy (karty „Dziś”) ----------
+var TM = { id: null, koniec: 0, tick: null, sek: 0 };
+function sekundy(p) { var s = String(p == null ? '' : p).toLowerCase().replace(',', '.'); var m = s.match(/(\d+(?:\.\d+)?)\s*min/); if (m) return Math.round(parseFloat(m[1]) * 60); m = s.match(/(\d+)\s*s/); if (m) return parseInt(m[1], 10); m = s.match(/^\s*(\d+)\s*$/); if (m) return parseInt(m[1], 10); return 0; }
+function fmtCzas(s) { s = Math.max(0, Math.round(s)); return (s >= 60 ? Math.floor(s / 60) + ':' + ('0' + (s % 60)).slice(-2) : s + ' s'); }
+function tekstMinutnika(id, sek) { if (TM.id !== id) return '⏱ przerwa ' + fmtCzas(sek); var left = (TM.koniec - Date.now()) / 1000; return left > 0 ? '⏱ ' + fmtCzas(left) + ' · stop' : 'Koniec przerwy, następna seria!'; }
+function minutnik(id, sek) {
+  if (TM.id === id && TM.koniec > Date.now()) { zatrzymajMinutnik(); return; }
+  zatrzymajMinutnik(true); TM.id = id; TM.sek = sek; TM.koniec = Date.now() + sek * 1000;
+  var b = document.getElementById('tm-' + id); if (b) { b.className = 'run'; b.textContent = tekstMinutnika(id, sek); }
+  TM.tick = setInterval(function () {
+    var el = document.getElementById('tm-' + TM.id); var left = TM.koniec - Date.now();
+    if (left <= 0) { clearInterval(TM.tick); TM.tick = null; if (el) { el.className = 'end'; el.textContent = tekstMinutnika(TM.id, TM.sek); } try { if (navigator.vibrate) navigator.vibrate([200, 100, 200, 100, 400]); } catch (e) {} dzwonek(); setTimeout(function () { if (TM.koniec <= Date.now()) { var e2 = document.getElementById('tm-' + TM.id); TM.id = null; if (e2) { e2.className = ''; e2.textContent = '⏱ przerwa ' + fmtCzas(TM.sek); } } }, 6000); return; }
+    if (el) el.textContent = tekstMinutnika(TM.id, TM.sek);
+  }, 250);
+}
+function zatrzymajMinutnik(cicho) { if (TM.tick) clearInterval(TM.tick); TM.tick = null; var el = TM.id ? document.getElementById('tm-' + TM.id) : null; var sek = TM.sek; TM.id = null; TM.koniec = 0; if (el && !cicho) { el.className = ''; el.textContent = '⏱ przerwa ' + fmtCzas(sek); } else if (el) { el.className = ''; el.textContent = '⏱ przerwa ' + fmtCzas(sek); } }
+function dzwonek() { try { var AC = window.AudioContext || window.webkitAudioContext; if (!AC) return; var ctx = new AC(); [0, 0.25, 0.5].forEach(function (t) { var o = ctx.createOscillator(), g = ctx.createGain(); o.type = 'sine'; o.frequency.value = 880; g.gain.value = 0.25; o.connect(g); g.connect(ctx.destination); o.start(ctx.currentTime + t); o.stop(ctx.currentTime + t + 0.15); }); } catch (e) {} }
 function bindAll() {
   document.querySelectorAll('.desk tr[data-id] [data-f]').forEach(function (el) {
     var id = el.closest('tr').dataset.id; var o = D.cwiczenia.filter(function (c) { return c.id === id; })[0]; var tab = 'Cwiczenia';
@@ -535,7 +610,7 @@ function dodajCw(t, nr) { var tmp = 'tmp' + Date.now(); var c = { id: tmp, treni
 window.addEventListener('beforeunload', function (e) { if (queue.length || pending) { flush(); e.preventDefault(); e.returnValue = ''; } });
 // ---------- ekran PIN (podopieczny) ----------
 function pinScreen(msg) {
-  document.getElementById('app').innerHTML = '<div style="max-width:760px;margin:120px auto;padding:0 16px"><div class="card" style="padding:44px;border-radius:12px"><div class="sub" style="font-size:20px">Plan treningowy</div><h1 style="margin:8px 0 22px;font-size:44px">Cześć' + (D.imie ? ', ' + esc(String(D.imie).split(' ')[0]) : '') + '!</h1><p style="color:var(--ivd);margin:0 0 24px;font-size:24px">Wpisz 4-cyfrowy PIN od Kuby. Telefon go zapamięta.</p><input id="pin" inputmode="numeric" maxlength="4" autocomplete="one-time-code" style="width:100%;height:100px;font:800 56px Poppins;text-align:center;letter-spacing:24px;background:#1A1A24;color:var(--gl);border:2px solid var(--gm);border-radius:8px"><button class="btn" id="pinbtn" style="width:100%;margin-top:24px;height:84px;font-size:30px">Wejdź</button><div id="pinmsg" style="color:var(--red);min-height:32px;margin-top:16px;font-weight:600;font-size:22px">' + (msg || '') + '</div></div></div>';
+  document.getElementById('app').innerHTML = '<div class="pinbox" style="max-width:760px;margin:120px auto;padding:0 16px"><div class="card" style="padding:44px;border-radius:12px"><div class="sub" style="font-size:20px">Plan treningowy</div><h1 style="margin:8px 0 22px;font-size:44px">Cześć' + (D.imie ? ', ' + esc(String(D.imie).split(' ')[0]) : '') + '!</h1><p style="color:var(--ivd);margin:0 0 24px;font-size:24px">Wpisz 4-cyfrowy PIN od Kuby. Telefon go zapamięta.</p><input id="pin" inputmode="numeric" maxlength="4" autocomplete="one-time-code" style="width:100%;height:100px;font:800 56px Poppins;text-align:center;letter-spacing:24px;background:#1A1A24;color:var(--gl);border:2px solid var(--gm);border-radius:8px"><button class="btn" id="pinbtn" style="width:100%;margin-top:24px;height:84px;font-size:30px">Wejdź</button><div id="pinmsg" style="color:var(--red);min-height:32px;margin-top:16px;font-weight:600;font-size:22px">' + (msg || '') + '</div></div></div>';
   var inp = document.getElementById('pin'); inp.focus();
   var go = function () { var v = inp.value.trim(); if (v.length < 4) return; document.getElementById('pinbtn').textContent = 'Wczytuję…'; wczytajPin(v); };
   document.getElementById('pinbtn').onclick = go; inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') go(); });
@@ -549,7 +624,7 @@ function wczytajPin(pin) {
 }
 function ladowanie(t) { document.getElementById('app').innerHTML = '<div class="mut" style="padding:60px;text-align:center;font-size:28px">' + t + '</div>'; }
 function hasloScreen(msg) {
-  document.getElementById('app').innerHTML = '<div style="max-width:760px;margin:120px auto;padding:0 16px"><div class="card" style="padding:44px;border-radius:12px"><div class="sub" style="font-size:20px">Plan treningowy</div><h1 style="margin:8px 0 22px;font-size:44px">Panel trenera</h1><p style="color:var(--ivd);margin:0 0 24px;font-size:24px">Wpisz hasło trenera. Przeglądarka je zapamięta.</p><input id="haslo" type="password" autocomplete="current-password" style="width:100%;height:100px;font:800 40px Poppins;text-align:center;background:#1A1A24;color:var(--gl);border:2px solid var(--gm);border-radius:8px"><button class="btn" id="haslobtn" style="width:100%;margin-top:24px;height:84px;font-size:30px">Wejdź</button><div id="haslomsg" style="color:var(--red);min-height:32px;margin-top:16px;font-weight:600;font-size:22px">' + (msg || '') + '</div><p style="color:var(--ivd);font-size:20px;margin-top:20px">Podopieczna? Wejdź swoim linkiem od Kuby (kończy się na ?k=…).</p></div></div>';
+  document.getElementById('app').innerHTML = '<div class="pinbox" style="max-width:760px;margin:120px auto;padding:0 16px"><div class="card" style="padding:44px;border-radius:12px"><div class="sub" style="font-size:20px">Plan treningowy</div><h1 style="margin:8px 0 22px;font-size:44px">Panel trenera</h1><p style="color:var(--ivd);margin:0 0 24px;font-size:24px">Wpisz hasło trenera. Przeglądarka je zapamięta.</p><input id="haslo" type="password" autocomplete="current-password" style="width:100%;height:100px;font:800 40px Poppins;text-align:center;background:#1A1A24;color:var(--gl);border:2px solid var(--gm);border-radius:8px"><button class="btn" id="haslobtn" style="width:100%;margin-top:24px;height:84px;font-size:30px">Wejdź</button><div id="haslomsg" style="color:var(--red);min-height:32px;margin-top:16px;font-weight:600;font-size:22px">' + (msg || '') + '</div><p style="color:var(--ivd);font-size:20px;margin-top:20px">Podopieczna? Wejdź swoim linkiem od Kuby (kończy się na ?k=…).</p></div></div>';
   var inp = document.getElementById('haslo'); inp.focus();
   var go = function () { var v = inp.value.trim(); if (!v) return; HASLO = v; document.getElementById('haslobtn').textContent = 'Wczytuję…'; wczytajTrenera(); };
   document.getElementById('haslobtn').onclick = go; inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') go(); });
