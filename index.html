@@ -157,6 +157,9 @@ table th{background:#1A1A1A;color:var(--ivd)}.sw span.on{background:var(--gl);co
 table.tr,.desk table:not(.pm):not(.wt):not(.zt){table-layout:fixed}td.part select{width:100%;font-size:11px}.dodaj-cw{padding:10px 12px}
 #notaTr{margin-left:12px;flex:1;min-width:260px;max-width:620px;resize:none;background:#141414;border:1px solid #333;border-radius:8px;color:var(--ivd);font-size:12px;padding:6px 10px;line-height:1.35}#notaTr:focus{color:var(--iv);border-color:var(--gm)}
 .top .weeks{margin-left:auto;margin-right:auto}.top .kpi{margin-left:0}
+.atlG{margin:10px 12px 18px}.atlH{display:flex;align-items:center;gap:12px;padding:8px 10px;background:#1A1A1A;border-left:3px solid var(--gm);border-radius:8px;margin-bottom:6px}.atlH b{font-size:15px;color:var(--iv)}
+table.atl{table-layout:fixed;width:100%}table.atl th{font-size:10px;padding:5px 6px;text-align:center}table.atl th.l{text-align:left}table.atl td{padding:2px 4px;border:1px solid #262626}table.atl input.c,table.atl select.c{width:100%;font-size:12px;text-align:center;background:transparent}table.atl input.c.l{text-align:left}table.atl .del{cursor:pointer;color:#7A766E;font-style:normal}table.atl .del:hover{color:var(--red)}
+.brakA{display:inline-block;margin-left:6px;font-size:10px;color:#7A766E;border:1px dashed #3A3A3A;border-radius:6px;padding:0 6px;vertical-align:middle;cursor:help}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
 .ank{max-width:760px;margin:30px auto;padding:0 16px 40px}.ankh{display:flex;justify-content:space-between;align-items:center}.ankh .sub{font-size:16px}.ankp{color:var(--ivd);font-size:16px;font-weight:700}.ankbar{height:4px;background:#2A2A36;border-radius:2px;margin:10px 0 22px;overflow:hidden}.ankbar i{display:block;height:100%;background:linear-gradient(90deg,#8E6B2E,#C9A455)}.anks{font-size:34px;margin:0 0 14px}.ankw{font-size:18px;line-height:1.5;margin:0 0 18px}
 .ap{background:var(--card);border:1px solid var(--line);border-left:3px solid #8E6B2E;border-radius:8px;padding:18px 20px;margin-bottom:14px}.ap.ukryte{display:none}.ap.brak{border-color:var(--red);border-left-color:var(--red)}.apt{font-size:19px;font-weight:700;color:var(--iv);line-height:1.35}.apt small{font-weight:500;color:var(--ivd);font-size:13px;margin-left:6px}.apo{color:var(--ivd);font-size:15px;line-height:1.5;margin-top:6px}
@@ -245,7 +248,7 @@ function rysujMenu() {
   var akt = aktywne(), h = '<div class="tlo" id="tlo" onclick="togMenu()"></div><div class="menu" id="menu"><div class="mtt">Menu<span class="x" onclick="togMenu()">✕</span></div>';
   h += '<div class="mgr">Treningi</div>';
   for (var t = 1; t <= akt; t++) h += '<span class="mi' + (WIDOK === 'treningi' && mobT === t ? ' on' : '') + '" onclick="idz(\'t\',' + t + ')">Trening ' + t + '<small>' + cw(t).length + ' ćwiczeń · ' + serie(t) + ' serii</small></span>';
-  if (TR) h += '<div class="mgr">Trener</div><span class="mi' + mAkt('plan') + '" onclick="idz(\'plan\')">Tryb planowania<small>objętość, partie × treningi</small></span><span class="mi' + mAkt('hist') + '" onclick="idz(\'hist\')">Historia bloków</span>';
+  if (TR) h += '<div class="mgr">Trener</div><span class="mi' + mAkt('plan') + '" onclick="idz(\'plan\')">Tryb planowania<small>objętość, partie × treningi</small></span><span class="mi' + mAkt('atlas') + '" onclick="idz(\'atlas\')">Atlas ćwiczeń<small>' + ((D.atlas || []).filter(function (a) { return a.nazwa; }).length || 'pusty') + ' ćwiczeń</small></span><span class="mi' + mAkt('hist') + '" onclick="idz(\'hist\')">Historia bloków</span>';
   h += '<div class="mgr">Raporty</div><span class="mi' + mAkt('rap') + '" onclick="idz(\'rap\')">Raporty tygodniowe<small>' + ((D.raporty || []).length ? (D.raporty || []).length + ' wysłanych' : 'napisz pierwszy') + '</small></span>';
   h += '<div class="mgr">Ciało i dieta</div><span class="mi' + mAkt('waz') + '" onclick="idz(\'waz\')">Ważenia i kalorie' + (ostWaga().length ? '<small>ostatnie ' + fmt(ostWaga().slice(-1)[0].waga) + ' kg</small>' : '') + '</span><span class="mi' + mAkt('zal') + '" onclick="idz(\'zal\')">Zalecenia i suplementy</span>';
   h += '<div class="mgr">Jak korzystać</div>' + INSTR().map(function (x, i) { return '<span class="mi' + mAkt('ins' + i) + '" onclick="idz(\'ins\',' + i + ')">' + esc(x[0]) + '</span>'; }).join('');
@@ -267,7 +270,7 @@ function idz(k, i) {
 var NAZWY_BAZA = ['Wyciskanie sztangi leżąc', 'Wyciskanie hantli leżąc', 'Wyciskanie hantli na ławce skośnej', 'Rozpiętki Butterfly', 'Rozpiętki hantlami', 'Rozpiętka dośrodkowa (cz. G)', 'Pompki na poręczach', 'Wyciskanie francuskie', 'Overhead extension', 'Prostowanie ramion na wyciągu', 'Allahy (skrócenie)', 'Wznosy hantli bokiem', 'Wznosy hantlami na bok barku 90°', 'Wznosy T.B wyciąg', 'Wyciskanie hantli nad głowę', 'Wznosy przodem', 'Odwrotne rozpiętki', 'Face pull', 'Podciąganie na drążku', 'Ściąganie drążka wyciągu górnego', 'Wiosłowanie sztangą', 'Wiosłowanie hantlem', 'Wiosłowanie na wyciągu siedząc', 'Uginanie ramion ze sztangą', 'Uginanie hantli siedząc', 'Uginanie młotkowe', 'Uginanie na modlitewniku', 'Zawijanie miednicy w zwisie', 'Unoszenie nóg w zwisie', 'Plank', 'Allahy', 'Uginanie nadgarstków', 'Martwy ciąg', 'Martwy ciąg rumuński', 'Hip thrust', 'Przysiad ze sztangą', 'Przysiad bułgarski', 'Wykroki', 'Wypychanie na suwnicy', 'Prostowanie nóg na maszynie', 'Uginanie nóg leżąc', 'Uginanie nóg siedząc', 'Przywodzenie nóg na maszynie', 'Odwodzenie nóg na maszynie', 'Wspięcia na palce stojąc', 'Wspięcia na palce siedząc', 'Cardio 45 min', 'Cardio 30 min'];
 var mobT = 1; try { mobT = Math.max(1, parseInt(localStorage.getItem('mobT'), 10) || 1); } catch (e) {}
 // ---------- widoki (menu ≡ przełącza ekrany, adres w #hash) ----------
-var WIDOKI = ['treningi', 'plan', 'hist', 'rap', 'waz', 'zal', 'ins0', 'ins1', 'ins2', 'ins3', 'ins4', 'ins5', 'ins6'];
+var WIDOKI = ['treningi', 'plan', 'atlas', 'hist', 'rap', 'waz', 'zal', 'ins0', 'ins1', 'ins2', 'ins3', 'ins4', 'ins5', 'ins6'];
 function widokZHash() { var h = (location.hash || '').replace('#', ''); return WIDOKI.indexOf(h) >= 0 ? h : 'treningi'; }
 var WIDOK = widokZHash();
 function ustawWidok(w) { if (WIDOKI.indexOf(w) < 0) w = 'treningi'; WIDOK = w; try { if (location.hash !== '#' + w && !(w === 'treningi' && !location.hash)) location.hash = w; } catch (e) {} }
@@ -395,7 +398,7 @@ function render() {
   var fokus = zapamietajFokus();
   if (TR && open.planAuto == null) { open.planAuto = true; open.plan = true; } // wersja hostowana: TR znane dopiero po wczytaniu
   var akt = aktywne(); if (mobT > akt || mobT < 1) mobT = 1; if (WIDOK === 'hist' && !TR) WIDOK = 'treningi';
-  if (TR && TRYB !== 'pelny') ustawTryb('pelny', false); if (WIDOK === 'plan' && !TR) WIDOK = 'treningi';
+  if (TR && TRYB !== 'pelny') ustawTryb('pelny', false); if ((WIDOK === 'plan' || WIDOK === 'atlas') && !TR) WIDOK = 'treningi';
   var blok = Math.max(1, Math.min(8, n(U('blok')) || 6)), zal = n(U('zaliczone'));
   var w = ostWaga(); var last = w.length ? n(w[w.length - 1].waga) : null, prev = w.length > 1 ? n(w[w.length - 2].waga) : null;
   var d = last != null && prev != null ? last - prev : null;
@@ -423,6 +426,7 @@ function render() {
   app.innerHTML = html + (TR ? datalist() : '');
   bindAll();
   bindWidok();
+  if (WIDOK === 'atlas') bindAtlas();
   renderMob();
   bindRaporty();
   przywrocFokus(fokus);
@@ -432,6 +436,7 @@ function widokInny() {
   var w = WIDOK, h = '<div class="widok">';
   var kol = function (s, maks) { return '<div class="wrap solo"' + (maks ? ' style="max-width:' + maks + 'px;margin:0 auto"' : '') + '><div>' + s + '</div></div>'; };
   if (w === 'plan') { open.plan = true; h += kol(planowanie()); }
+  else if (w === 'atlas') { h += kol(atlasWidok()); }
   else if (w === 'waz') { open.waz = true; h += TRYB === 'prosty' ? '<div style="margin:6px 10px 0">' + wykresWagi() + '</div>' + wazeniaMob() : '<div class="wrap" style="grid-template-columns:minmax(0,1fr) 520px"><div>' + wazenia() + '</div><div>' + wykresWagi() + '</div></div>'; }
   else if (w === 'rap') { open.rap = true; h += kol(raporty(), 1100); }
   else if (w === 'zal') { open.zal = true; h += kol(zalecenia(), 1100); }
@@ -459,6 +464,41 @@ function wykresWagi() {
   return h + '<div style="padding:10px 12px 6px">' + s + '</svg></div></div>';
 }
 function fmtData(d) { var m = String(d).match(/^(\d{4})-(\d{2})-(\d{2})/); return m ? m[3] + '.' + m[2] + '.' + m[1].slice(2) : String(d); }
+// ---------- atlas ćwiczeń (widok trenera) ----------
+var ATL = { szukaj: '' };
+function atlasWidok() {
+  var rows = (D.atlas || []), q = norm(ATL.szukaj);
+  var grupy = []; rows.forEach(function (a) { var g = String(a.miesien || '').trim() || '(bez mięśnia)'; if (grupy.indexOf(g) < 0) grupy.push(g); });
+  var h = '<div class="card" id="sek-atlas"><h2 class="metal"><span class="ttl">Atlas ćwiczeń</span><input id="atlSzukaj" class="c" placeholder="szukaj…" value="' + esc(ATL.szukaj) + '" style="margin-left:14px;width:220px"><span style="margin-left:auto"></span><span class="pbtn" onclick="atlasNowaGrupa()">+ grupa</span>' + (rows.length ? '' : '<span class="pbtn" onclick="atlasImportuj()" title="Kopiuje Twój arkusz Atlas do aplikacji">⇩ importuj z arkusza</span>') + '</h2>';
+  if (!rows.length) h += '<div class="mut" style="padding:20px">Atlas jest pusty. Kliknij „importuj z arkusza”, żeby przenieść ćwiczenia z Twojego arkusza „Atlas”.</div>';
+  grupy.forEach(function (g) {
+    var lista = rows.filter(function (a) { return (String(a.miesien || '').trim() || '(bez mięśnia)') === g; }).filter(function (a) { return !q || norm(a.nazwa + ' ' + a.region + ' ' + a.dlugosc).indexOf(q) >= 0; });
+    if (q && !lista.length) return;
+    var partia = (lista[0] && lista[0].partia) || '';
+    h += '<div class="atlG"><div class="atlH"><b>' + esc(g) + '</b>' + (partia ? '<span class="pill ' + (prio(partia) === 'P' ? 'GOLD' : prio(partia) === 'U' ? 'BORDO' : 'NAVY') + '" title="kafelek w trybie planowania">' + esc(partia) + '</span>' : '<span class="mut" style="font-size:11px">bez partii w planowaniu</span>') + '<span class="mut" style="margin-left:auto">' + lista.filter(function (a) { return a.nazwa; }).length + ' ćw.</span><span class="pbtn" style="font-size:11px" onclick="atlasDodajDo(\'' + esc(g) + '\')">+ ćwiczenie</span></div>';
+    h += '<table class="atl"><colgroup><col style="width:150px"><col style="width:120px"><col><col style="width:70px"><col style="width:70px"><col style="width:220px"><col style="width:34px"></colgroup><tr><th class="l">Region</th><th class="l">Długość</th><th class="l">Nazwa ćwiczenia</th><th>Powt.</th><th>Tempo</th><th class="l">Wideo</th><th></th></tr>';
+    lista.forEach(function (a) {
+      h += '<tr data-aid="' + esc(a.id) + '"><td><input class="c" data-f="region" value="' + esc(a.region) + '"></td><td><select class="c" data-f="dlugosc"><option value=""' + (a.dlugosc ? '' : ' selected') + '></option>' + ['Rozciągnięcie', 'Skrócenie', 'Pośrednie'].map(function (o) { return '<option' + (a.dlugosc === o ? ' selected' : '') + '>' + o + '</option>'; }).join('') + '</select></td><td><input class="c l" data-f="nazwa" value="' + esc(a.nazwa) + '"></td><td><input class="c" data-f="powt" value="' + esc(a.powt) + '"></td><td><input class="c" data-f="tempo" value="' + esc(a.tempo) + '"></td><td><input class="c l" data-f="wideo" placeholder="link" value="' + esc(a.wideo) + '"></td><td><i class="del" title="usuń z atlasu" onclick="atlasUsunW(\'' + esc(a.id) + '\')">✕</i></td></tr>';
+    });
+    h += '</table></div>';
+  });
+  return h + '</div>';
+}
+function bindAtlas() {
+  var s = document.getElementById('atlSzukaj'); if (s) { s.addEventListener('input', function () { ATL.szukaj = s.value; clearTimeout(window._atlS); window._atlS = setTimeout(function () { var f = zapamietajFokus(); render(); przywrocFokus(f); }, 250); }); }
+  document.querySelectorAll('tr[data-aid] [data-f]').forEach(function (el) {
+    var id = el.closest('tr').dataset.aid, a = (D.atlas || []).filter(function (x) { return x.id === id; })[0]; if (!a) return;
+    el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'change', function () { a[el.dataset.f] = el.value; status('zapisuję…'); wywolaj('atlasEdytuj', [id, el.dataset.f, el.value]).then(function () { status('zapisano', true); if (el.dataset.f === 'nazwa' || el.dataset.f === 'wideo') { var f = zapamietajFokus(); render(); przywrocFokus(f); } }).catch(function (e) { status('błąd zapisu: ' + e.message, false, true); }); });
+  });
+}
+function atlasDodajDo(g) {
+  var nazwa = prompt('Nazwa nowego ćwiczenia (' + g + '):', ''); if (nazwa === null) return; nazwa = nazwa.trim();
+  var d = { miesien: g === '(bez mięśnia)' ? '' : g, region: '', dlugosc: '', nazwa: nazwa, powt: 10, tempo: 'x211', wideo: '' };
+  status('dodaję…'); wywolaj('atlasDodaj', [d]).then(function (r) { d.id = r.id; d.partia = ''; var ost = (D.atlas || []).filter(function (a) { return a.miesien === d.miesien; }).slice(-1)[0]; d.kolejnosc = ost ? n(ost.kolejnosc) + 0.5 : 9999; D.atlas.push(d); D.atlas.sort(function (x, y) { return n(x.kolejnosc) - n(y.kolejnosc); }); status('dodano', true); render(); }).catch(function (e) { status('błąd: ' + e.message, false, true); });
+}
+function atlasNowaGrupa() { var g = prompt('Nazwa mięśnia / grupy (najlepiej jak kafelek w planowaniu, np. „Przedramiona”):', ''); if (!g || !g.trim()) return; atlasDodajDo(g.trim()); }
+function atlasUsunW(id) { var a = (D.atlas || []).filter(function (x) { return x.id === id; })[0]; if (!a || !confirm('Usunąć „' + (a.nazwa || 'ten wiersz') + '” z atlasu?')) return; D.atlas = D.atlas.filter(function (x) { return x.id !== id; }); render(); wywolaj('atlasUsun', [id]).then(function () { status('usunięto', true); }).catch(function (e) { status('błąd: ' + e.message, false, true); }); }
+function atlasImportuj() { if (!confirm('Skopiować ćwiczenia z arkusza „Atlas” do aplikacji? Obecna zawartość atlasu w aplikacji zostanie zastąpiona.')) return; status('importuję…'); wywolaj('atlasImport', []).then(function (r) { return wywolaj('atlas', []).then(function (rows) { D.atlas = rows; status('zaimportowano ' + r.wierszy + ' wierszy, ' + r.zLinkiem + ' z linkiem do filmu', true); render(); }); }).catch(function (e) { status('błąd importu: ' + e.message, false, true); }); }
 function wazeniaMob() {
   return '<div style="margin:6px 10px 16px" id="sek-waz"><div class="card"><h2 class="metal"><span class="ttl">Ważenia i kalorie</span>' + wagaBlok() + '</h2><div style="padding:10px"><button class="btn" onclick="dodajWaz()">+ Dodaj dzisiejsze ważenie</button></div>' + wazSorted().slice().reverse().map(function (w) { return '<div class="mw" data-id="' + w.id + '" style="padding:6px 12px"><label>Dzień<input type="date" data-f="data" value="' + esc(w.data) + '"></label><label class="kg">Waga<input data-f="waga" inputmode="decimal" value="' + esc(fmt(w.waga)) + '"></label><label>Notatka<input data-f="notatka" value="' + esc(w.notatka) + '"></label>' + (TR ? '<span class="pbtn" style="align-self:flex-end;color:var(--red)" onclick="usunWaz(\'' + w.id + '\')">✕</span>' : '') + '</div>'; }).join('') + (wazSorted().length ? '' : '<div class="mut" style="padding:0 12px 12px">Brak ważeń. Dodaj pierwsze.</div>') + '</div></div>';
 }
@@ -466,18 +506,17 @@ function bindWidok() {
   document.querySelectorAll('.widok .mw[data-id] [data-f]').forEach(function (el) { var id = el.closest('[data-id]').dataset.id; var o = D.wazenia.filter(function (c) { return c.id === id; })[0]; if (!o) return; bind(el, o, el.dataset.f, 'Wazenia', { change: true, after: function () { var f = zapamietajFokus(); render(); przywrocFokus(f); } }); });
 }
 function tabela(t) {
-  var rows = cw(t), out = '<table class="' + (TR ? 'tr' : '') + '"><tr><th>Nr ' + I('nr') + '</th><th class="l">Ćwiczenie ' + I('cw') + '</th><th colspan="6">Wykonane powtórzenia ' + I('powt') + '</th><th>Ciężar<br>aktualny ' + I('cakt') + '</th><th>Ciężar<br>początkowy ' + I('cst') + '</th><th>Sets ' + I('sets') + '</th><th>Reps ' + I('reps') + '</th><th>Przerwa ' + I('prz') + '</th><th>RiR ' + I('rir') + '</th><th>Tempo ' + I('tempo') + '</th><th>Wideo ' + I('wideo') + '</th><th class="l">Notatka podopiecznego ' + I('nota') + '</th>' + (TR ? '<th class="l">Partia</th>' : '') + '</tr>';
-  out = out.replace('<table class="' + (TR ? 'tr' : '') + '">', '<table class="' + (TR ? 'tr' : '') + '"><colgroup><col style="width:36px"><col style="width:' + (TR ? 230 : 300) + 'px">' + '<col style="width:46px">'.repeat(6) + '<col style="width:92px"><col style="width:92px">' + '<col style="width:76px">'.repeat(5) + '<col style="width:70px"><col>' + (TR ? '<col style="width:150px">' : '') + '</colgroup>');
+  var rows = cw(t), out = '<table class="' + (TR ? 'tr' : '') + '"><tr><th>Nr ' + I('nr') + '</th><th class="l">Ćwiczenie ' + I('cw') + '</th><th colspan="6">Wykonane powtórzenia ' + I('powt') + '</th><th>Ciężar<br>aktualny ' + I('cakt') + '</th><th>Ciężar<br>początkowy ' + I('cst') + '</th><th>Sets ' + I('sets') + '</th><th>Reps ' + I('reps') + '</th><th>Przerwa ' + I('prz') + '</th><th>RiR ' + I('rir') + '</th><th>Tempo ' + I('tempo') + '</th><th>Wideo ' + I('wideo') + '</th><th class="l">Notatka podopiecznego ' + I('nota') + '</th></tr>';
+  out = out.replace('<table class="' + (TR ? 'tr' : '') + '">', '<table class="' + (TR ? 'tr' : '') + '"><colgroup><col style="width:36px"><col style="width:' + (TR ? 230 : 300) + 'px">' + '<col style="width:46px">'.repeat(6) + '<col style="width:92px"><col style="width:92px">' + '<col style="width:76px">'.repeat(5) + '<col style="width:70px"><col></colgroup>');
   for (var i = 0; i < rows.length; i++) {
     var c = rows[i];
     var k = kolorCw(c), sets = n(c.sets);
-    out += '<tr class="r' + k + (TR && SEL[c.id] ? ' sel' : '') + '" data-id="' + c.id + '">' + '<td>' + (i + 1) + '</td><td class="ex">' + (TR ? '<input class="c" data-f="nazwa" list="nazwy" autocomplete="off" value="' + esc(c.nazwa) + '">' : esc(c.nazwa)) + (jestSS(c) ? '<span class="ssb" title="Superseria: to i następne ćwiczenie robisz jedno po drugim, bez przerwy">SS</span>' : '') + '</td>';
+    out += '<tr class="r' + k + (TR && SEL[c.id] ? ' sel' : '') + '" data-id="' + c.id + '">' + '<td>' + (i + 1) + '</td><td class="ex">' + (TR ? '<input class="c" data-f="nazwa" list="nazwy" autocomplete="off" value="' + esc(c.nazwa) + '">' + (c.nazwa && !atlasDlaNazwy(c.nazwa) && !pusteCw(c) ? '<span class="brakA" title="Tej nazwy nie ma w atlasie: kolor i film nie podstawią się same. Dodaj ćwiczenie w Atlasie albo wybierz nazwę z podpowiedzi.">brak w atlasie</span>' : '') : esc(c.nazwa)) + (jestSS(c) ? '<span class="ssb" title="Superseria: to i następne ćwiczenie robisz jedno po drugim, bez przerwy">SS</span>' : '') + '</td>';
     for (var p = 1; p <= 6; p++) out += '<td class="rep ' + (p <= sets ? 'plan' : '') + '">' + (p <= sets ? '<input class="c" data-f="p' + p + '" inputmode="numeric" value="' + esc(c['p' + p]) + '">' : '') + '</td>';
     out += '<td class="w"><input class="c" data-f="ciezar_akt" inputmode="decimal" value="' + esc(c.ciezar_akt) + '"></td><td class="w">' + (TR ? '<input class="c" data-f="ciezar_start" inputmode="decimal" value="' + esc(c.ciezar_start) + '">' : esc(c.ciezar_start)) + '</td>';
     ['sets', 'reps', 'przerwa', 'rir', 'tempo'].forEach(function (f) { out += '<td>' + (TR ? '<input class="c" data-f="' + f + '" value="' + esc(c[f]) + '" style="width:56px">' : esc(c[f])) + '</td>'; });
     out += '<td>' + (TR ? '<input class="c" data-f="wideo" placeholder="▶ link" title="Wklej link do filmu" value="' + esc(c.wideo) + '" style="width:64px;font-size:10px;text-overflow:ellipsis">' : '<a class="v ' + (bezpUrl(c.wideo) ? '' : 'off') + '" target="_blank" rel="noopener" href="' + esc(bezpUrl(c.wideo) || '#') + '">▶</a>') + '</td>';
     out += '<td class="note"><input class="c" data-f="notatka" value="' + esc(c.notatka) + '" placeholder="…"></td>';
-    if (TR) out += '<td class="part"><select class="c" data-f="partia"><option value=""' + (c.partia ? '' : ' selected') + '>–</option>' + D.partieLista.map(function (p) { return '<option' + (c.partia === p ? ' selected' : '') + '>' + esc(p) + '</option>'; }).join('') + '</select></td>';
     out += '</tr>';
   }
   out += '</table>' + (TR ? '<div class="dodaj-cw"><button class="btn" onclick="dodajCw(' + t + ',' + (rows.length + 1) + ')">+ dodaj ćwiczenie</button></div>' : (rows.length ? '' : '<div class="mut" style="padding:14px">Kuba jeszcze nie dodał ćwiczeń do tego treningu.</div>'));
@@ -546,7 +585,18 @@ function zamknijBlok() {
 }
 function prio(name) { var v = U('prio_' + name); return v === 'P' || v === 'U' ? v : 'N'; }
 // kolor ćwiczenia: z priorytetu przypisanej partii (kafelek); bez partii: stary ręczny typ; pusta nazwa = wiersz roboczy
-function kolorCw(c) { if (c.partia) return prio(c.partia); return TYP[c.typ] || 'N'; }
+function kolorCw(c) { var p = c.partia || (atlasDlaNazwy(c.nazwa) || {}).partia; if (p) return prio(p); return TYP[c.typ] || 'N'; }
+function atlasDlaNazwy(nazwa) { var nz = norm(nazwa); if (!nz || !D.atlas) return null; return D.atlas.filter(function (a) { return a.nazwa && norm(a.nazwa) === nz; })[0] || null; }
+// po wpisaniu nazwy z atlasu: partia, film, domyślne powtórzenia i tempo (tylko w puste / domyślne pola)
+function zAtlasu(c) {
+  var a = atlasDlaNazwy(c.nazwa); if (!a) return false; var zm = false;
+  var ust = function (pole, val, gdy) { if (val === '' || val == null) return; if (!gdy) return; c[pole] = val; push({ tab: 'Cwiczenia', id: c.id, pole: pole, wartosc: val }); zm = true; };
+  ust('partia', a.partia, c.partia !== a.partia);
+  ust('wideo', a.wideo, !c.wideo);
+  ust('reps', a.powt, c.reps === '' || c.reps == null || String(c.reps) === '10');
+  ust('tempo', a.tempo, !c.tempo || c.tempo === 'x211');
+  return zm;
+}
 function pusteCw(c) { return !String(c.nazwa || '').trim(); }
 function nieuzyta(p) { var v = String(p.plan == null ? '' : p.plan).trim(); return v === '' || v === '0' || /^x+$/i.test(v) || /^-+$/.test(v); }
 function klasaP(p) { if (nieuzyta(p)) return 'GREY'; var v = prio(p.partia); return v === 'P' ? 'GOLD' : v === 'U' ? 'BORDO' : 'NAVY'; }
@@ -609,7 +659,7 @@ function koloruj(typ) {
 }
 function datalist() {
   var seen = {}, out = '<datalist id="nazwy">';
-  D.cwiczenia.map(function (c) { return String(c.nazwa || '').trim(); }).concat(NAZWY_BAZA).forEach(function (nm) { if (!nm || seen[nm.toLowerCase()]) return; seen[nm.toLowerCase()] = 1; out += '<option value="' + esc(nm) + '">'; });
+  (D.atlas && D.atlas.length ? D.atlas.map(function (a) { return String(a.nazwa || '').trim(); }) : NAZWY_BAZA).concat(D.cwiczenia.map(function (c) { return String(c.nazwa || '').trim(); })).forEach(function (nm) { if (!nm || seen[nm.toLowerCase()]) return; seen[nm.toLowerCase()] = 1; out += '<option value="' + esc(nm) + '">'; });
   return out + '</datalist>';
 }
 function wagaBlok() {
@@ -779,7 +829,7 @@ function bindAll() {
     if (!o) return;
     var after = null;
     if (tab === 'Cwiczenia' && (el.dataset.f === 'typ' || el.dataset.f === 'sets' || el.dataset.f === 'partia')) after = function () { var f = zapamietajFokus(); render(); przywrocFokus(f); };
-    if (tab === 'Cwiczenia' && el.dataset.f === 'nazwa') after = function () { clearTimeout(window._nz); window._nz = setTimeout(function () { podpowiedzCiezar(o); }, 400); };
+    if (tab === 'Cwiczenia' && el.dataset.f === 'nazwa') after = function () { clearTimeout(window._nz); window._nz = setTimeout(function () { var zm = zAtlasu(o); podpowiedzCiezar(o); if (zm) { var f = zapamietajFokus(); render(); przywrocFokus(f); } }, 400); };
     if (tab === 'Wazenia' && (el.dataset.f === 'waga' || el.dataset.f === 'data')) after = function () { clearTimeout(window._kt); window._kt = setTimeout(render, 900); };
     bind(el, o, el.dataset.f, tab, { change: el.tagName === 'SELECT' || el.type === 'date', after: after });
   });
