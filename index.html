@@ -854,7 +854,7 @@ function dodajWaz() { var d = new Date(); var iso = d.getFullYear() + '-' + ('0'
 function usunWaz(id) { if (!confirm('Usunąć to ważenie?')) return; D.wazenia = D.wazenia.filter(function (w) { return w.id !== id; }); usunWpis('Wazenia', id); render(); }
 function jestSS(c) { var v = c.ss; return v === true || v === 'TRUE' || v === 'true' || v === 1 || v === '1'; }
 function togSS(id) { var c = D.cwiczenia.filter(function (x) { return x.id === id; })[0]; if (!c) return; var v = !jestSS(c); c.ss = v; push({ tab: 'Cwiczenia', id: id, pole: 'ss', wartosc: v }); render(); }
-function norm(s) { return String(s || '').toLowerCase().replace(/\s+/g, ' ').replace(/[„”"']/g, '').trim(); }
+function norm(s) { return String(s || '').toLowerCase().replace(/[\s ]+/g, '').replace(/[„”"'’‘`]/g, '').replace(/[–—]/g, '-').trim(); } // łagodne dopasowanie nazw: bez spacji, wielkości liter, cudzysłowów
 // ostatni ciężar tego ćwiczenia z zamkniętych bloków (najnowszy blok najpierw)
 function ciezarZHistorii(nazwa) {
   var nz = norm(nazwa); if (!nz || !D.historia || !D.historia.length) return null;
