@@ -165,6 +165,9 @@ table.atl th{border-bottom:1px solid #262626}
 body:not(.prosty) .top{display:grid;grid-template-columns:minmax(280px,1fr) auto minmax(280px,1fr);align-items:center;gap:20px}body:not(.prosty) .top>div:first-child{min-width:0}body:not(.prosty) .top .weeks{justify-self:center;margin:0}body:not(.prosty) .top .kpi{justify-self:end;margin:0}
 td.nrc{padding:0}input.c.nr{width:100%;text-align:center;font-weight:700;background:transparent}
 .pm-sekcja .trSel{white-space:nowrap;margin-left:22px;font-weight:600;letter-spacing:0;text-transform:none;color:var(--ivd);font-size:12px;display:inline-flex;align-items:center;gap:8px}.pm-sekcja .trSel select{font-size:13px}
+.top .sub{display:inline-block;font-size:13px!important;letter-spacing:2.5px;text-transform:uppercase;color:var(--iv);font-weight:700;border:1px solid var(--gl);border-radius:999px;padding:4px 14px;margin-bottom:6px;box-shadow:0 0 10px rgba(217,165,32,.18)}
+.pbtn.rz{background:#141414;border:1px solid var(--gl);border-radius:10px;padding:4px 14px 4px 6px;color:var(--iv);box-shadow:0 0 0 1px rgba(217,165,32,.15),0 0 12px rgba(217,165,32,.22);display:inline-flex;align-items:center;gap:8px;text-decoration:none}.pbtn.rz .ico{width:20px;height:20px;border-radius:50%;background:linear-gradient(180deg,#E6CB80,#B8891A);color:#0E0E12;display:inline-flex;align-items:center;justify-content:center;font-size:9px;flex:none}
+.plansum{width:300px;margin:0 0 12px;background:#141414;border:1px solid #262626;border-radius:12px;padding:10px 12px;box-sizing:border-box}.plansum .tt{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--gl);margin-bottom:8px;font-weight:700}.plansum table{width:100%;border-collapse:collapse;margin:0}.plansum td{border:none;padding:4px 4px;font-size:12px;text-align:left;background:transparent}.plansum td.pn{font-weight:700;color:var(--iv);border-left:3px solid #333;padding-left:8px}.plansum td.pn.GOLD{border-left-color:#B8891A}.plansum td.pn.NAVY{border-left-color:#2E3F66}.plansum td.pn.BORDO{border-left-color:#6E2231}.plansum td.pn.GREY{border-left-color:#444;color:var(--ivd)}.plansum td.n{color:var(--ivd);font-weight:800;white-space:nowrap;width:48px}.plansum td.n.ok{color:#5FBF7A}.plansum td.psb{width:70px}.plansum .psb i{display:block;height:6px;border-radius:3px;background:linear-gradient(90deg,#B8891A,#D9A520)}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
 .ank{max-width:760px;margin:30px auto;padding:0 16px 40px}.ankh{display:flex;justify-content:space-between;align-items:center}.ankh .sub{font-size:16px}.ankp{color:var(--ivd);font-size:16px;font-weight:700}.ankbar{height:4px;background:#2A2A36;border-radius:2px;margin:10px 0 22px;overflow:hidden}.ankbar i{display:block;height:100%;background:linear-gradient(90deg,#8E6B2E,#C9A455)}.anks{font-size:34px;margin:0 0 14px}.ankw{font-size:18px;line-height:1.5;margin:0 0 18px}
 .ap{background:var(--card);border:1px solid var(--line);border-left:3px solid #8E6B2E;border-radius:8px;padding:18px 20px;margin-bottom:14px}.ap.ukryte{display:none}.ap.brak{border-color:var(--red);border-left-color:var(--red)}.apt{font-size:19px;font-weight:700;color:var(--iv);line-height:1.35}.apt small{font-weight:500;color:var(--ivd);font-size:13px;margin-left:6px}.apo{color:var(--ivd);font-size:15px;line-height:1.5;margin-top:6px}
@@ -223,7 +226,7 @@ function INSTR() { return [
  ['Znaczki „i” przy nagłówkach', 'Wszystko ze znaczkiem <i class="inf">i</i> możesz kliknąć. Pokaże się krótki opis: co to znaczy i jak z tym pracować. Znaczki są przy nagłówkach kolumn w tabelach, przy kafelkach na górze i przy tytułach sekcji.'],
  ['Dwie rzeczy po zakończonym tygodniu treningowym', '<b>1. Wyślij raport.</b> Jak go napisać, masz w karcie „Raport” obok.\n<b>2. Odhacz tydzień.</b> Kliknij kolejną kratkę w polu „Blok” na samej górze. Dzięki temu wiem, w którym tygodniu bloku jesteś, i mogę dobrze zaplanować Twój progres.'],
  ['Raport: czym jest i jak go zrobić', 'Raport to krótki opis samopoczucia po całym tygodniu treningowym, czyli gdy zrobisz wszystkie zaplanowane treningi. Napisz w nim:\n• jak się czujesz po tym tygodniu,\n• czy pojawiły się jakieś problemy na treningach,\n• czy zostawiasz mi coś w „Notatce podopiecznego” przy ćwiczeniu,\n• co chcesz ze mną przegadać, treningowo albo zdrowotnie,\n• że wpisałeś wagę do tabeli „Ważenia i kalorie”,\n• wszystko, co jeszcze przyjdzie Ci do głowy.\n\n<b>Gdzie:</b> w sekcji <b>Raporty</b> (menu ≡ → Raporty tygodniowe). Możesz dołączyć zdjęcia albo krótki film. Jeśli coś nie działa, wyślij mailem na <b>' + (D.raportMail || '') + '</b> (w temacie numer tygodnia).\n<a class="pbtn rz" style="display:inline-block;margin:8px 0 0" href="mailto:' + (D.raportMail || '') + '?subject=' + encodeURIComponent('Raport – tydzień ' + (n((D.ustawienia || {}).zaliczone) + 1) + (D.klient && D.klient.imie ? ' – ' + D.klient.imie : '')) + '">✉ &nbsp;Wyślij raport (tydzień ' + (n((D.ustawienia || {}).zaliczone) + 1) + ')</a>\n<b>Do kiedy:</b> najlepiej od razu po ostatnim treningu, najpóźniej w piątek do 23:59. Odpisuję do niedzieli 23:59.\n<b>Pilne sprawy:</b> pisz na Instagramie albo Messengerze, odpowiadam do 24 h. Nie bój się pytać, od tego jestem.\n<span class="warn">Raport jest warunkiem dalszych wskazówek treningowych.</span>'],
- ['Jak wykonać prawidłową rozgrzewkę', 'Rozgrzewka przed każdym treningiem, według filmu. Przycisk „▶ Rozgrzewka” masz też w nagłówku każdego treningu.\n<a class="pbtn rz" style="display:inline-block;margin:8px 0 0" target="_blank" href="' + (D.rozgrzewka || '#') + '">▶ &nbsp;Film z rozgrzewką</a>'],
+ ['Jak wykonać prawidłową rozgrzewkę', 'Rozgrzewka przed każdym treningiem, według filmu. Przycisk „▶ Rozgrzewka” masz też w nagłówku każdego treningu.\n<a class="pbtn rz" style="margin:8px 0 0" target="_blank" href="' + (D.rozgrzewka || '#') + '"><span class="ico">▶</span>Film z rozgrzewką</a>'],
  ['Czym jest upadek mięśniowy (RiR 0)', 'To moment, w którym nie jesteś w stanie zrobić kolejnego powtórzenia z braku siły, mimo poprawnej techniki. RiR 0 w tabeli oznacza: seria do upadku.'],
  ['Jak czytać zapis tempa, np. x211', '1. <b>x</b>: ruch koncentryczny (skrócenie mięśnia) jak najszybciej, przy poprawnej technice,\n2. <b>2</b>: ruch ekscentryczny (opuszczanie) przez 2 sekundy,\n3. <b>1</b>: pauza 1 sekunda w maksymalnym skróceniu,\n4. <b>1</b>: pauza 1 sekunda w maksymalnym rozciągnięciu.'],
  ['Legenda', '<b>SS</b> = super seria: dwa ćwiczenia z tym samym numerem robisz jedno po drugim, bez przerwy.\n<b>DS</b> = drop set: po ostatniej serii od razu zmniejszasz ciężar i robisz kolejną.']
@@ -243,9 +246,9 @@ function ustawTryb(t, zapisz) {
 ustawTryb(TRYB, false);
 function zmienTryb(t) { if (t === TRYB) return; ustawTryb(t, true); MENU = false; if (D && D.cwiczenia) render(); else if (document.getElementById('pin') || document.getElementById('haslo')) { /* ekran logowania: tylko CSS */ } window.scrollTo(0, 0); }
 function pasek() {
-  var imie = D && D.klient && D.klient.imie ? ' · ' + esc(D.klient.imie) : '';
-  return '<div class="bar"><span class="hb3" onclick="togMenu()" title="Menu: skok do sekcji">≡</span><span class="ttx">Plan treningowy' + imie + '</span>' + (TR ? '' : '<span class="sw" title="Prosty = karty, jedna rzecz na ekranie. Pełny = tabele, wszystko naraz."><span class="' + (TRYB === 'prosty' ? 'on' : '') + '" onclick="zmienTryb(\'prosty\')">Prosty</span><span class="' + (TRYB === 'pelny' ? 'on' : '') + '" onclick="zmienTryb(\'pelny\')">Pełny</span></span>') + '</div>';
+  return '<div class="bar"><span class="hb3" onclick="togMenu()" title="Menu: skok do sekcji">≡</span><span class="ttx">' + esc(imieKlienta()) + '</span>' + (TR ? '' : '<span class="sw" title="Prosty = karty, jedna rzecz na ekranie. Pełny = tabele, wszystko naraz."><span class="' + (TRYB === 'prosty' ? 'on' : '') + '" onclick="zmienTryb(\'prosty\')">Prosty</span><span class="' + (TRYB === 'pelny' ? 'on' : '') + '" onclick="zmienTryb(\'pelny\')">Pełny</span></span>') + '</div>';
 }
+function imieKlienta() { return D && D.klient && D.klient.imie ? D.klient.imie : 'Plan treningowy'; }
 function togMenu() { MENU = !MENU; rysujMenu(); }
 function rysujMenu() {
   var old = document.getElementById('menu'); if (old) old.remove(); var tlo = document.getElementById('tlo'); if (tlo) tlo.remove();
@@ -409,7 +412,7 @@ function render() {
   var d = last != null && prev != null ? last - prev : null;
   var serieT = 0; for (var t = 1; t <= akt; t++) serieT += serie(t);
   var html = pasek();
-  html += '<div class="top"><div><div class="sub">Plan treningowy · ' + (TR ? '<input id="klub" value="' + esc(U('klub')) + '" placeholder="klub / miejsce" title="Klub lub miejsce treningów">' : (U('klub') ? esc(U('klub')) : '')) + (TR ? ' · <span style="color:#E6CB80">TRENER</span>' : '') + '</div><h1>Cel: ' + (TR ? '<input id="cel" value="' + esc(U('cel')) + '" placeholder="wpisz cel bloku">' : esc(U('cel'))) + '</h1></div>';
+  html += '<div class="top"><div><div class="sub">' + (TR ? 'Trener' : esc(imieKlienta())) + '</div><h1>Cel: ' + (TR ? '<input id="cel" value="' + esc(U('cel')) + '" placeholder="wpisz cel bloku">' : esc(U('cel'))) + '</h1></div>';
   html += '<div class="weeks"><span>Blok: <b>' + (TR ? '<input id="blok" class="c" style="width:44px;color:#E6CB80;font-weight:700;text-align:center" value="' + blok + '">' : blok) + '</b> tyg. · zaliczone: <b>' + zal + '</b> ' + I('tyg') + ' &nbsp;· treningi/tydz.: <b>' + akt + '</b></span><div id="wks">';
   for (var i = 0; i < blok; i++) html += '<i class="wk ' + (i < zal ? 'on' : '') + '" data-i="' + i + '">' + (i < zal ? '✓' : '') + '</i>';
   html += '</div></div>';
@@ -422,9 +425,9 @@ function render() {
   html += '<div class="wrap desk solo"><div>';
   var t3 = mobT;
   {
-    html += '<div class="card" id="sek-t' + t3 + '"><h2 class="metal"><span class="ttl">Trening ' + t3 + '</span><a class="pbtn rz" target="_blank" href="' + esc(D.rozgrzewka) + '">▶ &nbsp;Rozgrzewka</a><span style="margin-left:auto"></span><span style="font-size:12px;color:var(--ivd);font-weight:600">' + cw(t3).length + ' ćwiczeń · ' + serie(t3) + ' serii</span></h2>';
+    html += '<div class="card" id="sek-t' + t3 + '"><h2 class="metal"><span class="ttl">Trening ' + t3 + '</span><a class="pbtn rz" target="_blank" href="' + esc(D.rozgrzewka) + '"><span class="ico">▶</span>Rozgrzewka</a><span style="margin-left:auto"></span><span style="font-size:12px;color:var(--ivd);font-weight:600">' + cw(t3).length + ' ćwiczeń · ' + serie(t3) + ' serii</span></h2>';
     html += tabela(t3);
-    html += '<div class="legend"><span><i class="leg GOLD" onclick="tip(\'P\',event)"></i>Priorytet ' + I('P') + '</span><span><i class="leg NAVY" onclick="tip(\'N\',event)"></i>Neutral ' + I('N') + '</span><span><i class="leg BORDO" onclick="tip(\'U\',event)"></i>Utrzymanie ' + I('U') + '</span></div></div>';
+    html += '<div class="legend"><span><i class="leg GOLD" onclick="tip(\'P\',event)"></i>Priorytet ' + I('P') + '</span><span><i class="leg NAVY" onclick="tip(\'N\',event)"></i>Neutral ' + I('N') + '</span><span><i class="leg BORDO" onclick="tip(\'U\',event)"></i>Utrzymanie ' + I('U') + '</span></div></div>' + (TR ? planSum(t3) : '');
   }
   html += '</div></div>';
   }
@@ -541,6 +544,20 @@ function partieTreningu(t) {
   out += '<tr class="sum"><td colspan="5">Łącznie serii: ' + sum + '</td></tr></table></div>';
   return out;
 }
+function partiaCw(c) { return c.partia || (atlasDlaNazwy(c.nazwa) || {}).partia || ''; }
+function planSum(t) {
+  var rows = D.partie.filter(function (p) { return wTr(p, t); });
+  if (!rows.length) return '';
+  var h = '<div class="plansum" id="plansum-t' + t + '"><div class="tt">Plan na ten trening</div><table>';
+  rows.forEach(function (p) {
+    var plan = n(p['t' + t + '_r']) + n(p['t' + t + '_s']);
+    var roz = cw(t).reduce(function (s, c) { return s + (!pusteCw(c) && norm(partiaCw(c)) === norm(p.partia) ? n(c.sets) : 0); }, 0);
+    var pr = plan ? Math.min(100, Math.round(roz / plan * 100)) : 0;
+    h += '<tr><td class="pn ' + klasaP(p) + '">' + esc(p.partia) + '</td><td class="n' + (plan && roz >= plan ? ' ok' : '') + '">' + roz + ' / ' + plan + '</td><td class="psb"><i style="width:' + pr + '%"></i></td></tr>';
+  });
+  return h + '</table></div>';
+}
+function odswiezPlanSum(t) { var el = document.getElementById('plansum-t' + t); if (!el) return; var tmp = document.createElement('div'); tmp.innerHTML = planSum(t); if (tmp.firstChild) el.replaceWith(tmp.firstChild); else el.remove(); }
 function serieP(p) { var s = 0; for (var t = 1; t <= 5; t++) if (wTr(p, t)) s += n(p['t' + t + '_r']) + n(p['t' + t + '_s']); return s; }
 function rozpisane(p) { var s = serieP(p); return p.plan ? s + ' / ' + p.plan : '–'; }
 function kafelki() {
@@ -809,7 +826,7 @@ function renderMob() {
   });
   if (!rows.length) out = '<div class="mut" style="padding:20px">Brak ćwiczeń w tym treningu.</div>';
   box.innerHTML = out;
-  box.querySelectorAll('[data-id] [data-f]').forEach(function (el) { var id = el.closest('[data-id]').dataset.id; var o = D.cwiczenia.filter(function (c) { return c.id === id; })[0]; var tab = 'Cwiczenia'; if (!o) { o = D.wazenia.filter(function (c) { return c.id === id; })[0]; tab = 'Wazenia'; } if (o) bind(el, o, el.dataset.f, tab, { change: el.type === 'date' || tab === 'Wazenia', after: tab === 'Wazenia' ? function () { updateKpi(); } : (/^p\d$/.test(el.dataset.f) ? function () { var card = el.closest('.mcard'); var sets = Math.max(0, n(o.sets)), ok = sets > 0; for (var q = 1; q <= sets && q <= 6; q++) if (o['p' + q] === '' || o['p' + q] == null) ok = false; if (card) card.classList.toggle('done', ok); } : null) }); });
+  box.querySelectorAll('[data-id] [data-f]').forEach(function (el) { var id = el.closest('[data-id]').dataset.id; var o = D.cwiczenia.filter(function (c) { return c.id === id; })[0]; var tab = 'Cwiczenia'; if (!o) { o = D.wazenia.filter(function (c) { return c.id === id; })[0]; tab = 'Wazenia'; } if (o) bind(el, o, el.dataset.f, tab, { change: el.type === 'date' || tab === 'Wazenia', after: tab === 'Wazenia' ? function () { updateKpi(); } : (/^p\d$/.test(el.dataset.f) ? function () { var card = el.closest('.mcard'); var sets = Math.max(0, n(o.sets)), ok = sets > 0; for (var q = 1; q <= sets && q <= 6; q++) if (o['p' + q] === '' || o['p' + q] == null) ok = false; if (card) card.classList.toggle('done', ok); } : (TR && /^(sets|nazwa|partia)$/.test(el.dataset.f) ? function () { odswiezPlanSum(n(o.trening)); } : null)) }); });
   var sel = document.getElementById('mobSel'); if (sel) sel.onchange = function () { mobT = n(sel.value); try { localStorage.setItem('mobT', mobT); } catch (e) {} renderMob(); bindRaporty(); };
 }
 function updateKpi() { render(); }
@@ -852,7 +869,6 @@ function bindAll() {
   var cel = document.getElementById('cel'); if (cel) bind(cel, D.ustawienia, 'cel', 'Ustawienia');
   var blok = document.getElementById('blok'); if (blok) bind(blok, D.ustawienia, 'blok', 'Ustawienia', { change: true, after: render });
   var kcal = document.getElementById('kcal'); if (kcal) bind(kcal, D.ustawienia, 'kcal', 'Ustawienia');
-  var klub = document.getElementById('klub'); if (klub) bind(klub, D.ustawienia, 'klub', 'Ustawienia');
   var trn = document.getElementById('treningi'); if (trn) bind(trn, D.ustawienia, 'treningi', 'Ustawienia', { change: true, after: render });
   for (var ti = 1; ti <= 5; ti++) { var nt = document.getElementById('nazwa_t' + ti); if (nt) bind(nt, D.ustawienia, 'nazwa_t' + ti, 'Ustawienia'); }
   document.querySelectorAll('input.nr[data-nr]').forEach(function (el) { el.addEventListener('change', function () { przestawCw(el.dataset.nr, el.value); }); el.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); el.blur(); } }); });
