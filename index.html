@@ -1124,6 +1124,7 @@ function ekranStatusu(konto) {
   if (st === 'ankieta') t = '<p class="mut">Konto gotowe. Następny krok to <b style="color:var(--iv)">ankieta startowa</b>: pytania o cel, zdrowie, doświadczenie i codzienność, żeby plan był pod Ciebie. Zajmie ok. 15 minut, odpowiedzi zapisują się w trakcie.</p>';
   else if (st === 'czeka') t = '<p class="mut">Dzięki za ankietę. Kuba ją przegląda i zatwierdza Twoje konto. Plan pojawi się tutaj, w tym samym miejscu.</p>';
   else if (st === 'odrzucone') t = '<p class="mut">To konto nie jest aktywne. Napisz do Kuby na Instagramie.</p>';
+  else if (st === 'zakonczone') t = '<p class="mut">Prowadzenie zakończone. Dzięki za wspólną pracę! Plan nie jest już dostępny. Jeśli chcesz wrócić, napisz do Kuby na Instagramie.</p>';
   else t = '<p class="mut">Twój plan jest już gotowy.</p>';
   ekranKarta('Cześć' + (im ? ', ' + im : '') + '!', t + '<button class="btn" id="st-btn">' + (st === 'aktywne' ? 'Otwórz plan' : st === 'ankieta' ? 'Wypełnij ankietę' : 'Sprawdź ponownie') + '</button><p class="mut" style="font-size:16px;margin-top:22px"><a class="lnk" onclick="wylogujKonto()">Wyloguj</a> · ' + esc(konto.email || '') + '</p>');
   document.getElementById('st-btn').onclick = function () { if (st === 'ankieta') { if (!ANK.odp.imie && konto.imie) ANK.odp.imie = konto.imie; ekranAnkiety(); return; } ladowanie('Sprawdzam…'); wczytajSesja(); };
