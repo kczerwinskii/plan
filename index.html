@@ -171,6 +171,9 @@ td.nrc{padding:0}input.c.nr{width:100%;text-align:center;font-weight:700;backgro
 .plansum .blk{border-radius:9px;padding:9px 12px;min-width:0;background:linear-gradient(180deg,#3A3A3A,#262626)}.plansum .blk.pkGOLD{background:linear-gradient(180deg,#8A6A1E,#5A4512)}.plansum .blk.pkNAVY{background:linear-gradient(180deg,#2E3F66,#1E2A47)}.plansum .blk.pkBORDO{background:linear-gradient(180deg,#6E2231,#4A1620)}.plansum .blk.pkGREY{background:linear-gradient(180deg,#3A3A3A,#262626)}
 .plansum .nm{font-size:16px;font-weight:700;color:#E8E2D3;line-height:1.2;margin-bottom:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.plansum .sub2{display:grid;grid-template-columns:42px 45px 1fr;gap:8px;align-items:center;padding:2px 0}.plansum .lb{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:#D8D3C6;opacity:.9;font-weight:600}.plansum .n{font-size:15px;color:#E8E2D3;font-weight:800;white-space:nowrap}.plansum .n.ok{color:#8FE0A6}.plansum .psb{height:6px;background:rgba(0,0,0,.45);border-radius:3px;overflow:hidden}.plansum .psb i{display:block;height:100%;background:linear-gradient(90deg,#CFC9BA,#E8E2D3)}.plansum .sub2.brak{opacity:.4}.plansum .sub2.brak .psb{visibility:hidden}.plansum .mut2{font-size:12px;opacity:.7;font-weight:500}
 @media(max-width:700px){.plansum .siatka{grid-template-columns:1fr;grid-auto-flow:row;grid-template-rows:none!important}}
+.pm td.pl .pill{display:inline-block;min-width:30px;padding:2px 10px;border-radius:999px;border:1px solid var(--gl);color:var(--gl);font-weight:800;font-size:13px;background:rgba(217,165,32,.08)}
+.pm td.roz{padding:0;position:relative;background:#1A1A1A;overflow:hidden}.pm td.roz .fill{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,rgba(184,137,26,.55),rgba(217,165,32,.75))}.pm td.roz.ok .fill{background:rgba(95,191,122,.45)}.pm td.roz .rn{position:relative;display:block;padding:6px 8px;font-size:13px;font-weight:800;color:var(--iv)}.pm td.roz .rn small{font-size:11px;color:var(--ivd);font-weight:700;margin-left:2px}
+.pm-sekcja .trSel{border:1px solid var(--gl);border-radius:10px;padding:4px 6px 4px 12px;background:#1A1A1A;color:var(--iv);box-shadow:0 0 8px rgba(217,165,32,.15)}.pm-sekcja .trSel select{border:1px solid var(--gm);border-radius:8px;padding:3px 10px;background:#262626;color:var(--iv);font-weight:700;font-size:13px}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
 .ank{max-width:760px;margin:30px auto;padding:0 16px 40px}.ankh{display:flex;justify-content:space-between;align-items:center}.ankh .sub{font-size:16px}.ankp{color:var(--ivd);font-size:16px;font-weight:700}.ankbar{height:4px;background:#2A2A36;border-radius:2px;margin:10px 0 22px;overflow:hidden}.ankbar i{display:block;height:100%;background:linear-gradient(90deg,#8E6B2E,#C9A455)}.anks{font-size:34px;margin:0 0 14px}.ankw{font-size:18px;line-height:1.5;margin:0 0 18px}
 .ap{background:var(--card);border:1px solid var(--line);border-left:3px solid #8E6B2E;border-radius:8px;padding:18px 20px;margin-bottom:14px}.ap.ukryte{display:none}.ap.brak{border-color:var(--red);border-left-color:var(--red)}.apt{font-size:19px;font-weight:700;color:var(--iv);line-height:1.35}.apt small{font-weight:500;color:var(--ivd);font-size:13px;margin-left:6px}.apo{color:var(--ivd);font-size:15px;line-height:1.5;margin-top:6px}
@@ -651,37 +654,42 @@ function planowanie() {
   var out = '<div class="card" id="sek-plan"><h2 class="metal"><span class="ttl" onclick="tog(\'plan\')">▾ &nbsp;Tryb planowania</span></h2>';
   out += '<div class="pm-row"><div class="pm-l"><div class="pm-sekcja"><span class="step">1</span>Objętość na partię</div>' + kafelki() + '</div><div class="pm-r">';
   out += '<div class="pm-sekcja"><span class="step">2</span>Partie × treningi<span class="trSel">treningi w tygodniu <select id="treningi" class="c" title="Ile treningów w tygodniu ma ten plan">' + [1, 2, 3, 4, 5].map(function (x) { return '<option' + (x === akt ? ' selected' : '') + '>' + x + '</option>'; }).join('') + '</select></span></div>';
-  out += '<table class="pm" style="margin-top:8px;width:' + (190 + 56 + 200 * akt + 90) + 'px"><colgroup><col style="width:190px"><col style="width:56px">' + '<col style="width:56px"><col style="width:72px"><col style="width:72px">'.repeat(akt) + '<col style="width:90px"></colgroup><tr><th class="l tt" rowspan="2">Partia</th><th class="tt" rowspan="2">Plan</th>';
+  out += '<table class="pm" style="margin-top:8px;width:' + (190 + 56 + 200 * akt + 90) + 'px"><colgroup><col style="width:190px"><col style="width:56px"><col style="width:90px">' + '<col style="width:56px"><col style="width:72px"><col style="width:72px">'.repeat(akt) + '</colgroup><tr><th class="l tt" rowspan="2">Partia</th><th class="tt" rowspan="2">Plan</th><th class="tt sep" rowspan="2">Rozpisane</th>';
   for (var t = 1; t <= akt; t++) out += '<th class="tt sep" colspan="3">Trening ' + t + '</th>';
-  out += '<th class="tt sep" rowspan="2">Rozpisane</th></tr><tr>';
+  out += '</tr><tr>';
   for (var t2 = 1; t2 <= akt; t2++) out += '<th class="sep">w tr.</th><th>Rozc.</th><th>Skr.</th>';
   out += '</tr>';
   var sumR = [0, 0, 0, 0, 0, 0], sumS = [0, 0, 0, 0, 0, 0], planT = 0, rozT = 0, chips = [[], [], [], [], [], []];
   D.partieLista.forEach(function (name) {
     var p = D.partie.filter(function (x) { return x.partia === name; })[0]; if (!p) return;
     var kl = klasaP(p), plan = n(p.plan), roz = 0;
-    out += '<tr data-p="' + esc(name) + '"><td class="pn ' + kl + '">' + esc(name) + '</td><td class="pl">' + (plan || '–') + '</td>';
+    out += '<tr data-p="' + esc(name) + '"><td class="pn ' + kl + '">' + esc(name) + '</td><td class="pl">' + (plan ? '<span class="pill">' + plan + '</span>' : '–') + '</td>';
+    var tc = '';
     for (var t3 = 1; t3 <= akt; t3++) {
       var w = wTr(p, t3), r = w ? p['t' + t3 + '_r'] : '', s = w ? p['t' + t3 + '_s'] : '', rs = n(r) + n(s); roz += rs;
       if (t3 <= akt && w) { sumR[t3] += n(r); sumS[t3] += n(s); if (!nieuzyta(p)) chips[t3].push({ name: name, kl: kl, n: rs }); }
-      if (t3 > akt) { out += '<td class="off sep"></td><td class="off"></td><td class="off"></td>'; continue; }
-      if (w) out += '<td class="sep ' + kl + '"><input type="checkbox" data-f="t' + t3 + '_w" checked></td><td class="' + kl + '"><input class="c" data-f="t' + t3 + '_r" inputmode="numeric" placeholder="?" value="' + esc(r) + '"></td><td class="' + kl + '"><input class="c" data-f="t' + t3 + '_s" inputmode="numeric" placeholder="?" value="' + esc(s) + '"></td>';
-      else out += '<td class="sep dk" colspan="3"><input type="checkbox" data-f="t' + t3 + '_w"></td>';
+      if (t3 > akt) { tc += '<td class="off sep"></td><td class="off"></td><td class="off"></td>'; continue; }
+      if (w) tc += '<td class="sep ' + kl + '"><input type="checkbox" data-f="t' + t3 + '_w" checked></td><td class="' + kl + '"><input class="c" data-f="t' + t3 + '_r" inputmode="numeric" placeholder="?" value="' + esc(r) + '"></td><td class="' + kl + '"><input class="c" data-f="t' + t3 + '_s" inputmode="numeric" placeholder="?" value="' + esc(s) + '"></td>';
+      else tc += '<td class="sep dk" colspan="3"><input type="checkbox" data-f="t' + t3 + '_w"></td>';
     }
     planT += plan; rozT += roz;
-    out += '<td class="roz sep ' + (plan && roz >= plan ? 'ok' : '') + '">' + (plan ? roz + ' / ' + plan : (roz ? roz + ' / –' : '–')) + '</td></tr>';
+    out += rozKom(roz, plan) + tc + '</tr>';
   });
-  out += '<tr class="sum"><td class="pn">Suma</td><td>' + planT + '</td>';
+  out += '<tr class="sum"><td class="pn">Suma</td><td>' + planT + '</td><td class="sep">' + rozT + ' / ' + planT + '</td>';
   for (var t4 = 1; t4 <= akt; t4++) out += '<td class="sep"></td><td>' + (sumR[t4] || '') + '</td><td>' + (sumS[t4] || '') + '</td>';
-  out += '<td class="sep">' + rozT + ' / ' + planT + '</td></tr>';
-  out += '<tr class="tot"><td class="pn">Łącznie na treningu</td><td></td>';
+  out += '</tr>';
+  out += '<tr class="tot"><td class="pn">Łącznie na treningu</td><td></td><td class="sep"></td>';
   for (var t5 = 1; t5 <= akt; t5++) { var tot = sumR[t5] + sumS[t5]; out += '<td class="sep" colspan="3"><span class="gt ' + (t5 > akt || !tot ? 'off' : '') + '">' + (t5 > akt ? '–' : (tot || '–')) + '</span></td>'; }
-  out += '<td class="sep"></td></tr>';
-  out += '<tr class="tot"><td class="pn">Partie w treningu</td><td></td>';
+  out += '</tr>';
+  out += '<tr class="tot"><td class="pn">Partie w treningu</td><td></td><td class="sep"></td>';
   for (var t6 = 1; t6 <= akt; t6++) { out += '<td class="sep" colspan="3"><div class="chips">' + (t6 > akt ? '<span class="mut">–</span>' : (chips[t6].length ? chips[t6].map(function (c) { return '<span class="chip ' + c.kl + '">' + esc(c.name) + '<b' + (c.n ? '' : ' class="q"') + '>' + (c.n || '?') + '</b></span>'; }).join('') : '<span class="mut">brak</span>')) + '</div></td>'; }
-  out += '<td class="sep"></td></tr></table>';
+  out += '</tr></table>';
   out += '</div></div></div>';
   return out;
+}
+function rozKom(roz, plan) {
+  if (plan) { var pr = Math.min(100, Math.round(roz / plan * 100)); return '<td class="roz sep' + (roz >= plan ? ' ok' : '') + '"><div class="fill" style="width:' + pr + '%"></div><span class="rn">' + roz + '<small>/ ' + plan + '</small></span></td>'; }
+  return '<td class="roz sep"><span class="rn">' + (roz ? roz + '<small>/ –</small>' : '–') + '</span></td>';
 }
 function zaznacz(id) { if (SEL[id]) delete SEL[id]; else SEL[id] = true; render(); }
 function koloruj(typ) {
