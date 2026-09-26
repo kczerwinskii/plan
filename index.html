@@ -246,10 +246,10 @@ var open = { t: {}, waz: false, zal: false, obj: TR, ins: {} , part: {}, plan: T
 var RF = { pliki: [], wysylam: false, tresc: '', tydzien: null }; // formularz raportu (trzyma stan między renderami)
 var SEL = {}, SHOW_TYP = false;
 // tryb: 'prosty' (karty, telefon) albo 'pelny' (tabele); zapamiętany w localStorage, domyślnie po szerokości ekranu
-var TRYB = (function () { var z = null; try { z = localStorage.getItem('tryb'); } catch (e) {} if (z === 'prosty' || z === 'pelny') return z; var coarse = false; try { coarse = window.matchMedia('(pointer: coarse)').matches; } catch (e) {} var sw = window.screen ? window.screen.width : 1920; return (coarse && sw < 1000) || sw < 600 ? 'prosty' : 'pelny'; })();
+var TRYB = 'pelny'; // tryb Prosty (karty) wycofany 26.09: tabela jest jedynym widokiem
 var MENU = false;
 function ustawTryb(t, zapisz) {
-  TRYB = t; if (zapisz) { try { localStorage.setItem('tryb', t); } catch (e) {} }
+  t = 'pelny'; TRYB = t; if (zapisz) { try { localStorage.setItem('tryb', t); } catch (e) {} }
   document.body.classList.toggle('prosty', t === 'prosty');
   var vp = document.querySelector('meta[name=viewport]'); if (!vp) { vp = document.createElement('meta'); vp.name = 'viewport'; document.head.appendChild(vp); }
   vp.setAttribute('content', t === 'prosty' ? 'width=device-width, initial-scale=1, maximum-scale=1' : 'width=1280');
@@ -257,7 +257,7 @@ function ustawTryb(t, zapisz) {
 ustawTryb(TRYB, false);
 function zmienTryb(t) { if (t === TRYB) return; ustawTryb(t, true); MENU = false; if (D && D.cwiczenia) render(); else if (document.getElementById('pin') || document.getElementById('haslo')) { /* ekran logowania: tylko CSS */ } window.scrollTo(0, 0); }
 function pasek() {
-  return '<div class="bar"><span class="hb3" onclick="togMenu()" title="Menu: skok do sekcji">≡</span><span class="ttx">' + esc(imieKlienta()) + '</span>' + (TR ? '' : '<span class="sw" title="Prosty = karty, jedna rzecz na ekranie. Pełny = tabele, wszystko naraz."><span class="' + (TRYB === 'prosty' ? 'on' : '') + '" onclick="zmienTryb(\'prosty\')">Prosty</span><span class="' + (TRYB === 'pelny' ? 'on' : '') + '" onclick="zmienTryb(\'pelny\')">Pełny</span></span>') + '</div>';
+  return '<div class="bar"><span class="hb3" onclick="togMenu()" title="Menu: skok do sekcji">≡</span><span class="ttx">' + esc(imieKlienta()) + '</span>' + '' + '</div>';
 }
 function imieKlienta() { return D && D.klient && D.klient.imie ? D.klient.imie : 'Plan treningowy'; }
 function togMenu() { MENU = !MENU; rysujMenu(); }
