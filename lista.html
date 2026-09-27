@@ -1,32 +1,78 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Podopieczni</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Pulpit trenera</title><meta name="theme-color" content="#0B0B0B">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-body{margin:0;background:linear-gradient(180deg,#2A2A36,#1B1B22 60%,#0E0E12) fixed;color:#EFE9DA;font:14px Poppins,Arial,sans-serif;min-height:100vh;padding:40px 20px;box-sizing:border-box}
-.box{max-width:820px;margin:0 auto;background:#232330;border:1px solid #C9A455;border-radius:8px;padding:24px}
-h1{color:#E6CB80;font-size:22px;margin:0 0 6px}
-table{border-collapse:collapse;width:100%;margin-top:14px}th{color:#E6CB80;text-align:left;font-size:11px;letter-spacing:.5px;text-transform:uppercase;padding:8px;border-bottom:2px solid #C9A455}td{padding:8px;border-bottom:1px solid #4A4A5A;vertical-align:top}
-a{color:#E6CB80}input{background:#1A1A24;color:#EFE9DA;border:1px solid #4A4A5A;border-radius:6px;padding:8px 10px;font:14px Poppins}
-button{background:linear-gradient(180deg,#E6CB80,#C9A455 55%,#8E6B2E);color:#0E0E12;border:1px solid #F5E3A6;border-radius:6px;padding:8px 16px;font:600 14px Poppins;cursor:pointer}
-button.szary{background:#1A1A24;color:#EFE9DA;border:1px solid #4A4A5A}.mut{color:#B9AE94;font-size:13px}.pin{font:800 20px Poppins;color:#E6CB80}
-.box{max-width:1100px}
-.pk{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:14px;margin-top:14px}
-.k{background:linear-gradient(180deg,#2A2A36,#1B1B22);border:1px solid #C9A455;border-radius:8px;padding:14px 16px;position:relative}.k h2{margin:0 0 2px;font-size:18px;color:#fff}.k h2 small{display:block;font-size:12px;color:#B9AE94;font-weight:400}.k .cel{font-size:13px;color:#E6CB80;margin:6px 0 10px;min-height:18px}
-.k .st{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.k .st div{background:#14141C;border:1px solid #4A4A5A;border-radius:6px;padding:8px 6px;text-align:center}.k .st b{display:block;font-size:18px;color:#E6CB80}.k .st span{font-size:10px;letter-spacing:.5px;text-transform:uppercase;color:#B9AE94}
-.k .bd{position:absolute;top:12px;right:12px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:10px;border:1px solid rgba(255,255,255,.3)}.bd.ok{background:linear-gradient(180deg,#2E3F66,#161F36);color:#fff}.bd.al{background:linear-gradient(180deg,#8E3140,#6E2231 60%,#4A1520);color:#fff}.bd.new{background:linear-gradient(180deg,#E6CB80,#C9A455 55%,#8E6B2E);color:#0E0E12}
-.k .ln{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}.k .ln a,.k .ln button{font-size:12px;padding:5px 10px}.k .ln .pin{font-size:16px}.k .wk{display:flex;gap:3px;margin-top:6px}.k .wk i{width:14px;height:14px;border:1px solid #C9A455;border-radius:3px;background:#1E1E28;display:inline-block}.k .wk i.on{background:linear-gradient(180deg,#E6CB80,#C9A455 55%,#8E6B2E)}
-.k .ws{font-size:12px;color:#B9AE94;margin-top:8px;line-height:1.5}.k .ws b{color:#EFE9DA}.k .ws .warn{color:#E0684A;font-weight:700}
-.dod{margin-top:22px;border-top:1px solid #4A4A5A;padding-top:14px}
-.ankv{margin-top:10px;color:#EFE9DA;font-size:13px;columns:2;column-gap:24px}.ankq{break-inside:avoid;margin:0 0 10px;padding:8px 10px;background:#1A1A24;border-left:2px solid #8E6B2E;border-radius:4px}.ankq span{display:block;color:#B9AE94;font-size:11px;line-height:1.3}.ankq b{display:block;font-weight:500;white-space:pre-wrap;margin-top:3px}
-.nota{margin:6px 0 0;font-size:12px;color:#D9D3C4;cursor:pointer;white-space:pre-wrap;border-left:2px solid #7A5A12;padding:2px 8px;background:#141414;border-radius:4px}.nota:hover{border-left-color:#D9A520}
-</style></head><body><div class="box" id="box"><h1>Podopieczni</h1><div id="tresc" class="mut">Wczytuję…</div></div>
+/* pulpit trenera (patch103, wariant B3 zaakceptowany przez Kubę 28.09) */
+:root{--bg:#0B0B0B;--c1:#141414;--c2:#1A1A1A;--ln:#2C2C2C;--gl:#E6CB80;--gm:#C9A455;--gd:#8E6B2E;--iv:#F4F1EA;--ivd:#A7A49C}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--iv);font:14px Poppins,Arial,sans-serif;min-height:100vh}
+.top{display:flex;align-items:center;gap:12px;padding:14px 28px;border-bottom:1px solid #1F1F1F;position:sticky;top:0;background:#0B0B0B;z-index:5}
+.top .t{font-size:12px;letter-spacing:3px;color:var(--gm);font-weight:700;text-transform:uppercase}.top .sp{flex:1}
+.wrap{max-width:1180px;margin:0 auto;padding:22px 28px 60px}
+.b{height:38px;padding:0 16px;border-radius:10px;border:1.5px solid var(--gm);background:#141414;color:var(--gl);font:700 13px Poppins,Arial,sans-serif;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap;text-decoration:none}
+.b.pr{background:linear-gradient(180deg,#E6CB80,#C9A455 55%,#8E6B2E);color:#0E0E12;border-color:#F5E3A6}
+.b.gh{border-color:#343434;color:var(--ivd);background:transparent}
+.b.ic{width:38px;padding:0;font-size:18px;letter-spacing:1px}
+.b.sm{height:32px;padding:0 12px;font-size:12px;border-radius:9px}.b.sm.ic{width:32px;padding:0}
+.b:disabled{opacity:.6;cursor:default}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tab{padding:9px 16px;border-radius:12px;border:1.5px solid #2F2F2F;background:var(--c1);color:var(--ivd);font:700 13px Poppins,Arial,sans-serif;display:flex;align-items:center;gap:8px;cursor:pointer}
+.tab b{font-size:12px;background:#262626;color:var(--iv);border-radius:999px;padding:1px 8px}
+.tab.on{border-color:var(--gm);color:var(--gl);background:#17140C}.tab.on b,.tab.g b{background:var(--gm);color:#0E0E12}
+.baner{display:flex;align-items:center;gap:14px;border:1.5px solid var(--gm);background:#15120A;border-radius:14px;padding:12px 16px;margin-bottom:16px}
+.baner span{flex:1;font-weight:600}.baner span small{display:block;font-weight:400;color:var(--ivd);font-size:12px}
+.lista{background:var(--c1);border:1px solid var(--ln);border-radius:16px;overflow:hidden}
+.w{display:grid;grid-template-columns:6px minmax(0,1fr) 170px 170px 170px 180px;align-items:center;column-gap:14px;padding:14px 18px 14px 0;border-top:1px solid #222}
+.lista > :first-child{border-top:none}
+.w > *{text-align:center;min-width:0}.w > .kto{text-align:left}
+.w.hd{padding-top:11px;padding-bottom:11px;background:#111;font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ivd);font-weight:700}
+.kol{align-self:stretch;border-radius:0 4px 4px 0;min-height:40px}.kol.r{background:linear-gradient(180deg,#A63A4C,#6E2231)}.kol.n{background:linear-gradient(180deg,#4A62A0,#1E2A47)}.kol.g{background:linear-gradient(180deg,#E6CB80,#8E6B2E)}.kol.s{background:#3A3A3A}
+.kto b{display:block;font-size:15px}.kto small{display:block;color:var(--ivd);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kto small.nt{color:#D9D3C4}.kto small.bk{color:var(--gl)}.kto small.bl{color:#E0798A}
+.v b{display:block;font-size:15px}.v small{display:block;font-size:11px;color:var(--ivd);white-space:nowrap}.v b.zal{color:#E0798A}
+.wk{display:flex;gap:4px;justify-content:center;margin-top:5px}
+.wk i{width:14px;height:14px;border-radius:4px;border:1.5px solid var(--gd);display:inline-flex;align-items:center;justify-content:center;font-style:normal;font-size:9px;font-weight:800;color:#0E0E12}
+.wk i.on{background:linear-gradient(180deg,#E6CB80,#C9A455 55%,#8E6B2E);border-color:#F5E3A6}
+.akc{display:flex;gap:8px;justify-content:flex-end;align-items:center}
+.nw{display:grid;grid-template-columns:6px minmax(0,1fr) auto auto;align-items:center;column-gap:14px;padding:14px 18px 14px 0;border-top:1px solid #222}
+.pill{display:inline-flex;align-items:center;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.pill.g{background:linear-gradient(180deg,#E6CB80,#B8891A);color:#0E0E12}.pill.s{background:#232323;color:var(--ivd);border:1px solid #333}
+.pan{border-top:1px dashed #262626;padding:12px 18px 16px 24px}.pan:empty{display:none}
+.ankv{columns:2;column-gap:24px;font-size:13px}.ankq{break-inside:avoid;margin:0 0 10px;padding:8px 10px;background:#101010;border-left:2px solid var(--gd);border-radius:6px}.ankq span{display:block;color:var(--ivd);font-size:11px;line-height:1.3}.ankq b{display:block;font-weight:500;white-space:pre-wrap;margin-top:3px}
+.przyp{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+select{background:#101010;color:var(--iv);border:1.5px solid #333;border-radius:9px;padding:6px 8px;font:13px Poppins,Arial,sans-serif}
+.pusto{padding:26px;text-align:center;color:var(--ivd)}
+.dol{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:14px}
+.dodaj{display:none;margin-top:12px;gap:8px;flex-wrap:wrap;align-items:center}.dodaj.on{display:flex}
+input{background:#101010;color:var(--iv);border:1.5px solid #333;border-radius:10px;padding:10px 12px;font:14px Poppins,Arial,sans-serif}input:focus,select:focus{outline:0;border-color:var(--gm)}
+.dodaj input{flex:1;min-width:200px}
+.mut{color:var(--ivd)}.err{color:#E0798A;font-size:13px;min-height:18px}
+.pmenu{position:absolute;z-index:50;background:#161616;border:1px solid var(--gd);border-radius:12px;padding:6px;min-width:220px;box-shadow:0 12px 30px rgba(0,0,0,.6)}
+.pmenu div{padding:10px 12px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer}.pmenu div:hover{background:#222}.pmenu .zak{color:#E0798A}
+.login{min-height:70vh;display:flex;align-items:center;justify-content:center}
+.login .card{width:min(420px,100%);background:var(--c1);border:1px solid var(--gd);border-radius:18px;padding:26px;display:flex;flex-direction:column;gap:12px}
+.login h1{margin:0 0 4px;font-size:22px;color:var(--gl)}.login input{width:100%;font-size:16px}
+@media (max-width:820px){.top{padding:12px 16px}.wrap{padding:16px}.w.hd{display:none}
+ .w{grid-template-columns:6px 1fr 1fr;row-gap:12px;column-gap:12px;padding:14px 14px 14px 0}.w .kol{grid-row:span 4}.w .kto{grid-column:2 / 4}.w .akc{grid-column:2 / 4}.w .akc .pr{flex:1}
+ .w .v{text-align:left}.w .v small{white-space:normal}.w .wk{justify-content:flex-start}.w .v::before{content:attr(data-l);display:block;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--ivd);margin-bottom:2px}
+ .w .v[data-l="Tydzień bloku"]{grid-column:2 / 4}
+ .nw{grid-template-columns:6px 1fr;row-gap:10px;column-gap:12px;padding:14px 14px 14px 0}.nw .kol{grid-row:span 3}.nw .pill{justify-self:start}.nw .akc{justify-content:flex-start;flex-wrap:wrap}.nw .akc .pr{flex:1}
+ .baner{flex-wrap:wrap}.baner .b{width:100%}.dol{flex-direction:column;align-items:stretch}.ankv{columns:1}}
+</style></head><body>
+<div class="top"><span class="t">Pulpit trenera</span><span class="sp"></span><a class="b gh sm" id="doPlanu">‹ Do planu</a><button class="b gh sm" id="wyloguj" hidden>Wyloguj</button></div>
+<div class="wrap" id="tresc"><div class="mut">Wczytuję…</div></div>
 <script>var API_URL = "https://script.google.com/macros/s/AKfycbz48qRxFlyvGcVBSltMbjR8kfuQNCbq-8a5g2gYG7oJgtWiU2ZJ-HLEyux6WGc_Xesq1Q/exec";</script>
 <script>
 var TSESJA = null; try { TSESJA = localStorage.getItem('trener_sesja'); localStorage.removeItem('trener_haslo'); } catch (e) {}
 function api(b) { if (TSESJA && !b.sesja) b.sesja = TSESJA; return fetch(API_URL, { method: 'POST', body: JSON.stringify(b), redirect: 'follow' }).then(function (r) { return r.text(); }, function () { throw new Error('Brak połączenia z serwerem. Sprawdź internet i spróbuj ponownie.'); }).then(function (t) { try { return JSON.parse(t); } catch (e) { throw new Error('Serwer odpowiedział nieprawidłowo, spróbuj za chwilę.'); } }).then(function (r) { if (!r.ok) throw new Error(r.error || 'Błąd serwera'); return r.dane; }); }
 function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
 var BAZA = location.href.replace(/lista\.html.*$/, '');
+document.getElementById('doPlanu').href = BAZA;
+var T = document.getElementById('tresc'), KONTA = [], LISTA = [], ZAKL = 'wszyscy', MENU_EL = null;
+try { ZAKL = localStorage.getItem('pulpit_zakl') || 'wszyscy'; } catch (e) {}
+
 function pokazHaslo(msg) {
-  document.getElementById('tresc').innerHTML = '<p>Zaloguj się kontem trenera.</p><input id="he" type="email" autocomplete="username" placeholder="e-mail" style="font-size:18px"> <input id="h" type="password" autocomplete="current-password" placeholder="hasło" style="font-size:18px"> <button id="hb">Wejdź</button><div id="hm" style="color:#E0684A;margin-top:8px">' + esc(msg || '') + '</div>';
+  document.getElementById('wyloguj').hidden = true;
+  T.innerHTML = '<div class="login"><div class="card"><span class="mut" style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--gm);font-weight:700">Pulpit trenera</span><h1>Zaloguj się</h1><input id="he" type="email" autocomplete="username" placeholder="e-mail"><input id="h" type="password" autocomplete="current-password" placeholder="hasło"><button class="b pr" id="hb">Wejdź</button><div class="err" id="hm">' + esc(msg || '') + '</div></div></div>';
   var go = function () {
     var em = document.getElementById('he').value.trim(), ha = document.getElementById('h').value; if (!em || !ha) return;
     document.getElementById('hb').textContent = 'Sprawdzam…';
@@ -36,64 +82,139 @@ function pokazHaslo(msg) {
 }
 function wczytaj() {
   if (!TSESJA) return pokazHaslo();
-  document.getElementById('tresc').textContent = 'Wczytuję podopiecznych…';
-  Promise.all([api({ akcja: 'pulpit' }), api({ akcja: 'konta' }).catch(function () { return []; })]).then(function (r) { KONTA = r[1] || []; LISTA = r[0]; rysuj(r[0]); }).catch(function (e) { if (/hasło|dostęp|sesja/i.test(e.message)) { try { localStorage.removeItem('trener_sesja'); } catch (x) {} TSESJA = null; pokazHaslo(e.message); } else { document.getElementById('tresc').innerHTML = '<span style="color:#E0684A">' + String(e.message).replace(/[<>&]/g, '') + '</span> <button class="btn" onclick="wczytaj()" style="margin-left:10px">Spróbuj ponownie</button>'; } });
+  if (!LISTA.length && !KONTA.length) T.innerHTML = '<div class="mut">Wczytuję podopiecznych…</div>';
+  Promise.all([api({ akcja: 'pulpit' }), api({ akcja: 'konta' }).catch(function () { return []; })]).then(function (r) { LISTA = r[0] || []; KONTA = r[1] || []; document.getElementById('wyloguj').hidden = false; rysuj(); }).catch(function (e) { if (/hasło|dostęp|sesja/i.test(e.message)) { try { localStorage.removeItem('trener_sesja'); } catch (x) {} TSESJA = null; pokazHaslo(e.message); } else { T.innerHTML = '<span class="err">' + esc(e.message) + '</span> <button class="b gh sm" onclick="wczytaj()" style="margin-left:10px">Spróbuj ponownie</button>'; } });
 }
-function dni(iso) { if (!iso) return null; var d = new Date(String(iso).slice(0, 10)); if (isNaN(d)) return null; return Math.floor((Date.now() - d.getTime()) / 86400000); }
-function fmt(v) { return v === '' || v == null ? '–' : String(v).replace('.', ','); }
-var KONTA = [], LISTA = [];
-function statusKonta(s) { return s === 'ankieta' ? '<span class="bd al" style="position:static">nowe konto · bez ankiety</span>' : s === 'czeka' ? '<span class="bd new" style="position:static">ankieta wypełniona · czeka na zatwierdzenie</span>' : s === 'odrzucone' ? '<span class="bd" style="position:static;background:#333">odrzucone</span>' : s === 'zakonczone' ? '<span class="bd" style="position:static;background:#4A1620">prowadzenie zakończone</span>' : '<span class="bd ok" style="position:static">aktywne</span>'; }
-function kontaHtml() {
-  var nowe = KONTA.filter(function (k) { return k.status !== 'aktywne' && k.status !== 'zakonczone'; }), akt = KONTA.filter(function (k) { return k.status === 'aktywne'; }), zak = KONTA.filter(function (k) { return k.status === 'zakonczone'; });
-  var h = '<div class="dod"><h1 style="font-size:16px">Konta podopiecznych' + (nowe.length ? ' <span class="bd new" style="position:static;margin-left:8px">' + nowe.length + ' do zatwierdzenia</span>' : '') + '</h1>';
-  if (!KONTA.length) h += '<div class="mut">Nikt jeszcze nie założył konta. Podopieczny zakłada je sam na stronie planu przyciskiem „Załóż konto” albo Ty zakładasz mu je z karty wyżej.</div>';
-  var sel = '<select class="przyp-sel">' + LISTA.map(function (p) { return '<option value="' + esc(p.bazaId) + '">' + esc(p.imie) + '</option>'; }).join('') + '</select>';
-  nowe.forEach(function (k) {
-    h += '<div class="k" style="margin-top:10px"><h2>' + esc(k.imie) + '<small>' + esc(k.email) + ' · konto z ' + esc(k.utworzono) + '</small></h2><div style="margin:6px 0">' + statusKonta(k.status) + '</div>';
-    if (k.status !== 'odrzucone') h += '<div class="ln"><button class="zatw" data-e="' + esc(k.email) + '" title="Tworzy pustą bazę planu i włącza konto">zatwierdź: nowa baza</button>' + (LISTA.length ? '<span class="mut">albo przypnij do istniejącej:</span>' + sel + '<button class="szary przyp" data-e="' + esc(k.email) + '">przypnij</button>' : '') + (k.ankieta ? '<button class="szary ank" data-e="' + esc(k.email) + '">pokaż ankietę</button>' : '') + '<button class="szary reset" data-e="' + esc(k.email) + '">nowe hasło</button><button class="szary odrz" data-e="' + esc(k.email) + '">odrzuć</button></div>';
-    else h += '<div class="ln"><button class="szary zatw" data-e="' + esc(k.email) + '">przywróć i zatwierdź</button></div>';
-    h += '<div class="mut ank-out" data-e="' + esc(k.email) + '"></div></div>';
+function dni(iso) { if (!iso) return null; var d = new Date(String(iso).slice(0, 10)); if (isNaN(d)) return null; return Math.max(0, Math.floor((Date.now() - d.getTime()) / 86400000)); }
+function dniTxt(n) { return n <= 0 ? 'dziś' : n === 1 ? '1 dzień temu' : n + ' dni temu'; }
+function dataKr(iso) { var m = String(iso || '').match(/^(\d{4})-(\d{2})-(\d{2})/); return m ? m[3] + '.' + m[2] : String(iso || ''); }
+function dataGodz(s) { var m = String(s || '').match(/^(\d{4})-(\d{2})-(\d{2})(?:[ T](\d{2}:\d{2}))?/); return m ? m[3] + '.' + m[2] + (m[4] ? ', ' + m[4] : '') : String(s || ''); }
+function osob(n) { var d = n % 10, s = n % 100; return n === 1 ? '1 osoba czeka' : (d >= 2 && d <= 4 && !(s >= 12 && s <= 14)) ? n + ' osoby czekają' : n + ' osób czeka'; }
+function kontoBazy(b) { return KONTA.filter(function (k) { return k.bazaId === b && (k.status === 'aktywne' || k.status === 'zakonczone'); })[0] || null; }
+function kontoMail(e) { return KONTA.filter(function (k) { return k.email === e; })[0] || null; }
+function zalega(k) { var dw = dni(k.wagaData), dr = dni(k.raportOst); return !!k.blad || Math.min(dw == null ? 999 : dw, dr == null ? 999 : dr) > 8; }
+function podzial() {
+  var akt = LISTA.filter(function (k) { var c = kontoBazy(k.bazaId); return !(c && c.status === 'zakonczone'); });
+  return { akt: akt, uwaga: akt.filter(zalega), nowe: KONTA.filter(function (k) { return k.status === 'ankieta' || k.status === 'czeka'; }), odrz: KONTA.filter(function (k) { return k.status === 'odrzucone'; }), zak: KONTA.filter(function (k) { return k.status === 'zakonczone'; }) };
+}
+function rysuj() {
+  var P = podzial(), n = { wszyscy: P.akt.length, nowe: P.nowe.length, uwaga: P.uwaga.length, zak: P.zak.length };
+  if (!(ZAKL in n)) ZAKL = 'wszyscy';
+  var tab = function (id, t, g) { return '<button class="tab' + (ZAKL === id ? ' on' : '') + (g && n[id] ? ' g' : '') + '" data-z="' + id + '">' + t + ' <b>' + n[id] + '</b></button>'; };
+  var h = '<div class="tabs">' + tab('wszyscy', 'Wszyscy') + tab('nowe', 'Do zatwierdzenia', true) + tab('uwaga', 'Wymagają uwagi') + tab('zak', 'Zakończeni') + '</div>';
+  if (P.nowe.length && ZAKL !== 'nowe') {
+    var wyp = P.nowe.filter(function (k) { return k.status === 'czeka'; }).map(function (k) { return esc(k.imie); }), bez = P.nowe.filter(function (k) { return k.status !== 'czeka'; }).map(function (k) { return esc(k.imie); });
+    h += '<div class="baner"><span>' + osob(P.nowe.length) + ' na zatwierdzenie<small>' + [wyp.length ? 'ankieta wypełniona: ' + wyp.join(', ') : '', bez.length ? 'bez ankiety: ' + bez.join(', ') : ''].filter(Boolean).join(' · ') + '</small></span><button class="b pr sm" data-z="nowe">Pokaż</button></div>';
+  }
+  if (ZAKL === 'wszyscy') h += listaPod(P.akt, 'Nie masz jeszcze podopiecznych. Nowe osoby pojawią się w zakładce „Do zatwierdzenia” po założeniu konta.');
+  if (ZAKL === 'uwaga') h += listaPod(P.uwaga, 'Wszyscy są na bieżąco.');
+  if (ZAKL === 'nowe') h += listaNowych(P.nowe, P.odrz);
+  if (ZAKL === 'zak') h += listaZak(P.zak);
+  h += '<div class="dol"><span class="mut" style="font-size:12px">' + (ZAKL === 'wszyscy' || ZAKL === 'uwaga' ? 'Pasek z lewej: bordowy = ponad 8 dni bez ważenia i raportu, granatowy = na bieżąco' : '') + '</span><button class="b gh sm" id="dodajBtn">+ Dodaj ręcznie</button></div>'
+    + '<div class="dodaj" id="dodajForm"><input id="imie" placeholder="imię i nazwisko"><input id="mail" type="email" placeholder="e-mail, widzisz go tylko Ty"><button class="b pr sm" id="dodaj">Dodaj i utwórz bazę</button><span class="mut" id="msg" style="font-size:12px"></span></div>';
+  zamknijMenu(); T.innerHTML = h;
+}
+function listaPod(arr, pusto) {
+  if (!arr.length) return '<div class="lista"><div class="pusto">' + pusto + '</div></div>';
+  var h = '<div class="lista"><div class="w hd"><span></span><span class="kto">Podopieczny</span><span>Tydzień bloku</span><span>Ostatnie ważenie</span><span>Ostatni raport</span><span></span></div>';
+  arr.forEach(function (k) {
+    var dw = dni(k.wagaData), dr = dni(k.raportOst), c = kontoBazy(k.bazaId);
+    var blok = parseInt(k.blok, 10) || 0, zal = Math.min(blok, parseInt(k.zaliczone, 10) || 0), wk = '';
+    for (var i = 0; i < blok; i++) wk += '<i class="' + (i < zal ? 'on' : '') + '">' + (i < zal ? '✓' : '') + '</i>';
+    var kom = function (d, iso) { return d == null ? '<b>–</b><small>brak</small>' : '<b' + (d > 8 ? ' class="zal"' : '') + '>' + dniTxt(d) + '</b><small>' + esc(dataKr(iso)) + '</small>'; };
+    h += '<div class="w"><span class="kol ' + (zalega(k) ? 'r' : 'n') + '"></span><div class="kto"><b>' + esc(k.imie) + '</b>'
+      + (k.blad ? '<small class="bl">nie udało się wczytać bazy</small>' : '<small>' + (k.cel ? esc(k.cel) : 'bez celu') + '</small>')
+      + (k.notatka ? '<small class="nt">✎ ' + esc(k.notatka) + '</small>' : '') + (c ? '' : '<small class="bk">bez konta w aplikacji</small>') + '</div>'
+      + '<div class="v" data-l="Tydzień bloku">' + (blok ? '<b>' + zal + ' / ' + blok + '</b><div class="wk">' + wk + '</div>' : '<b>–</b>') + '</div>'
+      + '<div class="v" data-l="Ostatnie ważenie">' + kom(dw, k.wagaData) + '</div>'
+      + '<div class="v" data-l="Ostatni raport">' + kom(dr, k.raportOst) + '</div>'
+      + '<div class="akc"><a class="b pr sm" href="' + esc(BAZA) + '?klient=' + esc(k.bazaId) + '">Otwórz plan</a><button class="b gh ic sm" data-m="p" data-b="' + esc(k.bazaId) + '" title="Więcej">⋯</button></div></div>'
+      + '<div class="pan" id="pan-' + esc(k.bazaId) + '"></div>';
   });
-  if (akt.length) h += '<div class="mut" style="margin-top:12px">Aktywne konta (' + akt.length + '): ' + akt.map(function (k) { return esc(k.imie) + ' <span style="opacity:.7">(' + esc(k.email) + ')</span> <button class="szary reset" data-e="' + esc(k.email) + '" style="font-size:11px;padding:2px 8px">nowe hasło</button>' + (k.ankieta ? ' <button class="szary ank" data-e="' + esc(k.email) + '" style="font-size:11px;padding:2px 8px">ankieta</button><div class="ank-out" data-e="' + esc(k.email) + '"></div>' : '') + ' <button class="szary zakoncz" data-e="' + esc(k.email) + '" data-i="' + esc(k.imie) + '" style="font-size:11px;padding:2px 8px;border-color:#6E2231" title="Podopieczny traci dostęp do planu. Możesz wznowić jednym kliknięciem.">zakończ prowadzenie</button>'; }).join('<br>') + '</div>';
-  if (zak.length) h += '<div class="mut" style="margin-top:12px">Zakończone prowadzenia (' + zak.length + '): ' + zak.map(function (k) { return esc(k.imie) + ' <span style="opacity:.7">(' + esc(k.email) + ')</span> <button class="szary wznow" data-e="' + esc(k.email) + '" style="font-size:11px;padding:2px 8px">wznów prowadzenie</button>'; }).join('<br>') + '</div>';
   return h + '</div>';
 }
-function rysuj(lista) {
-  var h = '<div class="mut">Pulpit: jeden rzut oka, kto zalega. Czerwona plakietka = od ponad 8 dni bez ważenia i bez raportu, albo raport czeka na odpowiedź. <a href="' + esc(BAZA) + '">← do planu</a></div><div class="pk">';
-  lista.forEach(function (k) {
-    var dw = dni(k.wagaData), dr = dni(k.raportOst), konto = KONTA.filter(function (c) { return c.bazaId === k.bazaId && c.status === 'aktywne'; })[0];
-    var ostatni = Math.min(dw == null ? 999 : dw, dr == null ? 999 : dr);
-    var zalega = ostatni > 8, bezOdp = (k.raportBezOdp || 0) > 0;
-    var badge = k.blad ? '<span class="bd al">błąd bazy</span>' : bezOdp ? '<span class="bd new">raport czeka na odpowiedź</span>' : zalega ? '<span class="bd al">' + (ostatni === 999 ? 'brak wpisów' : ostatni + ' dni bez wpisu') + '</span>' : '<span class="bd ok">aktywny</span>';
-    var blok = parseInt(k.blok, 10) || 0, zal = parseInt(k.zaliczone, 10) || 0, wk = ''; for (var i = 0; i < blok; i++) wk += '<i class="' + (i < zal ? 'on' : '') + '"></i>';
-    var dwaga = (k.waga !== '' && k.wagaStart !== '' && k.waga != null) ? (parseFloat(k.waga) - parseFloat(k.wagaStart)) : null;
-    h += '<div class="k">' + badge + '<h2>' + esc(k.imie) + '<small>' + esc(k.email) + (k.klub ? ' · ' + esc(k.klub) : '') + '</small></h2><div class="cel">' + (k.cel ? 'Cel: ' + esc(k.cel) : '<span class="mut">bez celu</span>') + '</div><div class="nota" data-b="' + esc(k.bazaId) + '" title="Prywatna notatka trenera, kliknij, żeby zmienić">' + (k.notatka ? '✎ ' + esc(k.notatka) : '<span class="mut">✎ dodaj notatkę dla siebie</span>') + '</div>';
-    h += '<div class="st"><div><b>' + (blok ? zal + ' / ' + blok : '–') + '</b><span>tydzień bloku</span></div><div><b>' + fmt(k.waga) + (k.waga !== '' && k.waga != null ? ' kg' : '') + '</b><span>waga' + (dwaga != null && dwaga !== 0 ? ' (' + (dwaga > 0 ? '+' : '') + fmt(dwaga.toFixed(1)) + ')' : '') + '</span></div><div><b>' + (k.cwPlan ? k.cwWpisane + ' / ' + k.cwPlan : '–') + '</b><span>ćw. wpisane</span></div></div>';
-    if (blok) h += '<div class="wk">' + wk + '</div>';
-    h += '<div class="ws">ostatnie ważenie: <b>' + (k.wagaData ? esc(k.wagaData) + ' (' + dw + ' dni)' : '<span class="warn">brak</span>') + '</b><br>ostatni raport: <b>' + (k.raportOst ? 'tydz. ' + esc(k.raportTyg) + ' · ' + esc(String(k.raportOst).slice(0, 10)) + (bezOdp ? ' <span class="warn">· bez odpowiedzi</span>' : '') : '<span class="warn">brak</span>') + '</b>' + (k.hist ? '<br>zamknięte bloki: <b>' + k.hist + '</b>' : '') + '</div>';
-    h += '<div class="ln"><a href="' + esc(BAZA) + '?klient=' + esc(k.bazaId) + '"><button>otwórz plan →</button></a>' + (konto ? '<span class="mut">konto: ' + esc(konto.email) + '</span><button class="szary reset" data-e="' + esc(konto.email) + '">nowe hasło</button>' : '<button class="szary zaloz" data-b="' + esc(k.bazaId) + '" data-e="' + esc(k.email) + '" data-i="' + esc(k.imie) + '" title="Zakłada konto z hasłem startowym, które przekazujesz podopiecznemu">załóż konto</button><span class="mut">albo poczekaj, aż sam się zarejestruje, i przypnij niżej</span>') + '</div></div>';
+function listaNowych(nowe, odrz) {
+  if (!nowe.length && !odrz.length) return '<div class="lista"><div class="pusto">Nikt nie czeka na zatwierdzenie.</div></div>';
+  var h = '<div class="lista">';
+  nowe.concat(odrz).forEach(function (k) {
+    var od = k.status === 'odrzucone', e = esc(k.email);
+    h += '<div class="nw"><span class="kol ' + (od ? 's' : 'g') + '"></span><div class="kto"><b>' + esc(k.imie) + '</b><small>' + e + ' · konto z ' + esc(dataGodz(k.utworzono)) + '</small></div>'
+      + '<span class="pill ' + (!od && k.status === 'czeka' ? 'g' : 's') + '">' + (od ? 'odrzucone' : k.status === 'czeka' ? 'ankieta wypełniona' : 'bez ankiety') + '</span><div class="akc">'
+      + (od ? '<button class="b gh sm" data-a="zatw" data-e="' + e + '">Przywróć i zatwierdź</button>'
+        : (k.ankieta ? '<button class="b gh sm" data-a="ank" data-e="' + e + '">Ankieta</button>' : '') + '<button class="b gh ic sm" data-m="n" data-e="' + e + '" title="Więcej">⋯</button><button class="b pr sm" data-a="zatw" data-e="' + e + '">Zatwierdź</button>')
+      + '</div></div><div class="pan" id="pan-' + e + '"></div>';
   });
-  h += '</div>' + kontaHtml() + '<div class="dod"><h1 style="font-size:16px">Dodaj podopiecznego</h1><div style="display:flex;gap:8px;flex-wrap:wrap"><input id="imie" placeholder="Imię i nazwisko"><input id="mail" placeholder="e-mail, widzisz go tylko Ty"><button id="dodaj">Dodaj i utwórz bazę</button></div><div class="mut" style="margin-top:8px">Nowa baza to pusty plan z 16 partiami. Potem na karcie podopiecznego kliknij „załóż konto” i wyślij mu login z hasłem startowym, albo poczekaj, aż sam się zarejestruje, i przypnij konto niżej.</div><div id="msg" class="mut" style="margin-top:8px"></div><div class="mut" style="margin-top:18px"><a href="#" id="wyloguj">wyloguj trenera na tym urządzeniu</a></div></div>';
-  var t = document.getElementById('tresc'); t.innerHTML = h;
-  t.addEventListener('click', function (e) {
-    var b = e.target;
-    if (b.classList.contains('nota') || (b.closest && b.closest('.nota'))) { var nb = b.classList.contains('nota') ? b : b.closest('.nota'); var kk = LISTA.filter(function (x) { return x.bazaId === nb.dataset.b; })[0]; var v = prompt('Notatka trenera, widzisz ją tylko Ty:', kk && kk.notatka || ''); if (v === null) return; api({ akcja: 'notatkaTrenera', a0: nb.dataset.b, a1: v.trim() }).then(wczytaj).catch(function (er) { alert(er.message); }); return; }
-    if (b.classList.contains('zaloz')) { var em = prompt('E-mail podopiecznego, na niego się zaloguje:', b.dataset.e || ''); if (em === null) return; var im = prompt('Imię i nazwisko:', b.dataset.i || ''); if (im === null) return; b.textContent = 'zakładam…'; api({ akcja: 'zalozKonto', email: em.trim(), imie: im.trim(), bazaId: b.dataset.b }).then(function (r) { prompt('Konto założone. Skopiuj i wyślij podopiecznemu:', 'Cześć! Twój plan treningowy jest tutaj: ' + BAZA + '\nLogin: ' + em.trim() + '\nHasło: ' + r.haslo + '\nPo zalogowaniu możesz dodać stronę do ekranu głównego, żeby mieć ją pod ikonką.'); wczytaj(); }).catch(function (er) { alert(er.message); wczytaj(); }); }
-    if (b.classList.contains('zatw')) { if (confirm('Zatwierdzić konto i utworzyć nową bazę planu?')) { b.textContent = 'tworzę…'; api({ akcja: 'zatwierdz', email: b.dataset.e }).then(wczytaj).catch(function (er) { alert(er.message); wczytaj(); }); } }
-    if (b.classList.contains('przyp')) { var s = b.parentElement.querySelector('.przyp-sel'); if (s && confirm('Przypiąć konto do bazy „' + s.options[s.selectedIndex].text + '”?')) { api({ akcja: 'zatwierdz', email: b.dataset.e, bazaId: s.value }).then(wczytaj).catch(function (er) { alert(er.message); }); } }
-    if (b.classList.contains('zakoncz')) { if (confirm('Zakończyć prowadzenie ' + (b.dataset.i || '') + '? Podopieczny straci dostęp do planu i zostanie wylogowany. Możesz wznowić jednym kliknięciem.')) api({ akcja: 'zakoncz', email: b.dataset.e }).then(wczytaj).catch(function (er) { alert(er.message); }); return; }
-    if (b.classList.contains('wznow')) { api({ akcja: 'wznow', email: b.dataset.e }).then(wczytaj).catch(function (er) { alert(er.message); }); return; }
-    if (b.classList.contains('odrz')) { if (confirm('Odrzucić to konto? Osoba nie zaloguje się.')) api({ akcja: 'odrzuc', email: b.dataset.e }).then(wczytaj).catch(function (er) { alert(er.message); }); }
-    if (b.classList.contains('reset')) { if (confirm('Ustawić nowe hasło? Stare przestanie działać, a osoba zostanie wylogowana.')) api({ akcja: 'resetHasla', email: b.dataset.e }).then(function (r) { prompt('Nowe hasło, skopiuj je i wyślij podopiecznemu:', r.haslo); }).catch(function (er) { alert(er.message); }); }
-    if (b.classList.contains('ank')) { api({ akcja: 'ankieta', email: b.dataset.e }).then(function (r) { var out = document.querySelector('.ank-out[data-e="' + b.dataset.e + '"]'); if (!out) return; var o = r.odpowiedzi || {}; var ks = Object.keys(o); out.innerHTML = ks.length ? '<div class="ankv">' + (r.data ? '<div class="mut" style="margin-bottom:8px">wypełniona ' + esc(r.data) + '</div>' : '') + ks.map(function (q) { var it = o[q]; var pyt = it && typeof it === 'object' ? it.p : q, odp = it && typeof it === 'object' ? it.o : (typeof it === 'object' ? JSON.stringify(it) : String(it)); return '<div class="ankq"><span>' + esc(pyt) + '</span><b>' + esc(odp) + '</b></div>'; }).join('') + '</div>' : 'Ankieta pusta.'; }).catch(function (er) { alert(er.message); }); }
-    if (b.id === 'wyloguj') { e.preventDefault(); var s = TSESJA; TSESJA = null; try { localStorage.removeItem('trener_sesja'); } catch (x) {} if (s) api({ akcja: 'wyloguj', sesja: s }).catch(function () {}); pokazHaslo(); }
-  });
-  document.getElementById('dodaj').onclick = function () {
-    var i = document.getElementById('imie').value.trim(), m = document.getElementById('mail').value.trim();
-    if (!i || !m) { alert('Wpisz imię i e-mail'); return; }
-    document.getElementById('msg').textContent = 'Tworzę bazę…';
-    api({ akcja: 'dodaj', email: m, imie: i }).then(function (id) { location.href = BAZA + '?klient=' + id; }).catch(function (er) { document.getElementById('msg').textContent = 'Błąd: ' + er.message; });
-  };
+  return h + '</div>';
 }
+function listaZak(zak) {
+  if (!zak.length) return '<div class="lista"><div class="pusto">Brak zakończonych prowadzeń.</div></div>';
+  var h = '<div class="lista">';
+  zak.forEach(function (k) { h += '<div class="nw"><span class="kol s"></span><div class="kto"><b>' + esc(k.imie) + '</b><small>' + esc(k.email) + '</small></div><span></span><div class="akc"><button class="b gh sm" data-a="wznow" data-e="' + esc(k.email) + '">Wznów prowadzenie</button></div></div>'; });
+  return h + '</div>';
+}
+// ----- menu ⋯ -----
+function zamknijMenu() { if (MENU_EL) { MENU_EL.remove(); MENU_EL = null; } }
+function menu(btn, items) {
+  zamknijMenu(); var el = document.createElement('div'); el.className = 'pmenu';
+  items.forEach(function (it) { var d = document.createElement('div'); d.textContent = it[0]; if (it[2]) d.className = it[2]; d.onclick = function (e) { e.stopPropagation(); zamknijMenu(); it[1](); }; el.appendChild(d); });
+  document.body.appendChild(el); var r = btn.getBoundingClientRect(), w = el.offsetWidth;
+  el.style.top = (window.scrollY + r.bottom + 6) + 'px';
+  el.style.left = Math.max(8, Math.min(window.scrollX + r.right - w, window.scrollX + document.documentElement.clientWidth - w - 8)) + 'px';
+  MENU_EL = el;
+}
+document.addEventListener('click', function (e) { if (MENU_EL && !MENU_EL.contains(e.target)) zamknijMenu(); });
+window.addEventListener('resize', zamknijMenu);
+function blad(er) { alert(er && er.message || er); wczytaj(); }
+function noweHaslo(email) { if (confirm('Ustawić nowe hasło? Stare przestanie działać, a osoba zostanie wylogowana.')) api({ akcja: 'resetHasla', email: email }).then(function (r) { prompt('Nowe hasło, skopiuj je i wyślij podopiecznemu:', r.haslo); }).catch(blad); }
+function pokazAnkiete(email, panId) {
+  var out = document.getElementById(panId); if (!out) return;
+  if (out.innerHTML) { out.innerHTML = ''; return; }
+  out.innerHTML = '<span class="mut">Wczytuję ankietę…</span>';
+  api({ akcja: 'ankieta', email: email }).then(function (r) {
+    var o = r.odpowiedzi || {}, ks = Object.keys(o);
+    out.innerHTML = ks.length ? (r.data ? '<div class="mut" style="margin-bottom:8px;font-size:12px">wypełniona ' + esc(r.data) + '</div>' : '') + '<div class="ankv">' + ks.map(function (q) { var it = o[q]; var pyt = it && typeof it === 'object' ? it.p : q, odp = it && typeof it === 'object' ? it.o : String(it); return '<div class="ankq"><span>' + esc(pyt) + '</span><b>' + esc(odp) + '</b></div>'; }).join('') + '</div>' : '<span class="mut">Ankieta pusta.</span>';
+  }).catch(function (er) { out.innerHTML = '<span class="err">' + esc(er.message) + '</span>'; });
+}
+function menuPod(btn) {
+  var b = btn.dataset.b, k = LISTA.filter(function (x) { return x.bazaId === b; })[0] || {}, c = kontoBazy(b), items = [];
+  items.push(['Notatka dla siebie', function () { var v = prompt('Notatka trenera, widzisz ją tylko Ty:', k.notatka || ''); if (v === null) return; api({ akcja: 'notatkaTrenera', a0: b, a1: v.trim() }).then(wczytaj).catch(blad); }]);
+  if (c && c.ankieta) items.push(['Pokaż ankietę', function () { pokazAnkiete(c.email, 'pan-' + b); }]);
+  if (c) items.push(['Nowe hasło', function () { noweHaslo(c.email); }]);
+  else items.push(['Załóż konto', function () {
+    var em = prompt('E-mail podopiecznego, na niego się zaloguje:', k.email || ''); if (em === null) return; var im = prompt('Imię i nazwisko:', k.imie || ''); if (im === null) return;
+    api({ akcja: 'zalozKonto', email: em.trim(), imie: im.trim(), bazaId: b }).then(function (r) { prompt('Konto założone. Skopiuj i wyślij podopiecznemu:', 'Cześć! Twój plan treningowy jest tutaj: ' + BAZA + '\nLogin: ' + em.trim() + '\nHasło: ' + r.haslo + '\nPo zalogowaniu dodaj aplikację do ekranu telefonu, instrukcję znajdziesz w menu.'); wczytaj(); }).catch(blad);
+  }]);
+  if (c) items.push(['Zakończ prowadzenie', function () { if (confirm('Zakończyć prowadzenie: ' + (k.imie || c.email) + '? Podopieczny straci dostęp do planu i zostanie wylogowany. Możesz wznowić jednym kliknięciem.')) api({ akcja: 'zakoncz', email: c.email }).then(wczytaj).catch(blad); }, 'zak']);
+  menu(btn, items);
+}
+function menuNowy(btn) {
+  var e = btn.dataset.e, items = [];
+  if (LISTA.length) items.push(['Przypnij do istniejącej bazy', function () {
+    var p = document.getElementById('pan-' + e); if (!p) return;
+    p.innerHTML = '<div class="przyp"><span class="mut" style="font-size:12px">Przypnij do bazy:</span><select id="ps-sel">' + LISTA.map(function (x) { return '<option value="' + esc(x.bazaId) + '">' + esc(x.imie) + '</option>'; }).join('') + '</select><button class="b pr sm" data-a="przyp" data-e="' + esc(e) + '">Przypnij</button><button class="b gh sm" data-a="anuluj" data-e="' + esc(e) + '">Anuluj</button></div>';
+  }]);
+  items.push(['Nowe hasło', function () { noweHaslo(e); }]);
+  items.push(['Odrzuć', function () { if (confirm('Odrzucić to konto? Osoba nie zaloguje się.')) api({ akcja: 'odrzuc', email: e }).then(wczytaj).catch(blad); }, 'zak']);
+  menu(btn, items);
+}
+T.addEventListener('click', function (ev) {
+  var b = ev.target.closest ? ev.target.closest('[data-z],[data-m],[data-a],#dodajBtn,#dodaj') : null; if (!b) return;
+  if (b.dataset.z) { ZAKL = b.dataset.z; try { localStorage.setItem('pulpit_zakl', ZAKL); } catch (x) {} rysuj(); return; }
+  if (b.dataset.m) { ev.stopPropagation(); if (MENU_EL && MENU_EL.__od === b) { zamknijMenu(); return; } (b.dataset.m === 'p' ? menuPod : menuNowy)(b); if (MENU_EL) MENU_EL.__od = b; return; }
+  var a = b.dataset.a, e = b.dataset.e;
+  if (a === 'zatw') { var k = kontoMail(e); if (confirm('Zatwierdzić konto' + (k ? ': ' + k.imie : '') + ' i utworzyć nową bazę planu?')) { b.textContent = 'Tworzę…'; b.disabled = true; api({ akcja: 'zatwierdz', email: e }).then(wczytaj).catch(blad); } return; }
+  if (a === 'ank') { pokazAnkiete(e, 'pan-' + e); return; }
+  if (a === 'wznow') { b.textContent = 'Wznawiam…'; b.disabled = true; api({ akcja: 'wznow', email: e }).then(wczytaj).catch(blad); return; }
+  if (a === 'anuluj') { var p = document.getElementById('pan-' + e); if (p) p.innerHTML = ''; return; }
+  if (a === 'przyp') { var s = document.getElementById('ps-sel'); if (s && confirm('Przypiąć konto do bazy „' + s.options[s.selectedIndex].text + '”?')) api({ akcja: 'zatwierdz', email: e, bazaId: s.value }).then(wczytaj).catch(blad); return; }
+  if (b.id === 'dodajBtn') { document.getElementById('dodajForm').classList.toggle('on'); var i = document.getElementById('imie'); if (i) i.focus(); return; }
+  if (b.id === 'dodaj') {
+    var im = document.getElementById('imie').value.trim(), m = document.getElementById('mail').value.trim(), msg = document.getElementById('msg');
+    if (!im || !m) { msg.textContent = 'Wpisz imię i e-mail.'; return; }
+    msg.textContent = 'Tworzę bazę…'; b.disabled = true;
+    api({ akcja: 'dodaj', email: m, imie: im }).then(function (id) { location.href = BAZA + '?klient=' + id; }).catch(function (er) { msg.textContent = 'Błąd: ' + er.message; b.disabled = false; });
+  }
+});
+document.getElementById('wyloguj').onclick = function () { var s = TSESJA; TSESJA = null; LISTA = []; KONTA = []; try { localStorage.removeItem('trener_sesja'); } catch (x) {} if (s) api({ akcja: 'wyloguj', sesja: s }).catch(function () {}); pokazHaslo(); };
 wczytaj();
 </script></body></html>
