@@ -139,7 +139,7 @@ function listaNowych(nowe, odrz) {
   nowe.concat(odrz).forEach(function (k) {
     var od = k.status === 'odrzucone', e = esc(k.email);
     h += '<div class="nw"><span class="kol ' + (od ? 's' : 'g') + '"></span><div class="kto"><b>' + esc(k.imie) + '</b><small>' + e + ' · konto z ' + esc(dataGodz(k.utworzono)) + '</small></div>'
-      + '<span class="pill ' + (!od && k.status === 'czeka' ? 'g' : 's') + '">' + (od ? 'odrzucone' : k.status === 'czeka' ? 'ankieta wypełniona' : 'bez ankiety') + '</span><div class="akc">'
+      + (od ? '<span class="pill s">odrzucone</span>' : k.status === 'czeka' ? '<span></span>' : '<span class="pill s">bez ankiety</span>') + '<div class="akc">'
       + (od ? '<button class="b gh sm" data-a="zatw" data-e="' + e + '">Przywróć i zatwierdź</button>'
         : (k.ankieta ? '<button class="b gh sm" data-a="ank" data-e="' + e + '">Ankieta</button>' : '') + '<button class="b gh ic sm" data-m="n" data-e="' + e + '" title="Więcej">⋯</button><button class="b pr sm" data-a="zatw" data-e="' + e + '">Zatwierdź</button>')
       + '</div></div><div class="pan" id="pan-' + e + '"></div>';
