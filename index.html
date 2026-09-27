@@ -695,6 +695,7 @@ function gestStart(e) {
   if (kartyAktywne() && WIDOK === 'treningi' && document.getElementById('mswipe') && !w('textarea') && !w('select')) { g.typ = 'cw'; GEST = g; }
 }
 function gestPoczatek(g) {
+  if (g.typ === 'cw' && g.dx > 0 && idxMob(mobT) <= 0) g.typ = 'menu'; // patch87: na 1. ćwiczeniu ruch w prawo wysuwa menu
   if (g.typ === 'menu') { if (g.dx <= 0) return false; MENU = true; rysujMenu(); }
   if (g.typ === 'cw') { g.el = document.getElementById('mswipe'); if (!g.el) return false; g.i = idxMob(mobT); g.n = krokiMob(mobT).length; g.w = window.innerWidth; }
   else { g.el = document.getElementById('menu'); g.tlo = document.getElementById('tlo'); if (!g.el) return false; g.w = g.el.offsetWidth || 300; }
