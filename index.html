@@ -625,6 +625,11 @@ function render() {
   var d = last != null && prev != null ? last - prev : null;
   var serieT = 0; for (var t = 1; t <= akt; t++) serieT += serie(t);
   var html = pasek();
+  if (D.pusty && ['treningi', 'plan', 'rap', 'waz', 'zal', 'hist'].indexOf(WIDOK) >= 0) {
+    document.body.classList.remove('karty', 'mobw', 'lgmob'); viewportMob(false);
+    app.innerHTML = html + '<div class="widok"><div class="wrap solo" style="max-width:760px;margin:40px auto"><div><div class="card" id="sek-pusty"><h2 class="metal"><span class="ttl" style="font-size:15px">Brak podopiecznych</span></h2><div class="ibody">Nikt jeszcze nie ma konta ani planu. Gdy podopieczny założy konto i wypełni ankietę, zatwierdzisz go na pulpicie i tutaj pojawi się jego plan.\n<a class="pbtn rz" style="margin:12px 0 0" href="lista.html"><span class="ico">☰</span>Pulpit: konta i podopieczni</a></div></div></div></div></div>';
+    return;
+  }
   html += '<div class="top"><div><div class="sub">' + (TR ? 'Trener' : esc(imieKlienta())) + '</div><h1>Cel: ' + (TR ? '<input id="cel" value="' + esc(U('cel')) + '" placeholder="wpisz cel bloku">' : esc(U('cel'))) + '</h1></div>';
   html += '<div class="weeks"><span>Blok: <b>' + (TR ? '<input id="blok" class="c" style="width:44px;color:#E6CB80;font-weight:700;text-align:center" value="' + blok + '">' : blok) + '</b> tyg. · zaliczone: <b>' + zal + '</b> ' + I('tyg') + ' &nbsp;· treningi: <b>' + akt + '</b></span><div id="wks">';
   for (var i = 0; i < blok; i++) html += '<i class="wk ' + (i < zal ? 'on' : '') + '" data-i="' + i + '">' + (i < zal ? '✓' : '') + '</i>';
