@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="d979ce08a1"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="ef347e6b23"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg1:#121212;--bg2:#0D0D0D;--bg3:#080808;--card:#161616;--head:#1C1C1C;--dark:#101010;--empty:#141414;--line:#2C2C2C;--iv:#F4F1EA;--ivd:#A7A49C;--gl:#D9A520;--gm:#B8891A;--gd:#7A5A12;--gx:#4E3A0C;--green:#5FBF7A;--red:#E0684A}
@@ -328,6 +328,34 @@ table.tpl th{vertical-align:bottom}table.tpl th .inf{display:block;margin:4px au
 .zpora .ic .pik{display:block}
 /* patch96 */
 .jkl{color:#E6CB80;text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-weight:700}
+/* patch104: historia bloków (oś czasu, zwijane bloki) */
+.hb2 .hb2-ile{margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;color:var(--ivd);background:#1C1C1C;border:1px solid #2E2E2E;border-radius:999px;padding:3px 12px;letter-spacing:0;text-transform:none}
+.hb2-os{position:relative;padding:18px 22px 12px 64px}
+.hb2-os::before{content:"";position:absolute;left:36px;top:26px;bottom:34px;width:2px;background:linear-gradient(180deg,#8E6B2E,#3A2E14)}
+.hb2-el{position:relative;margin-bottom:14px}
+.hb2-el::before{content:"";position:absolute;left:-35px;top:16px;width:14px;height:14px;border-radius:50%;background:#0B0B0B;border:3px solid #C9A455}
+.hb2-teraz::before{background:#C9A455;box-shadow:0 0 0 4px rgba(201,164,85,.2)}
+.hb2-box{background:#141414;border:1px solid #2A2A2A;border-radius:14px;padding:14px 18px}
+.hb2-teraz .hb2-box{border-style:dashed;border-color:rgba(201,164,85,.6);background:#15120A;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.hb2-tx{flex:1;min-width:200px}.hb2-tx b{display:block;color:var(--iv)}.hb2-tx small{color:var(--ivd);font-size:12px}
+.hb2-el.otw .hb2-box{border-color:rgba(201,164,85,.6)}
+.hb2-hd{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;cursor:pointer;user-select:none}
+.hb2-nr{font-size:20px;font-weight:800;color:var(--gl)}.hb2-cel{font-weight:700;font-size:15px;color:var(--iv)}.hb2-sp{flex:1}.hb2-dt{font-size:12px;color:var(--ivd)}
+.hb2-ch{display:inline-block;font-style:normal;color:#C9A455;transition:transform .2s}.hb2-el.otw .hb2-ch{transform:rotate(90deg)}
+.hb2-kr{margin-top:6px;font-size:13px;color:var(--ivd)}.hb2-kr b{color:var(--iv)}
+.hb2-kr em,.hb2-kaf em{font-style:normal;font-weight:700}.hb2-kaf em{font-size:12px}
+.hb2-g{color:#6FD08A}.hb2-r{color:#E0684A}
+.hb2-nota{font-size:13px;color:#D9D3C4;border-left:3px solid #8E6B2E;padding:8px 12px;margin-top:12px;background:#101010;border-radius:8px}
+.hb2-kaf{display:flex;justify-content:center;gap:10px;margin:14px 0 6px;flex-wrap:wrap}
+.hb2-kaf div{width:220px;background:#1A1A1A;border:1px solid #262626;border-radius:12px;padding:10px 12px;text-align:center}
+.hb2-kaf b{display:block;font-size:18px;color:var(--gl);font-weight:800}.hb2-kaf span{font-size:10px;letter-spacing:.8px;text-transform:uppercase;color:var(--ivd)}
+.hb2-w{display:grid;grid-template-columns:minmax(0,1fr) 130px 170px 110px;gap:12px;align-items:center;padding:9px 0;border-top:1px solid #1F1F1F;font-size:13px;color:var(--iv)}
+.hb2-w > *{text-align:center}.hb2-w .hb2-ex{text-align:left;font-weight:600;display:flex;align-items:center;gap:10px}
+.hb2-ex i{width:4px;height:18px;border-radius:2px;flex:0 0 4px}.hb2-P{background:linear-gradient(180deg,#E6CB80,#8E6B2E)}.hb2-N{background:linear-gradient(180deg,#4A62A0,#1E2A47)}.hb2-U{background:linear-gradient(180deg,#A63A4C,#6E2231)}
+.hb2-h{font-size:10px;letter-spacing:1.2px;text-transform:uppercase;color:var(--ivd);font-weight:700;border-top:none;margin-top:6px}
+.hb2-tr{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--gl);font-weight:700;padding:14px 0 6px;border-top:1px solid #1F1F1F}
+.hb2-zm{display:inline-block;min-width:62px;padding:2px 8px;border-radius:999px;font-weight:700;font-size:12px;font-style:normal}
+.hb2-zm.g{background:rgba(95,191,122,.15);color:#6FD08A}.hb2-zm.z{background:#1E1E1E;color:var(--ivd)}.hb2-zm.r{background:rgba(224,104,74,.15);color:#E0684A}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
 .pinbox.lg{max-width:1060px;margin:0 auto;padding:24px 16px;min-height:100vh;display:flex;align-items:center;box-sizing:border-box}.pinbox.lg .card{width:100%;box-sizing:border-box;padding:60px;border-radius:14px}.pinbox.lg .sub{font-size:24px}.pinbox.lg h1{margin:8px 0 26px;font-size:56px}.pinbox.lg input{height:96px;font-size:32px}.pinbox.lg .btn{height:96px;font-size:34px}.pinbox.lg .mut{font-size:24px}
 body.lgmob .pinbox.lg{padding:16px;min-height:100vh}body.lgmob .pinbox.lg .card{padding:26px 20px;border-radius:14px}body.lgmob .pinbox.lg .sub{font-size:12px}body.lgmob .pinbox.lg h1{font-size:30px;margin:6px 0 18px}body.lgmob .pinbox.lg input{height:54px;font-size:17px;padding:0 14px;margin-bottom:10px;border-radius:10px}body.lgmob .pinbox.lg .btn{height:56px;font-size:18px;border-radius:10px;margin-top:4px}body.lgmob .pinbox.lg .err{font-size:15px;min-height:20px;margin-top:10px}body.lgmob .pinbox.lg .mut{font-size:15px;margin:14px 0 0;line-height:1.5}
@@ -1074,28 +1102,43 @@ function kafelki() {
 function historiaSekcja() {
   var H = D.historia || [];
   if (!open.hist) return '<div class="acc" id="sek-hist" onclick="tog(\'hist\')"><span class="chev">▸</span>Historia bloków<span class="cnt">' + (H.length ? H.length + ' zamkn.' : 'brak zamkniętych bloków') + '</span></div>';
-  var out = '<div class="card" id="sek-hist"><h2 class="metal"><span class="ttl" onclick="tog(\'hist\')">▾ &nbsp;Historia bloków</span><span class="pbtn" style="cursor:default">' + I('hist') + ' &nbsp;' + H.length + ' zamkniętych</span></h2>';
-  out += '<div style="padding:12px 14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap"><button class="btn warnb" onclick="zamknijBlok()">Zamknij blok i zacznij nowy</button><span class="mut" style="font-size:12px">Archiwizuje cały bieżący blok: ćwiczenia, ciężary, powtórzenia, plan partii i wagę od startu do końca. W nowym bloku ciężar początkowy = aktualny, powtórzenia i notatki wyczyszczone, kratki tygodni od zera. Plan ćwiczeń zostaje, żebyś mógł go zmienić.</span></div>';
-  H.slice().reverse().forEach(function (h, idx) {
-    var d = h.dane || {}, otw = open.hb[h.id];
-    var dw = (d.waga_start !== '' && d.waga_koniec !== '' && d.waga_start != null && d.waga_koniec != null) ? (n(d.waga_koniec) - n(d.waga_start)) : null;
-    out += '<div class="hb"><div class="hh" onclick="tog(\'hb\',\'' + esc(h.id) + '\')"><span class="chev">' + (otw ? '▾' : '▸') + '</span><b>Blok ' + esc(h.blok_nr) + '</b><span>' + esc(h.cel || 'bez celu') + '</span><span class="mut">zamknięty ' + esc(h.zamknieto) + ' · tygodnie ' + esc(h.tygodnie) + (h.kcal ? ' · ' + esc(h.kcal) + ' kcal' : '') + '</span><span class="cnt">' + (dw != null ? 'waga ' + fmt(d.waga_start) + ' → ' + fmt(d.waga_koniec) + ' kg (' + (dw > 0 ? '+' : '') + fmt(dw.toFixed(1)) + ')' : '') + '</span></div>';
-    if (otw) {
-      if (d.notatka) out += '<div class="kv"><span>Notatka trenera: <b>' + esc(d.notatka) + '</b></span></div>';
-      out += '<table><tr><th style="width:26px">Tr.</th><th class="l">Ćwiczenie</th><th style="width:26px" title="typ">●</th><th style="width:46px">S×R</th><th style="width:48px">Start</th><th style="width:52px">Koniec</th><th style="width:46px">Δ</th><th class="l" style="width:92px">Ost. powt.</th></tr>';
-      (d.cwiczenia || []).slice().sort(function (x, y) { return n(x.trening) - n(y.trening) || n(x.nr) - n(y.nr); }).forEach(function (c) {
-        var a0 = c.ciezar_start, a1 = c.ciezar_akt, dz = (a0 !== '' && a1 !== '' && a0 != null && a1 != null) ? n(a1) - n(a0) : null;
-        var pw = [1, 2, 3, 4, 5, 6].map(function (p) { return c['p' + p]; }).filter(function (v) { return v !== '' && v != null; }).join(' · ');
-        out += '<tr><td>' + esc(c.trening) + '</td><td class="ex l">' + esc(c.nazwa) + '</td><td><i class="dotT ' + (TYP[c.typ] === 'P' ? 'GOLD' : TYP[c.typ] === 'U' ? 'BORDO' : 'NAVY') + '" title="' + esc(c.typ || '') + '"></i></td><td>' + esc(c.sets) + '×' + esc(c.reps) + '</td><td>' + fmt(a0) + '</td><td>' + fmt(a1) + '</td><td class="' + (dz > 0 ? 'up' : dz < 0 ? 'dn' : '') + '">' + (dz == null ? '–' : (dz > 0 ? '+' : '') + fmt(dz)) + '</td><td class="l mut">' + esc(pw) + '</td></tr>';
-      });
-      out += '</table>';
-      var pl = (d.partie || []).filter(function (p) { return p.plan !== '' && p.plan != null; });
-      if (pl.length) out += '<div class="kv">' + pl.map(function (p) { var s = 0; for (var t = 1; t <= 5; t++) s += n(p['t' + t + '_r']) + n(p['t' + t + '_s']); return '<span>' + esc(p.partia) + ': <b>' + serieP(p) + ' / ' + esc(p.plan) + '</b></span>'; }).join('') + '</div>';
+  var ile = H.length === 1 ? '1 zamknięty' : (H.length % 10 >= 2 && H.length % 10 <= 4 && !(H.length % 100 >= 12 && H.length % 100 <= 14)) ? H.length + ' zamknięte' : H.length + ' zamkniętych';
+  var dataPl = function (x) { var m = String(x || '').match(/^(\d{4})-(\d{2})-(\d{2})/); return m ? m[3] + '.' + m[2] + '.' + m[1] : String(x || ''); };
+  var zmW = function (d) { return d ? ' <em class="' + (d < 0 ? 'hb2-g' : 'hb2-r') + '">' + (d < 0 ? '▼ ' : '▲ ') + fmt(Math.abs(Math.round(d * 10) / 10)) + '</em>' : ''; };
+  var zal = n(U('zaliczone')), blok = n(U('blok')), nrTeraz = H.length ? n(H[H.length - 1].blok_nr) + 1 : 1;
+  if (H.length && open.hb[H[H.length - 1].id] == null) open.hb[H[H.length - 1].id] = true;
+  var out = '<div class="card hb2" id="sek-hist"><h2 class="metal"><span class="ttl">Historia bloków</span><span class="hb2-ile">' + I('hist') + ' ' + ile + '</span></h2><div class="hb2-os">';
+  out += '<div class="hb2-el hb2-teraz"><div class="hb2-box"><div class="hb2-tx"><b>Blok ' + nrTeraz + ', w trakcie</b><small>' + zal + ' z ' + (blok || '–') + ' tygodni zaliczonych' + (U('cel') ? ' · ' + esc(U('cel')) : '') + '</small></div><button class="btn warnb" onclick="zamknijBlok()">Zamknij blok i zacznij nowy</button></div></div>';
+  H.slice().reverse().forEach(function (h) {
+    var d = h.dane || {}, otw = !!open.hb[h.id];
+    var ws = d.waga_start, wk = d.waga_koniec, maW = ws !== '' && ws != null && wk !== '' && wk != null, dw = maW ? n(wk) - n(ws) : null;
+    out += '<div class="hb2-el' + (otw ? ' otw' : '') + '"><div class="hb2-box"><div class="hb2-hd" onclick="tog(\'hb\',\'' + esc(h.id) + '\')"><span class="hb2-nr">Blok ' + esc(h.blok_nr) + '</span><span class="hb2-cel">' + esc(h.cel || 'bez celu') + '</span><span class="hb2-sp"></span><span class="hb2-dt">zamknięty ' + esc(dataPl(h.zamknieto)) + ' <i class="hb2-ch">▸</i></span></div>';
+    if (!otw) out += '<div class="hb2-kr">' + (h.tygodnie ? esc(h.tygodnie) + ' tyg.' : '') + (maW ? (h.tygodnie ? ' · ' : '') + 'waga <b>' + fmt(ws) + ' → ' + fmt(wk) + ' kg</b>' + zmW(dw) : '') + '</div>';
+    else {
+      if (d.notatka) out += '<div class="hb2-nota">' + esc(d.notatka) + '</div>';
+      var kaf = [];
+      if (maW) kaf.push('<div><b>' + fmt(ws) + ' → ' + fmt(wk) + ' kg</b><span>waga ciała' + zmW(dw) + '</span></div>');
+      if (h.tygodnie) kaf.push('<div><b>' + esc(h.tygodnie) + '</b><span>tygodni zaliczonych</span></div>');
+      if (h.kcal) kaf.push('<div><b>' + esc(h.kcal) + ' kcal</b><span>kalorie w bloku</span></div>');
+      if (kaf.length) out += '<div class="hb2-kaf">' + kaf.join('') + '</div>';
+      var cw = (d.cwiczenia || []).slice().sort(function (x, y) { return n(x.trening) - n(y.trening) || n(x.nr) - n(y.nr); });
+      if (cw.length) {
+        out += '<div class="hb2-w hb2-h"><span class="hb2-ex">Ćwiczenie</span><span>Serie × powt.</span><span>Ciężar</span><span>Zmiana</span></div>';
+        var ost = null;
+        cw.forEach(function (c) {
+          if (String(c.trening) !== ost) { ost = String(c.trening); out += '<div class="hb2-tr">Trening ' + esc(c.trening) + '</div>'; }
+          var a0 = c.ciezar_start, a1 = c.ciezar_akt, ma = a0 !== '' && a0 != null && a1 !== '' && a1 != null, dz = ma ? Math.round((n(a1) - n(a0)) * 100) / 100 : null;
+          var ciezar = ma ? fmt(a0) + ' → ' + fmt(a1) + ' kg' : (a1 !== '' && a1 != null ? fmt(a1) + ' kg' : '–');
+          var zm = dz == null ? '<em class="hb2-zm z">–</em>' : dz > 0 ? '<em class="hb2-zm g">+' + fmt(dz) + ' kg</em>' : dz < 0 ? '<em class="hb2-zm r">−' + fmt(-dz) + ' kg</em>' : '<em class="hb2-zm z">0</em>';
+          out += '<div class="hb2-w"><span class="hb2-ex"><i class="hb2-' + (TYP[c.typ] || 'N') + '"></i>' + esc(c.nazwa) + '</span><span>' + (c.sets !== '' && c.sets != null ? esc(c.sets) + ' × ' + esc(c.reps) : '–') + '</span><span>' + ciezar + '</span><span>' + zm + '</span></div>';
+        });
+      }
     }
-    out += '</div>';
+    out += '</div></div>';
   });
-  if (!H.length) out += '<div class="mut" style="padding:0 14px 14px;font-size:12px">Jeszcze nic tu nie ma. Po zakończeniu bloku kliknij przycisk powyżej, a blok trafi do archiwum z porównaniem ciężarów.</div>';
-  return out + '<div style="height:8px"></div></div>';
+  out += '</div>';
+  if (!H.length) out += '<div class="mut" style="padding:0 22px 16px;font-size:12px">Jeszcze nic tu nie ma. Po zakończeniu bloku kliknij „Zamknij blok i zacznij nowy”, a blok trafi do archiwum z porównaniem ciężarów.</div>';
+  return out + '</div>';
 }
 function zamknijBlok() {
   var zal = n(U('zaliczone')), blok = n(U('blok'));
