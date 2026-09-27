@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="9d334025f1"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="d979ce08a1"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg1:#121212;--bg2:#0D0D0D;--bg3:#080808;--card:#161616;--head:#1C1C1C;--dark:#101010;--empty:#141414;--line:#2C2C2C;--iv:#F4F1EA;--ivd:#A7A49C;--gl:#D9A520;--gm:#B8891A;--gd:#7A5A12;--gx:#4E3A0C;--green:#5FBF7A;--red:#E0684A}
@@ -1661,14 +1661,37 @@ function ekranKarta(tytul, tresc) {
   document.getElementById('app').innerHTML = '<div class="pinbox lg"><div class="card"><div class="sub">Plan treningowy</div><h1>' + tytul + '</h1>' + tresc + '</div></div>';
 }
 function ekranLogowania(msg, email) {
-  ekranKarta('Zaloguj się', '<input id="lg-email" type="email" autocomplete="username" inputmode="email" placeholder="e-mail" value="' + esc(email || '') + '"><input id="lg-haslo" type="password" autocomplete="current-password" placeholder="hasło"><button class="btn" id="lg-btn">Wejdź</button><div class="err" id="lg-msg">' + esc(msg || '') + '</div><p class="mut">Nie masz jeszcze konta? <a class="lnk" onclick="ekranRejestracji()">Załóż konto</a></p>');
+  ekranKarta('Zaloguj się', '<input id="lg-email" type="email" autocomplete="username" inputmode="email" placeholder="e-mail" value="' + esc(email || '') + '"><input id="lg-haslo" type="password" autocomplete="current-password" placeholder="hasło"><button class="btn" id="lg-btn">Wejdź</button><div class="err" id="lg-msg">' + esc(msg || '') + '</div><p class="mut">Nie pamiętasz hasła? <a class="lnk" onclick="ekranZapomnialem()">Ustaw nowe</a></p><p class="mut">Nie masz jeszcze konta? <a class="lnk" onclick="ekranRejestracji()">Załóż konto</a></p>');
   var go = function () { var em = document.getElementById('lg-email').value.trim(), ha = document.getElementById('lg-haslo').value; if (!em || !ha) { document.getElementById('lg-msg').textContent = 'Wpisz e-mail i hasło.'; return; } document.getElementById('lg-btn').textContent = 'Sprawdzam…'; api({ akcja: 'logowanie', email: em, haslo: ha }).then(function (r) { if (r.rola === 'trener') { TSESJA = r.sesja; try { localStorage.setItem('trener_sesja', TSESJA); } catch (e) {} ladowanie('Wczytuję…'); wczytajTrenera(); return; } SESJA = r.sesja; try { localStorage.setItem('sesja', SESJA); } catch (e) {} ladowanie('Wczytuję Twój plan…'); wczytajSesja(); }).catch(function (e) { ekranLogowania(String(e.message || e), em); }); };
   document.getElementById('lg-btn').onclick = go; document.getElementById('lg-haslo').addEventListener('keydown', function (e) { if (e.key === 'Enter') go(); });
   (document.getElementById(email ? 'lg-haslo' : 'lg-email') || {}).focus && document.getElementById(email ? 'lg-haslo' : 'lg-email').focus();
 }
+function ekranZapomnialem(email, msg) {
+  email = email || ((document.getElementById('lg-email') || {}).value || '').trim();
+  ekranKarta('Nowe hasło', '<p class="mut">Wpisz e-mail, na który masz konto. Wyślę Ci link do ustawienia nowego hasła.</p><input id="zp-email" type="email" autocomplete="username" inputmode="email" placeholder="e-mail" value="' + esc(email) + '"><button class="btn" id="zp-btn">Wyślij link</button><div class="err" id="zp-msg">' + esc(msg || '') + '</div><p class="mut"><a class="lnk" onclick="ekranLogowania()">Wróć do logowania</a></p>');
+  var go = function () {
+    var em = document.getElementById('zp-email').value.trim(), m = document.getElementById('zp-msg'), b = document.getElementById('zp-btn');
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)) { m.textContent = 'Podaj poprawny e-mail.'; return; }
+    b.textContent = 'Wysyłam…'; b.disabled = true;
+    api({ akcja: 'resetStart', email: em }).then(function () { ekranKarta('Sprawdź skrzynkę', '<p>Jeśli na adres <b>' + esc(em) + '</b> jest konto, za chwilę przyjdzie wiadomość z linkiem do nowego hasła. Link działa przez godzinę.</p><p class="mut">Nie widzisz wiadomości? Zajrzyj do folderu Spam i Oferty.</p><p class="mut"><a class="lnk" onclick="ekranLogowania()">Wróć do logowania</a></p>'); }).catch(function (e) { ekranZapomnialem(em, String(e.message || e)); });
+  };
+  document.getElementById('zp-btn').onclick = go; document.getElementById('zp-email').addEventListener('keydown', function (e) { if (e.key === 'Enter') go(); });
+}
+function ekranNowegoHasla(token, msg) {
+  ekranKarta('Ustaw nowe hasło', '<input id="nh-1" type="password" autocomplete="new-password" placeholder="nowe hasło, co najmniej 8 znaków"><input id="nh-2" type="password" autocomplete="new-password" placeholder="powtórz hasło"><button class="btn" id="nh-btn">Zapisz hasło</button><div class="err" id="nh-msg">' + esc(msg || '') + '</div>');
+  var go = function () {
+    var h1 = document.getElementById('nh-1').value, h2 = document.getElementById('nh-2').value, m = document.getElementById('nh-msg'), b = document.getElementById('nh-btn');
+    if (h1.length < 8) { m.textContent = 'Hasło musi mieć co najmniej 8 znaków.'; return; } if (h1 !== h2) { m.textContent = 'Hasła się różnią.'; return; }
+    b.textContent = 'Zapisuję…'; b.disabled = true;
+    api({ akcja: 'resetUstaw', token: token, haslo: h1 }).then(function (r) { try { sessionStorage.removeItem('reset_token'); } catch (e) {} SESJA = r.sesja; try { localStorage.setItem('sesja', SESJA); } catch (e) {} ladowanie('Hasło zmienione. Wczytuję Twój plan…'); wczytajSesja(); })
+      .catch(function (e) { var t = String(e.message || e); if (/wygasł|użyty/.test(t)) { try { sessionStorage.removeItem('reset_token'); } catch (x) {} ekranZapomnialem('', t); } else ekranNowegoHasla(token, t); });
+  };
+  document.getElementById('nh-btn').onclick = go; document.getElementById('nh-2').addEventListener('keydown', function (e) { if (e.key === 'Enter') go(); });
+  (document.getElementById('nh-1') || {}).focus && document.getElementById('nh-1').focus();
+}
 function ekranRejestracji(msg, dane) {
   dane = dane || {};
-  ekranKarta('Załóż konto', '<input id="rg-imie" autocomplete="name" placeholder="imię i nazwisko" value="' + esc(dane.imie || '') + '"><input id="rg-email" type="email" autocomplete="username" inputmode="email" placeholder="e-mail" value="' + esc(dane.email || '') + '"><input id="rg-haslo" type="password" autocomplete="new-password" placeholder="hasło (min. 8 znaków)"><input id="rg-haslo2" type="password" autocomplete="new-password" placeholder="powtórz hasło"><button class="btn" id="rg-btn">Załóż konto</button><div class="err" id="rg-msg">' + esc(msg || '') + '</div><p class="mut">Po założeniu konta wypełnisz krótką ankietę startową, a Kuba zatwierdzi Cię i przygotuje plan.</p><p class="mut">Masz już konto? <a class="lnk" onclick="ekranLogowania()">Zaloguj się</a></p>');
+  ekranKarta('Załóż konto', '<input id="rg-imie" autocomplete="name" placeholder="imię i nazwisko" value="' + esc(dane.imie || '') + '"><input id="rg-email" type="email" autocomplete="username" inputmode="email" placeholder="e-mail" value="' + esc(dane.email || '') + '"><input id="rg-haslo" type="password" autocomplete="new-password" placeholder="hasło, co najmniej 8 znaków"><input id="rg-haslo2" type="password" autocomplete="new-password" placeholder="powtórz hasło"><button class="btn" id="rg-btn">Załóż konto</button><div class="err" id="rg-msg">' + esc(msg || '') + '</div><p class="mut">Po założeniu konta wypełnisz krótką ankietę startową, a Kuba zatwierdzi Cię i przygotuje plan.</p><p class="mut">Masz już konto? <a class="lnk" onclick="ekranLogowania()">Zaloguj się</a></p>');
   var go = function () {
     var im = document.getElementById('rg-imie').value.trim(), em = document.getElementById('rg-email').value.trim(), h1 = document.getElementById('rg-haslo').value, h2 = document.getElementById('rg-haslo2').value, m = document.getElementById('rg-msg');
     if (im.length < 2) { m.textContent = 'Podaj imię i nazwisko.'; return; } if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)) { m.textContent = 'Podaj poprawny e-mail.'; return; } if (h1.length < 8) { m.textContent = 'Hasło musi mieć co najmniej 8 znaków.'; return; } if (h1 !== h2) { m.textContent = 'Hasła się różnią.'; return; }
@@ -1712,6 +1735,8 @@ function wylogujKonto(cicho) {
   var q = new URLSearchParams(location.search), k = q.get('k');
   try { TSESJA = localStorage.getItem('trener_sesja'); localStorage.removeItem('trener_haslo'); } catch (e) {}
   if (k) { history.replaceState(null, '', location.pathname + location.hash); if (!TSESJA && !SESJA) { ekranLogowania('Linki z PIN-em już nie działają. Zaloguj się kontem albo załóż je poniżej.'); return; } }
+  var rt = q.get('reset'); if (rt) { try { sessionStorage.setItem('reset_token', rt); } catch (e) {} history.replaceState(null, '', location.pathname + location.hash); } else { try { rt = sessionStorage.getItem('reset_token'); } catch (e) {} }
+  if (rt) { ekranNowegoHasla(rt); return; }
   if (TSESJA) { ladowanie('Wczytuję…'); wczytajTrenera(); return; }
   if (SESJA) { ladowanie('Wczytuję Twój plan…'); wczytajSesja(); return; }
   ekranLogowania();
