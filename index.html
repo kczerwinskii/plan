@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="e808d62939"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="0117819181"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg1:#121212;--bg2:#0D0D0D;--bg3:#080808;--card:#161616;--head:#1C1C1C;--dark:#101010;--empty:#141414;--line:#2C2C2C;--iv:#F4F1EA;--ivd:#A7A49C;--gl:#D9A520;--gm:#B8891A;--gd:#7A5A12;--gx:#4E3A0C;--green:#5FBF7A;--red:#E0684A}
@@ -321,6 +321,8 @@ body.karty{padding-bottom:180px}
 .lbx{color:var(--iv);font-size:24px;line-height:1;cursor:pointer;padding:4px 6px}
 .lbc{flex:1;display:flex;align-items:center;justify-content:center;padding:0 10px calc(16px + env(safe-area-inset-bottom));min-height:0}
 .lbc img,.lbc video{max-width:100%;max-height:100%;border-radius:10px;object-fit:contain;background:#000}
+/* patch91: kropka przed suplementem (globalna .dot „zapisano” ją chowała) */
+.zpora .it .dot{position:static;opacity:1}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
 .pinbox.lg{max-width:1060px;margin:0 auto;padding:24px 16px;min-height:100vh;display:flex;align-items:center;box-sizing:border-box}.pinbox.lg .card{width:100%;box-sizing:border-box;padding:60px;border-radius:14px}.pinbox.lg .sub{font-size:24px}.pinbox.lg h1{margin:8px 0 26px;font-size:56px}.pinbox.lg input{height:96px;font-size:32px}.pinbox.lg .btn{height:96px;font-size:34px}.pinbox.lg .mut{font-size:24px}
 body.lgmob .pinbox.lg{padding:16px;min-height:100vh}body.lgmob .pinbox.lg .card{padding:26px 20px;border-radius:14px}body.lgmob .pinbox.lg .sub{font-size:12px}body.lgmob .pinbox.lg h1{font-size:30px;margin:6px 0 18px}body.lgmob .pinbox.lg input{height:54px;font-size:17px;padding:0 14px;margin-bottom:10px;border-radius:10px}body.lgmob .pinbox.lg .btn{height:56px;font-size:18px;border-radius:10px;margin-top:4px}body.lgmob .pinbox.lg .err{font-size:15px;min-height:20px;margin-top:10px}body.lgmob .pinbox.lg .mut{font-size:15px;margin:14px 0 0;line-height:1.5}
@@ -764,8 +766,10 @@ function gestStart(e) {
   if (document.getElementById('lbox')) return;
   if (MENU) { if (w('#menu') || w('#tlo')) { g.typ = 'zamknij'; GEST = g; } return; }
   if (p.clientX <= 24) { g.typ = 'menu'; GEST = g; return; }
-  if (kartyAktywne() && WIDOK === 'treningi' && document.getElementById('mswipe') && !w('textarea') && !w('select')) { g.typ = 'cw'; GEST = g; }
+  if (kartyAktywne() && WIDOK === 'treningi' && document.getElementById('mswipe') && !w('textarea') && !w('select')) { g.typ = 'cw'; GEST = g; return; }
+  if (!w('textarea') && !w('select') && !przewWLewo(tg)) { g.typ = 'menu'; GEST = g; } // patch91: w pozostałych zakładkach ruch w prawo wysuwa menu
 }
+function przewWLewo(el) { for (var e = el; e && e.nodeType === 1 && e !== document.body; e = e.parentElement) { var s = getComputedStyle(e); if ((s.overflowX === 'auto' || s.overflowX === 'scroll') && e.scrollLeft > 0) return true; } var se = document.scrollingElement; return !!(se && se.scrollLeft > 0); }
 function gestPoczatek(g) {
   if (g.typ === 'cw' && g.dx > 0 && idxMob(mobT) <= 0) g.typ = 'menu'; // patch87: na 1. ćwiczeniu ruch w prawo wysuwa menu
   if (g.typ === 'film') { g.el = VP.el; if (!g.el) return false; g.w = g.el.offsetWidth || window.innerWidth; g.el.style.transition = 'none'; return true; }
