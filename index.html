@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="0a467f05d7"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="4fd0a504eb"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg1:#121212;--bg2:#0D0D0D;--bg3:#080808;--card:#161616;--head:#1C1C1C;--dark:#101010;--empty:#141414;--line:#2C2C2C;--iv:#F4F1EA;--ivd:#A7A49C;--gl:#D9A520;--gm:#B8891A;--gd:#7A5A12;--gx:#4E3A0C;--green:#5FBF7A;--red:#E0684A}
@@ -326,6 +326,8 @@ table.tpl th{vertical-align:bottom}table.tpl th .inf{display:block;margin:4px au
 .zpora .it .dot{position:static;opacity:1}
 /* patch92: ikonki pór dnia */
 .zpora .ic .pik{display:block}
+/* patch96 */
+.jkl{color:#E6CB80;text-decoration:underline;text-underline-offset:3px;cursor:pointer;font-weight:700}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
 .pinbox.lg{max-width:1060px;margin:0 auto;padding:24px 16px;min-height:100vh;display:flex;align-items:center;box-sizing:border-box}.pinbox.lg .card{width:100%;box-sizing:border-box;padding:60px;border-radius:14px}.pinbox.lg .sub{font-size:24px}.pinbox.lg h1{margin:8px 0 26px;font-size:56px}.pinbox.lg input{height:96px;font-size:32px}.pinbox.lg .btn{height:96px;font-size:34px}.pinbox.lg .mut{font-size:24px}
 body.lgmob .pinbox.lg{padding:16px;min-height:100vh}body.lgmob .pinbox.lg .card{padding:26px 20px;border-radius:14px}body.lgmob .pinbox.lg .sub{font-size:12px}body.lgmob .pinbox.lg h1{font-size:30px;margin:6px 0 18px}body.lgmob .pinbox.lg input{height:54px;font-size:17px;padding:0 14px;margin-bottom:10px;border-radius:10px}body.lgmob .pinbox.lg .btn{height:56px;font-size:18px;border-radius:10px;margin-top:4px}body.lgmob .pinbox.lg .err{font-size:15px;min-height:20px;margin-top:10px}body.lgmob .pinbox.lg .mut{font-size:15px;margin:14px 0 0;line-height:1.5}
@@ -361,14 +363,14 @@ var TYP = { Priorytet: 'P', Neutral: 'N', Utrzymanie: 'U' };
 var TIPS = {
  nr: 'Kolejność ćwiczeń. Znaczek „superseria” przy nazwie: dwa ćwiczenia robisz jedno po drugim, bez przerwy między nimi. Przerwę robisz dopiero po obu.',
  cw: 'Nazwa ćwiczenia. Kolor wiersza mówi, jaki to priorytet: złoto = Priorytet, granat = Neutral, bordo = Utrzymanie. Kliknij kwadraty w legendzie, żeby przeczytać, jak zarządzać każdym z nich.',
- powt: 'Wpisz, ile powtórzeń zrobiłeś w każdej serii. Kolorowe pola = tyle serii jest zaplanowanych. Ciemnych nie wypełniasz.',
+ powt: 'Wpisz liczbę powtórzeń wykonanych w każdej serii. Kolorowe pola = tyle serii jest zaplanowanych. Ciemnych nie wypełniasz.',
  cakt: 'Ciężar, którym robisz ćwiczenie teraz. Aktualizuj, gdy dokładasz.',
- cst: 'Ciężar, którym zaczynasz ten blok. Wpisujesz go raz, w pierwszym tygodniu, i nie zmieniasz do końca bloku. Na koniec widzisz, ile dołożyłeś.',
+ cst: 'Ciężar, którym zaczynasz ten blok. Wpisujesz go raz, w pierwszym tygodniu, i nie zmieniasz do końca bloku. Na koniec widzisz, ile udało się dołożyć.',
  sets: 'Sets = liczba serii w tym ćwiczeniu. Od tej liczby zależy, ile pól „Wykonane powtórzenia” się podświetla.',
  reps: 'Reps = liczba powtórzeń w serii, do której dążysz.',
  prz: 'Przerwa = czas odpoczynku między seriami.',
- rir: 'RiR (Reps in Reserve) = ile powtórzeń zostawiasz w zapasie. 0 = seria do upadku mięśniowego. Dobierasz dla 1. serii w pierwszym tygodniu; w kolejnych seriach spada sam.\n\nJak dobrać: przy 3×10 na RiR 2 wybierz ciężar, którym zrobisz 10 z zapasem 2 (czyli 12 do upadku). Zrób serię do upadku: 12 = dobrze; 14+ = za lekko, dołóż; 10 lub mniej = za ciężko.',
- tempo: 'Tempo, np. x211: x = ruch koncentryczny (skrócenie) jak najszybciej przy dobrej technice; 2 = ruch ekscentryczny 2 s; 1 = pauza 1 s w skróceniu; 1 = pauza 1 s w rozciągnięciu.',
+ rir: 'RiR mówi, ile powtórzeń zostawiasz w zapasie. RiR 0 to seria do upadku mięśniowego: nie zrobisz kolejnego powtórzenia z braku siły. Na przykład RiR 2 oznacza, że zostały Ci 2 powtórzenia do upadku mięśniowego.\n\nRiR liczysz dla pierwszej serii, w kolejnych maleje sam, bo mięśnie są już zmęczone.',
+ tempo: 'Tempo, np. x211: x: skrócenie mięśnia jak najszybciej, przy poprawnej technice; 2: opuszczanie przez 2 sekundy; 1: pauza 1 sekunda w maksymalnym skróceniu; 1: pauza 1 sekunda w maksymalnym rozciągnięciu.',
  wideo: 'Kliknij ikonkę, żeby otworzyć film z techniką. Szara ikonka = brak filmu.',
  nota: 'Twoje miejsce na notatki: ustawienia sprzętu (np. wysokość wyciągu 25), co czujesz, co nie działa. Czytam to co tydzień.',
  tyg: 'Po zakończonym tygodniu treningowym kliknij kolejną kratkę. Dzięki temu wiem, w którym tygodniu bloku jesteś.',
@@ -386,12 +388,15 @@ function INSTR() { var tyd = n((D.ustawienia || {}).zaliczone) + 1, mail = D.rap
   + jkSek('Superseria', '<p class="jkp"><span class="mtag">superseria</span>Dwa ćwiczenia robisz jedno po drugim, bez przerwy między nimi. Przerwę robisz dopiero po obu.</p>')
   + jkSek('Znaczek <span class="nt">„i”</span>', '<p class="jkp"><i class="inf">i</i>Dotknij znaczka „i”, a zobaczysz krótki opis. Jest przy kolumnach tabeli, kafelkach i kolorach na dole karty.</p>')
   + jkSek('Przesuwanie palcem', '<p class="jkp">Przesuwaj palcem w lewo i w prawo, żeby szybciej poruszać się po aplikacji. W treningu przechodzisz tak między ćwiczeniami, a w pozostałych zakładkach wysuwasz i chowasz menu. Menu działa też przyciskami <b>≡</b> i <b style="color:var(--iv)">✕</b>.</p>')],
- ['RiR i tempo', jkSek('RiR', '<p class="jkp">RiR mówi, ile powtórzeń zostawiasz w zapasie. RiR 0 to seria do upadku mięśniowego: nie zrobisz kolejnego powtórzenia z braku siły.</p>')
-  + jkSek('Jak dobrać ciężar', '<p class="jkp">Przykład: 3×10 na RiR 2. Wybierz ciężar, którym zrobisz 10 powtórzeń z zapasem 2, czyli 12 do upadku. Sprawdź go jedną serią do upadku:</p>' + jkKaf([['12', 'dobrze', 1], ['14+', 'za lekko:<br>dołóż'], ['10', 'lub mniej:<br>za ciężko']]) + '<p class="jkp">RiR dobierasz dla 1. serii w pierwszym tygodniu. W kolejnych seriach spada sam.</p>')
+ ['Jak progresować', jkSek('Dobór ciężaru', '<p class="jkp">Dobierasz ciężar do parametrów z planu: tyle powtórzeń, ile w rubryce <b>Reps</b>, z zapasem z rubryki <b>RiR</b>.</p><p class="jkp">RiR liczysz dla pierwszej serii, w kolejnych maleje sam, bo mięśnie są już zmęczone.</p>')
+  + jkSek('Co tydzień', '<p class="jkp">Co tydzień staraj się dołożyć ciężar przy dobrej technice. Jeśli nie idzie, dołóż powtórzenia.</p><p class="jkp">Wyjątkiem są ćwiczenia w kolorze <b>Utrzymanie</b>: ciężar zostaje ten sam przez cały blok.</p>')
+  + jkSek('Przykład: seria na 10 powtórzeń', [['1', 'Robisz 10 powtórzeń. Na następnym treningu dokładasz ciężar.'], ['2', 'Z nowym ciężarem wychodzi 8. To nadal w porządku, bo jesteś blisko 10.'], ['3', 'Od teraz dokładasz powtórzenia, a nie ciężar, aż znowu dojdziesz do 10.'], ['4', 'Wtedy znowu dokładasz ciężar i cykl się powtarza.']].map(function (x) { return '<div class="jkr"><b>' + x[0] + '</b><span>' + x[1] + '</span></div>'; }).join(''))
+  + jkSek('Kolory', '<p class="jkp">Jak progresować przy każdym kolorze, znajdziesz w zakładce <a class="jkl" onclick="idz(\'ins\',0)">Legenda: kolory i obsługa</a>.</p>')],
+ ['RiR i tempo', jkSek('RiR', '<p class="jkp">RiR mówi, ile powtórzeń zostawiasz w zapasie.</p><p class="jkp">RiR 0 to seria do upadku mięśniowego: nie zrobisz kolejnego powtórzenia z braku siły.</p><p class="jkp">Na przykład RiR 2 oznacza, że zostały Ci 2 powtórzenia do upadku mięśniowego.</p>')
   + jkSek('Tempo, np. x211', [['x', 'skrócenie mięśnia jak najszybciej, przy poprawnej technice'], ['2', 'opuszczanie przez 2 sekundy'], ['1', 'pauza 1 sekunda w maksymalnym skróceniu'], ['1', 'pauza 1 sekunda w maksymalnym rozciągnięciu']].map(function (x) { return '<div class="jkr"><b>' + x[0] + '</b><span>' + x[1] + '</span></div>'; }).join(''))],
  ['Rozgrzewka', 'Rozgrzewka przed każdym treningiem, według filmu. Przycisk „Rozgrzewka” masz też w nagłówku każdego treningu.\n<a class="pbtn rz" style="margin:8px 0 0" target="_blank" href="' + (D.rozgrzewka || '#') + '"><span class="ico">' + playIkona(20) + '</span>Film z rozgrzewką</a>'],
  ['Na koniec tygodnia', '<p class="jkp"><b>Po ostatnim treningu w tygodniu wyślij mi raport.</b> Kratka tygodnia w bloku odhaczy się wtedy sama, a ja będę wiedział, w którym tygodniu bloku jesteś, i dobrze zaplanuję Twój progres.</p>'
-  + jkSek('Co napisać', '<ul><li>jak się czujesz po tym tygodniu,</li><li>czy pojawiły się problemy na treningach,</li><li>czy zostawiasz mi coś w notatce przy ćwiczeniu,</li><li>co chcesz ze mną przegadać, treningowo albo zdrowotnie,</li><li>że wpisałeś wagę w „Ważenia i kalorie”,</li><li>wszystko, co jeszcze przyjdzie Ci do głowy.</li></ul>')
+  + jkSek('Co napisać', '<ul><li>jak się czujesz po tym tygodniu,</li><li>czy pojawiły się problemy na treningach,</li><li>czy zostawiasz mi coś w notatce przy ćwiczeniu,</li><li>co chcesz ze mną przegadać, treningowo albo zdrowotnie,</li><li>czy waga jest wpisana w „Ważenia i kalorie”,</li><li>wszystko, co jeszcze przyjdzie Ci do głowy.</li></ul>')
   + jkSek('Gdzie', '<p class="jkp">W menu ≡, w sekcji Raporty. Możesz dołączyć zdjęcia albo krótki film. Jeśli coś nie działa, wyślij raport mailem na <b>' + mail + '</b>, w temacie wpisz numer tygodnia.</p><a class="pbtn rz" style="display:inline-block;margin:0 0 4px" href="mailto:' + mail + '?subject=' + encodeURIComponent('Raport – tydzień ' + tyd + (D.klient && D.klient.imie ? ' – ' + D.klient.imie : '')) + '">✉ &nbsp;Wyślij raport mailem</a>')
   + jkSek('Do kiedy', '<p class="jkp">Najlepiej od razu po ostatnim treningu, najpóźniej w piątek do 23:59. Odpisuję do niedzieli 23:59.</p>')
   + jkSek('Pilne sprawy', '<p class="jkp">Pisz na Instagramie albo Messengerze, odpowiadam do 24&nbsp;h. Nie bój się pytać, od tego jestem.</p><span class="warn">Raport jest warunkiem dalszych wskazówek treningowych.</span>')]
@@ -486,7 +491,7 @@ function widokPwa() {
   return h + '</div></div>';
 }
 // ---------- widoki (menu ≡ przełącza ekrany, adres w #hash) ----------
-var WIDOKI = ['treningi', 'plan', 'atlas', 'hist', 'rap', 'waz', 'zal', 'pwa', 'ins0', 'ins1', 'ins2', 'ins3'];
+var WIDOKI = ['treningi', 'plan', 'atlas', 'hist', 'rap', 'waz', 'zal', 'pwa', 'ins0', 'ins1', 'ins2', 'ins3', 'ins4'];
 function widokZHash() { var h = (location.hash || '').replace('#', ''); return WIDOKI.indexOf(h) >= 0 ? h : 'treningi'; }
 var WIDOK = widokZHash();
 function ustawWidok(w) { if (WIDOKI.indexOf(w) < 0) w = 'treningi'; WIDOK = w; try { if (location.hash !== '#' + w && !(w === 'treningi' && !location.hash)) location.hash = w; } catch (e) {} }
