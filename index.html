@@ -298,6 +298,8 @@ body.karty{padding-bottom:180px}
 .jhA{margin:22px -18px 12px;padding:9px 18px;font-size:13px;letter-spacing:2.5px;text-transform:uppercase;color:var(--iv);font-weight:700;background:linear-gradient(90deg,#2A3A5E 0%,#22304F 60%,rgba(34,48,79,0) 100%);border-left:3px solid #8E6B2E;white-space:normal}.ibody>.jhA:first-child{margin-top:0}.jhA .nt{text-transform:none}
 .ibody ul{margin:0 0 4px;padding-left:18px;white-space:normal}.ibody li{margin:2px 0}
 .msheet .ex4 span{min-width:0;line-height:1.25}
+/* patch86: karta może wyjechać w bok bez poziomego przewijania strony */
+#mobv{overflow-x:hidden}@supports (overflow:clip){#mobv{overflow-x:clip}}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
 .pinbox.lg{max-width:1060px;margin:0 auto;padding:24px 16px;min-height:100vh;display:flex;align-items:center;box-sizing:border-box}.pinbox.lg .card{width:100%;box-sizing:border-box;padding:60px;border-radius:14px}.pinbox.lg .sub{font-size:24px}.pinbox.lg h1{margin:8px 0 26px;font-size:56px}.pinbox.lg input{height:96px;font-size:32px}.pinbox.lg .btn{height:96px;font-size:34px}.pinbox.lg .mut{font-size:24px}
 body.lgmob .pinbox.lg{padding:16px;min-height:100vh}body.lgmob .pinbox.lg .card{padding:26px 20px;border-radius:14px}body.lgmob .pinbox.lg .sub{font-size:12px}body.lgmob .pinbox.lg h1{font-size:30px;margin:6px 0 18px}body.lgmob .pinbox.lg input{height:54px;font-size:17px;padding:0 14px;margin-bottom:10px;border-radius:10px}body.lgmob .pinbox.lg .btn{height:56px;font-size:18px;border-radius:10px;margin-top:4px}body.lgmob .pinbox.lg .err{font-size:15px;min-height:20px;margin-top:10px}body.lgmob .pinbox.lg .mut{font-size:15px;margin:14px 0 0;line-height:1.5}
@@ -680,11 +682,70 @@ function bindMob(t) {
     bind(el, o, el.dataset.f, 'Cwiczenia', { after: function () { odswiezPostepMob(t); } });
     el.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); el.blur(); } });
   });
-  var sw = document.getElementById('mswipe'); if (!sw) return;
-  var x0 = null, y0 = null;
-  sw.addEventListener('touchstart', function (e) { var p = e.touches[0]; x0 = p.clientX; y0 = p.clientY; }, { passive: true });
-  sw.addEventListener('touchend', function (e) { if (x0 == null) return; var p = e.changedTouches[0], dx = p.clientX - x0, dy = p.clientY - y0; x0 = null; if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) { var i = idxMob(t); if (dx < 0) idzMob(t, i + 1); else idzMob(t, i - 1); } }, { passive: true });
 }
+// ----- gesty na telefonie (patch86): karta jedzie za palcem, menu od lewej krawędzi, chowanie menu ruchem w lewo -----
+var GEST = null;
+function gestStart(e) {
+  GEST = null;
+  if (!e.touches || e.touches.length !== 1 || MV.arkusz) return;
+  var p = e.touches[0], tg = e.target, w = function (s) { return tg && tg.closest ? tg.closest(s) : null; };
+  var g = { x0: p.clientX, y0: p.clientY, t0: Date.now(), dx: 0, dy: 0, lock: null };
+  if (MENU) { if (w('#menu') || w('#tlo')) { g.typ = 'zamknij'; GEST = g; } return; }
+  if (p.clientX <= 24) { g.typ = 'menu'; GEST = g; return; }
+  if (kartyAktywne() && WIDOK === 'treningi' && document.getElementById('mswipe') && !w('textarea') && !w('select')) { g.typ = 'cw'; GEST = g; }
+}
+function gestPoczatek(g) {
+  if (g.typ === 'menu') { if (g.dx <= 0) return false; MENU = true; rysujMenu(); }
+  if (g.typ === 'cw') { g.el = document.getElementById('mswipe'); if (!g.el) return false; g.i = idxMob(mobT); g.n = krokiMob(mobT).length; g.w = window.innerWidth; }
+  else { g.el = document.getElementById('menu'); g.tlo = document.getElementById('tlo'); if (!g.el) return false; g.w = g.el.offsetWidth || 300; }
+  g.el.style.transition = 'none'; if (g.tlo) g.tlo.style.transition = 'none';
+  return true;
+}
+function gestRysuj(g) {
+  if (g.typ === 'cw') { var opor = (g.dx > 0 && g.i <= 0) || (g.dx < 0 && g.i >= g.n - 1); g.el.style.transform = 'translateX(' + Math.round(opor ? g.dx * 0.25 : g.dx) + 'px)'; return; }
+  var x = g.typ === 'menu' ? Math.min(0, g.dx - g.w) : Math.min(0, g.dx);
+  g.el.style.transform = 'translateX(' + Math.round(x) + 'px)'; if (g.tlo) g.tlo.style.opacity = String(Math.max(0, 1 + x / g.w));
+}
+function gestMove(e) {
+  var g = GEST; if (!g || !e.touches || !e.touches.length) return;
+  var p = e.touches[0]; g.dx = p.clientX - g.x0; g.dy = p.clientY - g.y0;
+  if (!g.lock) {
+    if (Math.abs(g.dx) < 8 && Math.abs(g.dy) < 8) return;
+    g.lock = Math.abs(g.dx) > Math.abs(g.dy) * 1.2 ? 'h' : 'v';
+    if (g.lock === 'v' || !gestPoczatek(g)) { GEST = null; return; }
+  }
+  if (e.cancelable) e.preventDefault();
+  gestRysuj(g);
+}
+function gestKoniec() {
+  var g = GEST; GEST = null; if (!g || g.lock !== 'h' || !g.el) return;
+  var v = Math.abs(g.dx) / Math.max(1, Date.now() - g.t0), T = 'transform .2s ease-out';
+  if (g.typ === 'cw') {
+    var kier = g.dx < 0 ? 1 : -1, cel = g.i + kier;
+    if ((Math.abs(g.dx) > g.w * 0.22 || (v > 0.45 && Math.abs(g.dx) > 40)) && cel >= 0 && cel < g.n) {
+      g.el.style.transition = 'transform .16s ease-in'; g.el.style.transform = 'translateX(' + (-kier * g.w) + 'px)';
+      setTimeout(function () {
+        idzMob(mobT, cel); var nw = document.getElementById('mswipe'); if (!nw) return;
+        nw.style.transition = 'none'; nw.style.transform = 'translateX(' + Math.round(kier * g.w * 0.3) + 'px)'; nw.style.opacity = '0'; void nw.offsetWidth;
+        nw.style.transition = 'transform .2s ease-out, opacity .2s ease-out'; nw.style.transform = ''; nw.style.opacity = '';
+      }, 160);
+    } else { g.el.style.transition = T; g.el.style.transform = ''; }
+    return;
+  }
+  var otwarte = g.typ === 'menu' ? (g.dx > g.w * 0.3 || (v > 0.4 && g.dx > 30)) : !(-g.dx > g.w * 0.3 || (v > 0.4 && g.dx < -30));
+  g.el.style.transition = T; if (g.tlo) g.tlo.style.transition = 'opacity .2s ease-out';
+  if (otwarte) { g.el.style.transform = ''; if (g.tlo) g.tlo.style.opacity = ''; }
+  else { g.el.style.transform = 'translateX(' + (-g.w - 20) + 'px)'; if (g.tlo) g.tlo.style.opacity = '0'; setTimeout(function () { if (MENU) { MENU = false; rysujMenu(); } }, 200); }
+}
+function gestPrzerwany() {
+  var g = GEST; GEST = null; if (!g || g.lock !== 'h' || !g.el) return;
+  g.el.style.transition = 'transform .2s ease-out'; g.el.style.transform = ''; if (g.tlo) g.tlo.style.opacity = '';
+  if (g.typ === 'menu' && MENU) { MENU = false; rysujMenu(); }
+}
+document.addEventListener('touchstart', gestStart, { passive: true });
+document.addEventListener('touchmove', gestMove, { passive: false });
+document.addEventListener('touchend', gestKoniec, { passive: true });
+document.addEventListener('touchcancel', gestPrzerwany, { passive: true });
 // ----- arkusze od dołu -----
 function arkusz(html, klasa) { zamknijArkusz(); var tlo = document.createElement('div'); tlo.className = 'mtlo'; tlo.id = 'mtlo'; tlo.onclick = zamknijArkusz; var sh = document.createElement('div'); sh.className = 'msheet' + (klasa ? ' ' + klasa : ''); sh.id = 'msheet'; sh.innerHTML = '<div class="grab"></div>' + html; document.body.appendChild(tlo); document.body.appendChild(sh); MV.arkusz = sh; return sh; }
 function zamknijArkusz() { var a = document.getElementById('msheet'), t = document.getElementById('mtlo'); if (a) a.remove(); if (t) t.remove(); MV.arkusz = null; if (MV.vv) { try { window.visualViewport.removeEventListener('resize', MV.vv); } catch (e) {} MV.vv = null; } }
