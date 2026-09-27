@@ -1019,6 +1019,8 @@ function wazeniaTel() {
   if (!rows.length) h += '<div class="mut" style="padding:20px;text-align:center">Jeszcze nie ma ważeń. Dodaj pierwsze.</div>';
   return h + '</div>';
 }
+// dotknięcie pustego tła zwija rozwinięty wpis ważenia
+document.addEventListener('click', function (e) { if (WAZ_ED == null || WIDOK !== 'waz') return; var t = e.target; if (t.closest && (t.closest('.wz') || t.closest('.wdodaj') || t.closest('#menu') || t.closest('#tlo') || t.closest('.pasek') || t.closest('.msheet') || t.tagName === 'INPUT' || t.tagName === 'SELECT' || t.tagName === 'TEXTAREA')) return; WAZ_ED = null; render(); });
 function wazEdytuj(id) { WAZ_ED = id; render(); setTimeout(function () { var e = document.querySelector('.wz.ed [data-f="waga"]'); if (e) e.focus(); }, 50); }
 function raporty() {
   var L = (D.raporty || []).slice().sort(function (x, y) { return String(y.data).localeCompare(String(x.data)); });
