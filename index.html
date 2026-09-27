@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="80828adba2"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="fbfdf96b84"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg1:#121212;--bg2:#0D0D0D;--bg3:#080808;--card:#161616;--head:#1C1C1C;--dark:#101010;--empty:#141414;--line:#2C2C2C;--iv:#F4F1EA;--ivd:#A7A49C;--gl:#D9A520;--gm:#B8891A;--gd:#7A5A12;--gx:#4E3A0C;--green:#5FBF7A;--red:#E0684A}
@@ -362,7 +362,7 @@ function bledLogowania(e) { return /PIN|nieaktywn|hasło|dostęp/i.test(String(e
 var TYP = { Priorytet: 'P', Neutral: 'N', Utrzymanie: 'U' };
 var TIPS = {
  nr: 'Kolejność ćwiczeń. Znaczek „superseria” przy nazwie: dwa ćwiczenia robisz jedno po drugim, bez przerwy między nimi. Przerwę robisz dopiero po obu.',
- cw: 'Nazwa ćwiczenia. Kolor wiersza mówi, jaki to priorytet: złoto = Priorytet, granat = Neutral, bordo = Utrzymanie. Kliknij kwadraty w legendzie, żeby przeczytać, jak zarządzać każdym z nich.',
+ cw: 'Ćwiczenie do wykonania. Kolor wiersza mówi, jak progresujesz: złoto = Priorytet, granat = Neutral, bordo = Utrzymanie. Wejdź w menu Legendy, żeby przeczytać szczegóły.',
  powt: 'Wpisz liczbę powtórzeń wykonanych w każdej serii. Kolorowe pola = tyle serii jest zaplanowanych.',
  cakt: 'Ciężar, którym robisz ćwiczenie teraz. Aktualizuj, gdy dokładasz.',
  cst: 'Ciężar, którym zaczynasz ten blok. Wpisujesz go raz, w pierwszym tygodniu, i nie zmieniasz do końca bloku. Na koniec widzisz, ile udało się dołożyć.',
@@ -372,9 +372,9 @@ var TIPS = {
  rir: 'RiR mówi, ile powtórzeń zostawiasz w zapasie. RiR 0 to seria do upadku mięśniowego: nie zrobisz kolejnego powtórzenia z braku siły. Na przykład RiR 2 oznacza, że zostały Ci 2 powtórzenia do upadku mięśniowego.\n\nRiR liczysz dla pierwszej serii, w kolejnych maleje sam, bo mięśnie są już zmęczone.',
  tempo: 'Tempo, np. x211: x: skrócenie mięśnia jak najszybciej, przy poprawnej technice; 2: opuszczanie przez 2 sekundy; 1: pauza 1 sekunda w maksymalnym skróceniu; 1: pauza 1 sekunda w maksymalnym rozciągnięciu.',
  wideo: 'Kliknij ikonkę, żeby otworzyć film z techniką. Szara ikonka = brak filmu.',
- nota: 'Twoje miejsce na notatki: ustawienia sprzętu (np. wysokość wyciągu 25), co czujesz, co nie działa. Czytam to co tydzień.',
+ nota: 'Twoje miejsce na notatki. Wpisz ustawienia sprzętu, na przykład wysokość wyciągu 25, to, co czujesz, albo to, co nie działa. Czytam to co tydzień.',
  tyg: 'Po ostatnim treningu w tygodniu wyślij mi raport. Wtedy kratka tygodnia w bloku odhaczy się sama. Dzięki temu wiem, w którym tygodniu bloku jesteś, i mogę dobrze zaplanować Twój progres.',
- raport: 'Raport tygodniowy piszesz tu, po ostatnim treningu w tygodniu. Możesz dołączyć zdjęcia (np. sylwetka) albo krótki film z techniką. Raport zostaje w Twojej historii.',
+ raport: 'Raport tygodniowy piszesz tu, po ostatnim treningu w tygodniu. Możesz dołączyć zdjęcia, na przykład sylwetki, albo krótki film z techniką. Raport zostaje w Twojej historii.',
  plan: 'Tryb planowania: najpierw zaznacz, które partie robisz w danym treningu (kratka „w tr.”), potem wpisz serie: Rozc. = ćwiczenia w rozciągnięciu, Skr. = w skróceniu. Kolumna „Rozpisane” porównuje sumę z planem z kafelków. Wycinek dla jednego treningu widzisz pod tabelą ćwiczeń („Partie treningu”).',
  hist: 'Każdy zamknięty blok zostaje w archiwum: ćwiczenia z ciężarem na start i koniec, wykonane powtórzenia z ostatniego tygodnia, plan partii i waga. Dzięki temu widzisz progres z bloku na blok i możesz wrócić do tego, co działało.',
  strzalki: 'Między polami poruszasz się strzałkami: w kafelkach prawo/lewo/góra/dół między partiami, w tabelach po wierszu i kolumnie. Enter = następne pole. Wpisz liczbę i od razu strzałka w prawo.',
