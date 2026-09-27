@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="e808d62939"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg1:#121212;--bg2:#0D0D0D;--bg3:#080808;--card:#161616;--head:#1C1C1C;--dark:#101010;--empty:#141414;--line:#2C2C2C;--iv:#F4F1EA;--ivd:#A7A49C;--gl:#D9A520;--gm:#B8891A;--gd:#7A5A12;--gx:#4E3A0C;--green:#5FBF7A;--red:#E0684A}
@@ -300,6 +300,27 @@ body.karty{padding-bottom:180px}
 .msheet .ex4 span{min-width:0;line-height:1.25}
 /* patch86: karta może wyjechać w bok bez poziomego przewijania strony */
 #mobv{overflow-x:hidden}@supports (overflow:clip){#mobv{overflow-x:clip}}
+/* patch90: ikonki „i” rysowane, wideo w tabeli trenera, panel filmu z prawej, podgląd załączników */
+.inf,.lgi{position:relative;color:transparent!important}
+.inf::before,.lgi::before{content:"";position:absolute;left:50%;top:20%;width:18%;height:18%;border-radius:50%;background:#0E0E12;transform:translateX(-50%)}
+.inf::after,.lgi::after{content:"";position:absolute;left:50%;top:44%;width:18%;height:36%;border-radius:1px;background:#0E0E12;transform:translateX(-50%)}
+.vw{display:inline-flex;align-items:center;gap:6px}.vw input{display:none}.vw.ed input{display:inline-block}.vw.ed a.v,.vw.ed .ved{display:none}.vw .ved{font-style:normal;cursor:pointer;color:var(--ivd);font-size:13px;opacity:.75}.vw .ved:hover{opacity:1;color:var(--gl)}
+.vpan{position:fixed;inset:0;z-index:90;background:#0B0B0B;display:flex;flex-direction:column;transform:translateX(105%);transition:transform .25s ease-out;touch-action:none;overscroll-behavior:contain}.vpan.on{transform:none}
+.vtop{display:flex;align-items:center;gap:12px;padding:calc(12px + env(safe-area-inset-top)) 14px 12px;border-bottom:1px solid #2C2C2C}
+.vwroc{display:block;margin:20px auto 0;height:50px;min-width:210px;padding:0 28px;border-radius:14px;border:2px solid var(--gl);background:#141414;color:#E6CB80;font:700 16px Poppins,Arial,sans-serif;cursor:pointer}
+.vtop b{color:var(--iv);font-size:16px;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center;line-height:40px}
+.vbody{flex:1;display:flex;flex-direction:column;justify-content:center;padding:16px 16px calc(24px + env(safe-area-inset-bottom));min-height:0}
+.vbox{position:relative;width:100%;max-width:960px;aspect-ratio:16/9;margin:0 auto;background:#000;border-radius:12px;overflow:hidden;border:1px solid #2C2C2C}
+.vbox.pion{width:auto;height:min(70vh,calc((100vw - 32px) * 16 / 9));aspect-ratio:9/16}
+.vbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vyt{display:block;text-align:center;margin-top:14px;color:var(--ivd);font-size:12px}
+.lbox{position:fixed;inset:0;z-index:95;background:rgba(0,0,0,.93);display:flex;flex-direction:column;opacity:0;transition:opacity .2s;touch-action:none;overscroll-behavior:contain}.lbox.on{opacity:1}
+.lbtop{display:flex;align-items:center;gap:12px;padding:calc(12px + env(safe-area-inset-top)) 14px 12px}
+.lbn{flex:1;min-width:0;color:var(--ivd);font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lbd{color:#E6CB80;font-size:13px;font-weight:700;text-decoration:none;border:1.5px solid #8E6B2E;border-radius:10px;padding:6px 10px}
+.lbx{color:var(--iv);font-size:24px;line-height:1;cursor:pointer;padding:4px 6px}
+.lbc{flex:1;display:flex;align-items:center;justify-content:center;padding:0 10px calc(16px + env(safe-area-inset-bottom));min-height:0}
+.lbc img,.lbc video{max-width:100%;max-height:100%;border-radius:10px;object-fit:contain;background:#000}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
 .pinbox.lg{max-width:1060px;margin:0 auto;padding:24px 16px;min-height:100vh;display:flex;align-items:center;box-sizing:border-box}.pinbox.lg .card{width:100%;box-sizing:border-box;padding:60px;border-radius:14px}.pinbox.lg .sub{font-size:24px}.pinbox.lg h1{margin:8px 0 26px;font-size:56px}.pinbox.lg input{height:96px;font-size:32px}.pinbox.lg .btn{height:96px;font-size:34px}.pinbox.lg .mut{font-size:24px}
 body.lgmob .pinbox.lg{padding:16px;min-height:100vh}body.lgmob .pinbox.lg .card{padding:26px 20px;border-radius:14px}body.lgmob .pinbox.lg .sub{font-size:12px}body.lgmob .pinbox.lg h1{font-size:30px;margin:6px 0 18px}body.lgmob .pinbox.lg input{height:54px;font-size:17px;padding:0 14px;margin-bottom:10px;border-radius:10px}body.lgmob .pinbox.lg .btn{height:56px;font-size:18px;border-radius:10px;margin-top:4px}body.lgmob .pinbox.lg .err{font-size:15px;min-height:20px;margin-top:10px}body.lgmob .pinbox.lg .mut{font-size:15px;margin:14px 0 0;line-height:1.5}
@@ -607,7 +628,9 @@ function kgIn(c, pole, mala) { return '<input class="mc" data-f="' + pole + '" i
 // ikonka play (granatowy kwadrat, własny rysunek – bez emotki systemowej; patch82)
 function playIkona(r) { playIkona.n = (playIkona.n || 0) + 1; var id = 'pgi' + playIkona.n; return '<svg class="psvg" viewBox="0 0 24 24" width="' + r + '" height="' + r + '" aria-hidden="true"><defs><linearGradient id="' + id + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4A62A0"/><stop offset="1" stop-color="#1E2A47"/></linearGradient></defs><rect x="1" y="1" width="22" height="22" rx="6" fill="url(#' + id + ')" stroke="#6B82C0" stroke-width="1"/><path d="M9.6 7.2 L17 12 L9.6 16.8 Z" fill="#fff" stroke="#fff" stroke-width="1.4" stroke-linejoin="round"/></svg>'; }
 function odlIkona(zost) { odlIkona.n = (odlIkona.n || 0) + 1; var g = 'odg' + odlIkona.n, c = 'odc' + odlIkona.n, h = Math.round(22 * zost) / 100; return '<svg class="psvg" viewBox="0 0 24 24" width="32" height="32" aria-hidden="true"><defs><linearGradient id="' + g + '" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4A62A0"/><stop offset="1" stop-color="#1E2A47"/></linearGradient><clipPath id="' + c + '"><rect x="1" y="1" width="22" height="22" rx="6"/></clipPath></defs><rect x="1" y="1" width="22" height="22" rx="6" fill="url(#' + g + ')"/><rect x="1" y="' + (23 - h) + '" width="22" height="' + h + '" fill="#C99A2E" opacity=".55" clip-path="url(#' + c + ')"/><rect x="1" y="1" width="22" height="22" rx="6" fill="none" stroke="#6B82C0" stroke-width="1"/><rect x="8.4" y="8.4" width="7.2" height="7.2" rx="1.5" fill="#fff"/></svg>'; }
-function filmMob(c, maly) { var u = bezpUrl(c.wideo); return '<a class="mfilm' + (u ? '' : ' off') + '" target="_blank" rel="noopener" href="' + esc(u || '#') + '">FILM <i>' + playIkona(16) + '</i></a>'; }
+function vwEdytuj(el) { var w = el.parentNode; w.classList.add('ed'); var i = w.querySelector('input'); if (i) { i.focus(); try { i.select(); } catch (e) {} } }
+function vwKoniec(inp) { var w = inp.parentNode, u = bezpUrl(inp.value); if (!u) return; var a = w.querySelector('a.v'); if (a) a.setAttribute('href', u); w.classList.remove('ed'); }
+function filmMob(c, maly) { var u = bezpUrl(c.wideo); return '<a class="mfilm' + (u ? '' : ' off') + '" data-t="' + esc(c.nazwa) + '" target="_blank" rel="noopener" href="' + esc(u || '#') + '">FILM <i>' + playIkona(16) + '</i></a>'; }
 function restMob(c, para) { var sek = sekundy(c.przerwa); if (!sek) return ''; return '<div class="mrest" id="mrest-' + esc(c.id) + '" onclick="mobPrzerwa(\'' + esc(c.id) + '\',' + sek + ')">' + restWnetrze(c.id, sek, para) + '</div>'; }
 function restWnetrze(id, sek, para) {
   var tm = MV.tm, teraz = Date.now();
@@ -684,6 +707,52 @@ function bindMob(t) {
     el.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); el.blur(); } });
   });
 }
+// ----- nakładki (patch90): film z prawej, podgląd załączników; wstecz na Androidzie zamyka nakładkę -----
+var NAK = [], VP = { el: null };
+function nakOtworz(f) { var h = false; try { history.pushState({ nak: NAK.length + 1 }, ''); h = true; } catch (e) {} NAK.push({ f: f, h: h }); }
+function nakWroc() { var t = NAK[NAK.length - 1]; if (!t) return; if (t.h) { try { history.back(); return; } catch (e) {} } NAK.pop(); t.f(); }
+window.addEventListener('popstate', function () { var t = NAK.pop(); if (t) t.f(); });
+function ytId(u) { var m = String(u || '').match(/(?:youtu\.be\/|youtube(?:-nocookie)?\.com\/(?:watch\?(?:[^#]*&)?v=|shorts\/|embed\/|live\/|v\/))([A-Za-z0-9_-]{6,})/); return m ? m[1] : ''; }
+function driveId(u) { var m = String(u || '').match(/drive\.google\.com\/(?:file\/d\/|open\?id=)([A-Za-z0-9_-]{10,})/); return m ? m[1] : ''; }
+function filmEmbed(u) { var y = ytId(u); if (y) return { src: 'https://www.youtube-nocookie.com/embed/' + y + '?rel=0&playsinline=1&modestbranding=1', pion: /\/shorts\//.test(u), yt: true }; var d = driveId(u); if (d) return { src: 'https://drive.google.com/file/d/' + d + '/preview', pion: false, yt: false }; return null; }
+function filmOtworz(u, em, tytul) {
+  if (VP.el) return;
+  var el = document.createElement('div'); el.className = 'vpan'; el.id = 'vpan';
+  el.innerHTML = '<div class="vtop"><b>' + esc(tytul) + '</b></div><div class="vbody"><div class="vbox' + (em.pion ? ' pion' : '') + '"><iframe src="' + esc(em.src) + '" title="' + esc(tytul) + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div><button class="vwroc" onclick="nakWroc()">‹ Wróć</button><a class="vyt" href="' + esc(u) + '" target="_blank" rel="noopener">Nie działa? Otwórz w ' + (em.yt ? 'YouTube' : 'nowym oknie') + '</a></div>';
+  document.body.appendChild(el); VP.el = el; void el.offsetWidth; el.classList.add('on');
+  nakOtworz(filmUsun);
+}
+function filmUsun() { var el = VP.el || document.getElementById('vpan'); VP.el = null; if (!el) return; el.style.transition = 'transform .22s ease-in'; el.style.transform = 'translateX(105%)'; setTimeout(function () { el.remove(); }, 240); }
+document.addEventListener('click', function (e) {
+  var a = e.target && e.target.closest ? e.target.closest('a.mfilm, a.pbtn.rz, a.v') : null; if (!a || a.classList.contains('off')) return;
+  var u = a.getAttribute('href') || '', em = filmEmbed(u); if (!em) return;
+  e.preventDefault(); filmOtworz(u, em, a.getAttribute('data-t') || (a.classList.contains('rz') || /rozgrzew/i.test(a.getAttribute('title') || '') ? 'Rozgrzewka' : 'Film'));
+});
+function lbOtworz() {
+  var st = document.getElementById('lbox'); if (st) st.remove();
+  var el = document.createElement('div'); el.className = 'lbox'; el.id = 'lbox';
+  el.innerHTML = '<div class="lbtop"><span class="lbn"></span><a class="lbd" style="display:none">Pobierz</a><span class="lbx" onclick="nakWroc()">✕</span></div><div class="lbc"><span class="mut">wczytuję…</span></div>';
+  el.addEventListener('click', function (e) { if (e.target === el || (e.target.classList && e.target.classList.contains('lbc'))) nakWroc(); });
+  document.body.appendChild(el); void el.offsetWidth; el.classList.add('on'); nakOtworz(lbUsun); return el;
+}
+function lbUsun() { var el = document.getElementById('lbox'); if (!el) return; el.id = ''; el.classList.remove('on'); setTimeout(function () { el.remove(); }, 200); }
+// sprawdzanie nowej wersji: GitHub Pages trzyma stronę w pamięci do 10 min, więc pytamy serwer z pominięciem pamięci
+(function () {
+  var m = document.querySelector('meta[name="wersja"]'); if (!m || !/^https?:$/.test(location.protocol) || !window.fetch) return;
+  var moja = m.getAttribute('content'), ost = 0, start = Date.now();
+  var bezpiecznie = function () { try { return !(MV.tm && MV.tm.koniec > Date.now()) && !MV.arkusz && !NAK.length && !MENU && !(RF.tresc || RF.pliki.length || RF.wysylam) && !(document.activeElement && /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName) && document.activeElement.value); } catch (e) { return false; } };
+  var sprawdz = function () {
+    var t = Date.now(); if (t - ost < 60000) return; ost = t;
+    fetch(location.pathname + '?nv=' + t, { cache: 'no-store' }).then(function (r) { return r.ok ? r.text() : ''; }).then(function (tx) {
+      var w = (String(tx).match(/<meta name="wersja" content="([^"]+)"/) || [])[1]; if (!w || w === moja) return;
+      if (!bezpiecznie()) { ost = 0; if (Date.now() - start < 30000) setTimeout(sprawdz, 3000); return; }
+      var k = 'wersja-' + w; try { if (sessionStorage.getItem(k)) return; sessionStorage.setItem(k, '1'); } catch (e) {}
+      location.replace(location.pathname + '?v=' + w + location.hash);
+    }).catch(function () {});
+  };
+  setTimeout(sprawdz, 1500);
+  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible') sprawdz(); });
+})();
 // ----- gesty na telefonie (patch86): karta jedzie za palcem, menu od lewej krawędzi, chowanie menu ruchem w lewo -----
 var GEST = null;
 function gestStart(e) {
@@ -691,12 +760,15 @@ function gestStart(e) {
   if (!e.touches || e.touches.length !== 1 || MV.arkusz) return;
   var p = e.touches[0], tg = e.target, w = function (s) { return tg && tg.closest ? tg.closest(s) : null; };
   var g = { x0: p.clientX, y0: p.clientY, t0: Date.now(), dx: 0, dy: 0, lock: null };
+  if (VP.el) { if (w('#vpan')) { g.typ = 'film'; GEST = g; } return; }
+  if (document.getElementById('lbox')) return;
   if (MENU) { if (w('#menu') || w('#tlo')) { g.typ = 'zamknij'; GEST = g; } return; }
   if (p.clientX <= 24) { g.typ = 'menu'; GEST = g; return; }
   if (kartyAktywne() && WIDOK === 'treningi' && document.getElementById('mswipe') && !w('textarea') && !w('select')) { g.typ = 'cw'; GEST = g; }
 }
 function gestPoczatek(g) {
   if (g.typ === 'cw' && g.dx > 0 && idxMob(mobT) <= 0) g.typ = 'menu'; // patch87: na 1. ćwiczeniu ruch w prawo wysuwa menu
+  if (g.typ === 'film') { g.el = VP.el; if (!g.el) return false; g.w = g.el.offsetWidth || window.innerWidth; g.el.style.transition = 'none'; return true; }
   if (g.typ === 'menu') { if (g.dx <= 0) return false; MENU = true; rysujMenu(); }
   if (g.typ === 'cw') { g.el = document.getElementById('mswipe'); if (!g.el) return false; g.i = idxMob(mobT); g.n = krokiMob(mobT).length; g.w = window.innerWidth; }
   else { g.el = document.getElementById('menu'); g.tlo = document.getElementById('tlo'); if (!g.el) return false; g.w = g.el.offsetWidth || 300; }
@@ -704,6 +776,7 @@ function gestPoczatek(g) {
   return true;
 }
 function gestRysuj(g) {
+  if (g.typ === 'film') { g.el.style.transform = 'translateX(' + Math.round(Math.max(0, g.dx)) + 'px)'; return; }
   if (g.typ === 'cw') { var opor = (g.dx > 0 && g.i <= 0) || (g.dx < 0 && g.i >= g.n - 1); g.el.style.transform = 'translateX(' + Math.round(opor ? g.dx * 0.25 : g.dx) + 'px)'; return; }
   var x = g.typ === 'menu' ? Math.min(0, g.dx - g.w) : Math.min(0, g.dx);
   g.el.style.transform = 'translateX(' + Math.round(x) + 'px)'; if (g.tlo) g.tlo.style.opacity = String(Math.max(0, 1 + x / g.w));
@@ -722,6 +795,7 @@ function gestMove(e) {
 function gestKoniec() {
   var g = GEST; GEST = null; if (!g || g.lock !== 'h' || !g.el) return;
   var v = Math.abs(g.dx) / Math.max(1, Date.now() - g.t0), T = 'transform .2s ease-out';
+  if (g.typ === 'film') { g.el.style.transition = T; if (g.dx > g.w * 0.3 || (v > 0.4 && g.dx > 30)) { g.el.style.transform = 'translateX(' + (g.w + 20) + 'px)'; setTimeout(nakWroc, 200); } else g.el.style.transform = ''; return; }
   if (g.typ === 'cw') {
     var kier = g.dx < 0 ? 1 : -1, cel = g.i + kier;
     if ((Math.abs(g.dx) > g.w * 0.22 || (v > 0.45 && Math.abs(g.dx) > 40)) && cel >= 0 && cel < g.n) {
@@ -941,7 +1015,7 @@ function tabela(t) {
     for (var p = 1; p <= 6; p++) out += '<td class="rep ' + (p <= sets ? 'plan' : '') + '">' + (p <= sets ? '<input class="c" data-f="p' + p + '" inputmode="numeric" value="' + esc(c['p' + p]) + '">' : '') + '</td>';
     out += '<td class="w"><input class="c" data-f="ciezar_akt" inputmode="decimal" value="' + esc(c.ciezar_akt) + '"></td><td class="w"><input class="c" data-f="ciezar_start" inputmode="decimal" value="' + esc(c.ciezar_start) + '"></td>';
     ['sets', 'reps', 'przerwa', 'rir', 'tempo'].forEach(function (f) { if (f === 'przerwa' && isB) return; out += '<td' + (f === 'przerwa' && isA ? ' class="przSS" rowspan="2"' : '') + '>' + (TR ? '<input class="c" data-f="' + f + '" value="' + esc(c[f]) + '" style="width:56px">' : esc(c[f])) + '</td>'; });
-    out += '<td>' + (TR ? '<input class="c" data-f="wideo" placeholder="▶︎ link" title="Wklej link do filmu" value="' + esc(c.wideo) + '" style="width:64px;font-size:10px;text-overflow:ellipsis">' : '<a class="v ' + (bezpUrl(c.wideo) ? '' : 'off') + '" target="_blank" rel="noopener" href="' + esc(bezpUrl(c.wideo) || '#') + '">' + playIkona(24) + '</a>') + '</td>';
+    out += '<td>' + (TR ? '<span class="vw' + (bezpUrl(c.wideo) ? '' : ' ed') + '"><a class="v" data-t="' + esc(c.nazwa) + '" target="_blank" rel="noopener" href="' + esc(bezpUrl(c.wideo) || '#') + '">' + playIkona(24) + '</a><i class="ved" title="Zmień link do filmu" onclick="vwEdytuj(this)">✎</i><input class="c" data-f="wideo" placeholder="link" title="Wklej link do filmu" value="' + esc(c.wideo) + '" style="width:64px;font-size:10px;text-overflow:ellipsis" onblur="vwKoniec(this)" onkeydown="if(event.key===\'Enter\')this.blur()"></span>' : '<a class="v ' + (bezpUrl(c.wideo) ? '' : 'off') + '" data-t="' + esc(c.nazwa) + '" target="_blank" rel="noopener" href="' + esc(bezpUrl(c.wideo) || '#') + '">' + playIkona(24) + '</a>') + '</td>';
     out += '<td class="note"><input class="c" data-f="notatka" value="' + esc(c.notatka) + '" placeholder="…"></td>';
     out += '</tr>';
   }
@@ -1249,13 +1323,16 @@ function zapiszOdp(id, txt) {
 }
 var PLIKI = {};
 function pokazPlik(rid, pid) {
-  var box = document.querySelector('.rp[data-rid="' + rid + '"] .f[data-pid="' + pid + '"]'); if (!box) return;
-  if (box.dataset.open) { box.innerHTML = box.dataset.label; delete box.dataset.open; return; }
-  var wstaw = function (p) { var src = 'data:' + (p.typ || 'application/octet-stream') + ';base64,' + p.dane; box.dataset.label = box.innerHTML; box.dataset.open = '1'; box.style.cursor = 'default';
-    box.innerHTML = '<div style="width:100%"><div style="display:flex;gap:10px;align-items:center;margin-bottom:6px"><b>' + esc(p.nazwa) + '</b><a class="pbtn" style="margin:0;font-size:12px" download="' + esc(p.nazwa) + '" href="' + src + '">pobierz</a><span class="pbtn" style="margin:0;font-size:12px" onclick="event.stopPropagation();pokazPlik(\'' + rid + '\',\'' + pid + '\')">zwiń</span></div>' + (String(p.typ).indexOf('image') === 0 ? '<img src="' + src + '" alt="">' : String(p.typ).indexOf('video') === 0 ? '<video src="' + src + '" controls playsinline></video>' : '<span class="mut">plik do pobrania</span>') + '</div>'; };
+  var lb = lbOtworz();
+  var wstaw = function (p) {
+    if (!lb.parentNode || !lb.id) return;
+    var src = 'data:' + (p.typ || 'application/octet-stream') + ';base64,' + p.dane, t = String(p.typ || '');
+    lb.querySelector('.lbn').textContent = p.nazwa || '';
+    var d = lb.querySelector('.lbd'); d.href = src; d.setAttribute('download', p.nazwa || 'plik'); d.style.display = '';
+    lb.querySelector('.lbc').innerHTML = t.indexOf('image') === 0 ? '<img src="' + src + '" alt="">' : t.indexOf('video') === 0 ? '<video src="' + src + '" controls playsinline></video>' : '<span class="mut">Tego pliku nie da się tu pokazać. Pobierz go.</span>';
+  };
   if (PLIKI[pid]) { wstaw(PLIKI[pid]); return; }
-  box.innerHTML = '<span class="mut">wczytuję…</span>';
-  wywolaj('plik', [D.bazaId, pid, AUTH]).then(function (p) { PLIKI[pid] = p; wstaw(p); }).catch(function (e) { box.innerHTML = '<span style="color:var(--red)">nie udało się wczytać: ' + esc(e && e.message || e) + '</span>'; });
+  wywolaj('plik', [D.bazaId, pid, AUTH]).then(function (p) { PLIKI[pid] = p; wstaw(p); }).catch(function (e) { var c = lb.querySelector('.lbc'); if (c) c.innerHTML = '<span style="color:var(--red)">Nie udało się wczytać: ' + esc(e && e.message || e) + '</span>'; });
 }
 var PORY = ['Rano', 'Przed treningiem', 'Po treningu', 'Do posiłku', 'Wieczór', 'Dowolna pora'];
 var PORY_IK = { 'Rano': '☀', 'Przed treningiem': '🏋', 'Po treningu': '✓', 'Do posiłku': '🍽', 'Wieczór': '☾', 'Dowolna pora': '◌' };
@@ -1291,7 +1368,7 @@ function renderMob() {
   rows.forEach(function (c, i) {
     var k = kolorCw(c), sets = Math.max(0, n(c.sets));
     var zrobione = sets > 0; for (var q = 1; q <= sets && q <= 6; q++) if (c['p' + q] === '' || c['p' + q] == null) zrobione = false;
-    out += '<div class="mcard' + (zrobione ? ' done' : '') + '" data-id="' + c.id + '"><div class="mh ' + (k === 'P' ? 'GOLD' : k === 'U' ? 'BORDO' : 'NAVY') + '"><span class="mn">' + (i + 1) + '</span><b>' + esc(c.nazwa) + (jestSS(c) ? ' <span class="ssb">SS</span>' : '') + '</b><a class="v ' + (bezpUrl(c.wideo) ? '' : 'off') + '" target="_blank" rel="noopener" href="' + esc(bezpUrl(c.wideo) || '#') + '">' + playIkona(24) + '</a></div><div class="mm"><span>' + esc(c.sets) + ' × ' + esc(c.reps) + '</span>' + (c.przerwa ? '<span>' + esc(c.przerwa) + '</span>' : '') + (c.rir !== '' ? '<span>RiR ' + esc(c.rir) + '</span>' : '') + (c.tempo ? '<span>' + esc(c.tempo) + '</span>' : '') + '</div><div class="mr">';
+    out += '<div class="mcard' + (zrobione ? ' done' : '') + '" data-id="' + c.id + '"><div class="mh ' + (k === 'P' ? 'GOLD' : k === 'U' ? 'BORDO' : 'NAVY') + '"><span class="mn">' + (i + 1) + '</span><b>' + esc(c.nazwa) + (jestSS(c) ? ' <span class="ssb">SS</span>' : '') + '</b><a class="v ' + (bezpUrl(c.wideo) ? '' : 'off') + '" data-t="' + esc(c.nazwa) + '" target="_blank" rel="noopener" href="' + esc(bezpUrl(c.wideo) || '#') + '">' + playIkona(24) + '</a></div><div class="mm"><span>' + esc(c.sets) + ' × ' + esc(c.reps) + '</span>' + (c.przerwa ? '<span>' + esc(c.przerwa) + '</span>' : '') + (c.rir !== '' ? '<span>RiR ' + esc(c.rir) + '</span>' : '') + (c.tempo ? '<span>' + esc(c.tempo) + '</span>' : '') + '</div><div class="mr">';
     for (var p = 1; p <= sets && p <= 6; p++) out += '<input data-f="p' + p + '" inputmode="numeric" enterkeyhint="next" placeholder="powt." value="' + esc(c['p' + p]) + '">';
     out += '</div><div class="mw"><label class="kg">Ciężar<input data-f="ciezar_akt" inputmode="decimal" enterkeyhint="next" value="' + esc(c.ciezar_akt) + '"></label><label class="kg">Start<input data-f="ciezar_start" inputmode="decimal" enterkeyhint="next" value="' + esc(c.ciezar_start) + '"></label><label>Notatka<input data-f="notatka" enterkeyhint="done" placeholder="dla trenera" value="' + esc(c.notatka) + '"></label></div>';
     var sek = sekundy(c.przerwa); if (sek) out += '<div class="mt"><button id="tm-' + c.id + '" class="' + (TM.id === c.id ? (TM.koniec > Date.now() ? 'run' : 'end') : '') + '" onclick="minutnik(\'' + c.id + '\',' + sek + ')">' + tekstMinutnika(c.id, sek) + '</button></div>';
