@@ -1282,17 +1282,17 @@ function ankPole(p) {
   else if (p.typ === 'zgoda') h += '<label class="apz' + (v === true ? ' on' : '') + '" onclick="ankZgoda(\'' + p.id + '\')"><i>' + (v === true ? '✓' : '') + '</i><span>' + esc(p.tekst) + '</span></label>';
   return h + '<div class="apb" data-b="' + p.id + '"></div></div>';
 }
-function ankWybierz(id, v) { ANK.odp[id] = v; ankZapiszDraft(); ekranAnkiety(); }
-function ankMulti(id, v) { var arr = Array.isArray(ANK.odp[id]) ? ANK.odp[id].slice() : []; var i = arr.indexOf(v); if (i >= 0) arr.splice(i, 1); else { if (v === 'Żadnego z powyższych') arr = []; else arr = arr.filter(function (x) { return x !== 'Żadnego z powyższych'; }); arr.push(v); } ANK.odp[id] = arr; ankZapiszDraft(); ekranAnkiety(); }
-function ankZgoda(id) { ANK.odp[id] = !(ANK.odp[id] === true); ankZapiszDraft(); ekranAnkiety(); }
+function ankWybierz(id, v) { ANK.odp[id] = v; ankZapiszDraft(); ekranAnkiety([], true); }
+function ankMulti(id, v) { var arr = Array.isArray(ANK.odp[id]) ? ANK.odp[id].slice() : []; var i = arr.indexOf(v); if (i >= 0) arr.splice(i, 1); else { if (v === 'Żadnego z powyższych') arr = []; else arr = arr.filter(function (x) { return x !== 'Żadnego z powyższych'; }); arr.push(v); } ANK.odp[id] = arr; ankZapiszDraft(); ekranAnkiety([], true); }
+function ankZgoda(id) { ANK.odp[id] = !(ANK.odp[id] === true); ankZapiszDraft(); ekranAnkiety([], true); }
 function ankZbierz() { document.querySelectorAll('[data-a]').forEach(function (el) { ANK.odp[el.dataset.a] = el.value; }); ankZapiszDraft(); }
 function ankBraki(sek) {
   var braki = [];
   sek.p.forEach(function (p) { if (!p.req || !ankWidoczne(p)) return; var v = ANK.odp[p.id]; var puste = v == null || v === '' || v === false || (Array.isArray(v) && !v.length); if (puste) braki.push(p.id); });
   return braki;
 }
-function ekranAnkiety(braki) {
-  braki = braki || [];
+function ekranAnkiety(braki, zostan) {
+  braki = braki || []; var sy = window.pageYOffset || 0;
   var k = ANK.krok, sek = ANKIETA[k], n = ANKIETA.length;
   var h = '<div class="ank"><div class="ankh"><span class="sub">Ankieta startowa</span><span class="ankp">' + (k + 1) + ' / ' + n + '</span></div><div class="ankbar"><i style="width:' + Math.round((k + 1) / n * 100) + '%"></i></div>';
   if (k === 0) h += '<p class="mut ankw">Cześć! Zanim ułożę Ci plan, muszę Cię trochę poznać. Odpowiadaj szczerze i tak, jak Ci wygodnie. Im więcej mi powiesz, tym lepiej dopasuję trening do Twojego życia. Zajmie Ci to jakieś 15 minut. Nie ma tu złych odpowiedzi.</p>';
@@ -1301,7 +1301,7 @@ function ekranAnkiety(braki) {
   h += '<div class="ankn">' + (k > 0 ? '<button class="btn szary" id="ank-wstecz">← Wstecz</button>' : '<span></span>') + '<button class="btn" id="ank-dalej">' + (k === n - 1 ? 'Wyślij ankietę' : 'Dalej →') + '</button></div><div class="err" id="ank-msg"></div><p class="mut" style="font-size:14px;margin-top:18px;text-align:center"><a class="lnk" onclick="wylogujKonto()">Wyloguj</a> · odpowiedzi zapisują się na tym urządzeniu, możesz wrócić później</p></div>';
   document.getElementById('app').innerHTML = h;
   braki.forEach(function (id) { var el = document.querySelector('.ap[data-id="' + id + '"]'); if (el) el.classList.add('brak'); });
-  if (braki.length) { document.getElementById('ank-msg').textContent = 'Uzupełnij zaznaczone pytania.'; var f = document.querySelector('.ap.brak'); if (f) f.scrollIntoView({ behavior: 'smooth', block: 'center' }); } else window.scrollTo(0, 0);
+  if (braki.length) { document.getElementById('ank-msg').textContent = 'Uzupełnij zaznaczone pytania.'; var f = document.querySelector('.ap.brak'); if (f) f.scrollIntoView({ behavior: 'smooth', block: 'center' }); } else if (zostan) window.scrollTo(0, sy); else window.scrollTo(0, 0);
   document.querySelectorAll('[data-a]').forEach(function (el) { el.addEventListener('input', function () { ANK.odp[el.dataset.a] = el.value; ankZapiszDraft(); var ap = el.closest('.ap'); if (ap) ap.classList.remove('brak'); }); });
   document.querySelectorAll('textarea[data-a]').forEach(function (ta) { var fit = function () { ta.style.height = 'auto'; ta.style.height = Math.max(90, ta.scrollHeight + 4) + 'px'; }; fit(); ta.addEventListener('input', fit); });
   var w = document.getElementById('ank-wstecz'); if (w) w.onclick = function () { ankZbierz(); ANK.krok--; ekranAnkiety(); };
