@@ -343,7 +343,7 @@ var TIPS = {
  tempo: 'Tempo, np. x211: x = ruch koncentryczny (skrócenie) jak najszybciej przy dobrej technice; 2 = ruch ekscentryczny 2 s; 1 = pauza 1 s w skróceniu; 1 = pauza 1 s w rozciągnięciu.',
  wideo: 'Kliknij ikonkę, żeby otworzyć film z techniką. Szara ikonka = brak filmu.',
  nota: 'Twoje miejsce na notatki: ustawienia sprzętu (np. wysokość wyciągu 25), co czujesz, co nie działa. Czytam to co tydzień.',
- P: 'PRIORYTET: co tydzień staraj się dołożyć ciężar przy dobrej technice. Jeśli nie idzie, dołóż powtórzenie.\n\nPrzykład: 3×10. Dokładasz ciężar i trzymasz 10 (albo chociaż 9)? Progresujesz ciężarem. Dołożyłeś, a powtórzenia spadły do 7–8? W następnym tygodniu ten sam ciężar i wracasz do 10.',
+ P: 'PRIORYTET: co tydzień staraj się dołożyć ciężar przy dobrej technice. Jeśli nie idzie, dołóż powtórzenia.\n\nPrzykład: 3×10. Dokładasz ciężar i trzymasz 10 (albo chociaż 9)? Progresujesz ciężarem. Dołożyłeś, a powtórzenia spadły do 7–8? W następnym tygodniu ten sam ciężar i wracasz do 10.',
  N: 'NEUTRAL: jak w priorytecie, ale rzadziej. Ciężar dokładasz co drugi tydzień, nie co tydzień. Chodzi o to, żeby jak najwięcej „energii adaptacyjnej” w tym bloku poszło na partie priorytetowe.',
  U: 'UTRZYMANIE: dobierasz ciężar do parametrów (powtórzenia, RiR) i trzymasz go bez zmian przez cały blok. Te partie nie mają rosnąć ani spadać, tylko nie zabierać energii priorytetom.',
  tyg: 'Po zakończonym tygodniu treningowym kliknij kolejną kratkę. Dzięki temu wiem, w którym tygodniu bloku jesteś.',
@@ -690,11 +690,11 @@ function arkusz(html, klasa) { zamknijArkusz(); var tlo = document.createElement
 function zamknijArkusz() { var a = document.getElementById('msheet'), t = document.getElementById('mtlo'); if (a) a.remove(); if (t) t.remove(); MV.arkusz = null; if (MV.vv) { try { window.visualViewport.removeEventListener('resize', MV.vv); } catch (e) {} MV.vv = null; } }
 function arkuszInfo(tempo) { var t = String(tempo || '').replace(/\s/g, ''), f = ['skrócenie', 'opuszczanie', 'pauza w skróceniu', 'pauza w rozciąg&shy;nięciu'], ex = ''; if (t.length === 4) ex = '<div class="ex4">' + t.split('').map(function (ch, i) { return '<span><b>' + esc(ch) + '</b>' + f[i] + '</span>'; }).join('') + '</div>'; arkusz('<h3>Tempo' + (t ? ' ' + esc(t) : '') + '</h3><p>' + esc(TIPS.tempo || '') + '</p>' + ex + '<h3>RiR</h3><p>' + esc(TIPS.rir || '') + '</p><div class="row"><div class="b ok" onclick="zamknijArkusz()">Rozumiem</div></div>'); }
 // legenda priorytetów (telefon, patch80)
-var KOLORY_OPIS = { P: 'Co tydzień staraj się dołożyć ciężar przy dobrej technice. Jeśli nie idzie, dołóż powtórzenie.', N: 'Podobnie jak w priorytecie, ale ciężar dokładasz co drugi tydzień.', U: 'Dobierasz ciężar do powtórzeń i RiR i trzymasz go bez zmian przez cały blok.' };
+var KOLORY_OPIS = { P: 'Co tydzień staraj się dołożyć ciężar przy dobrej technice. Jeśli nie idzie, dołóż powtórzenia.', N: 'Podobnie jak w priorytecie, ale ciężar dokładasz co drugi tydzień.', U: 'Dobierasz ciężar do powtórzeń i RiR i trzymasz go bez zmian przez cały blok.' };
 function legendaMob() { return '<div class="lgB">' + ['U', 'N', 'P'].map(function (k) { return '<span class="k' + k + '" onclick="arkuszKolory(\'' + k + '\')">' + nazwaPrio(k) + '<i class="lgi">i</i></span>'; }).join('') + '</div>'; }
 function arkuszKolory(k) {
   var h = '<h3>Co oznaczają kolory <small>kolor = sposób progresji</small></h3>';
-  ['U', 'N', 'P'].forEach(function (x) { h += '<div class="lgs k' + x + (x === k ? ' on' : '') + '"><div class="h">' + nazwaPrio(x) + '</div><p>' + KOLORY_OPIS[x] + '</p></div>'; });
+  ['P', 'N', 'U'].forEach(function (x) { h += '<div class="lgs k' + x + (x === k ? ' on' : '') + '"><div class="h">' + nazwaPrio(x) + '</div><p>' + KOLORY_OPIS[x] + '</p></div>'; });
   arkusz(h + '<div class="row"><div class="b ok" onclick="zamknijArkusz()">Rozumiem</div></div>');
 }
 function arkuszPrio(k) { arkuszKolory(k); }
