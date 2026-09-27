@@ -248,6 +248,12 @@ body.tel .top{display:none}
 .pm-wrap{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start;margin-top:8px}
 .makpanel{background:#141414;border:2px solid var(--gl);border-radius:12px;padding:12px 16px 14px;width:300px;flex:0 0 300px}.makpanel .pm-sekcja{margin:0 0 10px;padding:0}.makpanel label{display:flex;align-items:center;gap:10px;font-size:12px;color:#E6CB80;font-weight:600;margin-bottom:8px}.makpanel label i{color:var(--ivd);font-weight:500;font-size:11px;font-style:normal;margin-left:auto;margin-right:6px}.makpanel input.c{width:110px;text-align:center;font-size:16px;font-weight:700;color:var(--iv);background:#0F0F0F;border:1px solid var(--gm);border-radius:8px;height:38px}.makpanel input.c.big{font-size:22px;color:#E6CB80;height:46px}.makpanel .mk3{border-top:1px solid #2C2C2C;margin-top:6px;padding-top:10px}.makpanel p{margin:8px 0 0;font-size:11px;color:var(--ivd);line-height:1.45}
 .kpi div small.mk{display:block;font-size:10px;color:var(--iv);margin-top:3px;letter-spacing:.3px;font-weight:600}.menu .mhd .k3 small.mk{display:block;font-size:8px;color:var(--iv);margin:2px 0 0;font-weight:600;white-space:nowrap}
+.rapw{padding-bottom:20px}.rcard{margin:12px 14px 0}.rcard .rsub{color:var(--ivd);font-weight:500;font-size:13px}.rapTel .rcard{border-radius:14px}
+.rsend{display:flex;align-items:center;justify-content:center;gap:8px;height:46px;margin-top:12px;border-radius:12px;border:2px solid var(--gl);background:#141414;color:#E6CB80;font-weight:700;font-size:14px;cursor:pointer}.rsend.dis{opacity:.5;cursor:default}
+.rlst{margin:10px 14px 0;display:flex;flex-direction:column;gap:6px}
+.rp2{background:#141414;border:1px solid #2C2C2C;border-radius:12px;overflow:hidden}.rp2 .rh2{display:grid;grid-template-columns:1fr auto 16px;align-items:center;gap:8px;padding:8px 12px;cursor:pointer}.rp2 .rh2 b{font-size:13px;color:var(--iv)}.rp2 .rh2 b small{color:var(--ivd);font-weight:500;font-size:11px;margin-right:6px}.rp2 .rh2 .dt{font-size:11px;color:var(--ivd)}.rp2 .rh2 .chev{color:var(--ivd);font-size:12px;text-align:right}
+.rp2.open{border:2px solid var(--gl);background:#1E1A10}.rp2 .rt{padding:0 12px 10px;font-size:13px;line-height:1.5;white-space:pre-wrap}.rp2 .rt textarea{width:100%;min-height:110px;background:#0F0F0F;color:var(--iv);border:1px solid var(--gm);border-radius:8px;padding:8px;font:13px/1.5 Poppins;box-sizing:border-box}
+.rp2 .rf{display:flex;flex-wrap:wrap;gap:8px;padding:0 12px 10px}.rp2 .rf .f{border:1px solid #2C2C2C;border-radius:8px;background:#0F0F0F;padding:6px 10px;font-size:12px;color:var(--iv);cursor:pointer;display:flex;gap:8px;align-items:center}.rp2 .rakc{display:flex;gap:8px;justify-content:flex-end;padding:0 12px 10px}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
 .pinbox.lg{max-width:1060px;margin:0 auto;padding:24px 16px;min-height:100vh;display:flex;align-items:center;box-sizing:border-box}.pinbox.lg .card{width:100%;box-sizing:border-box;padding:60px;border-radius:14px}.pinbox.lg .sub{font-size:24px}.pinbox.lg h1{margin:8px 0 26px;font-size:56px}.pinbox.lg input{height:96px;font-size:32px}.pinbox.lg .btn{height:96px;font-size:34px}.pinbox.lg .mut{font-size:24px}
 body.lgmob .pinbox.lg{padding:16px;min-height:100vh}body.lgmob .pinbox.lg .card{padding:26px 20px;border-radius:14px}body.lgmob .pinbox.lg .sub{font-size:12px}body.lgmob .pinbox.lg h1{font-size:30px;margin:6px 0 18px}body.lgmob .pinbox.lg input{height:54px;font-size:17px;padding:0 14px;margin-bottom:10px;border-radius:10px}body.lgmob .pinbox.lg .btn{height:56px;font-size:18px;border-radius:10px;margin-top:4px}body.lgmob .pinbox.lg .err{font-size:15px;min-height:20px;margin-top:10px}body.lgmob .pinbox.lg .mut{font-size:15px;margin:14px 0 0;line-height:1.5}
@@ -680,7 +686,7 @@ function render() {
   html += '<div class="kpi"><div><b>' + serieT + '</b><span>Serie / tydzień</span></div><div><b>' + (TR ? '<input id="kcal" class="c" style="width:96px;color:var(--gl);font-weight:700;font-size:22px;text-align:center" value="' + esc(U('kcal')) + '" placeholder="–" title="Aktualne kcal">' : (U('kcal') ? esc(U('kcal')) : '–')) + '</b><span>Aktualne kcal</span>' + (makroTxt() ? '<small class="mk">' + makroTxt() + '</small>' : '') + '</div><div><b>' + (last != null ? fmt(last) + ' kg' : '–') + (d != null ? '<em class="' + (d > 0 ? 'up' : '') + '">' + (d < 0 ? '▼' : d > 0 ? '▲' : '=') + '</em><small class="' + (d > 0 ? 'up' : '') + '">' + fmt(Math.abs(d).toFixed(1)) + '</small>' : '') + '</b><span>Aktualna waga</span></div></div></div>';
   if (TR && D.lista && D.lista.length) { html += '<div class="selbar desk"><div class="sbl">Podopieczny: <select id="selK">' + D.lista.map(function (k) { return '<option value="' + esc(k.bazaId) + '"' + (k.bazaId === D.bazaId ? ' selected' : '') + '>' + esc(k.imie) + '</option>'; }).join('') + '</select><a class="pbtn" style="margin-left:8px" href="lista.html">lista / dodaj</a><textarea id="notaTr" class="c" rows="1" placeholder="notatka trenera (widzisz tylko Ty)" title="Prywatna notatka o podopiecznym. Podopieczny jej nie widzi.">' + esc(D.klient && D.klient.notatka || '') + '</textarea></div><div class="sbc">' + (D.kontoStatus ? '<button class="pbtn zak ' + (D.kontoStatus.status === 'aktywne' ? 'kon' : 'wzn') + '" onclick="togProwadzenie()" title="' + (D.kontoStatus.status === 'aktywne' ? 'Podopieczny traci dostęp do planu i zostaje wylogowany. Wznowisz jednym kliknięciem.' : 'Przywraca podopiecznemu dostęp do planu.') + '">' + (D.kontoStatus.status === 'aktywne' ? 'zakończ prowadzenie' : 'wznów prowadzenie') + '</button>' : '<span class="mut" style="font-size:12px" title="Ta baza nie ma jeszcze konta podopiecznego. Konto zakładasz na liście albo podopieczny sam się rejestruje.">brak konta podopiecznego</span>') + '</div><div></div></div>'; }
   }
-  var KARTY = kartyAktywne(), MOBW = (WIDOK === 'pwa' && trybKart()) || (WIDOK === 'waz' && telefon()); document.body.classList.toggle('karty', KARTY); document.body.classList.toggle('mobw', MOBW); document.body.classList.toggle('tel', telefon()); document.body.classList.remove('lgmob'); viewportMob(KARTY || MOBW);
+  var KARTY = kartyAktywne(), MOBW = (WIDOK === 'pwa' && trybKart()) || ((WIDOK === 'waz' || WIDOK === 'rap') && telefon()); document.body.classList.toggle('karty', KARTY); document.body.classList.toggle('mobw', MOBW); document.body.classList.toggle('tel', telefon()); document.body.classList.remove('lgmob'); viewportMob(KARTY || MOBW);
   if (WIDOK !== 'treningi') html += widokInny(); else if (KARTY) { html += widokMobilny(mobT); } else {
   // ----- telefon: wybór treningu + karty
   html += '<div class="mob"><div class="selbar">Trening: <select id="mobSel">'; for (var t2 = 1; t2 <= akt; t2++) html += '<option value="' + t2 + '"' + (t2 === mobT ? ' selected' : '') + '>Trening ' + t2 + '</option>'; html += '</select><a class="v" style="margin-left:auto" target="_blank" href="' + esc(D.rozgrzewka) + '" title="Rozgrzewka">▶</a></div><div id="mobcards" style="padding-top:10px"></div></div>';
@@ -709,7 +715,7 @@ function widokInny() {
   if (w === 'plan') { open.plan = true; h += kol(planowanie()); }
   else if (w === 'atlas') { h += kol(atlasWidok()); }
   else if (w === 'waz') { open.waz = true; h += telefon() ? '<div class="wazTel">' + wykresWagi() + wazeniaTel() + '</div>' : kol(wykresWagi() + wazenia(), 1100); }
-  else if (w === 'rap') { open.rap = true; h += kol(raporty(), 1100); }
+  else if (w === 'rap') { open.rap = true; h += telefon() ? '<div class="rapTel">' + raporty() + '</div>' : kol(raporty(), 1100); }
   else if (w === 'zal') { open.zal = true; h += kol(zalecenia(), 1100); }
   else if (w === 'pwa') { h += kol(widokPwa(), 1100); }
   else if (w === 'hist') { open.hist = true; h += kol(historiaSekcja()); }
@@ -1022,29 +1028,35 @@ function wazeniaTel() {
 // dotknięcie pustego tła zwija rozwinięty wpis ważenia
 document.addEventListener('click', function (e) { if (WAZ_ED == null || WIDOK !== 'waz') return; var t = e.target; if (t.closest && (t.closest('.wz') || t.closest('.wdodaj') || t.closest('#menu') || t.closest('#tlo') || t.closest('.pasek') || t.closest('.msheet') || t.tagName === 'INPUT' || t.tagName === 'SELECT' || t.tagName === 'TEXTAREA')) return; WAZ_ED = null; render(); });
 function wazEdytuj(id) { WAZ_ED = id; render(); setTimeout(function () { var e = document.querySelector('.wz.ed [data-f="waga"]'); if (e) e.focus(); }, 50); }
+var RAP_FORM = false, RAP_OPEN = null;
+function blokNr() { return (D.historiaLiczba != null ? n(D.historiaLiczba) : (D.historia || []).length) + 1; }
+function blokRaportu(r) { if (r.blok) return n(r.blok); var H = D.historia || [], d = String(r.data || '').slice(0, 10); return 1 + H.filter(function (h) { return String(h.zamknieto || '').slice(0, 10) < d; }).length; }
 function raporty() {
   var L = (D.raporty || []).slice().sort(function (x, y) { return String(y.data).localeCompare(String(x.data)); });
-  if (!open.rap) return '<div class="acc" id="sek-rap" onclick="tog(\'rap\')"><span class="chev">▸</span>Raporty tygodniowe<span class="cnt">' + (L.length ? L.length + ' wysł. · ostatni: tydz. ' + esc(L[0].tydzien) + (L[0].odp ? ' · odpowiedź ✓' : (TR ? ' · bez odpowiedzi' : '')) : 'brak raportów') + '</span></div>';
-  var tyg = RF.tydzien != null ? RF.tydzien : (n(U('zaliczone')) + 1);
-  var out = '<div class="card" id="sek-rap"><h2 class="metal"><span class="ttl" onclick="tog(\'rap\')">▾ &nbsp;Raporty tygodniowe</span><span class="pbtn" style="cursor:default">' + I('raport') + ' &nbsp;' + L.length + ' wysłanych</span></h2>';
-  // formularz
-  out += '<div class="rform"><textarea id="rf-tresc" placeholder="Jak się czujesz po tym tygodniu? Problemy na treningach? Coś zostawiasz w notatkach przy ćwiczeniach? Waga wpisana? Co chcesz przegadać?">' + esc(RF.tresc) + '</textarea>';
-  out += '<div class="row"><label>Tydzień <input type="number" id="rf-tyg" min="1" max="20" value="' + esc(tyg) + '"></label><label class="pick" for="rf-file">📎 dodaj zdjęcie / film</label><input type="file" id="rf-file" multiple accept="image/*,video/*"><span class="mut" style="font-size:12px">zdjęcia zmniejszam automatycznie, film do ok. 12 MB</span></div>';
-  out += '<div class="zal" id="rf-zal">' + RF.pliki.map(function (p, i) { return '<span>' + (p.typ.indexOf('image') === 0 ? '🖼 ' : '🎬 ') + esc(p.nazwa) + ' <em style="color:var(--ivd);font-style:normal">' + rozmiarTxt(p.rozmiar) + '</em><i onclick="rfUsun(' + i + ')" title="usuń załącznik">✕</i></span>'; }).join('') + '</div>';
-  out += '<div class="row"><button class="btn" id="rf-send" onclick="wyslijRaport()"' + (RF.wysylam ? ' disabled' : '') + ' style="height:42px;font-size:15px;padding:0 22px">' + (RF.wysylam ? 'Wysyłam…' : '✉ Wyślij raport') + '</button><span class="mut" style="font-size:12px">Raport zostaje tutaj, w Twojej historii. Kuba odpowiada pod nim.</span></div></div>';
-  // historia
+  var tyg = RF.tydzien != null ? RF.tydzien : (n(U('zaliczone')) + 1), bl = blokNr();
+  var out = '<div class="rapw" id="sek-rap">';
+  if (!RAP_FORM) out += '<div class="wdodaj" onclick="RAP_FORM = true; render(); setTimeout(function () { var t = document.getElementById(\'rf-tresc\'); if (t) t.focus(); }, 50)">＋ Napisz raport: Blok ' + bl + ' · Tydzień ' + esc(tyg) + '</div>';
+  else {
+    out += '<div class="card rcard"><h2 class="metal"><span class="ttl">Raport <small class="rsub">· Blok ' + bl + ' ·</small> Tydzień ' + esc(tyg) + '</span></h2><div class="rform"><textarea id="rf-tresc" placeholder="Jak się czujesz po tym tygodniu? Problemy na treningach? Coś zostawiasz w notatkach przy ćwiczeniach? Waga wpisana? Co chcesz przegadać?">' + esc(RF.tresc) + '</textarea>';
+    out += '<div class="row"><label>Tydzień <input type="number" id="rf-tyg" min="1" max="20" value="' + esc(tyg) + '"></label><label class="pick" for="rf-file">📎 zdjęcie / film</label><input type="file" id="rf-file" multiple accept="image/*,video/*"></div>';
+    out += '<div class="zal" id="rf-zal">' + RF.pliki.map(function (p, i) { return '<span>' + (p.typ.indexOf('image') === 0 ? '🖼 ' : '🎬 ') + esc(p.nazwa) + ' <em style="color:var(--ivd);font-style:normal">' + rozmiarTxt(p.rozmiar) + '</em><i onclick="rfUsun(' + i + ')" title="usuń załącznik">✕</i></span>'; }).join('') + '</div>';
+    out += '<div class="rsend' + (RF.wysylam ? ' dis' : '') + '" id="rf-send" onclick="' + (RF.wysylam ? '' : 'wyslijRaport()') + '">' + (RF.wysylam ? 'Wysyłam…' : '✉ Wyślij raport') + '</div><div class="mut" style="font-size:12px;text-align:center;margin-top:8px"><a class="lnk" onclick="RAP_FORM = false; render()">Anuluj</a> · zdjęcia zmniejszam automatycznie, film do ok. 12 MB</div></div></div>';
+  }
+  out += '<div class="wlh"><span>Wysłane raporty</span><span>' + L.length + '</span></div><div class="rlst">';
+  var otw = RAP_OPEN != null ? RAP_OPEN : (L.length ? L[0].id : null);
   L.forEach(function (r) {
-    var ed = open.rapEd[r.id];
-    out += '<div class="rp" data-rid="' + esc(r.id) + '"><div class="rh"><b>Tydzień ' + esc(r.tydzien || '?') + '</b><span class="mut">' + esc(r.data) + '</span><span class="x">' + (ed ? '<span class="pbtn" style="margin:0;font-size:12px" onclick="zapiszEdycje(\'' + esc(r.id) + '\')">zapisz</span><span class="pbtn" style="margin:0;font-size:12px" onclick="togEd(\'' + esc(r.id) + '\')">anuluj</span>' : (r.odp && !TR ? '' : '<span class="pbtn" style="margin:0;font-size:12px" onclick="togEd(\'' + esc(r.id) + '\')">edytuj</span>')) + (TR ? '<span class="pbtn" style="margin:0;font-size:12px;color:var(--red)" onclick="usunRaport(\'' + esc(r.id) + '\')">usuń</span>' : '') + '</span></div>';
-    out += '<div class="rt">' + (ed ? '<textarea id="re-' + esc(r.id) + '">' + esc(r.tresc) + '</textarea>' : (r.tresc ? esc(r.tresc) : '<span class="mut">(bez treści)</span>')) + '</div>';
-    if (r.pliki && r.pliki.length) out += '<div class="rf">' + r.pliki.map(function (p) { return '<div class="f" data-pid="' + esc(p.id) + '" onclick="pokazPlik(\'' + esc(r.id) + '\',\'' + esc(p.id) + '\')">' + (String(p.typ).indexOf('image') === 0 ? '🖼' : '🎬') + ' <b>' + esc(p.nazwa) + '</b> <span class="mut">' + rozmiarTxt(p.rozmiar) + ' · kliknij</span></div>'; }).join('') + '</div>';
-    if (TR) out += '<div class="ro"><small>Odpowiedź trenera' + (r.odp_data ? ' · ' + esc(r.odp_data) : '') + '</small><textarea data-odp="' + esc(r.id) + '" placeholder="Napisz odpowiedź, zapisze się sama po wyjściu z pola">' + esc(r.odp || '') + '</textarea></div>';
-    else if (r.odp) out += '<div class="ro"><small>Odpowiedź Kuby · ' + esc(r.odp_data) + '</small>' + esc(r.odp) + '</div>';
-    else out += '<div class="mut" style="padding:0 14px 12px;font-size:12px">Kuba jeszcze nie odpowiedział.</div>';
+    var ot = otw === r.id, ed = open.rapEd[r.id];
+    out += '<div class="rp2' + (ot ? ' open' : '') + '" data-rid="' + esc(r.id) + '"><div class="rh2" onclick="RAP_OPEN = \'' + (ot ? '__none__' : esc(r.id)) + '\'; render()"><b><small>Blok ' + blokRaportu(r) + ' ·</small>Tydzień ' + esc(r.tydzien || '?') + '</b><span class="dt">' + esc(fmtData(r.data)) + '</span><span class="chev">' + (ot ? '▴' : '▾') + '</span></div>';
+    if (ot) {
+      out += '<div class="rt">' + (ed ? '<textarea id="re-' + esc(r.id) + '">' + esc(r.tresc) + '</textarea>' : (r.tresc ? esc(r.tresc) : '<span class="mut">(bez treści)</span>')) + '</div>';
+      if (r.pliki && r.pliki.length) out += '<div class="rf">' + r.pliki.map(function (p) { return '<div class="f" data-pid="' + esc(p.id) + '" onclick="pokazPlik(\'' + esc(r.id) + '\',\'' + esc(p.id) + '\')">' + (String(p.typ).indexOf('image') === 0 ? '🖼' : '🎬') + ' <b>' + esc(p.nazwa) + '</b> <span class="mut">' + rozmiarTxt(p.rozmiar) + '</span></div>'; }).join('') + '</div>';
+      var akc = ed ? '<span class="pbtn" style="margin:0;font-size:12px" onclick="zapiszEdycje(\'' + esc(r.id) + '\')">zapisz</span><span class="pbtn" style="margin:0;font-size:12px" onclick="togEd(\'' + esc(r.id) + '\')">anuluj</span>' : '<span class="pbtn" style="margin:0;font-size:12px" onclick="togEd(\'' + esc(r.id) + '\')">edytuj</span>' + (TR ? '<span class="pbtn" style="margin:0;font-size:12px;color:var(--red)" onclick="usunRaport(\'' + esc(r.id) + '\')">usuń</span>' : '');
+      out += '<div class="rakc">' + akc + '</div>';
+    }
     out += '</div>';
   });
-  if (!L.length) out += '<div class="mut" style="padding:0 14px 14px;font-size:12px">Tu pojawią się wysłane raporty razem z odpowiedziami Kuby.</div>';
-  return out + '<div style="height:8px"></div></div>';
+  if (!L.length) out += '<div class="mut" style="padding:14px 4px;font-size:12px">Tu pojawią się wysłane raporty. Zostają też po zakończeniu bloku.</div>';
+  return out + '</div></div>';
 }
 function bindRaporty() {
   var rff = document.getElementById('rf-file'); if (rff) rff.onchange = function () { if (rff.files && rff.files.length) rfDodajPliki(rff.files); rff.value = ''; };
@@ -1087,7 +1099,7 @@ function wyslijRaport() {
   if (razem > 24000000) { status('Za dużo załączników naraz (limit ok. 15 MB). Usuń część albo wyślij w dwóch raportach.', false, true); return; }
   RF.wysylam = true; render(); status('wysyłam raport…');
   wywolaj('raportZapisz', [D.bazaId, { tydzien: RF.tydzien || (n(U('zaliczone')) + 1), tresc: tresc }, RF.pliki, AUTH]).then(function (lista) {
-    D.raporty = lista || []; RF = { pliki: [], wysylam: false, tresc: '', tydzien: null }; open.rap = true; render(); status('raport wysłany, dziękuję!', true);
+    D.raporty = lista || []; RF = { pliki: [], wysylam: false, tresc: '', tydzien: null }; open.rap = true; RAP_FORM = false; RAP_OPEN = null; render(); status('raport wysłany, dziękuję!', true);
   }).catch(function (e) { RF.wysylam = false; render(); status('nie udało się wysłać: ' + String(e && e.message || e), false, true); });
 }
 function zapiszEdycje(id) {
