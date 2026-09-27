@@ -628,7 +628,7 @@ function render() {
   if (D.pusty && ['treningi', 'plan', 'rap', 'waz', 'zal', 'hist'].indexOf(WIDOK) >= 0) {
     document.body.classList.remove('karty', 'mobw', 'lgmob'); viewportMob(false);
     app.innerHTML = html + '<div class="widok"><div class="wrap solo" style="max-width:760px;margin:40px auto"><div><div class="card" id="sek-pusty"><h2 class="metal"><span class="ttl" style="font-size:15px">Brak podopiecznych</span></h2><div class="ibody">Nikt jeszcze nie ma konta ani planu. Gdy podopieczny założy konto i wypełni ankietę, zatwierdzisz go na pulpicie i tutaj pojawi się jego plan.\n<a class="pbtn rz" style="margin:12px 0 0" href="lista.html"><span class="ico">☰</span>Pulpit: konta i podopieczni</a></div></div></div></div></div>';
-    return;
+    rysujMenu(); return;
   }
   if (!D.pusty) {
   html += '<div class="top"><div><div class="sub">' + (TR ? 'Trener' : esc(imieKlienta())) + '</div><h1>Cel: ' + (TR ? '<input id="cel" value="' + esc(U('cel')) + '" placeholder="wpisz cel bloku">' : esc(U('cel'))) + '</h1></div>';
