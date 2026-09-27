@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="717be97ba7"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="9d334025f1"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg1:#121212;--bg2:#0D0D0D;--bg3:#080808;--card:#161616;--head:#1C1C1C;--dark:#101010;--empty:#141414;--line:#2C2C2C;--iv:#F4F1EA;--ivd:#A7A49C;--gl:#D9A520;--gm:#B8891A;--gd:#7A5A12;--gx:#4E3A0C;--green:#5FBF7A;--red:#E0684A}
@@ -355,7 +355,7 @@ function api(b, opts) {
   var init = { method: 'POST', body: body, redirect: 'follow' }; if (ac) init.signal = ac.signal; if (opts.keepalive && body.length < 60000) init.keepalive = true;
   return fetch(API_URL, init)
     .then(function (r) { return r.text(); }, function () { throw new Error(BRAK_SIECI); })
-    .then(function (t) { var r; try { r = JSON.parse(t); } catch (e) { throw new Error('Serwer odpowiedział nieprawidłowo (spróbuj za chwilę).'); } if (!r.ok) throw new Error(r.error || 'Błąd serwera'); return r.dane; })
+    .then(function (t) { var r; try { r = JSON.parse(t); } catch (e) { throw new Error('Serwer odpowiedział nieprawidłowo. Spróbuj za chwilę.'); } if (!r.ok) throw new Error(r.error || 'Błąd serwera'); return r.dane; })
     .finally(function () { if (tm) clearTimeout(tm); });
 }
 function bledLogowania(e) { return /PIN|nieaktywn|hasło|dostęp/i.test(String(e && e.message || e)); }
@@ -375,10 +375,10 @@ var TIPS = {
  nota: 'Twoje miejsce na notatki. Wpisz ustawienia sprzętu, na przykład wysokość wyciągu 25, to, co czujesz, albo to, co nie działa. Czytam to co tydzień.',
  tyg: 'Po ostatnim treningu w tygodniu wyślij mi raport. Wtedy kratka tygodnia w bloku odhaczy się sama. Dzięki temu wiem, w którym tygodniu bloku jesteś, i mogę dobrze zaplanować Twój progres.',
  raport: 'Raport tygodniowy piszesz tu, po ostatnim treningu w tygodniu. Możesz dołączyć zdjęcia, na przykład sylwetki, albo krótki film z techniką. Raport zostaje w Twojej historii.',
- plan: 'Tryb planowania: najpierw zaznacz, które partie robisz w danym treningu (kratka „w tr.”), potem wpisz serie: Rozc. = ćwiczenia w rozciągnięciu, Skr. = w skróceniu. Kolumna „Rozpisane” porównuje sumę z planem z kafelków. Wycinek dla jednego treningu widzisz pod tabelą ćwiczeń („Partie treningu”).',
+ plan: 'Tryb planowania: najpierw zaznacz kratką „w tr.”, które partie robisz w danym treningu, potem wpisz serie: Rozc. = ćwiczenia w rozciągnięciu, Skr. = w skróceniu. Kolumna „Rozpisane” porównuje sumę z planem z kafelków. Wycinek dla jednego treningu widzisz pod tabelą ćwiczeń, w części „Partie treningu”.',
  hist: 'Każdy zamknięty blok zostaje w archiwum: ćwiczenia z ciężarem na start i koniec, wykonane powtórzenia z ostatniego tygodnia, plan partii i waga. Dzięki temu widzisz progres z bloku na blok i możesz wrócić do tego, co działało.',
  strzalki: 'Między polami poruszasz się strzałkami: w kafelkach prawo/lewo/góra/dół między partiami, w tabelach po wierszu i kolumnie. Enter = następne pole. Wpisz liczbę i od razu strzałka w prawo.',
- kolor: 'Kliknij numer ćwiczenia (kolumna Nr), żeby je zaznaczyć. Możesz zaznaczyć kilka, także w różnych treningach. Potem kliknij kolor: złoto = Priorytet, granat = Neutral, bordo = Utrzymanie. ✕ czyści zaznaczenie.'
+ kolor: 'Kliknij numer ćwiczenia w kolumnie Nr, żeby je zaznaczyć. Możesz zaznaczyć kilka, także w różnych treningach. Potem kliknij kolor: złoto = Priorytet, granat = Neutral, bordo = Utrzymanie. ✕ czyści zaznaczenie.'
 };
 function jkSek(h, b) { return '<div class="jhA">' + h + '</div>' + b; }
 function jkKaf(a) { return '<div class="jkx">' + a.map(function (x) { return '<span' + (x[2] ? ' class="ok"' : '') + '><b>' + x[0] + '</b>' + x[1] + '</span>'; }).join('') + '</div>'; }
@@ -482,11 +482,11 @@ function widokPwa() {
   var h = '<div class="card" id="sek-pwa"><h2 class="metal"><span class="ttl" style="font-size:15px">Dodaj aplikację do ekranu telefonu</span></h2><div class="ibody"><div class="pwa-ik"><span>KC</span></div>';
   if (pwaStandalone()) h += '<b>Gotowe.</b> Aplikacja jest już na ekranie telefonu i otwiera się bez paska przeglądarki.';
   else if (PWA.ev) h += 'Skrót z ikoną KC na ekranie telefonu. Plan otwiera się jak zwykła aplikacja, bez paska przeglądarki.\n<a class="pbtn rz" style="margin:10px 0 0;cursor:pointer" onclick="zainstaluj()"><span class="ico">⤓</span>Dodaj do ekranu głównego</a>';
-  else if (pwaIos() && pwaWAplikacji()) h += 'Ta strona jest otwarta w przeglądarce aplikacji (Messenger, Instagram itp.), a ona nie potrafi dodać skrótu.\n<b>1.</b> Dotknij <b>⋯</b> albo ikony ' + PWA_SH + ' i wybierz <b>„Otwórz w Safari”</b>.\n<b>2.</b> W Safari wejdź w menu ≡ i wróć do tego ekranu.\n<a class="pbtn rz" style="margin:10px 0 0;cursor:pointer" onclick="pwaKopiuj()"><span class="ico">⧉</span>Kopiuj link</a>';
+  else if (pwaIos() && pwaWAplikacji()) h += 'Ta strona jest otwarta w przeglądarce wbudowanej w aplikację, na przykład w Messengerze albo na Instagramie, a ona nie potrafi dodać skrótu.\n<b>1.</b> Dotknij <b>⋯</b> albo ikony ' + PWA_SH + ' i wybierz <b>„Otwórz w Safari”</b>.\n<b>2.</b> W Safari wejdź w menu ≡ i wróć do tego ekranu.\n<a class="pbtn rz" style="margin:10px 0 0;cursor:pointer" onclick="pwaKopiuj()"><span class="ico">⧉</span>Kopiuj link</a>';
   else if (pwaSafari()) h += 'Na iPhonie skrót dodaje się z menu Safari:\n<b>1.</b> Dotknij ikony ' + PWA_SH + ' <b>Udostępnij</b> na pasku Safari albo <b>⋯</b> obok adresu i wybierz <b>Udostępnij</b>.\n<b>2.</b> Przewiń listę w dół i wybierz <b>„Do ekranu głównego”</b>.\n<b>3.</b> Dotknij <b>Dodaj</b>.\nIkona KC pojawi się na ekranie telefonu.';
   else if (pwaChromeIos()) h += 'W Chrome na iPhonie skrót dodaje się z menu udostępniania przeglądarki:\n<b>1.</b> Dotknij ikony ' + PWA_SH + ' <b>Udostępnij</b> obok adresu strony (albo <b>⋯</b> i Udostępnij).\n<b>2.</b> Przewiń listę w dół i wybierz <b>„Do ekranu głównego”</b>.\n<b>3.</b> Dotknij <b>Dodaj</b>.\nIkona KC pojawi się na ekranie telefonu.';
   else if (pwaIos()) h += 'Ta przeglądarka nie potrafi dodać skrótu na iPhonie. Otwórz stronę w <b>Safari</b> albo <b>Chrome</b>: dotknij <b>⋯</b> lub ikony ' + PWA_SH + ' i wybierz <b>„Otwórz w Safari”</b>, potem w menu ≡ wróć do tego ekranu.\n<a class="pbtn rz" style="margin:10px 0 0;cursor:pointer" onclick="pwaKopiuj()"><span class="ico">⧉</span>Kopiuj link</a>';
-  else h += 'W przeglądarce otwórz menu <b>⋮</b> (prawy górny róg) i wybierz <b>„Dodaj do ekranu głównego”</b> albo <b>„Zainstaluj aplikację”</b>.\nIkona KC pojawi się na ekranie telefonu, a plan będzie otwierać się jak zwykła aplikacja.';
+  else h += 'W przeglądarce otwórz menu <b>⋮</b> w prawym górnym rogu i wybierz <b>„Dodaj do ekranu głównego”</b> albo <b>„Zainstaluj aplikację”</b>.\nIkona KC pojawi się na ekranie telefonu, a plan będzie otwierać się jak zwykła aplikacja.';
   return h + '</div></div>';
 }
 // ---------- widoki (menu ≡ przełącza ekrany, adres w #hash) ----------
@@ -959,7 +959,7 @@ function wykresWagi() {
 function wazPodsumowanie() {
   var w = wazBloku(), a0 = w.length ? n(w[0].waga) : null, a1 = w.length ? n(w[w.length - 1].waga) : null, d = w.length > 1 ? a1 - a0 : null;
   var mak = makroTxt();
-  return '<div class="wsum"><div><b class="' + (d == null ? '' : d < 0 ? 'dn' : d > 0 ? 'up' : '') + '">' + zmianaTxt(d) + '</b><span>od startu bloku' + (w.length ? ' (' + fmtData(w[0].data) + ')' : '') + '</span></div>'
+  return '<div class="wsum"><div><b class="' + (d == null ? '' : d < 0 ? 'dn' : d > 0 ? 'up' : '') + '">' + zmianaTxt(d) + '</b><span>od startu bloku' + (w.length ? ' ' + fmtData(w[0].data) : '') + '</span></div>'
     + '<div><b>' + (a1 != null ? fmt(a1) : '–') + '</b><span>ostatnie' + (w.length ? ' (' + fmtData(w[w.length - 1].data) + ')' : '') + '</span></div>'
     + '<div><b>' + (U('kcal') !== '' ? esc(U('kcal')) : '–') + '</b><span>kcal zalecane' + (mak ? '<br><i style="color:var(--iv);font-style:normal;font-weight:600">' + mak + '</i>' : '') + '</span></div></div>';
 }
@@ -973,11 +973,11 @@ var KOL_D = { 'skrócenie': ['#FFF2CC', '#7F6000'], 'rozciągnięcie': ['#1155CC
 function chipStyl(mapa, v) { var k = mapa[String(v || '').trim().toLowerCase()]; return k ? 'background:' + k[0] + ';color:' + k[1] + ';border-color:' + k[0] : ''; }
 function atlasWidok() {
   var rows = (D.atlas || []), q = norm(ATL.szukaj);
-  var grupy = []; rows.forEach(function (a) { var g = String(a.miesien || '').trim() || '(bez mięśnia)'; if (grupy.indexOf(g) < 0) grupy.push(g); });
+  var grupy = []; rows.forEach(function (a) { var g = String(a.miesien || '').trim() || 'Bez mięśnia'; if (grupy.indexOf(g) < 0) grupy.push(g); });
   var h = '<div class="card" id="sek-atlas"><h2 class="metal"><span class="ttl">Atlas ćwiczeń</span><input id="atlSzukaj" class="c" placeholder="szukaj…" value="' + esc(ATL.szukaj) + '" style="margin-left:14px;width:220px"><span style="margin-left:auto"></span><span class="pbtn" onclick="atlasNowaGrupa()">+ grupa</span>' + (rows.length ? '' : '<span class="pbtn" onclick="atlasImportuj()" title="Kopiuje Twój arkusz Atlas do aplikacji">⇩ importuj z arkusza</span>') + '</h2>';
   if (!rows.length) h += '<div class="mut" style="padding:20px">Atlas jest pusty. Kliknij „importuj z arkusza”, żeby przenieść ćwiczenia z Twojego arkusza „Atlas”.</div>';
   grupy.forEach(function (g) {
-    var lista = rows.filter(function (a) { return (String(a.miesien || '').trim() || '(bez mięśnia)') === g; }).filter(function (a) { return !q || norm(a.nazwa + ' ' + a.region + ' ' + a.dlugosc).indexOf(q) >= 0; });
+    var lista = rows.filter(function (a) { return (String(a.miesien || '').trim() || 'Bez mięśnia') === g; }).filter(function (a) { return !q || norm(a.nazwa + ' ' + a.region + ' ' + a.dlugosc).indexOf(q) >= 0; });
     if (q && !lista.length) return;
     var partia = (lista[0] && lista[0].partia) || '';
     h += '<div class="atlG"><div class="atlH"><b class="tytG" title="' + (partia ? 'w planowaniu liczy się do: ' + esc(partia) : 'bez partii w planowaniu') + '">' + esc(g) + '</b><span class="mut" style="margin-left:auto">' + lista.filter(function (a) { return a.nazwa; }).length + ' ćw.</span><span class="pbtn" style="font-size:11px" onclick="atlasDodajDo(\'' + esc(g) + '\')">+ ćwiczenie</span></div>';
@@ -998,10 +998,10 @@ function bindAtlas() {
   });
 }
 function atlasDodajDo(g) {
-  var d = { miesien: g === '(bez mięśnia)' ? '' : g, region: '', dlugosc: '', nazwa: '', powt: 10, tempo: 'x211', wideo: '' };
+  var d = { miesien: g === 'Bez mięśnia' ? '' : g, region: '', dlugosc: '', nazwa: '', powt: 10, tempo: 'x211', wideo: '' };
   status('dodaję…'); wywolaj('atlasDodaj', [d]).then(function (r) { d.id = r.id; d.partia = ''; var ost = (D.atlas || []).filter(function (a) { return a.miesien === d.miesien; }).slice(-1)[0]; d.kolejnosc = ost ? n(ost.kolejnosc) + 0.5 : 9999; D.atlas.push(d); D.atlas.sort(function (x, y) { return n(x.kolejnosc) - n(y.kolejnosc); }); status('dodano', true); render(); var el = document.querySelector('tr[data-aid="' + d.id + '"] input[data-f="nazwa"]'); if (el) el.focus(); }).catch(function (e) { status('błąd: ' + e.message, false, true); });
 }
-function atlasNowaGrupa() { var g = prompt('Nazwa mięśnia / grupy (najlepiej jak kafelek w planowaniu, np. „Przedramiona”):', ''); if (!g || !g.trim()) return; atlasDodajDo(g.trim()); }
+function atlasNowaGrupa() { var g = prompt('Nazwa mięśnia albo grupy, najlepiej taka jak kafelek w planowaniu, na przykład „Przedramiona”:', ''); if (!g || !g.trim()) return; atlasDodajDo(g.trim()); }
 function atlasUsunW(id) { var a = (D.atlas || []).filter(function (x) { return x.id === id; })[0]; if (!a || !confirm('Usunąć „' + (a.nazwa || 'ten wiersz') + '” z atlasu?')) return; D.atlas = D.atlas.filter(function (x) { return x.id !== id; }); render(); wywolaj('atlasUsun', [id]).then(function () { status('usunięto', true); }).catch(function (e) { status('błąd: ' + e.message, false, true); }); }
 function atlasImportuj() { if (!confirm('Skopiować ćwiczenia z arkusza „Atlas” do aplikacji? Obecna zawartość atlasu w aplikacji zostanie zastąpiona.')) return; status('importuję…'); wywolaj('atlasImport', []).then(function (r) { return wywolaj('atlas', []).then(function (rows) { D.atlas = rows; status('zaimportowano ' + r.wierszy + ' wierszy, ' + r.zLinkiem + ' z linkiem do filmu', true); render(); }); }).catch(function (e) { status('błąd importu: ' + e.message, false, true); }); }
 function wazeniaMob() {
@@ -1075,7 +1075,7 @@ function historiaSekcja() {
   var H = D.historia || [];
   if (!open.hist) return '<div class="acc" id="sek-hist" onclick="tog(\'hist\')"><span class="chev">▸</span>Historia bloków<span class="cnt">' + (H.length ? H.length + ' zamkn.' : 'brak zamkniętych bloków') + '</span></div>';
   var out = '<div class="card" id="sek-hist"><h2 class="metal"><span class="ttl" onclick="tog(\'hist\')">▾ &nbsp;Historia bloków</span><span class="pbtn" style="cursor:default">' + I('hist') + ' &nbsp;' + H.length + ' zamkniętych</span></h2>';
-  out += '<div style="padding:12px 14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap"><button class="btn warnb" onclick="zamknijBlok()">Zamknij blok i zacznij nowy</button><span class="mut" style="font-size:12px">Archiwizuje cały bieżący blok (ćwiczenia, ciężary, powtórzenia, plan partii, waga start→koniec). W nowym bloku ciężar początkowy = aktualny, powtórzenia i notatki wyczyszczone, kratki tygodni od zera. Plan ćwiczeń zostaje, żebyś mógł go zmienić.</span></div>';
+  out += '<div style="padding:12px 14px;display:flex;gap:12px;align-items:center;flex-wrap:wrap"><button class="btn warnb" onclick="zamknijBlok()">Zamknij blok i zacznij nowy</button><span class="mut" style="font-size:12px">Archiwizuje cały bieżący blok: ćwiczenia, ciężary, powtórzenia, plan partii i wagę od startu do końca. W nowym bloku ciężar początkowy = aktualny, powtórzenia i notatki wyczyszczone, kratki tygodni od zera. Plan ćwiczeń zostaje, żebyś mógł go zmienić.</span></div>';
   H.slice().reverse().forEach(function (h, idx) {
     var d = h.dane || {}, otw = open.hb[h.id];
     var dw = (d.waga_start !== '' && d.waga_koniec !== '' && d.waga_start != null && d.waga_koniec != null) ? (n(d.waga_koniec) - n(d.waga_start)) : null;
@@ -1101,14 +1101,14 @@ function zamknijBlok() {
   var zal = n(U('zaliczone')), blok = n(U('blok'));
   var msg = 'Zamknąć bieżący blok (' + zal + ' / ' + blok + ' tyg.) i zacząć nowy?\n\nDo archiwum trafi wszystko z tego bloku. W nowym: ciężar początkowy = aktualny, powtórzenia i notatki podopiecznego wyczyszczone, kratki tygodni od zera.';
   if (!confirm(msg)) return;
-  var notatka = prompt('Krótka notatka do archiwum (opcjonalnie): jak poszedł blok, co zmieniasz w następnym.', '') || '';
+  var notatka = prompt('Krótka notatka do archiwum, nieobowiązkowa: jak poszedł blok, co zmieniasz w następnym.', '') || '';
   if (queue.length) flush();
   status('zamykam blok…');
   wywolaj('zamknijBlok', [D.bazaId, notatka]).then(function (hist) {
     D.historia = hist || [];
     D.cwiczenia.forEach(function (c) { if (c.ciezar_akt !== '' && c.ciezar_akt != null) c.ciezar_start = c.ciezar_akt; for (var p = 1; p <= 6; p++) c['p' + p] = ''; c.notatka = ''; });
     D.ustawienia.zaliczone = 0; open.hist = true; render(); status('blok zamknięty, nowy rozpoczęty', true);
-  }).catch(function (e) { var m = String(e && e.message || e); status(/Nieznana akcja|not a function|is not defined/.test(m) ? 'Zamykanie bloków wymaga wdrożenia nowej wersji serwera (Kuba: Wdróż → Nowa wersja).' : 'błąd: ' + m, false, true); });
+  }).catch(function (e) { var m = String(e && e.message || e); status(/Nieznana akcja|not a function|is not defined/.test(m) ? 'Zamykanie bloków wymaga wdrożenia nowej wersji serwera: w Apps Script Wdróż, potem Nowa wersja.' : 'błąd: ' + m, false, true); });
 }
 function prio(name) { var v = U('prio_' + name); return v === 'P' || v === 'U' ? v : 'N'; }
 // kolor ćwiczenia: z priorytetu przypisanej partii (kafelek); bez partii: stary ręczny typ; pusta nazwa = wiersz roboczy
@@ -1190,7 +1190,7 @@ function zaznacz(id) { if (SEL[id]) delete SEL[id]; else SEL[id] = true; render(
 function koloruj(typ) {
   var ids = Object.keys(SEL);
   if (typ === null) { SEL = {}; render(); return; }
-  if (!ids.length) { status('Najpierw kliknij numer ćwiczenia (kolumna Nr), żeby je zaznaczyć.', true, true); return; }
+  if (!ids.length) { status('Najpierw kliknij numer ćwiczenia w kolumnie Nr, żeby je zaznaczyć.', true, true); return; }
   ids.forEach(function (id) { var c = D.cwiczenia.filter(function (x) { return x.id === id; })[0]; if (!c) return; c.typ = typ; push({ tab: 'Cwiczenia', id: id, pole: 'typ', wartosc: typ }); });
   SEL = {}; render();
 }
@@ -1261,7 +1261,7 @@ function raporty() {
     var ot = otw === r.id, ed = open.rapEd[r.id];
     out += '<div class="rp2' + (ot ? ' open' : '') + '" data-rid="' + esc(r.id) + '"><div class="rh2" onclick="RAP_OPEN = \'' + (ot ? '__none__' : esc(r.id)) + '\'; render()"><b><small>Blok ' + blokRaportu(r) + ' ·</small>Tydzień ' + esc(r.tydzien || '?') + '</b><span class="dt">' + esc(fmtData(r.data)) + '</span><span class="chev">' + (ot ? '▴' : '▾') + '</span></div>';
     if (ot) {
-      out += '<div class="rt">' + (ed ? '<textarea id="re-' + esc(r.id) + '">' + esc(r.tresc) + '</textarea>' : (r.tresc ? esc(r.tresc) : '<span class="mut">(bez treści)</span>')) + '</div>';
+      out += '<div class="rt">' + (ed ? '<textarea id="re-' + esc(r.id) + '">' + esc(r.tresc) + '</textarea>' : (r.tresc ? esc(r.tresc) : '<span class="mut">bez treści</span>')) + '</div>';
       if (r.pliki && r.pliki.length) out += '<div class="rf">' + r.pliki.map(function (p) { return '<div class="f" data-pid="' + esc(p.id) + '" onclick="pokazPlik(\'' + esc(r.id) + '\',\'' + esc(p.id) + '\')">' + (String(p.typ).indexOf('image') === 0 ? '🖼' : '🎬') + ' <b>' + esc(p.nazwa) + '</b> <span class="mut">' + rozmiarTxt(p.rozmiar) + '</span></div>'; }).join('') + '</div>';
       var akc = ed ? '<span class="pbtn" style="margin:0;font-size:12px" onclick="zapiszEdycje(\'' + esc(r.id) + '\')">zapisz</span><span class="pbtn" style="margin:0;font-size:12px" onclick="togEd(\'' + esc(r.id) + '\')">anuluj</span>' : '<span class="pbtn" style="margin:0;font-size:12px" onclick="togEd(\'' + esc(r.id) + '\')">edytuj</span>' + (TR ? '<span class="pbtn" style="margin:0;font-size:12px;color:var(--red)" onclick="usunRaport(\'' + esc(r.id) + '\')">usuń</span>' : '');
       out += '<div class="rakc">' + akc + '</div>';
@@ -1309,7 +1309,7 @@ function wyslijRaport() {
   rfZbierz(); var tresc = String(RF.tresc || '').trim();
   if (!tresc && !RF.pliki.length) { status('Napisz kilka słów albo dodaj zdjęcie, zanim wyślesz.', true, true); return; }
   var razem = 0; RF.pliki.forEach(function (p) { razem += p.dane.length; });
-  if (razem > 24000000) { status('Za dużo załączników naraz (limit ok. 15 MB). Usuń część albo wyślij w dwóch raportach.', false, true); return; }
+  if (razem > 24000000) { status('Za dużo załączników naraz. Limit to około 15 MB. Usuń część albo wyślij w dwóch raportach.', false, true); return; }
   RF.wysylam = true; render(); status('wysyłam raport…');
   wywolaj('raportZapisz', [D.bazaId, { tydzien: RF.tydzien || (n(U('zaliczone')) + 1), tresc: tresc }, RF.pliki, AUTH]).then(function (lista) {
     D.raporty = lista || []; var tygW = n(RF.tydzien) || (n(U('zaliczone')) + 1), blokW = Math.max(1, Math.min(8, n(U('blok')) || 6)), nz = Math.min(blokW, Math.max(n(U('zaliczone')), tygW));
@@ -1483,7 +1483,7 @@ function podpowiedzCiezar(c) {
   c.ciezar_start = z.w; push({ tab: 'Cwiczenia', id: c.id, pole: 'ciezar_start', wartosc: z.w });
   if (c.ciezar_akt === '' || c.ciezar_akt == null) { c.ciezar_akt = z.w; push({ tab: 'Cwiczenia', id: c.id, pole: 'ciezar_akt', wartosc: z.w }); }
   var fokus = zapamietajFokus(); render(); przywrocFokus(fokus);
-  status('ciężar ' + fmt(z.w) + ' kg pobrany z bloku ' + z.blok + ' (to samo ćwiczenie)', true);
+  status('ciężar ' + fmt(z.w) + ' kg pobrany z bloku ' + z.blok + ', to samo ćwiczenie', true);
 }
 function duplikujCw(id) {
   var c = D.cwiczenia.filter(function (x) { return x.id === id; })[0]; if (!c) return;
@@ -1546,7 +1546,7 @@ function wylogujTrenera(cicho) {
 function kartaEkran() {
   var ios = /iPhone|iPad/i.test(navigator.userAgent), android = /Android/i.test(navigator.userAgent);
   if (!ios && !android) return;
-  var tekst = ios ? 'Kliknij <b>ikonę udostępniania</b> (kwadrat ze strzałką w górę, na dole Safari), zjedź niżej i wybierz <b>„Do ekranu początkowego”</b>. Plan pojawi się jako ikonka obok innych aplikacji.' : 'Kliknij <b>trzy kropki</b> w prawym górnym rogu Chrome i wybierz <b>„Dodaj do ekranu głównego”</b> (albo „Zainstaluj aplikację”). Plan pojawi się jako ikonka obok innych aplikacji.';
+  var tekst = ios ? 'Kliknij <b>ikonę udostępniania</b>, czyli kwadrat ze strzałką w górę na dole Safari, zjedź niżej i wybierz <b>„Do ekranu początkowego”</b>. Plan pojawi się jako ikonka obok innych aplikacji.' : 'Kliknij <b>trzy kropki</b> w prawym górnym rogu Chrome i wybierz <b>„Dodaj do ekranu głównego”</b> albo „Zainstaluj aplikację”. Plan pojawi się jako ikonka obok innych aplikacji.';
   var box = document.createElement('div'); box.id = 'a2hs';
   box.innerHTML = '<div style="position:fixed;left:0;right:0;bottom:0;z-index:60;padding:28px;background:linear-gradient(180deg,#2E3F66,#161F36);border-top:3px solid var(--gm);box-shadow:0 -8px 30px rgba(0,0,0,.6);font-size:26px;line-height:1.4"><div style="max-width:1100px;margin:0 auto;display:flex;gap:28px;align-items:center;flex-wrap:wrap"><div style="flex:1;min-width:400px"><b style="color:var(--gl);font-size:30px;display:block;margin-bottom:8px">Chcesz mieć plan pod ikonką?</b>' + tekst + '</div><button class="btn" id="a2hsOk" style="height:72px;font-size:26px;padding:0 34px">Nie teraz, wejdę z linku</button></div></div>';
   document.body.appendChild(box);
@@ -1568,12 +1568,12 @@ var ANKIETA = [
   { s: 'Na start', p: [
     { id: 'imie', t: 'Imię i nazwisko', typ: 'text', req: 1, ph: 'Jan Kowalski' },
     { id: 'wiek', t: 'Ile masz lat?', o: 'Wiek ma znaczenie przy planowaniu regeneracji.', typ: 'number', req: 1, ph: 'np. 28' },
-    { id: 'cel', t: 'Jaki jest Twój cel?', o: 'Napisz, jak chcesz wyglądać i czuć się za kilka miesięcy lub co chcesz osiągnąć. Może być konkretnie („zrobić pierwsze podciągnięcie”) albo ogólnie, oba są ok.', typ: 'area', req: 1 },
+    { id: 'cel', t: 'Jaki jest Twój cel?', o: 'Napisz, jak chcesz wyglądać i czuć się za kilka miesięcy lub co chcesz osiągnąć. Może być konkretnie, na przykład „zrobić pierwsze podciągnięcie”, albo ogólnie. Oba są ok.', typ: 'area', req: 1 },
     { id: 'oczekiwania', t: 'Czego oczekujesz od planu i od naszej współpracy?', typ: 'area', req: 1 } ] },
   { s: 'Twoje doświadczenie', p: [
-    { id: 'staz', t: 'Opowiedz o swoim stażu treningowym', o: 'Ile trenujesz, jak (siłownia, sporty, zajęcia grupowe, samodzielnie czy z trenerem), jakie były przerwy. Jeśli zaczynasz od zera, po prostu napisz.', typ: 'area', req: 1 },
+    { id: 'staz', t: 'Opowiedz o swoim stażu treningowym', o: 'Ile trenujesz i jak: siłownia, sporty, zajęcia grupowe, samodzielnie czy z trenerem. Jakie były przerwy. Jeśli zaczynasz od zera, po prostu napisz.', typ: 'area', req: 1 },
     { id: 'poziom', t: 'Jak oceniasz swój obecny poziom wytrenowania?', typ: 'skala', min: 1, max: 10, lewo: 'Zaczynam od zera', prawo: 'Poziom zaawansowany', req: 1 },
-    { id: 'pojecia', t: 'Które z tych pojęć znasz?', o: 'Zaznacz wszystkie, które kojarzysz. Nie musisz ich opisywać.', typ: 'multi', opcje: ['RIR (reps in reserve)', 'RPE (skala odczuwanego wysiłku)', 'Upadek mięśniowy / praca blisko upadku', 'Upadek techniczny', 'Żadnego z powyższych'], req: 1 },
+    { id: 'pojecia', t: 'Które z tych pojęć znasz?', o: 'Zaznacz wszystkie, które kojarzysz. Nie musisz ich opisywać.', typ: 'multi', opcje: ['RIR, czyli powtórzenia w zapasie', 'RPE, czyli skala odczuwanego wysiłku', 'Upadek mięśniowy / praca blisko upadku', 'Upadek techniczny', 'Żadnego z powyższych'], req: 1 },
     { id: 'mocne_slabe', t: 'Jakie są Twoje mocne i słabe strony?', o: 'Nie tylko treningowe. Chodzi też o Ciebie jako osobę: np. „dużo zaangażowania, ale brak regularności”, „ciekawość i chęć próbowania nowych rzeczy”, „problem z motywacją”. Im lepiej Cię poznam, tym lepiej wykorzystam to w planie.', typ: 'area', req: 1 } ] },
   { s: 'Logistyka treningu', p: [
     { id: 'treningi_tydz', t: 'Ile treningów w tygodniu realnie zrobisz? Czy możesz trenować w stałe dni, jakie?', o: 'Chodzi o realną liczbę, nie ambitną. Np. „3 treningi, na pewno pon, śr, pt” albo „2-3, dni różne”.', typ: 'area', req: 1 },
@@ -1592,7 +1592,7 @@ var ANKIETA = [
     { id: 'suplementy', t: 'Czy bierzesz obecnie jakieś suplementy? Jakie i po co?', o: 'Jeśli nic nie bierzesz, napisz „nie”.', typ: 'area', req: 1 },
     { id: 'rozpiska', t: 'Chcesz dostać ode mnie też rozpiskę suplementacji?', typ: 'taknie', req: 1 },
     { id: 'budzet', t: 'Jaki budżet miesięcznie chcesz na to przeznaczyć?', typ: 'text', req: 1, ph: 'np. 100-150 zł miesięcznie', gdy: ['rozpiska', 'Tak'] },
-    { id: 'sterydy', t: 'Czy zdarzyło Ci się stosować środki anaboliczne (sterydy), teraz lub w przeszłości?', o: 'Pytam, bo to zmienia sposób planowania. Bez oceniania.', typ: 'taknie', req: 1 },
+    { id: 'sterydy', t: 'Czy zdarzyło Ci się stosować środki anaboliczne, czyli sterydy, teraz lub w przeszłości?', o: 'Pytam, bo to zmienia sposób planowania. Bez oceniania.', typ: 'taknie', req: 1 },
     { id: 'sterydy_opis', t: 'Co, kiedy i jak długo?', typ: 'area', req: 1, gdy: ['sterydy', 'Tak'] } ] },
   { s: 'Regeneracja i styl życia', p: [
     { id: 'sen', t: 'Od której do której zwykle śpisz? Czy to stałe godziny?', o: 'Sen to podstawa regeneracji, więc muszę wiedzieć, na czym stoimy.', typ: 'text', req: 1, ph: 'np. od 23:00 do 6:30, w weekendy dłużej' },
@@ -1604,7 +1604,7 @@ var ANKIETA = [
     { id: 'zajecie', t: 'Czym się zajmujesz?', o: 'Nie musisz odpowiadać, jeśli nie chcesz. Ale jeśli napiszesz, łatwiej mi ocenić, jak regeneruje się Twój organizm i dobrać do tego trening.', typ: 'area', req: 0 } ] },
   { s: 'Na koniec', p: [
     { id: 'cos_jeszcze', t: 'Czy jest coś jeszcze, co może przeszkadzać w treningu albo o czym powinienem wiedzieć?', o: 'Cokolwiek: życie, praca, plany na najbliższe miesiące, słaby sen, obawy.', typ: 'area', req: 0 },
-    { id: 'oswiadczenie', t: 'Zanim zaczniemy', o: 'Dwie formalności, dla Twojego bezpieczeństwa.', typ: 'zgoda', req: 1, tekst: 'Potwierdzam, że podane informacje są zgodne z prawdą i nie pominąłem/am niczego, co dotyczy mojego zdrowia i może wpłynąć na bezpieczeństwo treningu. Będę na bieżąco informować trenera o zmianach stanu zdrowia, urazach i zaleceniach lekarskich. Wiem, że plan wykonuję samodzielnie i na własną odpowiedzialność.' },
+    { id: 'oswiadczenie', t: 'Zanim zaczniemy', o: 'Dwie formalności, dla Twojego bezpieczeństwa.', typ: 'zgoda', req: 1, tekst: 'Potwierdzam, że podane informacje są zgodne z prawdą i nic, co dotyczy mojego zdrowia i może wpłynąć na bezpieczeństwo treningu, nie zostało pominięte. Będę na bieżąco informować trenera o zmianach stanu zdrowia, urazach i zaleceniach lekarskich. Wiem, że plan wykonuję samodzielnie i na własną odpowiedzialność.' },
     { id: 'rodo', t: 'Zgoda na przetwarzanie danych', typ: 'zgoda', req: 1, tekst: 'Wyrażam zgodę na przetwarzanie moich danych osobowych, w tym danych o zdrowiu, w celu przygotowania planu treningowego i prowadzenia współpracy trenerskiej. Wiem, że mogę ją w każdej chwili wycofać.' } ] }
 ];
 var ANK = { krok: 0, odp: {} };
