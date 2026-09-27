@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="86c8a805b9"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="e34c6932ac"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg1:#121212;--bg2:#0D0D0D;--bg3:#080808;--card:#161616;--head:#1C1C1C;--dark:#101010;--empty:#141414;--line:#2C2C2C;--iv:#F4F1EA;--ivd:#A7A49C;--gl:#D9A520;--gm:#B8891A;--gd:#7A5A12;--gx:#4E3A0C;--green:#5FBF7A;--red:#E0684A}
@@ -358,7 +358,7 @@ function api(b, opts) {
 function bledLogowania(e) { return /PIN|nieaktywn|hasło|dostęp/i.test(String(e && e.message || e)); }
 var TYP = { Priorytet: 'P', Neutral: 'N', Utrzymanie: 'U' };
 var TIPS = {
- nr: 'Kolejność ćwiczeń. Znaczek SS przy nazwie = superseria: to ćwiczenie i następne robisz jedno po drugim, bez przerwy między nimi.',
+ nr: 'Kolejność ćwiczeń. Znaczek „superseria” przy nazwie: dwa ćwiczenia robisz jedno po drugim, bez przerwy między nimi. Przerwę robisz dopiero po obu.',
  cw: 'Nazwa ćwiczenia. Kolor wiersza mówi, jaki to priorytet: złoto = Priorytet, granat = Neutral, bordo = Utrzymanie. Kliknij kwadraty w legendzie, żeby przeczytać, jak zarządzać każdym z nich.',
  powt: 'Wpisz, ile powtórzeń zrobiłeś w każdej serii. Kolorowe pola = tyle serii jest zaplanowanych. Ciemnych nie wypełniasz.',
  cakt: 'Ciężar, którym robisz ćwiczenie teraz. Aktualizuj, gdy dokładasz.',
@@ -370,9 +370,6 @@ var TIPS = {
  tempo: 'Tempo, np. x211: x = ruch koncentryczny (skrócenie) jak najszybciej przy dobrej technice; 2 = ruch ekscentryczny 2 s; 1 = pauza 1 s w skróceniu; 1 = pauza 1 s w rozciągnięciu.',
  wideo: 'Kliknij ikonkę, żeby otworzyć film z techniką. Szara ikonka = brak filmu.',
  nota: 'Twoje miejsce na notatki: ustawienia sprzętu (np. wysokość wyciągu 25), co czujesz, co nie działa. Czytam to co tydzień.',
- P: 'PRIORYTET: co tydzień staraj się dołożyć ciężar przy dobrej technice. Jeśli nie idzie, dołóż powtórzenia.\n\nPrzykład: 3×10. Dokładasz ciężar i trzymasz 10 (albo chociaż 9)? Progresujesz ciężarem. Dołożyłeś, a powtórzenia spadły do 7–8? W następnym tygodniu ten sam ciężar i wracasz do 10.',
- N: 'NEUTRAL: jak w priorytecie, ale rzadziej. Ciężar dokładasz co drugi tydzień, nie co tydzień. Chodzi o to, żeby jak najwięcej „energii adaptacyjnej” w tym bloku poszło na partie priorytetowe.',
- U: 'UTRZYMANIE: dobierasz ciężar do parametrów (powtórzenia, RiR) i trzymasz go bez zmian przez cały blok. Te partie nie mają rosnąć ani spadać, tylko nie zabierać energii priorytetom.',
  tyg: 'Po zakończonym tygodniu treningowym kliknij kolejną kratkę. Dzięki temu wiem, w którym tygodniu bloku jesteś.',
  kcal2: 'Dwie liczby = kcal w dni treningowe / w dni bez treningu. Jedna liczba = tyle samo codziennie. Trener wpisuje obie w kafelku (druga jest opcjonalna).',
  raport: 'Raport tygodniowy piszesz tu, po ostatnim treningu w tygodniu. Możesz dołączyć zdjęcia (np. sylwetka) albo krótki film z techniką. Raport zostaje w Twojej historii, Kuba odpowiada pod nim.',
@@ -385,7 +382,7 @@ function jkSek(h, b) { return '<div class="jhA">' + h + '</div>' + b; }
 function jkKaf(a) { return '<div class="jkx">' + a.map(function (x) { return '<span' + (x[2] ? ' class="ok"' : '') + '><b>' + x[0] + '</b>' + x[1] + '</span>'; }).join('') + '</div>'; }
 function INSTR() { var tyd = n((D.ustawienia || {}).zaliczone) + 1, mail = D.raportMail || ''; return [
  ['Legenda: kolory i obsługa', jkSek('Kolory', '<p class="jkp">Kolor ćwiczenia mówi, jak progresujesz.</p>' + ['P', 'N', 'U'].map(function (k) { return '<div class="lgs k' + k + '"><div class="h">' + nazwaPrio(k) + '</div><p>' + KOLORY_OPIS[k] + '</p></div>'; }).join(''))
-  + jkSek('Superseria', '<p class="jkp"><span class="mtag">superseria</span>Dwa ćwiczenia robisz jedno po drugim, bez przerwy między nimi. Przerwa dopiero po obu.</p>')
+  + jkSek('Superseria', '<p class="jkp"><span class="mtag">superseria</span>Dwa ćwiczenia robisz jedno po drugim, bez przerwy między nimi. Przerwę robisz dopiero po obu.</p>')
   + jkSek('Znaczek <span class="nt">„i”</span>', '<p class="jkp"><i class="inf">i</i>Dotknij znaczka „i”, a zobaczysz krótki opis. Jest przy kolumnach tabeli, kafelkach i kolorach na dole karty.</p>')
   + jkSek('Przesuwanie palcem', '<ul><li>Przesuń palcem w lewo, żeby przejść do następnego ćwiczenia, albo w prawo, żeby wrócić. Działa w każdym miejscu ekranu.</li><li>Na pierwszym ćwiczeniu ruch w prawo wysuwa menu. Menu otworzysz też od lewej krawędzi ekranu albo przyciskiem <b>≡</b> w lewym górnym rogu.</li><li>Menu schowasz ruchem w lewo, dotknięciem przygaszonego tła albo przyciskiem <b style="color:var(--iv)">✕</b> w prawym górnym rogu.</li></ul>')],
  ['RiR i tempo', jkSek('RiR', '<p class="jkp">RiR mówi, ile powtórzeń zostawiasz w zapasie. RiR 0 to seria do upadku mięśniowego: nie zrobisz kolejnego powtórzenia z braku siły.</p>')
@@ -833,7 +830,8 @@ function arkusz(html, klasa) { zamknijArkusz(); var tlo = document.createElement
 function zamknijArkusz() { var a = document.getElementById('msheet'), t = document.getElementById('mtlo'); if (a) a.remove(); if (t) t.remove(); MV.arkusz = null; if (MV.vv) { try { window.visualViewport.removeEventListener('resize', MV.vv); } catch (e) {} MV.vv = null; } }
 function arkuszInfo(tempo) { var t = String(tempo || '').replace(/\s/g, ''), f = ['skrócenie', 'opuszczanie', 'pauza w skróceniu', 'pauza w rozciąg&shy;nięciu'], ex = ''; if (t.length === 4) ex = '<div class="ex4">' + t.split('').map(function (ch, i) { return '<span><b>' + esc(ch) + '</b>' + f[i] + '</span>'; }).join('') + '</div>'; arkusz('<h3>Tempo' + (t ? ' ' + esc(t) : '') + '</h3><p>' + esc(TIPS.tempo || '') + '</p>' + ex + '<h3>RiR</h3><p>' + esc(TIPS.rir || '') + '</p><div class="row"><div class="b ok" onclick="zamknijArkusz()">Rozumiem</div></div>'); }
 // legenda priorytetów (telefon, patch80)
-var KOLORY_OPIS = { P: 'Co tydzień staraj się dołożyć ciężar przy dobrej technice. Jeśli nie idzie, dołóż powtórzenia.', N: 'Podobnie jak w priorytecie, ale ciężar dokładasz co drugi tydzień.', U: 'Dobierasz ciężar do powtórzeń i RiR i trzymasz go bez zmian przez cały blok.' };
+var KOLORY_OPIS = { P: 'Co tydzień staraj się dołożyć ciężar przy dobrej technice. Jeśli nie idzie, dołóż powtórzenia.', N: 'Tak samo jak w priorytecie.', U: 'Dobierasz ciężar do powtórzeń i RiR i trzymasz go przez cały blok. Te partie mają się utrzymać, a nie rosnąć, i nie zabierać siły adaptacyjnej.' };
+['P', 'N', 'U'].forEach(function (k) { TIPS[k] = nazwaPrio(k).toUpperCase() + ': ' + KOLORY_OPIS[k]; }); // patch93: opisy „i” na komputerze = te same teksty
 function legendaMob() { return '<div class="lgB">' + ['U', 'N', 'P'].map(function (k) { return '<span class="k' + k + '" onclick="arkuszKolory(\'' + k + '\')">' + nazwaPrio(k) + '<i class="lgi">i</i></span>'; }).join('') + '</div>'; }
 function arkuszKolory(k) {
   var h = '<h3>Co oznaczają kolory <small>kolor = sposób progresji</small></h3>';
@@ -1017,7 +1015,7 @@ function tabela(t) {
     var isB = wB; wB = false; var isA = !isB && jestSS(c) && i + 1 < rows.length; if (isA) wB = true;
     var moznaPolaczyc = TR && !isA && !isB && i + 1 < rows.length && !jestSS(rows[i + 1]);
     var nrCell = isB ? '' : '<td class="' + (TR ? 'nrc' : '') + (isA ? ' nrSS' : '') + '"' + (isA ? ' rowspan="2"' : '') + '>' + (TR ? '<input class="c nr" data-nr="' + c.id + '" inputmode="numeric" value="' + (i + 1) + '">' : (i + 1)) + (isA ? '<span class="ssg">SS</span>' : '') + (isA ? '<i class="ssl" title="Rozłącz superserię" onclick="togSS(\'' + c.id + '\')">✕</i>' : '') + (moznaPolaczyc ? '<i class="ssl" title="Połącz z następnym ćwiczeniem w superserię" onclick="togSS(\'' + c.id + '\')">⛓</i>' : '') + '</td>';
-    out += '<tr class="r' + k + (TR && SEL[c.id] ? ' sel' : '') + (isA ? ' ssa' : '') + (isB ? ' ssb2' : '') + '" data-id="' + c.id + '">' + nrCell + '<td class="ex">' + (TR ? '<input class="c" data-f="nazwa" list="nazwy" autocomplete="off" value="' + esc(c.nazwa) + '">'  : esc(c.nazwa)) + (isA ? '<span class="tag" title="Superseria: to i następne ćwiczenie robisz jedno po drugim, przerwa dopiero po obu">superseria</span>' : '') + '</td>';
+    out += '<tr class="r' + k + (TR && SEL[c.id] ? ' sel' : '') + (isA ? ' ssa' : '') + (isB ? ' ssb2' : '') + '" data-id="' + c.id + '">' + nrCell + '<td class="ex">' + (TR ? '<input class="c" data-f="nazwa" list="nazwy" autocomplete="off" value="' + esc(c.nazwa) + '">'  : esc(c.nazwa)) + (isA ? '<span class="tag" title="Superseria: dwa ćwiczenia robisz jedno po drugim, bez przerwy między nimi. Przerwę robisz dopiero po obu.">superseria</span>' : '') + '</td>';
     for (var p = 1; p <= 6; p++) out += '<td class="rep ' + (p <= sets ? 'plan' : '') + '">' + (p <= sets ? '<input class="c" data-f="p' + p + '" inputmode="numeric" value="' + esc(c['p' + p]) + '">' : '') + '</td>';
     out += '<td class="w"><input class="c" data-f="ciezar_akt" inputmode="decimal" value="' + esc(c.ciezar_akt) + '"></td><td class="w"><input class="c" data-f="ciezar_start" inputmode="decimal" value="' + esc(c.ciezar_start) + '"></td>';
     ['sets', 'reps', 'przerwa', 'rir', 'tempo'].forEach(function (f) { if (f === 'przerwa' && isB) return; out += '<td' + (f === 'przerwa' && isA ? ' class="przSS" rowspan="2"' : '') + '>' + (TR ? '<input class="c" data-f="' + f + '" value="' + esc(c[f]) + '" style="width:56px">' : esc(c[f])) + '</td>'; });
