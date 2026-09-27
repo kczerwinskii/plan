@@ -21,19 +21,23 @@ button.szary{background:#1A1A24;color:#EFE9DA;border:1px solid #4A4A5A}.mut{colo
 </style></head><body><div class="box" id="box"><h1>Podopieczni</h1><div id="tresc" class="mut">Wczytuję…</div></div>
 <script>var API_URL = "https://script.google.com/macros/s/AKfycbz48qRxFlyvGcVBSltMbjR8kfuQNCbq-8a5g2gYG7oJgtWiU2ZJ-HLEyux6WGc_Xesq1Q/exec";</script>
 <script>
-var HASLO = null; try { HASLO = localStorage.getItem('trener_haslo'); } catch (e) {}
-function api(b) { if (HASLO) b.haslo = HASLO; return fetch(API_URL, { method: 'POST', body: JSON.stringify(b), redirect: 'follow' }).then(function (r) { return r.text(); }, function () { throw new Error('Brak połączenia z serwerem. Sprawdź internet i spróbuj ponownie.'); }).then(function (t) { try { return JSON.parse(t); } catch (e) { throw new Error('Serwer odpowiedział nieprawidłowo, spróbuj za chwilę.'); } }).then(function (r) { if (!r.ok) throw new Error(r.error || 'Błąd serwera'); return r.dane; }); }
+var TSESJA = null; try { TSESJA = localStorage.getItem('trener_sesja'); localStorage.removeItem('trener_haslo'); } catch (e) {}
+function api(b) { if (TSESJA && !b.sesja) b.sesja = TSESJA; return fetch(API_URL, { method: 'POST', body: JSON.stringify(b), redirect: 'follow' }).then(function (r) { return r.text(); }, function () { throw new Error('Brak połączenia z serwerem. Sprawdź internet i spróbuj ponownie.'); }).then(function (t) { try { return JSON.parse(t); } catch (e) { throw new Error('Serwer odpowiedział nieprawidłowo, spróbuj za chwilę.'); } }).then(function (r) { if (!r.ok) throw new Error(r.error || 'Błąd serwera'); return r.dane; }); }
 function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
 var BAZA = location.href.replace(/lista\.html.*$/, '');
 function pokazHaslo(msg) {
-  document.getElementById('tresc').innerHTML = '<p>Wpisz hasło trenera.</p><input id="h" type="password" style="font-size:18px"> <button id="hb">Wejdź</button><div id="hm" style="color:#E0684A;margin-top:8px">' + esc(msg || '') + '</div>';
-  var go = function () { HASLO = document.getElementById('h').value.trim(); if (HASLO) wczytaj(); };
-  document.getElementById('hb').onclick = go; document.getElementById('h').addEventListener('keydown', function (e) { if (e.key === 'Enter') go(); }); document.getElementById('h').focus();
+  document.getElementById('tresc').innerHTML = '<p>Zaloguj się kontem trenera.</p><input id="he" type="email" autocomplete="username" placeholder="e-mail" style="font-size:18px"> <input id="h" type="password" autocomplete="current-password" placeholder="hasło" style="font-size:18px"> <button id="hb">Wejdź</button><div id="hm" style="color:#E0684A;margin-top:8px">' + esc(msg || '') + '</div>';
+  var go = function () {
+    var em = document.getElementById('he').value.trim(), ha = document.getElementById('h').value; if (!em || !ha) return;
+    document.getElementById('hb').textContent = 'Sprawdzam…';
+    api({ akcja: 'logowanie', email: em, haslo: ha }).then(function (r) { if (r.rola !== 'trener') throw new Error('To nie jest konto trenera.'); TSESJA = r.sesja; try { localStorage.setItem('trener_sesja', TSESJA); } catch (e) {} wczytaj(); }).catch(function (e) { pokazHaslo(e.message); });
+  };
+  document.getElementById('hb').onclick = go; document.getElementById('h').addEventListener('keydown', function (e) { if (e.key === 'Enter') go(); }); document.getElementById('he').focus();
 }
 function wczytaj() {
-  if (!HASLO) return pokazHaslo();
+  if (!TSESJA) return pokazHaslo();
   document.getElementById('tresc').textContent = 'Wczytuję podopiecznych…';
-  Promise.all([api({ akcja: 'pulpit' }), api({ akcja: 'konta' }).catch(function () { return []; })]).then(function (r) { try { localStorage.setItem('trener_haslo', HASLO); } catch (e) {} KONTA = r[1] || []; LISTA = r[0]; rysuj(r[0]); }).catch(function (e) { if (/hasło/i.test(e.message)) { try { localStorage.removeItem('trener_haslo'); } catch (x) {} HASLO = null; pokazHaslo(e.message); } else { document.getElementById('tresc').innerHTML = '<span style="color:#E0684A">' + String(e.message).replace(/[<>&]/g, '') + '</span> <button class="btn" onclick="wczytaj()" style="margin-left:10px">Spróbuj ponownie</button>'; } });
+  Promise.all([api({ akcja: 'pulpit' }), api({ akcja: 'konta' }).catch(function () { return []; })]).then(function (r) { KONTA = r[1] || []; LISTA = r[0]; rysuj(r[0]); }).catch(function (e) { if (/hasło|dostęp|sesja/i.test(e.message)) { try { localStorage.removeItem('trener_sesja'); } catch (x) {} TSESJA = null; pokazHaslo(e.message); } else { document.getElementById('tresc').innerHTML = '<span style="color:#E0684A">' + String(e.message).replace(/[<>&]/g, '') + '</span> <button class="btn" onclick="wczytaj()" style="margin-left:10px">Spróbuj ponownie</button>'; } });
 }
 function dni(iso) { if (!iso) return null; var d = new Date(String(iso).slice(0, 10)); if (isNaN(d)) return null; return Math.floor((Date.now() - d.getTime()) / 86400000); }
 function fmt(v) { return v === '' || v == null ? '–' : String(v).replace('.', ','); }
@@ -82,7 +86,7 @@ function rysuj(lista) {
     if (b.classList.contains('odrz')) { if (confirm('Odrzucić to konto? Osoba nie zaloguje się.')) api({ akcja: 'odrzuc', email: b.dataset.e }).then(wczytaj).catch(function (er) { alert(er.message); }); }
     if (b.classList.contains('reset')) { if (confirm('Ustawić nowe hasło? Stare przestanie działać, a osoba zostanie wylogowana.')) api({ akcja: 'resetHasla', email: b.dataset.e }).then(function (r) { prompt('Nowe hasło (skopiuj i wyślij podopiecznemu):', r.haslo); }).catch(function (er) { alert(er.message); }); }
     if (b.classList.contains('ank')) { api({ akcja: 'ankieta', email: b.dataset.e }).then(function (r) { var out = document.querySelector('.ank-out[data-e="' + b.dataset.e + '"]'); if (!out) return; var o = r.odpowiedzi || {}; var ks = Object.keys(o); out.innerHTML = ks.length ? '<div class="ankv">' + (r.data ? '<div class="mut" style="margin-bottom:8px">wypełniona ' + esc(r.data) + '</div>' : '') + ks.map(function (q) { var it = o[q]; var pyt = it && typeof it === 'object' ? it.p : q, odp = it && typeof it === 'object' ? it.o : (typeof it === 'object' ? JSON.stringify(it) : String(it)); return '<div class="ankq"><span>' + esc(pyt) + '</span><b>' + esc(odp) + '</b></div>'; }).join('') + '</div>' : 'Ankieta pusta.'; }).catch(function (er) { alert(er.message); }); }
-    if (b.id === 'wyloguj') { e.preventDefault(); try { localStorage.removeItem('trener_haslo'); } catch (x) {} HASLO = null; pokazHaslo(); }
+    if (b.id === 'wyloguj') { e.preventDefault(); var s = TSESJA; TSESJA = null; try { localStorage.removeItem('trener_sesja'); } catch (x) {} if (s) api({ akcja: 'wyloguj', sesja: s }).catch(function () {}); pokazHaslo(); }
   });
   document.getElementById('dodaj').onclick = function () {
     var i = document.getElementById('imie').value.trim(), m = document.getElementById('mail').value.trim();

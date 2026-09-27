@@ -232,6 +232,8 @@ body.karty{padding-bottom:96px}body.karty .top{display:none}body.karty .selbar.d
 .menu .mgr.zt{justify-content:space-between;padding-right:12px}.menu .mgr .wt{display:inline-flex;align-items:center;gap:6px;border:2px solid var(--gl);border-radius:10px;padding:4px 10px;font-size:11px;letter-spacing:.5px;text-transform:none;color:#E6CB80;font-weight:700;background:#141414;cursor:pointer;user-select:none;white-space:nowrap}.menu .mgr .wt i{font-style:normal;font-size:13px}
 .pwa-ik{width:72px;height:72px;border-radius:16px;background:linear-gradient(180deg,#1A1A1A,#0B0B0B);border:2px solid var(--gl);display:flex;align-items:center;justify-content:center;margin:0 0 12px}.pwa-ik span{font-size:30px;font-weight:800;color:#E6CB80;letter-spacing:-1px;line-height:1}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
+.pinbox.lg{max-width:1060px;margin:0 auto;padding:24px 16px;min-height:100vh;display:flex;align-items:center;box-sizing:border-box}.pinbox.lg .card{width:100%;box-sizing:border-box;padding:60px;border-radius:14px}.pinbox.lg .sub{font-size:24px}.pinbox.lg h1{margin:8px 0 26px;font-size:56px}.pinbox.lg input{height:96px;font-size:32px}.pinbox.lg .btn{height:96px;font-size:34px}.pinbox.lg .mut{font-size:24px}
+body.lgmob .pinbox.lg{padding:16px;min-height:100vh}body.lgmob .pinbox.lg .card{padding:26px 20px;border-radius:14px}body.lgmob .pinbox.lg .sub{font-size:12px}body.lgmob .pinbox.lg h1{font-size:30px;margin:6px 0 18px}body.lgmob .pinbox.lg input{height:54px;font-size:17px;padding:0 14px;margin-bottom:10px;border-radius:10px}body.lgmob .pinbox.lg .btn{height:56px;font-size:18px;border-radius:10px;margin-top:4px}body.lgmob .pinbox.lg .err{font-size:15px;min-height:20px;margin-top:10px}body.lgmob .pinbox.lg .mut{font-size:15px;margin:14px 0 0;line-height:1.5}
 .ank{max-width:760px;margin:30px auto;padding:0 16px 40px}.ankh{display:flex;justify-content:space-between;align-items:center}.ankh .sub{font-size:16px}.ankp{color:var(--ivd);font-size:16px;font-weight:700}.ankbar{height:4px;background:#2A2A36;border-radius:2px;margin:10px 0 22px;overflow:hidden}.ankbar i{display:block;height:100%;background:linear-gradient(90deg,#8E6B2E,#C9A455)}.anks{font-size:34px;margin:0 0 14px}.ankw{font-size:18px;line-height:1.5;margin:0 0 18px}
 .ap{background:var(--card);border:1px solid var(--line);border-left:3px solid #8E6B2E;border-radius:8px;padding:18px 20px;margin-bottom:14px}.ap.ukryte{display:none}.ap.brak{border-color:var(--red);border-left-color:var(--red)}.apt{font-size:19px;font-weight:700;color:var(--iv);line-height:1.35}.apt small{font-weight:500;color:var(--ivd);font-size:13px;margin-left:6px}.apo{color:var(--ivd);font-size:15px;line-height:1.5;margin-top:6px}
 .ap input,.ap textarea{display:block;width:100%;margin-top:12px;background:#1A1A24;color:var(--iv);border:1px solid var(--gm);border-radius:6px;padding:12px 14px;font:16px Poppins;box-sizing:border-box;letter-spacing:0!important;height:auto!important;text-align:left}.ap textarea{min-height:90px;resize:vertical;line-height:1.45}.ap input::placeholder,.ap textarea::placeholder{color:#7C7462}
@@ -247,10 +249,10 @@ body.prosty .pinbox.lg input{letter-spacing:0!important;height:52px!important;fo
 <div id="status" class="status hidden"></div>
 <script>var API_URL = "https://script.google.com/macros/s/AKfycbz48qRxFlyvGcVBSltMbjR8kfuQNCbq-8a5g2gYG7oJgtWiU2ZJ-HLEyux6WGc_Xesq1Q/exec";</script>
 <script>
-var D = {}, TR = false, AUTH = null, HASLO = null, URL_STRONY = location.pathname;
+var D = {}, TR = false, AUTH = null, TSESJA = null, URL_STRONY = location.pathname;
 var BRAK_SIECI = 'Brak połączenia z serwerem. Sprawdź internet i spróbuj ponownie.';
 function api(b, opts) {
-  opts = opts || {}; if (HASLO) b.haslo = HASLO;
+  opts = opts || {}; if (TSESJA && !b.sesja) b.sesja = TSESJA;
   var ac = window.AbortController ? new AbortController() : null, tm = ac ? setTimeout(function () { ac.abort(); }, opts.timeout || 60000) : null;
   var body = JSON.stringify(b);
   var init = { method: 'POST', body: body, redirect: 'follow' }; if (ac) init.signal = ac.signal; if (opts.keepalive && body.length < 60000) init.keepalive = true;
@@ -325,6 +327,7 @@ function rysujMenu() {
   h += '<div class="mgr">Ciało i dieta</div><span class="mi' + mAkt('waz') + '" onclick="idz(\'waz\')">Ważenia i kalorie' + (ostWaga().length ? '<small>ostatnie ' + fmt(ostWaga().slice(-1)[0].waga) + ' kg</small>' : '') + '</span><span class="mi' + mAkt('zal') + '" onclick="idz(\'zal\')">Zalecenia i suplementy</span>';
   h += '<div class="mgr">Jak korzystać</div>' + (pwaStandalone() ? '' : '<span class="mi' + mAkt('pwa') + '" onclick="idz(\'pwa\')">Dodaj aplikację do ekranu telefonu<small>skrót z ikoną, otwiera się jak aplikacja</small></span>') + INSTR().map(function (x, i) { return '<span class="mi' + mAkt('ins' + i) + '" onclick="idz(\'ins\',' + i + ')">' + esc(x[0]) + '</span>'; }).join('');
   if (AUTH && AUTH.sesja) h += '<div class="mgr">Konto</div><span class="mi" onclick="wylogujKonto()">Wyloguj<small>' + esc(D.konto ? D.konto.email : '') + '</small></span>';
+  else if (TR && TSESJA) h += '<div class="mgr">Konto</div><span class="mi" onclick="wylogujTrenera()">Wyloguj<small>konto trenera</small></span>';
   h += '</div>';
   var box = document.createElement('div'); box.innerHTML = h; while (box.firstChild) document.body.appendChild(box.firstChild);
 }
@@ -628,7 +631,7 @@ function render() {
   html += '</div></div>';
   html += '<div class="kpi"><div><b>' + serieT + '</b><span>Serie / tydzień</span></div><div><b>' + (TR ? '<input id="kcal" class="c" style="width:96px;color:var(--gl);font-weight:700;font-size:22px;text-align:center" value="' + esc(U('kcal')) + '" placeholder="–" title="Aktualne kcal">' : (U('kcal') ? esc(U('kcal')) : '–')) + '</b><span>Aktualne kcal</span></div><div><b>' + (last != null ? fmt(last) + ' kg' : '–') + (d != null ? '<em class="' + (d > 0 ? 'up' : '') + '">' + (d < 0 ? '▼' : d > 0 ? '▲' : '=') + '</em><small class="' + (d > 0 ? 'up' : '') + '">' + fmt(Math.abs(d).toFixed(1)) + '</small>' : '') + '</b><span>Aktualna waga</span></div></div></div>';
   if (TR && D.lista && D.lista.length) { html += '<div class="selbar desk"><div class="sbl">Podopieczny: <select id="selK">' + D.lista.map(function (k) { return '<option value="' + esc(k.bazaId) + '"' + (k.bazaId === D.bazaId ? ' selected' : '') + '>' + esc(k.imie) + '</option>'; }).join('') + '</select><a class="pbtn" style="margin-left:8px" href="lista.html">lista / dodaj</a><textarea id="notaTr" class="c" rows="1" placeholder="notatka trenera (widzisz tylko Ty)" title="Prywatna notatka o podopiecznym. Podopieczny jej nie widzi.">' + esc(D.klient && D.klient.notatka || '') + '</textarea></div><div class="sbc">' + (D.kontoStatus ? '<button class="pbtn zak ' + (D.kontoStatus.status === 'aktywne' ? 'kon' : 'wzn') + '" onclick="togProwadzenie()" title="' + (D.kontoStatus.status === 'aktywne' ? 'Podopieczny traci dostęp do planu i zostaje wylogowany. Wznowisz jednym kliknięciem.' : 'Przywraca podopiecznemu dostęp do planu.') + '">' + (D.kontoStatus.status === 'aktywne' ? 'zakończ prowadzenie' : 'wznów prowadzenie') + '</button>' : '<span class="mut" style="font-size:12px" title="Ta baza nie ma jeszcze konta podopiecznego. Konto zakładasz na liście albo podopieczny sam się rejestruje.">brak konta podopiecznego</span>') + '</div><div></div></div>'; }
-  var KARTY = kartyAktywne(), MOBW = WIDOK === 'pwa' && trybKart(); document.body.classList.toggle('karty', KARTY); document.body.classList.toggle('mobw', MOBW); viewportMob(KARTY || MOBW);
+  var KARTY = kartyAktywne(), MOBW = WIDOK === 'pwa' && trybKart(); document.body.classList.toggle('karty', KARTY); document.body.classList.toggle('mobw', MOBW); document.body.classList.remove('lgmob'); viewportMob(KARTY || MOBW);
   if (WIDOK !== 'treningi') html += widokInny(); else if (KARTY) { html += widokMobilny(mobT); } else {
   // ----- telefon: wybór treningu + karty
   html += '<div class="mob"><div class="selbar">Trening: <select id="mobSel">'; for (var t2 = 1; t2 <= akt; t2++) html += '<option value="' + t2 + '"' + (t2 === mobT ? ' selected' : '') + '>Trening ' + t2 + '</option>'; html += '</select><a class="v" style="margin-left:auto" target="_blank" href="' + esc(D.rozgrzewka) + '" title="Rozgrzewka">▶</a></div><div id="mobcards" style="padding-top:10px"></div></div>';
@@ -1176,18 +1179,22 @@ window.addEventListener('beforeunload', function (e) { if (queue.length || pendi
 document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden' && queue.length) { clearTimeout(timer); flush(true); } });
 window.addEventListener('pagehide', function () { if (queue.length) { clearTimeout(timer); flush(true); } });
 function ladowanie(t) { document.getElementById('app').innerHTML = '<div class="mut" style="padding:60px;text-align:center;font-size:28px">' + t + '</div>'; }
-function hasloScreen(msg) {
-  document.getElementById('app').innerHTML = '<div class="pinbox" style="max-width:760px;margin:120px auto;padding:0 16px"><div class="card" style="padding:44px;border-radius:12px"><div class="sub" style="font-size:20px">Plan treningowy</div><h1 style="margin:8px 0 22px;font-size:44px">Panel trenera</h1><p style="color:var(--ivd);margin:0 0 24px;font-size:24px">Wpisz hasło trenera. Przeglądarka je zapamięta.</p><input id="haslo" type="password" autocomplete="current-password" style="width:100%;height:100px;font:800 40px Poppins;text-align:center;background:#1A1A24;color:var(--gl);border:2px solid var(--gm);border-radius:8px"><button class="btn" id="haslobtn" style="width:100%;margin-top:24px;height:84px;font-size:30px">Wejdź</button><div id="haslomsg" style="color:var(--red);min-height:32px;margin-top:16px;font-weight:600;font-size:22px">' + (msg || '') + '</div><p style="color:var(--ivd);font-size:20px;margin-top:20px">Podopieczny? <a class="lnk" onclick="ekranLogowania()">Zaloguj się tutaj</a>.</p></div></div>';
-  var inp = document.getElementById('haslo'); inp.focus();
-  var go = function () { var v = inp.value.trim(); if (!v) return; HASLO = v; document.getElementById('haslobtn').textContent = 'Wczytuję…'; wczytajTrenera(); };
-  document.getElementById('haslobtn').onclick = go; inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') go(); });
-}
 function wczytajTrenera() {
   var q = new URLSearchParams(location.search);
   api({ akcja: 'plan', bazaId: q.get('klient') || '' }).then(function (dane) {
-    try { localStorage.setItem('trener_haslo', HASLO); } catch (e) {}
     D = dane; D.url = URL_STRONY; TR = true; OST_WCZYT = Date.now(); render();
-  }).catch(function (e) { var msg = String(e.message || e).replace(/^Error:\s*/, ''); if (bledLogowania(e)) { try { localStorage.removeItem('trener_haslo'); } catch (x) {} HASLO = null; } hasloScreen(msg + (bledLogowania(e) ? '' : ' Wpisz hasło i spróbuj jeszcze raz.')); });
+  }).catch(function (e) {
+    var msg = String(e.message || e).replace(/^Error:\s*/, '');
+    if (bledLogowania(e)) { wylogujTrenera(true); ekranLogowania(msg); return; }
+    ekranKarta('Nie udało się wczytać', '<p class="mut">' + esc(msg) + '</p><button class="btn" id="tr-retry">Spróbuj ponownie</button>');
+    document.getElementById('tr-retry').onclick = function () { ladowanie('Wczytuję…'); wczytajTrenera(); };
+  });
+}
+function wylogujTrenera(cicho) {
+  var s = TSESJA; TSESJA = null; TR = false; MENU = false;
+  try { localStorage.removeItem('trener_sesja'); localStorage.removeItem('trener_haslo'); } catch (e) {}
+  if (s && !cicho) api({ akcja: 'wyloguj', sesja: s }).catch(function () {});
+  if (!cicho) ekranLogowania();
 }
 // karta „dodaj do ekranu” po pierwszym logowaniu (raz; iPhone = instrukcja, Android = instrukcja Chrome)
 function kartaEkran() {
@@ -1303,11 +1310,13 @@ function ekranAnkiety(braki) {
 // ---------- konto podopiecznego: logowanie, rejestracja, sesja ----------
 var SESJA = null; try { SESJA = localStorage.getItem('sesja'); } catch (e) {}
 function ekranKarta(tytul, tresc) {
-  document.getElementById('app').innerHTML = '<div class="pinbox lg" style="max-width:760px;margin:90px auto;padding:0 16px"><div class="card" style="padding:44px;border-radius:12px"><div class="sub" style="font-size:20px">Plan treningowy</div><h1 style="margin:8px 0 22px;font-size:44px">' + tytul + '</h1>' + tresc + '</div></div>';
+  var mob = false; try { mob = window.matchMedia('(pointer: coarse)').matches || (window.screen && window.screen.width < 800); } catch (e) {}
+  document.body.classList.toggle('lgmob', mob); try { viewportMob(mob); } catch (e) {}
+  document.getElementById('app').innerHTML = '<div class="pinbox lg"><div class="card"><div class="sub">Plan treningowy</div><h1>' + tytul + '</h1>' + tresc + '</div></div>';
 }
 function ekranLogowania(msg, email) {
-  ekranKarta('Zaloguj się', '<input id="lg-email" type="email" autocomplete="username" inputmode="email" placeholder="e-mail" value="' + esc(email || '') + '"><input id="lg-haslo" type="password" autocomplete="current-password" placeholder="hasło"><button class="btn" id="lg-btn">Wejdź</button><div class="err" id="lg-msg">' + esc(msg || '') + '</div><p class="mut">Nie masz jeszcze konta? <a class="lnk" onclick="ekranRejestracji()">Załóż konto</a></p><p class="mut" style="font-size:16px"><a class="lnk" onclick="hasloScreen()">Panel trenera</a></p>');
-  var go = function () { var em = document.getElementById('lg-email').value.trim(), ha = document.getElementById('lg-haslo').value; if (!em || !ha) { document.getElementById('lg-msg').textContent = 'Wpisz e-mail i hasło.'; return; } document.getElementById('lg-btn').textContent = 'Sprawdzam…'; api({ akcja: 'logowanie', email: em, haslo: ha }).then(function (r) { SESJA = r.sesja; try { localStorage.setItem('sesja', SESJA); } catch (e) {} ladowanie('Wczytuję Twój plan…'); wczytajSesja(); }).catch(function (e) { ekranLogowania(String(e.message || e), em); }); };
+  ekranKarta('Zaloguj się', '<input id="lg-email" type="email" autocomplete="username" inputmode="email" placeholder="e-mail" value="' + esc(email || '') + '"><input id="lg-haslo" type="password" autocomplete="current-password" placeholder="hasło"><button class="btn" id="lg-btn">Wejdź</button><div class="err" id="lg-msg">' + esc(msg || '') + '</div><p class="mut">Nie masz jeszcze konta? <a class="lnk" onclick="ekranRejestracji()">Załóż konto</a></p>');
+  var go = function () { var em = document.getElementById('lg-email').value.trim(), ha = document.getElementById('lg-haslo').value; if (!em || !ha) { document.getElementById('lg-msg').textContent = 'Wpisz e-mail i hasło.'; return; } document.getElementById('lg-btn').textContent = 'Sprawdzam…'; api({ akcja: 'logowanie', email: em, haslo: ha }).then(function (r) { if (r.rola === 'trener') { TSESJA = r.sesja; try { localStorage.setItem('trener_sesja', TSESJA); } catch (e) {} ladowanie('Wczytuję…'); wczytajTrenera(); return; } SESJA = r.sesja; try { localStorage.setItem('sesja', SESJA); } catch (e) {} ladowanie('Wczytuję Twój plan…'); wczytajSesja(); }).catch(function (e) { ekranLogowania(String(e.message || e), em); }); };
   document.getElementById('lg-btn').onclick = go; document.getElementById('lg-haslo').addEventListener('keydown', function (e) { if (e.key === 'Enter') go(); });
   (document.getElementById(email ? 'lg-haslo' : 'lg-email') || {}).focus && document.getElementById(email ? 'lg-haslo' : 'lg-email').focus();
 }
@@ -1355,10 +1364,10 @@ function wylogujKonto(cicho) {
 }
 (function start() {
   var q = new URLSearchParams(location.search), k = q.get('k');
-  try { HASLO = localStorage.getItem('trener_haslo'); } catch (e) {}
-  if (k) { history.replaceState(null, '', location.pathname + location.hash); if (!HASLO && !SESJA) { ekranLogowania('Linki z PIN-em już nie działają. Zaloguj się kontem albo załóż je poniżej.'); return; } }
-  if (HASLO) { ladowanie('Wczytuję…'); wczytajTrenera(); return; }
+  try { TSESJA = localStorage.getItem('trener_sesja'); localStorage.removeItem('trener_haslo'); } catch (e) {}
+  if (k) { history.replaceState(null, '', location.pathname + location.hash); if (!TSESJA && !SESJA) { ekranLogowania('Linki z PIN-em już nie działają. Zaloguj się kontem albo załóż je poniżej.'); return; } }
+  if (TSESJA) { ladowanie('Wczytuję…'); wczytajTrenera(); return; }
   if (SESJA) { ladowanie('Wczytuję Twój plan…'); wczytajSesja(); return; }
-  if (q.get('klient') != null || q.get('trener') != null) hasloScreen(); else ekranLogowania();
+  ekranLogowania();
 })();
 </script></body></html>
