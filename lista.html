@@ -83,7 +83,7 @@ function pokazHaslo(msg) {
 function wczytaj() {
   if (!TSESJA) return pokazHaslo();
   if (!LISTA.length && !KONTA.length) T.innerHTML = '<div class="mut">Wczytuję podopiecznych…</div>';
-  Promise.all([api({ akcja: 'pulpit' }), api({ akcja: 'konta' }).catch(function () { return []; })]).then(function (r) { LISTA = r[0] || []; KONTA = r[1] || []; document.getElementById('wyloguj').hidden = false; rysuj(); }).catch(function (e) { if (/hasło|dostęp|sesja/i.test(e.message)) { try { localStorage.removeItem('trener_sesja'); } catch (x) {} TSESJA = null; pokazHaslo(e.message); } else { T.innerHTML = '<span class="err">' + esc(e.message) + '</span> <button class="b gh sm" onclick="wczytaj()" style="margin-left:10px">Spróbuj ponownie</button>'; } });
+  Promise.all([api({ akcja: 'pulpit' }), api({ akcja: 'konta' })]).then(function (r) { LISTA = r[0] || []; KONTA = r[1] || []; document.getElementById('wyloguj').hidden = false; rysuj(); }).catch(function (e) { if (/hasło|dostęp|sesja/i.test(e.message)) { try { localStorage.removeItem('trener_sesja'); } catch (x) {} TSESJA = null; pokazHaslo(e.message); } else { T.innerHTML = '<span class="err">' + esc(e.message) + '</span> <button class="b gh sm" onclick="wczytaj()" style="margin-left:10px">Spróbuj ponownie</button>'; } });
 }
 function dni(iso) { if (!iso) return null; var d = new Date(String(iso).slice(0, 10)); if (isNaN(d)) return null; return Math.max(0, Math.floor((Date.now() - d.getTime()) / 86400000)); }
 function dniTxt(n) { return n <= 0 ? 'dziś' : n === 1 ? '1 dzień temu' : n + ' dni temu'; }
