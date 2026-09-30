@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="e765430a9b"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="491fc48395"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg1:#121212;--bg2:#0D0D0D;--bg3:#080808;--card:#161616;--head:#1C1C1C;--dark:#101010;--empty:#141414;--line:#2C2C2C;--iv:#F4F1EA;--ivd:#A7A49C;--gl:#D9A520;--gm:#B8891A;--gd:#7A5A12;--gx:#4E3A0C;--green:#5FBF7A;--red:#E0684A}
@@ -951,6 +951,17 @@ function arkuszNotatki(idA, idB) {
   if (window.visualViewport) { MV.vv = function () { var vv = window.visualViewport; sh.style.bottom = Math.max(0, window.innerHeight - vv.height - vv.offsetTop) + 'px'; sh.style.maxHeight = Math.max(200, vv.height - 40) + 'px'; }; window.visualViewport.addEventListener('resize', MV.vv); MV.vv(); }
   setTimeout(function () { var ta = document.getElementById('mnA'); if (ta) { ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length); } }, 50);
 }
+// patch108: notatka przy ważeniu na telefonie w tym samym panelu co notatka podopiecznego w treningu
+function arkuszNotWaz(id) {
+  var w = D.wazenia.filter(function (x) { return x.id === id; })[0]; if (!w) return;
+  var h = '<h3>Notatka podopiecznego <small>' + esc(fmtData(w.data)) + '</small></h3><textarea id="mnA" placeholder="na czysto? ostatni posiłek? sen? makro?">' + esc(w.notatka || '') + '</textarea>';
+  h += '<div class="row"><div class="b" onclick="zamknijArkusz()">Anuluj</div><div class="b ok" id="mnZapisz">Zapisz</div></div>';
+  var sh = arkusz(h);
+  document.getElementById('mnZapisz').onclick = function () { var el = document.getElementById('mnA'); var v = el ? el.value.trim() : ''; if (v !== String(w.notatka || '')) { w.notatka = v; push({ tab: 'Wazenia', id: w.id, pole: 'notatka', wartosc: v }); } zamknijArkusz(); render(); };
+  // panel trzyma się górnej krawędzi klawiatury
+  if (window.visualViewport) { MV.vv = function () { var vv = window.visualViewport; sh.style.bottom = Math.max(0, window.innerHeight - vv.height - vv.offsetTop) + 'px'; sh.style.maxHeight = Math.max(200, vv.height - 40) + 'px'; }; window.visualViewport.addEventListener('resize', MV.vv); MV.vv(); }
+  setTimeout(function () { var ta = document.getElementById('mnA'); if (ta) { ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length); } }, 50);
+}
 function arkuszLista(t) {
   var kroki = krokiMob(t), cur = idxMob(t), h = '<h3>Ćwiczenia · Trening ' + t + ' <small>dotknij, aby przejść</small></h3>' + legendaMob();
   kroki.forEach(function (st, i) {
@@ -1355,7 +1366,7 @@ function wazeniaTel() {
   rows.forEach(function (w) {
     var d = zmianaWagi(w), zk = d == null ? 'eq' : d < 0 ? 'dn' : d > 0 ? 'up' : 'eq';
     if (WAZ_ED === w.id) {
-      h += '<div class="wz ed" data-id="' + w.id + '"><div class="r1"><input class="c dt" type="date" data-f="data" value="' + esc(w.data) + '"><span class="inp"><input class="c kg" data-f="waga" inputmode="decimal" placeholder="0,0" value="' + esc(fmt(w.waga)) + '"><small>kg</small></span><input class="c kc" data-f="kcal" inputmode="numeric" placeholder="kcal" value="' + esc(w.kcal) + '"></div><div class="r2"><span class="lbl">Notatka</span><input class="c nt" data-f="notatka" placeholder="na czysto? ostatni posiłek? sen? makro?" value="' + esc(w.notatka) + '"></div><div class="r3">' + (TR ? '<span class="usun" onclick="usunWaz(\'' + w.id + '\')">Usuń</span>' : '') + '<span class="ok" onclick="WAZ_ED = null; render()">Gotowe</span></div></div>';
+      h += '<div class="wz ed" data-id="' + w.id + '"><div class="r1"><input class="c dt" type="date" data-f="data" value="' + esc(w.data) + '"><span class="inp"><input class="c kg" data-f="waga" inputmode="decimal" placeholder="0,0" value="' + esc(fmt(w.waga)) + '"><small>kg</small></span><input class="c kc" data-f="kcal" inputmode="numeric" placeholder="kcal" value="' + esc(w.kcal) + '"></div><div class="r2"><span class="lbl">Notatka</span><input class="c nt" readonly tabindex="-1" style="cursor:pointer;text-overflow:ellipsis" onclick="arkuszNotWaz(\'' + w.id + '\')" placeholder="na czysto? ostatni posiłek? sen? makro?" value="' + esc(w.notatka) + '"></div><div class="r3">' + (TR ? '<span class="usun" onclick="usunWaz(\'' + w.id + '\')">Usuń</span>' : '') + '<span class="ok" onclick="WAZ_ED = null; render()">Gotowe</span></div></div>';
     } else {
       h += '<div class="wz" onclick="wazEdytuj(\'' + w.id + '\')"><span class="d">' + fmtData(w.data) + (w.notatka ? '<i class="ni">✎</i>' : '') + '</span><span class="kg">' + (w.waga !== '' && w.waga != null ? fmt(w.waga) : '–') + '<small>kg</small></span><span class="z ' + zk + '">' + zmianaTxt(d) + '</span><span class="kc">' + (w.kcal !== '' && w.kcal != null ? '<b>' + esc(w.kcal) + '</b> kcal' : '') + '</span></div>';
     }
