@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="491fc48395"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="2334148c9d"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg1:#121212;--bg2:#0D0D0D;--bg3:#080808;--card:#161616;--head:#1C1C1C;--dark:#101010;--empty:#141414;--line:#2C2C2C;--iv:#F4F1EA;--ivd:#A7A49C;--gl:#D9A520;--gm:#B8891A;--gd:#7A5A12;--gx:#4E3A0C;--green:#5FBF7A;--red:#E0684A}
@@ -365,6 +365,63 @@ table.tpl th{vertical-align:bottom}table.tpl th .inf{display:block;margin:4px au
 .tile.kf2 small.kfr textarea{display:block;width:100%;box-sizing:border-box;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:5px 9px;margin:0;font:600 12px Poppins,Arial,sans-serif;color:#F4F1EA;min-height:28px;line-height:16px;resize:none;overflow:hidden}
 .tile.kf2 small.kfr textarea:focus{outline:0;border-color:#C9A455}
 .tile.kf2.GREY small.kfr textarea{color:#8A8272}
+/* patch110: dostęp na dni (pasek ostatnich 3 dni, ekran końca dostępu; makieta mock_dostep.html) */
+.dpas{margin:16px 28px 0;max-width:560px;border:1.5px solid #C9A455;background:#15120A;border-radius:12px;padding:10px 14px;font-size:13px;font-weight:600;color:var(--iv);display:flex;align-items:center;gap:10px;line-height:1.4}
+.dpas small{display:block;color:var(--ivd);font-weight:400;font-size:12px}
+body.tel .dpas,body.karty .dpas{margin:14px 14px 0;max-width:none}
+.dkon{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:34px;box-sizing:border-box}
+.dk-in{max-width:440px;text-align:center;display:flex;flex-direction:column;align-items:center}
+.dk-ik{width:64px;height:64px;border-radius:50%;border:2px solid #C9A455;display:flex;align-items:center;justify-content:center;margin-bottom:22px}
+.dkon h1{display:block;margin:0 0 10px;font-size:21px;font-weight:700;color:var(--iv);white-space:normal}
+.dkon p{margin:0;color:var(--ivd);font-size:14px;line-height:1.55}
+.dk-wyl{position:absolute;top:16px;right:18px;font-size:13px;color:var(--ivd);text-decoration:underline;cursor:pointer}
+body:not(.tel) .dkon h1{font-size:28px}body:not(.tel) .dkon p{font-size:16px}body:not(.tel) .dk-ik{width:76px;height:76px}
+/* patch111: dni ważenia (Ustawienia dni_wazenia) */
+.card h2 .dniw{margin-left:auto;display:inline-flex;align-items:center;gap:10px;background:linear-gradient(180deg,var(--bg1),var(--bg3));border:1px solid #8E6B2E;border-radius:6px;padding:4px 4px 4px 12px;box-shadow:0 2px 6px rgba(0,0,0,.45)}
+.dniw label,.wdni label{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(244,241,234,.72);font-weight:700;white-space:nowrap}
+.dniw input{width:300px;height:30px;background:#0B0B0B;border:1px solid #8E6B2E;border-radius:5px;color:#F4F1EA;font:600 13px Poppins,Arial,sans-serif;padding:0 10px}
+.dniw input:focus,.wdni input:focus{outline:0;border-color:#C9A455}.dniw input::placeholder,.wdni input::placeholder{color:#6F6A60;font-weight:500}
+.card h2 .dniwt{margin-left:auto;background:linear-gradient(180deg,var(--bg1),var(--bg3));border:1px solid #8E6B2E;border-radius:6px;padding:6px 14px;font-size:13px;font-weight:600;color:#F4F1EA;box-shadow:0 2px 6px rgba(0,0,0,.45)}
+.wdni{margin:12px 14px 0;font-size:13px;font-weight:600;color:#F4F1EA;line-height:1.4}
+.wdni.ed{display:flex;flex-direction:column;gap:6px}
+.wdni.ed input{height:42px;background:#0F0F0F;border:1px solid #8E6B2E;border-radius:10px;color:#F4F1EA;font:600 14px Poppins,Arial,sans-serif;padding:0 12px;width:100%;box-sizing:border-box}
+/* patch112: kalkulator kalorii (makieta mock_kalkulator.html) i makro w ważeniach */
+.kalk{max-width:420px;margin:0 auto;color:#F4F1EA}
+body:not(.tel) .kalk{margin:8px auto 40px;border:1.5px solid #2C2C2C;border-radius:26px;background:#0E0E0E;padding:20px 18px 24px}
+body.tel .kalk{padding:16px 16px 30px}
+.kalk .kk-nag{display:flex;align-items:center;gap:10px;margin-bottom:16px}.kalk .kk-nag b{font-size:18px;font-weight:700}.kalk .kk-wr{color:#A7A49C;font-size:22px;font-weight:600;cursor:pointer;padding:0 6px 2px 2px;line-height:1;user-select:none}
+.kalk .kk-lb{font-size:10px;letter-spacing:1.6px;text-transform:uppercase;color:#A7A49C;font-weight:700;margin:16px 0 8px}
+.kalk .kk-seg{display:grid;gap:8px}.kalk .kk-seg.s2{grid-template-columns:1fr 1fr}.kalk .kk-seg.s3{grid-template-columns:1fr 1fr 1fr}
+.kalk .kk-sg{height:44px;border-radius:12px;border:1.5px solid #2A2A2A;background:#141414;color:#A7A49C;font-weight:700;font-size:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.15;cursor:pointer;user-select:none}
+.kalk .kk-sg small{font-weight:500;font-size:10px;opacity:.8}
+.kalk .kk-sg.on,.kalk .kk-ak.on{background:linear-gradient(180deg,#2E3F66,#1E2A47);border-color:#3B4F80;color:#F4F1EA}
+.kalk .kk-p3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.kalk .kk-pl{background:#141414;border:1.5px solid #2A2A2A;border-radius:12px;height:50px;display:flex;align-items:center;gap:4px;padding:0 12px;cursor:text;margin:0}
+.kalk .kk-pl:focus-within{border-color:#C9A455}
+.kalk .kk-pl input{flex:1;min-width:0;width:100%;background:transparent;border:0;outline:0;color:#F4F1EA;font:800 17px Poppins,Arial,sans-serif;padding:0}
+.kalk .kk-pl input::placeholder{color:#4A4A4A}
+.kalk .kk-pl i{font-style:normal;font-weight:600;font-size:11px;color:#A7A49C}
+.kalk .kk-akt{display:grid;gap:6px}
+.kalk .kk-ak{border:1.5px solid #2A2A2A;background:#141414;border-radius:12px;padding:9px 12px;cursor:pointer;user-select:none}
+.kalk .kk-ak b{display:block;font-size:13px}.kalk .kk-ak span{font-size:11px;color:#A7A49C}.kalk .kk-ak.on span{color:#C9CFDD}
+.kalk .kk-wyn{margin-top:18px;border:1.5px solid #8E6B2E;border-radius:18px;background:linear-gradient(180deg,#17140C,#111);padding:16px;text-align:center}
+.kalk .kk-wyn.pusty{font-size:13px;color:#A7A49C;line-height:1.5;padding:18px 16px}
+.kalk .kk-cel{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#C9A455;font-weight:700}
+.kalk .kk-kc{font-size:46px;font-weight:800;line-height:1.05;margin:4px 0 2px}.kalk .kk-kc i{font-style:normal;font-size:16px;color:#A7A49C;font-weight:600;margin-left:4px}
+.kalk .kk-mt{margin-top:14px;text-align:left}
+.kalk .kk-mr{display:grid;grid-template-columns:1fr 74px 16px 62px 16px;align-items:center;gap:6px;margin-top:8px}
+.kalk .kk-mr > span{font-weight:600;font-size:14px}.kalk .kk-mr i{font-style:normal;color:#A7A49C;font-size:13px}
+.kalk .kk-f{height:40px;width:100%;min-width:0;box-sizing:border-box;border-radius:10px;background:linear-gradient(180deg,#2E3F66,#1E2A47);border:1px solid #3B4F80;box-shadow:0 0 0 1.5px #C9A455 inset;text-align:right;padding:0 10px;color:#F4F1EA;font:700 16px Poppins,Arial,sans-serif;outline:0}
+.kalk .kk-f:focus{box-shadow:0 0 0 2px #E6CB80 inset}
+.kalk .kk-raz{margin-top:12px;border:1.5px solid #2C2C2C;border-radius:14px;padding:12px 14px;text-align:center}
+.kalk .kk-raz .rr{display:flex;align-items:center;justify-content:flex-end;gap:12px;font-weight:600;font-size:15px}
+.kalk .kk-raz .rr b{min-width:84px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;background:linear-gradient(180deg,#2E3F66,#1E2A47);border:1px solid #3B4F80}
+.kalk .kk-raz.zle .rr b{background:linear-gradient(180deg,#8E3140,#6E2231);border-color:#A63A4C}
+.kalk .kk-raz small{display:block;margin-top:10px;font-size:11px;color:#A7A49C;text-align:right}
+.kalk .kk-btn{margin-top:14px;width:100%;height:50px;border-radius:12px;border:1.5px solid #F5E3A6;background:linear-gradient(180deg,#E6CB80,#C9A455 55%,#8E6B2E);color:#0E0E12;font:800 15px Poppins,Arial,sans-serif;cursor:pointer}
+.kalk .kk-btn:disabled{opacity:.4;cursor:default}
+.wt th.wbt,.wt td.wbt{width:58px}.wt td.wbt input.c{text-align:center}
+.wz.ed .r4{display:flex;align-items:center;gap:10px;margin-top:10px}.wz.ed .r4 .mk3{flex:1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.wz.ed .r4 label{display:flex;align-items:center;gap:6px;margin:0}.wz.ed .r4 label i{font-style:normal;font-size:12px;font-weight:700;color:#E6CB80}.wz.ed .r4 input.c{text-align:center;font-weight:600;min-width:0}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
 .pinbox.lg{max-width:1060px;margin:0 auto;padding:24px 16px;min-height:100vh;display:flex;align-items:center;box-sizing:border-box}.pinbox.lg .card{width:100%;box-sizing:border-box;padding:60px;border-radius:14px}.pinbox.lg .sub{font-size:24px}.pinbox.lg h1{margin:8px 0 26px;font-size:56px}.pinbox.lg input{height:96px;font-size:32px}.pinbox.lg .btn{height:96px;font-size:34px}.pinbox.lg .mut{font-size:24px}
 body.lgmob .pinbox.lg{padding:16px;min-height:100vh}body.lgmob .pinbox.lg .card{padding:26px 20px;border-radius:14px}body.lgmob .pinbox.lg .sub{font-size:12px}body.lgmob .pinbox.lg h1{font-size:30px;margin:6px 0 18px}body.lgmob .pinbox.lg input{height:54px;font-size:17px;padding:0 14px;margin-bottom:10px;border-radius:10px}body.lgmob .pinbox.lg .btn{height:56px;font-size:18px;border-radius:10px;margin-top:4px}body.lgmob .pinbox.lg .err{font-size:15px;min-height:20px;margin-top:10px}body.lgmob .pinbox.lg .mut{font-size:15px;margin:14px 0 0;line-height:1.5}
@@ -381,8 +438,9 @@ body.prosty .pinbox.lg input{letter-spacing:0!important;height:52px!important;fo
 <div id="app"></div>
 <div id="tipbox" class="tip hidden"><span class="x" onclick="hideTip()">✕</span><div id="tipc"></div></div>
 <div id="status" class="status hidden"></div>
-<script>var API_URL = "https://script.google.com/macros/s/AKfycbz48qRxFlyvGcVBSltMbjR8kfuQNCbq-8a5g2gYG7oJgtWiU2ZJ-HLEyux6WGc_Xesq1Q/exec";</script>
+<script>var API_URL = "https://hnyfncbytkbufobyxeoh.supabase.co/functions/v1/api";</script>
 <script>
+// patch109: raporty usunięte z frontu (FUNKCJE.md D)
 var D = {}, TR = false, AUTH = null, TSESJA = null, URL_STRONY = location.pathname;
 var BRAK_SIECI = 'Brak połączenia z serwerem. Sprawdź internet i spróbuj ponownie.';
 function api(b, opts) {
@@ -410,8 +468,7 @@ var TIPS = {
  tempo: 'Tempo, np. x211: x: skrócenie mięśnia jak najszybciej, przy poprawnej technice; 2: opuszczanie przez 2 sekundy; 1: pauza 1 sekunda w maksymalnym skróceniu; 1: pauza 1 sekunda w maksymalnym rozciągnięciu.',
  wideo: 'Kliknij ikonkę, żeby otworzyć film z techniką. Szara ikonka = brak filmu.',
  nota: 'Twoje miejsce na notatki. Wpisz ustawienia sprzętu, na przykład wysokość wyciągu 25, to, co czujesz, albo to, co nie działa. Czytam to co tydzień.',
- tyg: 'Po ostatnim treningu w tygodniu wyślij mi raport. Wtedy kratka tygodnia w bloku odhaczy się sama. Dzięki temu wiem, w którym tygodniu bloku jesteś, i mogę dobrze zaplanować Twój progres.',
- raport: 'Raport tygodniowy piszesz tu, po ostatnim treningu w tygodniu. Możesz dołączyć zdjęcia, na przykład sylwetki, albo krótki film z techniką. Raport zostaje w Twojej historii.',
+ tyg: 'Po ostatnim treningu w tygodniu wyślij mi raport mailem. Kratkę tygodnia w bloku odhaczam po jego przeczytaniu. Dzięki temu wiem, w którym tygodniu bloku jesteś, i mogę dobrze zaplanować Twój progres.',
  plan: 'Tryb planowania: najpierw zaznacz kratką „w tr.”, które partie robisz w danym treningu, potem wpisz serie: Rozc. = ćwiczenia w rozciągnięciu, Skr. = w skróceniu. Kolumna „Rozpisane” porównuje sumę z planem z kafelków. Wycinek dla jednego treningu widzisz pod tabelą ćwiczeń, w części „Partie treningu”.',
  hist: 'Każdy zamknięty blok zostaje w archiwum: ćwiczenia z ciężarem na start i koniec, wykonane powtórzenia z ostatniego tygodnia, plan partii i waga. Dzięki temu widzisz progres z bloku na blok i możesz wrócić do tego, co działało.',
  strzalki: 'Między polami poruszasz się strzałkami: w kafelkach prawo/lewo/góra/dół między partiami, w tabelach po wierszu i kolumnie. Enter = następne pole. Wpisz liczbę i od razu strzałka w prawo.',
@@ -431,14 +488,13 @@ function INSTR() { var tyd = n((D.ustawienia || {}).zaliczone) + 1, mail = D.rap
  ['RiR i tempo', jkSek('RiR', '<p class="jkp">RiR mówi, ile powtórzeń zostawiasz w zapasie.</p><p class="jkp">RiR 0 to seria do upadku mięśniowego: nie zrobisz kolejnego powtórzenia z braku siły.</p><p class="jkp">Na przykład RiR 2 oznacza, że zostały Ci 2 powtórzenia do upadku mięśniowego.</p>')
   + jkSek('Tempo, np. x211', [['x', 'skrócenie mięśnia jak najszybciej, przy poprawnej technice'], ['2', 'opuszczanie przez 2 sekundy'], ['1', 'pauza 1 sekunda w maksymalnym skróceniu'], ['1', 'pauza 1 sekunda w maksymalnym rozciągnięciu']].map(function (x) { return '<div class="jkr"><b>' + x[0] + '</b><span>' + x[1] + '</span></div>'; }).join(''))],
  ['Rozgrzewka', 'Zrób rozgrzewkę przed każdym treningiem, według filmu poniżej. Ten sam film otworzysz przyciskiem „Rozgrzewka” w nagłówku każdego treningu.\n<a class="pbtn rz" style="margin:8px 0 0" target="_blank" href="' + (D.rozgrzewka || '#') + '"><span class="ico">' + playIkona(20) + '</span>Film z rozgrzewką</a>'],
- ['Na koniec tygodnia', '<p class="jkp"><b>Po ostatnim treningu w tygodniu wyślij mi raport.</b> Wtedy kratka tygodnia w bloku odhaczy się sama. Dzięki temu wiem, w którym tygodniu bloku jesteś, i mogę dobrze zaplanować Twój progres.</p>'
+ ['Na koniec tygodnia', '<p class="jkp"><b>Po ostatnim treningu w tygodniu wyślij mi raport mailem' + (mail ? ' na adres ' + esc(mail) : '') + '.</b> Kratkę tygodnia w bloku odhaczam po jego przeczytaniu. Dzięki temu wiem, w którym tygodniu bloku jesteś, i mogę dobrze zaplanować Twój progres.</p>'
   + jkSek('Co napisać', '<ul><li>jak się czujesz po tym tygodniu,</li><li>czy pojawiły się problemy na treningach,</li><li>czy zostawiasz mi coś w notatce przy ćwiczeniu,</li><li>co chcesz ze mną przegadać, treningowo albo zdrowotnie,</li><li>czy waga jest wpisana w „Ważenia i kalorie”,</li><li>wszystko, co jeszcze przyjdzie Ci do głowy.</li></ul>')
-  + jkSek('Gdzie', '<p class="jkp">W menu ≡, w sekcji Raporty. Możesz dołączyć zdjęcia albo krótki film. Jeśli coś nie działa, wyślij raport mailem na <b>' + mail + '</b>, w temacie wpisz numer tygodnia.</p><a class="pbtn rz" style="display:inline-block;margin:0 0 4px" href="mailto:' + mail + '?subject=' + encodeURIComponent('Raport – tydzień ' + tyd + (D.klient && D.klient.imie ? ' – ' + D.klient.imie : '')) + '">✉ &nbsp;Wyślij raport mailem</a>')
+  + jkSek('Gdzie', '<p class="jkp">Mailem' + (mail ? ' na adres <b>' + esc(mail) + '</b>' : '') + '. W temacie wpisz numer tygodnia. Możesz dołączyć zdjęcia albo krótki film.</p>' + (mail ? '<a class="pbtn rz" style="display:inline-block;margin:0 0 4px" href="mailto:' + esc(mail) + '?subject=' + encodeURIComponent('Raport – tydzień ' + tyd + (D.klient && D.klient.imie ? ' – ' + D.klient.imie : '')) + '">✉ &nbsp;Wyślij raport mailem</a>' : ''))
   + jkSek('Do kiedy', '<p class="jkp">Najlepiej od razu po ostatnim treningu, najpóźniej w piątek do 23:59. Odpisuję do niedzieli 23:59.</p>')
-  + jkSek('Pilne sprawy', '<p class="jkp">Pisz na Instagramie albo Messengerze, odpowiadam do 24&nbsp;h. Nie bój się pytać, od tego jestem.</p><span class="warn">Raport jest warunkiem dalszych wskazówek treningowych.</span>')]
+  + jkSek('Pilne sprawy', '<p class="jkp">Napisz do mnie, odpowiadam do 24&nbsp;h. Nie bój się pytać, od tego jestem.</p><span class="warn">Raport jest warunkiem dalszych wskazówek treningowych.</span>')]
 ]; }
-var open = { t: {}, waz: false, zal: false, obj: TR, ins: {} , part: {}, plan: TR, hist: false, hb: {}, rap: false, rapEd: {} };
-var RF = { pliki: [], wysylam: false, tresc: '', tydzien: null }; // formularz raportu (trzyma stan między renderami)
+var open = { t: {}, waz: false, zal: false, obj: TR, ins: {} , part: {}, plan: TR, hist: false, hb: {} };
 var SEL = {}, SHOW_TYP = false;
 // tryb: 'prosty' (karty, telefon) albo 'pelny' (tabele); zapamiętany w localStorage, domyślnie po szerokości ekranu
 var TRYB = 'pelny'; // tryb Prosty (karty) wycofany 26.09: tabela jest jedynym widokiem
@@ -468,7 +524,7 @@ function menuNaglowek() {
   var w = ostWaga(); var last = w.length ? n(w[w.length - 1].waga) : null, prev = w.length > 1 ? n(w[w.length - 2].waga) : null, d = last != null && prev != null ? last - prev : null;
   var h = '<div class="mhd"><div class="celk"><div class="cel">Cel</div><div class="celv' + (U('cel') ? '' : ' pusty') + '">' + (U('cel') ? esc(U('cel')) : (TR ? 'wpisz cel bloku w nagłówku' : 'Kuba jeszcze nie wpisał celu')) + '</div></div>';
   h += '<div class="blok"><span class="lb">Blok <b>' + blok + '</b> tyg. · zaliczone <b>' + zal + '</b></span><span class="wks">';
-  for (var i = 0; i < blok; i++) h += '<i class="wk' + (i < zal ? ' on' : '') + (TR ? '' : ' ro') + '" onclick="' + (TR ? 'klikTydzien(' + i + ')' : 'status(\'Tydzień odhacza się po wysłaniu raportu.\', true)') + '">' + (i < zal ? '✓' : '') + '</i>';
+  for (var i = 0; i < blok; i++) h += '<i class="wk' + (i < zal ? ' on' : '') + (TR ? '' : ' ro') + '" onclick="' + (TR ? 'klikTydzien(' + i + ')' : 'status(\'Tydzień odhacza Kuba po przeczytaniu raportu.\', true)') + '">' + (i < zal ? '✓' : '') + '</i>';
   h += '</span></div><div class="k3"><div><b>' + serieT + '</b><span>Serie / tydzień</span></div><div><b>' + (U('kcal') !== '' ? esc(U('kcal')) : '–') + '</b><span>Aktualne kcal</span>' + (makroTxt() ? '<small class="mk">' + makroTxt() + '</small>' : '') + '</div>';
   h += '<div><b>' + (last != null ? fmt(last) : '–') + (d != null && d !== 0 ? '<small style="color:' + (d < 0 ? '#5FBF7A' : '#E0684A') + '">' + (d < 0 ? '▼' : '▲') + fmt(Math.round(Math.abs(d) * 10) / 10) + '</small>' : '') + '</b><span>Aktualna waga</span></div></div></div>';
   return h;
@@ -481,8 +537,7 @@ function rysujMenu() {
   for (var t = 1; t <= akt; t++) h += '<span class="mi' + (WIDOK === 'treningi' && mobT === t ? ' on' : '') + '" onclick="idz(\'t\',' + t + ')">Trening ' + t + '<small>' + cw(t).length + ' ćwiczeń · ' + serie(t) + ' serii</small></span>';
 
   if (TR) h += '<div class="mgr">Trener</div><span class="mi' + mAkt('plan') + '" onclick="idz(\'plan\')">Tryb planowania<small>objętość, partie × treningi</small></span><span class="mi' + mAkt('atlas') + '" onclick="idz(\'atlas\')">Atlas ćwiczeń<small>' + ((D.atlas || []).filter(function (a) { return a.nazwa; }).length || 'pusty') + ' ćwiczeń</small></span><span class="mi' + mAkt('hist') + '" onclick="idz(\'hist\')">Historia bloków</span>';
-  h += '<div class="mgr">Raporty</div><span class="mi' + mAkt('rap') + '" onclick="idz(\'rap\')">Raporty tygodniowe<small>' + (!TR && raportCzeka() ? '<span class="czeka">raport za tydzień ' + (n(U('zaliczone')) + 1) + ' czeka</span>' : ((D.raporty || []).length ? (D.raporty || []).length + ' wysłanych' : 'napisz pierwszy')) + '</small></span>';
-  h += '<div class="mgr">Ciało i dieta</div><span class="mi' + mAkt('waz') + '" onclick="idz(\'waz\')">Ważenia i kalorie' + (ostWaga().length ? '<small>ostatnie ' + fmt(ostWaga().slice(-1)[0].waga) + ' kg</small>' : '') + '</span><span class="mi' + mAkt('zal') + '" onclick="idz(\'zal\')">Zalecenia i suplementy</span>';
+  h += '<div class="mgr">Ciało i dieta</div><span class="mi' + mAkt('waz') + '" onclick="idz(\'waz\')">Ważenia i kalorie' + (ostWaga().length ? '<small>ostatnie ' + fmt(ostWaga().slice(-1)[0].waga) + ' kg</small>' : '') + '</span><span class="mi' + mAkt('kalk') + '" onclick="idz(\'kalk\')">Kalkulator kalorii</span><span class="mi' + mAkt('zal') + '" onclick="idz(\'zal\')">Zalecenia i suplementy</span>';
   h += '<div class="mgr jk" onclick="togJK(this)">Jak korzystać<span class="jkz"><svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M6 9 L12 15 L18 9" fill="none" stroke="#E6CB80" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>' + (pwaStandalone() ? '' : '<span class="mi' + mAkt('pwa') + '" onclick="idz(\'pwa\')">Dodaj aplikację do ekranu telefonu<small>skrót z ikoną, otwiera się jak aplikacja</small></span>') + INSTR().map(function (x, i) { return '<span class="mi jki' + mAkt('ins' + i) + '" onclick="idz(\'ins\',' + i + ')">' + esc(x[0]) + '</span>'; }).join('');
   if (AUTH && AUTH.sesja) h += '<div class="mgr">Konto</div><span class="mi" onclick="wylogujKonto()">Wyloguj<small>' + esc(D.konto ? D.konto.email : '') + '</small></span>';
   else if (TR && TSESJA) h += '<div class="mgr">Konto</div><span class="mi" onclick="wylogujTrenera()">Wyloguj<small>konto trenera</small></span>';
@@ -494,7 +549,7 @@ function idz(k, i) {
   if (k === 't') { ustawWidok('treningi'); mobT = i; try { localStorage.setItem('mobT', mobT); } catch (e) {} }
   else if (k === 'plan') { ustawWidok('plan'); open.plan = true; }
   else if (k === 'ins') ustawWidok('ins' + i);
-  else ustawWidok(k);
+  else { if (k === 'kalk') { KALK = kalkNowy(); KALK.z = true; } ustawWidok(k); }
   render();
   if (!id) { window.scrollTo(0, 0); return; }
   var el = null; document.querySelectorAll('[id="' + id + '"]').forEach(function (e) { if (!el && (e.offsetParent !== null || e.getClientRects().length)) el = e; });
@@ -527,7 +582,7 @@ function widokPwa() {
   return h + '</div></div>';
 }
 // ---------- widoki (menu ≡ przełącza ekrany, adres w #hash) ----------
-var WIDOKI = ['treningi', 'plan', 'atlas', 'hist', 'rap', 'waz', 'zal', 'pwa', 'ins0', 'ins1', 'ins2', 'ins3', 'ins4'];
+var WIDOKI = ['treningi', 'plan', 'atlas', 'hist', 'waz', 'kalk', 'zal', 'pwa', 'ins0', 'ins1', 'ins2', 'ins3', 'ins4'];
 function widokZHash() { var h = (location.hash || '').replace('#', ''); return WIDOKI.indexOf(h) >= 0 ? h : 'treningi'; }
 var WIDOK = widokZHash();
 function ustawWidok(w) { if (WIDOKI.indexOf(w) < 0) w = 'treningi'; WIDOK = w; try { if (location.hash !== '#' + w && !(w === 'treningi' && !location.hash)) location.hash = w; } catch (e) {} }
@@ -562,7 +617,13 @@ function przywrocSzkic() {
   if (!v || !Array.isArray(v.zmiany) || !v.zmiany.length) return;
   if (v.blok !== szkicBlok()) { status('Zachowano niezapisane zmiany z innego bloku. Nie przywracam ich do bieżącego planu.', false, true); return; }
   if (!confirm('W tej karcie są niezapisane zmiany tego podopiecznego. Przywrócić je i ponowić zapis?')) return;
-  queue = v.zmiany; USUN_PO = v.usun || {}; ZAPIS_REV++;
+  queue = scalKolejke(v.zmiany); USUN_PO = v.usun || {}; ZAPIS_REV++;
+  nalozKolejke();
+  render(); zachowajSzkic(); clearTimeout(timer); timer = setTimeout(flush, 100);
+}
+// patch115: zmiany z kolejki nałożone na świeżo wczytane dane (szkic z sessionStorage albo kolejka, która czekała
+// na ekranie końca dostępu), żeby plan pokazywał je przed zapisem
+function nalozKolejke() {
   var map = { Cwiczenia: 'cwiczenia', Partie: 'partie', Wazenia: 'wazenia', Zalecenia: 'zalecenia', Suplementy: 'suplementy' };
   queue.forEach(function (z) {
     if (z.tab === 'Ustawienia') { D.ustawienia[z.klucz] = z.wartosc; return; }
@@ -573,7 +634,6 @@ function przywrocSzkic() {
     else if (o) o[z.pole] = z.wartosc;
   });
   Object.keys(map).forEach(function (tab) { var key = map[tab]; D[key] = (D[key] || []).filter(function (o) { return !USUN_PO[o.id]; }); });
-  render(); zachowajSzkic(); clearTimeout(timer); timer = setTimeout(flush, 100);
 }
 function czekajNaZapis() {
   clearTimeout(timer);
@@ -581,8 +641,16 @@ function czekajNaZapis() {
   return flush().then(function (ok) { if (!ok) throw new Error('Najpierw trzeba zapisać zmiany. Pozostały w tej karcie.'); return czekajNaZapis(); });
 }
 function nowyTmp() { return 'tmp' + (window.crypto && window.crypto.randomUUID ? window.crypto.randomUUID() : Date.now() + '-' + Math.random().toString(36).slice(2)); }
+// Kolejne zmiany tego samego pola (klawisz po klawiszu) bez niczego pomiędzy: w kolejce zostaje ostatnia. Bez tego
+// kolejka offline rosła o całą wartość pola przy każdym klawiszu (długa notatka to dziesiątki MB, ponad limit żądania).
+function tenSamZapis(a, b) {
+  if (!a || !b || a.usun || b.usun || a.id === 'nowe' || b.id === 'nowe' || a.tab !== b.tab) return false;
+  return a.tab === 'Ustawienia' ? a.klucz === b.klucz : (a.pole != null && a.id === b.id && a.pole === b.pole);
+}
+function scalKolejke(q) { var o = []; q.forEach(function (z) { if (tenSamZapis(o[o.length - 1], z)) o[o.length - 1] = z; else o.push(z); }); return o; }
 function push(z, el) {
-  queue.push(z); ZAPIS_REV++; status('oczekuję na zapis…'); zachowajSzkic(); if (el) { el.classList.add('saving'); markDot(el, 'wait'); }
+  if (tenSamZapis(queue[queue.length - 1], z)) queue[queue.length - 1] = z; else queue.push(z);
+  ZAPIS_REV++; status('oczekuję na zapis…'); zachowajSzkic(); if (el) { el.classList.add('saving'); markDot(el, 'wait'); }
   clearTimeout(timer); timer = setTimeout(flush, 700);
 }
 function zapiszPaczke(batch) { return api({ akcja: 'zapisz', bazaId: D.bazaId, zmiany: batch, auth: AUTH, blok: szkicBlok() }, { keepalive: true }); }
@@ -611,6 +679,7 @@ function flush(sila) {
       });
       document.querySelectorAll('[data-id]').forEach(function (el) { if (el.dataset.id === r.tmp) el.dataset.id = r.id; });
       queue.forEach(function (z) { if (z.id === r.tmp) z.id = r.id; });
+      if (typeof WAZ_ED !== 'undefined' && WAZ_ED === r.tmp) WAZ_ED = r.id; // patch114: rozwinięte nowe ważenie zostaje otwarte po zapisie
       if (USUN_PO[r.tmp]) { delete USUN_PO[r.tmp]; queue.push({ tab: batch.filter(function (z) { return z.tmp === r.tmp; }).map(function (z) { return z.tab; })[0] || 'Cwiczenia', id: r.id, usun: true }); }
     });
     cells.forEach(function (c) { c.classList.remove('saving'); markDot(c, 'ok'); }); status(queue.length ? 'zapisuję…' : 'zapisano', !queue.length);
@@ -619,9 +688,10 @@ function flush(sila) {
     if (queue.length) { clearTimeout(timer); timer = setTimeout(flush, 100); }
     return true;
   }).catch(function (e) {
-    pending--; PACZKA = []; queue = batch.concat(queue); retryN++; zachowajSzkic();
+    pending--; PACZKA = []; queue = scalKolejke(batch.concat(queue)); retryN++; zachowajSzkic();
     var op = [3000, 6000, 15000, 30000][Math.min(retryN - 1, 3)];
     cells.forEach(function (c) { markDot(c, 'err'); });
+    if (!TR && /Dostęp się skończył/.test(String(e && e.message || e))) { clearTimeout(timer); status('Dostęp się skończył. Napisz do Kuby.', false, true); D.dostepKoniec = true; render(); return false; }
     status('nie zapisano (' + String(e.message || e).replace(/^Error:\s*/, '') + '). Próbuję ponownie za ' + Math.round(op / 1000) + ' s…', false, true);
     clearTimeout(timer); timer = setTimeout(flush, op);
     return false;
@@ -795,7 +865,6 @@ function widokMobilny(t) {
   var progH = '<div class="mprog" id="mprog"><span>' + (st.b ? 'Ćwiczenia <b>' + st.nr[0] + ' i ' + st.nr[1] + '</b>' : 'Ćwiczenie <b>' + st.nr[0] + '</b>') + ' / ' + cw(t).length + '</span><div class="psb"><i style="width:' + (p.s ? Math.round(p.k / p.s * 100) : 0) + '%"></i></div></div>';
   h += '<div id="mswipe">' + kartaMob(st, t) + '</div>';
   if (hintMob()) h += '<div class="mhint" id="mhint">Przesuń palcem w bok, żeby przejść do następnego ćwiczenia</div>';
-  if (!TR && t === ostatniTrening() && i === kroki.length - 1 && krokZrobiony(st) && raportCzeka()) h += '<div class="mrap"><span><b>Ostatni trening tygodnia za Tobą?</b><br>Wyślij raport, kratka tygodnia odhaczy się sama.</span><span class="go" onclick="RAP_FORM = true; idz(\'rap\')">Raport</span></div>';
   h += '<div class="mnav">' + legendaMob() + progH + '<div class="b lst" onclick="arkuszLista(' + t + ')">Ćwiczenia<span class="up">▴</span></div><div class="b' + (i === 0 ? ' dis' : '') + '" onclick="idzMob(' + t + ',' + (i - 1) + ')"><span class="ar">‹</span>Poprzednie</div><div class="b next' + (i >= kroki.length - 1 ? ' dis' : '') + '" onclick="idzMob(' + t + ',' + (i + 1) + ')">Następne<span class="ar">›</span></div></div>';
   return h + '</div>';
 }
@@ -840,14 +909,14 @@ function lbUsun() { var el = document.getElementById('lbox'); if (!el) return; e
 (function () {
   var m = document.querySelector('meta[name="wersja"]'); if (!m || !/^https?:$/.test(location.protocol) || !window.fetch) return;
   var moja = m.getAttribute('content'), ost = 0, start = Date.now();
-  var bezpiecznie = function () { try { return !queue.length && !pending && !BLOK_ZAMYKANY && !(MV.tm && MV.tm.koniec > Date.now()) && !MV.arkusz && !NAK.length && !MENU && !(RF.tresc || RF.pliki.length || RF.wysylam) && !(document.activeElement && /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName) && document.activeElement.value); } catch (e) { return false; } };
+  var bezpiecznie = function () { try { return !queue.length && !pending && !BLOK_ZAMYKANY && !(MV.tm && MV.tm.koniec > Date.now()) && !MV.arkusz && !NAK.length && !MENU && !(document.activeElement && /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName) && document.activeElement.value); } catch (e) { return false; } };
   var sprawdz = function () {
     var t = Date.now(); if (t - ost < 60000) return; ost = t;
     fetch(location.pathname + '?nv=' + t, { cache: 'no-store' }).then(function (r) { return r.ok ? r.text() : ''; }).then(function (tx) {
       var w = (String(tx).match(/<meta name="wersja" content="([^"]+)"/) || [])[1]; if (!w || w === moja) return;
       if (!bezpiecznie()) { ost = 0; if (Date.now() - start < 30000) setTimeout(sprawdz, 3000); return; }
       var k = 'wersja-' + w; try { if (sessionStorage.getItem(k)) return; sessionStorage.setItem(k, '1'); } catch (e) {}
-      location.replace(location.pathname + '?v=' + w + location.hash);
+      var qs = new URLSearchParams(location.search); qs.delete('nv'); qs.set('v', w); location.replace(location.pathname + '?' + qs.toString() + location.hash); // patch114: bez gubienia ?klient=
     }).catch(function () {});
   };
   setTimeout(sprawdz, 1500);
@@ -976,8 +1045,27 @@ function arkuszLista(t) {
   arkusz(h);
 }
 
+// patch110: dostęp na określoną liczbę dni (FUNKCJE.md A). „Dziś” jak na serwerze: data w Europe/Warsaw.
+function dzisWarszawa() { try { return new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Warsaw' }).format(new Date()); } catch (e) { var d = new Date(); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); } }
+function dniDo(iso) { var a = String(iso || '').match(/^(\d{4})-(\d{2})-(\d{2})/), b = dzisWarszawa().match(/^(\d{4})-(\d{2})-(\d{2})/); if (!a || !b) return null; return Math.round((Date.UTC(+a[1], a[2] - 1, +a[3]) - Date.UTC(+b[1], b[2] - 1, +b[3])) / 86400000); }
+function dostepPasek() {
+  if (TR || !D || !D.dostepDo) return ''; var d = dniDo(D.dostepDo); if (d == null || d < 0 || d > 2) return '';
+  return '<div class="dpas"><span>Dostęp kończy się ' + (d === 0 ? 'dzisiaj' : d === 1 ? 'za 1 dzień' : 'za ' + d + ' dni') + '<small>Napisz do Kuby, żeby go przedłużyć.</small></span></div>';
+}
+var KLODKA = '<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#E6CB80" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
+function ekranDostepKoniec() {
+  var tel = telefon(); document.body.classList.remove('karty', 'mobw', 'lgmob'); document.body.classList.toggle('tel', tel); viewportMob(tel); MENU = false; rysujMenu();
+  var wyl = typeof wylogujKonto === 'function' && AUTH && AUTH.sesja ? '<a class="dk-wyl" onclick="dkWyloguj()">Wyloguj</a>' : '';
+  document.getElementById('app').innerHTML = '<div class="dkon">' + wyl + '<div class="dk-in"><div class="dk-ik">' + KLODKA + '</div><h1>Dostęp się skończył</h1><p>Twój plan i wyniki są zapisane. Napisz do Kuby, a po przedłużeniu wszystko wróci na miejsce.</p></div></div>';
+}
+// patch115: zmiany odrzucone po końcu dostępu czekają w kolejce na przedłużenie; wylogowanie je porzuca, więc pytamy
+function dkWyloguj() {
+  if (queue.length && !confirm('Na tym urządzeniu są zmiany, których nie udało się zapisać. Po wylogowaniu mogą przepaść. Wylogować mimo to?')) return;
+  queue = []; clearTimeout(timer); wylogujKonto();
+}
 function render() {
   var app = document.getElementById('app');
+  if (D && D.dostepKoniec && !TR) { ekranDostepKoniec(); return; }
   var fokus = zapamietajFokus();
   if (TR && open.planAuto == null) { open.planAuto = true; open.plan = true; } // wersja hostowana: TR znane dopiero po wczytaniu
   var akt = aktywne(); if (mobT > akt || mobT < 1) mobT = 1; if (WIDOK === 'hist' && !TR) WIDOK = 'treningi';
@@ -987,7 +1075,7 @@ function render() {
   var d = last != null && prev != null ? last - prev : null;
   var serieT = 0; for (var t = 1; t <= akt; t++) serieT += serie(t);
   var html = pasek();
-  if (D.pusty && ['treningi', 'plan', 'rap', 'waz', 'zal', 'hist'].indexOf(WIDOK) >= 0) {
+  if (D.pusty && ['treningi', 'plan', 'waz', 'kalk', 'zal', 'hist'].indexOf(WIDOK) >= 0) {
     document.body.classList.remove('karty', 'mobw', 'lgmob'); viewportMob(false);
     app.innerHTML = html + '<div class="widok"><div class="wrap solo" style="max-width:760px;margin:40px auto"><div><div class="card" id="sek-pusty"><h2 class="metal"><span class="ttl" style="font-size:15px">Brak podopiecznych</span></h2><div class="ibody">Nikt jeszcze nie ma konta ani planu. Gdy podopieczny założy konto i wypełni ankietę, zatwierdzisz go na pulpicie i tutaj pojawi się jego plan.\n<a class="pbtn rz" style="margin:12px 0 0" href="lista.html"><span class="ico">☰</span>Pulpit: konta i podopieczni</a></div></div></div></div></div>';
     rysujMenu(); return;
@@ -1000,7 +1088,8 @@ function render() {
   html += '<div class="kpi"><div><b>' + serieT + '</b><span>Serie / tydzień</span></div><div><b>' + (TR ? '<input id="kcal" class="c" style="width:96px;color:var(--gl);font-weight:700;font-size:22px;text-align:center" value="' + esc(U('kcal')) + '" placeholder="–" title="Aktualne kcal">' : (U('kcal') ? esc(U('kcal')) : '–')) + '</b><span>Aktualne kcal</span>' + (makroTxt() ? '<small class="mk">' + makroTxt() + '</small>' : '') + '</div><div><b>' + (last != null ? fmt(last) + ' kg' : '–') + (d != null ? '<em class="' + (d > 0 ? 'up' : '') + '">' + (d < 0 ? '▼' : d > 0 ? '▲' : '=') + '</em><small class="' + (d > 0 ? 'up' : '') + '">' + fmt(Math.abs(d).toFixed(1)) + '</small>' : '') + '</b><span>Aktualna waga</span></div></div></div>';
   if (TR && D.lista && D.lista.length) { html += '<div class="selbar desk"><div class="sbl">Podopieczny: <select id="selK">' + D.lista.map(function (k) { return '<option value="' + esc(k.bazaId) + '"' + (k.bazaId === D.bazaId ? ' selected' : '') + '>' + esc(k.imie) + '</option>'; }).join('') + '</select><a class="pbtn" style="margin-left:8px" href="lista.html">lista / dodaj</a><textarea id="notaTr" class="c" rows="1" placeholder="notatka trenera (widzisz tylko Ty)" title="Prywatna notatka o podopiecznym. Podopieczny jej nie widzi.">' + esc(D.klient && D.klient.notatka || '') + '</textarea></div><div class="sbc">' + (D.kontoStatus ? '<button class="pbtn zak ' + (D.kontoStatus.status === 'aktywne' ? 'kon' : 'wzn') + '" onclick="togProwadzenie()" title="' + (D.kontoStatus.status === 'aktywne' ? 'Podopieczny traci dostęp do planu i zostaje wylogowany. Wznowisz jednym kliknięciem.' : 'Przywraca podopiecznemu dostęp do planu.') + '">' + (D.kontoStatus.status === 'aktywne' ? 'zakończ prowadzenie' : 'wznów prowadzenie') + '</button>' : '<span class="mut" style="font-size:12px" title="Ta baza nie ma jeszcze konta podopiecznego. Konto zakładasz na liście albo podopieczny sam się rejestruje.">brak konta podopiecznego</span>') + '</div><div></div></div>'; }
   }
-  var KARTY = kartyAktywne(), MOBW = (WIDOK === 'pwa' && trybKart()) || ((WIDOK === 'waz' || WIDOK === 'rap' || WIDOK === 'zal' || /^ins\d$/.test(WIDOK)) && telefon()); document.body.classList.toggle('karty', KARTY); document.body.classList.toggle('mobw', MOBW); document.body.classList.toggle('tel', telefon()); document.body.classList.remove('lgmob'); viewportMob(KARTY || MOBW);
+  if (WIDOK === 'treningi') html += dostepPasek();
+  var KARTY = kartyAktywne(), MOBW = (WIDOK === 'pwa' && trybKart()) || ((WIDOK === 'waz' || WIDOK === 'kalk' || WIDOK === 'zal' || /^ins\d$/.test(WIDOK)) && telefon()); document.body.classList.toggle('karty', KARTY); document.body.classList.toggle('mobw', MOBW); document.body.classList.toggle('tel', telefon()); document.body.classList.remove('lgmob'); viewportMob(KARTY || MOBW);
   if (WIDOK !== 'treningi') html += widokInny(); else if (KARTY) { html += widokMobilny(mobT); } else {
   // ----- telefon: wybór treningu + karty
   html += '<div class="mob"><div class="selbar">Trening: <select id="mobSel">'; for (var t2 = 1; t2 <= akt; t2++) html += '<option value="' + t2 + '"' + (t2 === mobT ? ' selected' : '') + '>Trening ' + t2 + '</option>'; html += '</select><a class="v" style="margin-left:auto" target="_blank" href="' + esc(D.rozgrzewka) + '" title="Rozgrzewka">' + playIkona(24) + '</a></div><div id="mobcards" style="padding-top:10px"></div></div>';
@@ -1018,8 +1107,8 @@ function render() {
   bindAll(); if (KARTY && WIDOK === 'treningi') bindMob(mobT);
   bindWidok();
   if (WIDOK === 'atlas') bindAtlas();
+  if (WIDOK === 'kalk') kalkBind();
   renderMob();
-  bindRaporty();
   przywrocFokus(fokus);
   rysujMenu();
 }
@@ -1029,12 +1118,91 @@ function widokInny() {
   if (w === 'plan') { open.plan = true; h += kol(planowanie()); }
   else if (w === 'atlas') { h += kol(atlasWidok()); }
   else if (w === 'waz') { open.waz = true; h += telefon() ? '<div class="wazTel">' + wykresWagi() + wazeniaTel() + '</div>' : kol(wykresWagi() + wazenia(), 1100); }
-  else if (w === 'rap') { open.rap = true; h += telefon() ? '<div class="rapTel">' + raporty() + '</div>' : kol(raporty(), 1100); }
+  else if (w === 'kalk') { h += telefon() ? '<div class="kalkTel">' + kalkulator() + '</div>' : kol(kalkulator(), 520); }
   else if (w === 'zal') { open.zal = true; h += telefon() ? '<div class="zalTel">' + zalecenia() + '</div>' : kol(zalecenia(), 760); }
   else if (w === 'pwa') { h += kol(widokPwa(), 1100); }
   else if (w === 'hist') { open.hist = true; h += kol(historiaSekcja()); }
   else if (/^ins\d$/.test(w)) { var i = +w.slice(3); var x = INSTR()[i]; h += kol(x ? '<div class="card" id="sek-ins' + i + '"><h2 class="metal"><span class="ttl" style="font-size:15px">' + esc(x[0]) + '</span></h2><div class="ibody">' + x[1] + '</div></div>' : '', 1100); }
   return h + '</div>';
+}
+// ---------- patch112: kalkulator kalorii (FUNKCJE.md C, makieta mock_kalkulator.html) ----------
+// Dane wpisywane ręcznie przy każdym wejściu (KALK zerowany w idz), nic nie zapisujemy poza celem po kliknięciu przycisku.
+var KALK = null;
+function kalkNowy() { return { wzor: 'M', plec: '', wiek: '', wzrost: '', masa: '', akt: '', cel: '', g: null, p: null }; }
+var KALK_AKT = [['Mała', 1.2, 'Praca siedząca, bez treningów'], ['Lekka', 1.375, 'Trening 1–3 razy w tygodniu'], ['Umiarkowana', 1.55, 'Trening 3–5 razy w tygodniu'], ['Wysoka', 1.725, 'Trening 6–7 razy w tygodniu'], ['Bardzo wysoka', 1.9, 'Praca fizyczna i treningi']];
+var KALK_CEL = { red: ['Redukcja', 'deficyt', -350], utrz: ['Utrzymanie', 'bez zmian', 0], bud: ['Budowa', 'nadwyżka', 350] };
+var KALK_MAK = [['B', 'Białko', 4], ['T', 'Tłuszcze', 9], ['W', 'Węglowodany', 4]]; // 1 g białka = 4 kcal, 1 g tłuszczu = 9 kcal, 1 g węglowodanów = 4 kcal
+// kcal na dzień albo null, gdy brakuje danych: zero kaloryczne = round(BMR × aktywność), cel −350 / 0 / +350
+function kalkKcal(k) {
+  var wiek = n(k.wiek), cm = n(k.wzrost), kg = n(k.masa), a = KALK_AKT[k.akt], c = KALK_CEL[k.cel], M = k.plec === 'M';
+  if (!k.plec || !a || !c || !(wiek >= 10 && wiek <= 100) || !(cm >= 100 && cm <= 250) || !(kg >= 30 && kg <= 300)) return null;
+  var bmr = k.wzor === 'H' ? (M ? 88.362 + 13.397 * kg + 4.799 * cm - 5.677 * wiek : 447.593 + 9.247 * kg + 3.098 * cm - 4.330 * wiek) : 10 * kg + 6.25 * cm - 5 * wiek + (M ? 5 : -161);
+  return Math.round(bmr * a[1]) + c[2];
+}
+// makro domyślne: białko = min(2,5 g/kg, 30% kcal), tłuszcz = max(25% kcal, 0,8 g/kg), węglowodany = reszta (co najmniej 40% kcal kosztem białka).
+// Białko zaokrąglane połówką w dół (nie przekracza progu 30%), węglowodany liczone od zaokrąglonego białka; procenty całkowite, reszta do węglowodanów.
+function kalkMakro(kcal, kg) {
+  var B = Math.min(2.5 * kg, 0.3 * kcal / 4), T = Math.max(0.25 * kcal / 9, 0.8 * kg);
+  if (kcal - 4 * B - 9 * T < 0.4 * kcal) B = Math.max(0, (0.6 * kcal - 9 * T) / 4);
+  var gB = Math.ceil(B - 0.5), gW = Math.max(0, Math.round((kcal - 4 * gB - 9 * T) / 4)), gT = Math.round(T);
+  var pB = Math.round(gB * 400 / kcal), pT = Math.round(gT * 900 / kcal);
+  return { g: { B: gB, T: gT, W: gW }, p: { B: pB, T: pT, W: 100 - pB - pT } };
+}
+function kalkStan() { var kc = kalkKcal(KALK); if (kc == null) return null; if (!KALK.g) { var m = kalkMakro(kc, n(KALK.masa)); KALK.g = m.g; KALK.p = m.p; } return kc; }
+function kalkSuma() { return KALK_MAK.reduce(function (s, x) { return s + (KALK.p && KALK.p[x[0]] !== '' ? n(KALK.p[x[0]]) : 0); }, 0); }
+// patch115: cel poniżej KALK_MIN kcal kalkulator pokazuje, ale go nie ustawia (serwer i tak przyjmuje od podopiecznego 1000..20000)
+var KALK_MIN = 1000;
+function kalkGotowe() { return KALK.g && kalkKcal(KALK) >= KALK_MIN && KALK_MAK.every(function (x) { return KALK.g[x[0]] !== '' && KALK.p[x[0]] !== '' && n(KALK.g[x[0]]) >= 0 && n(KALK.p[x[0]]) >= 0; }) && kalkSuma() === 100; }
+function kalkulator() { if (!KALK) KALK = kalkNowy(); return '<div class="kalk" id="kalk">' + kalkWnetrze() + '</div>'; }
+function kalkWnetrze() {
+  var k = KALK, sg = function (pole, v, t, mala) { return '<span class="kk-sg' + (k[pole] === v ? ' on' : '') + '" onclick="kalkUstaw(\'' + pole + '\',\'' + v + '\')">' + t + (mala ? '<small>' + mala + '</small>' : '') + '</span>'; };
+  var pl = function (pole, jedn, ph, tryb) { return '<label class="kk-pl"><input data-k="' + pole + '" inputmode="' + tryb + '" maxlength="5" placeholder="' + ph + '" value="' + esc(k[pole]) + '"><i>' + jedn + '</i></label>'; };
+  var h = '<div class="kk-nag"><span class="kk-wr" onclick="kalkWstecz()" title="Wróć">‹</span><b>Kalkulator kalorii</b></div>';
+  h += '<div class="kk-lb" style="margin-top:4px">Wzór</div><div class="kk-seg s2">' + sg('wzor', 'M', 'Mifflin-St Jeor') + sg('wzor', 'H', 'Harris-Benedict') + '</div>';
+  h += '<div class="kk-lb">Płeć</div><div class="kk-seg s2">' + sg('plec', 'K', 'Kobieta') + sg('plec', 'M', 'Mężczyzna') + '</div>';
+  h += '<div class="kk-lb">Wiek, wzrost, masa</div><div class="kk-p3">' + pl('wiek', 'lat', '–', 'numeric') + pl('wzrost', 'cm', '–', 'numeric') + pl('masa', 'kg', '–', 'decimal') + '</div>';
+  h += '<div class="kk-lb">Aktywność</div><div class="kk-akt">' + KALK_AKT.map(function (a, i) { return '<div class="kk-ak' + (k.akt === i ? ' on' : '') + '" onclick="kalkUstaw(\'akt\',' + i + ')"><b>' + a[0] + '</b><span>' + a[2] + '</span></div>'; }).join('') + '</div>';
+  h += '<div class="kk-lb">Cel</div><div class="kk-seg s3">' + ['red', 'utrz', 'bud'].map(function (c) { return sg('cel', c, KALK_CEL[c][0], KALK_CEL[c][1]); }).join('') + '</div>';
+  return h + kalkWynikHtml();
+}
+function kalkWynikHtml() {
+  var kc0 = kalkKcal(KALK);
+  if (kc0 == null) return '<div class="kk-wyn pusty" id="kk-wyn">Uzupełnij płeć, wiek, wzrost, masę, aktywność i cel. Tu pojawią się kalorie i makro.</div>';
+  if (kc0 < KALK_MIN) return '<div class="kk-wyn pusty kk-nisko" id="kk-wyn">Wynik poniżej ' + KALK_MIN + ' kcal. Sprawdź wiek, wzrost i masę' + (TR ? '.' : ' albo napisz do Kuby.') + '</div>'; // patch115
+  var kc = kalkStan();
+  var h = '<div class="kk-wyn" id="kk-wyn"><div class="kk-cel">' + KALK_CEL[KALK.cel][0] + '</div><div class="kk-kc">' + kc + '<i>kcal</i></div><div class="kk-mt">';
+  KALK_MAK.forEach(function (x) { h += '<div class="kk-mr"><span>' + x[1] + '</span><input class="kk-f" data-m="' + x[0] + '" data-t="g" inputmode="numeric" maxlength="4" value="' + esc(KALK.g[x[0]]) + '"><i>g</i><input class="kk-f" data-m="' + x[0] + '" data-t="p" inputmode="numeric" maxlength="3" value="' + esc(KALK.p[x[0]]) + '"><i>%</i></div>'; });
+  var ok = kalkGotowe();
+  h += '<div class="kk-raz' + (ok ? '' : ' zle') + '" id="kk-raz"><div class="rr">Razem: <b>' + kalkSuma() + '%</b></div><small>Łączna wartość procentów makroskładników musi wynosić 100%.</small></div></div>';
+  return h + '<button class="kk-btn" id="kk-zap" onclick="kalkZapisz()"' + (ok ? '' : ' disabled') + '>' + (TR ? 'Ustaw jako cel podopiecznego' : 'Ustaw jako mój cel') + '</button></div>';
+}
+function kalkUstaw(pole, v) { KALK[pole] = v; KALK.g = null; KALK.p = null; var el = document.getElementById('kalk'); if (el) el.innerHTML = kalkWnetrze(); }
+function kalkWstecz() { if (KALK && KALK.z) { try { history.back(); return; } catch (e) {} } idz('t', mobT); }
+// zmiana gramów przelicza procent i odwrotnie; „Razem” i przycisk na bieżąco (bez przerysowania, żeby nie zgubić kursora)
+function kalkPole(m, t, v) {
+  var kc = kalkKcal(KALK), f = KALK_MAK.filter(function (x) { return x[0] === m; })[0][2], pusty = String(v).trim() === '', x = pusty ? '' : Math.max(0, Math.round(n(v)));
+  if (t === 'g') { KALK.g[m] = x; KALK.p[m] = pusty || !kc ? '' : Math.round(x * f * 100 / kc); }
+  else { KALK.p[m] = x; KALK.g[m] = pusty || !kc ? '' : Math.round(x / 100 * kc / f); }
+  var drugi = document.querySelector('#kalk .kk-f[data-m="' + m + '"][data-t="' + (t === 'g' ? 'p' : 'g') + '"]'); if (drugi) drugi.value = t === 'g' ? KALK.p[m] : KALK.g[m];
+  var ok = kalkGotowe(), r = document.getElementById('kk-raz'), b = document.getElementById('kk-zap');
+  if (r) { r.classList.toggle('zle', !ok); r.querySelector('b').textContent = kalkSuma() + '%'; }
+  if (b) b.disabled = !ok;
+}
+function kalkBind() {
+  var el = document.getElementById('kalk'); if (!el) return;
+  el.addEventListener('input', function (e) {
+    var t = e.target; if (!t || !t.dataset) return;
+    if (t.dataset.k) { KALK[t.dataset.k] = t.value; KALK.g = null; KALK.p = null; var w = document.getElementById('kk-wyn'), b = document.getElementById('kk-zap'); if (b) b.remove(); if (w) w.outerHTML = kalkWynikHtml(); return; }
+    if (t.dataset.m && KALK.g) kalkPole(t.dataset.m, t.dataset.t, t.value);
+  });
+  el.addEventListener('keydown', function (e) { if (e.key === 'Enter' && e.target.tagName === 'INPUT') { e.preventDefault(); e.target.blur(); } });
+}
+function kalkZapisz() {
+  var kc = kalkKcal(KALK); if (kc == null || !kalkGotowe()) return;
+  var v = { kcal: kc, bialko: KALK.g.B, tluszcze: KALK.g.T, wegle: KALK.g.W };
+  Object.keys(v).forEach(function (k) { D.ustawienia[k] = String(v[k]); push({ tab: 'Ustawienia', klucz: k, wartosc: String(v[k]) }); });
+  render(); // kafelki „Aktualne kcal” i „kcal zalecane” od razu z nowymi liczbami
+  czekajNaZapis().then(function () { status('Zapisano cel: ' + kc + ' kcal', true); }).catch(function () {}); // błąd zapisu pokazuje i ponawia kolejka
 }
 function wykresWagi() {
   var tel = telefon(), zrodlo = (TR && WYK_CALY) ? ostWaga() : wazBloku(), od = blokOd();
@@ -1229,7 +1397,7 @@ function zamknijBlok() {
     D.historia = hist || [];
     D.cwiczenia.forEach(function (c) { if (c.ciezar_akt !== '' && c.ciezar_akt != null) c.ciezar_start = c.ciezar_akt; for (var p = 1; p <= 6; p++) c['p' + p] = ''; c.notatka = ''; });
     D.ustawienia.zaliczone = 0; open.hist = true; render(); status('blok zamknięty, nowy rozpoczęty', true);
-  }).catch(function (e) { var m = String(e && e.message || e); status(/Nieznana akcja|not a function|is not defined/.test(m) ? 'Zamykanie bloków wymaga wdrożenia nowej wersji serwera: w Apps Script Wdróż, potem Nowa wersja.' : 'błąd: ' + m, false, true); }).finally(function () { BLOK_ZAMYKANY = false; });
+  }).catch(function (e) { var m = String(e && e.message || e); status('Nie udało się zamknąć bloku: ' + m.replace(/^Error:\s*/, ''), false, true); }).finally(function () { BLOK_ZAMYKANY = false; });
 }
 function prio(name) { var v = U('prio_' + name); return v === 'P' || v === 'U' ? v : 'N'; }
 // kolor ćwiczenia: z priorytetu przypisanej partii (kafelek); bez partii: stary ręczny typ; pusta nazwa = wiersz roboczy
@@ -1349,24 +1517,28 @@ function wagaBlok() {
   var a0 = n(w[0].waga), a1 = n(w[w.length - 1].waga), d = a1 - a0;
   return '<span class="pbtn" style="margin-left:10px;font-size:12px;color:' + (d < 0 ? 'var(--green)' : d > 0 ? 'var(--red)' : 'var(--iv)') + '">od startu bloku: ' + fmt(a0) + ' → ' + fmt(a1) + ' kg (' + (d > 0 ? '+' : '') + fmt(d.toFixed(1)) + ')</span>';
 }
+// patch111: dni ważenia (FUNKCJE.md B). Pisze tylko trener, podopieczny czyta.
+function dniWazeniaPole() { return '<input id="ust-dni_wazenia" maxlength="120" enterkeyhint="done" value="' + esc(U('dni_wazenia')) + '" placeholder="np. środa i sobota, rano, na czysto">'; }
+function dniWazeniaNag() { if (TR) return '<span class="dniw"><label for="ust-dni_wazenia">Dni ważenia</label>' + dniWazeniaPole() + '</span>'; var t = String(U('dni_wazenia')).trim(); return t ? '<span class="dniwt">Ważenie: ' + esc(t) + '</span>' : ''; } // patch115: z etykietą jak na telefonie
+function dniWazeniaTel() { if (TR) return '<div class="wdni ed"><label for="ust-dni_wazenia">Dni ważenia</label>' + dniWazeniaPole() + '</div>'; var t = String(U('dni_wazenia')).trim(); return t ? '<div class="wdni">Ważenie: ' + esc(t) + '</div>' : ''; }
 function wazenia() {
   var rows = wazSorted().slice().reverse();
-  var out = '<div class="card" id="sek-waz"><h2 class="metal"><span class="ttl">Ważenia i kalorie</span><span class="pbtn" style="font-size:12px">ważenie: środa i sobota, rano, na czysto</span></h2><table class="wt"><tr><th>Dzień</th><th>Waga (kg)</th><th>Zmiana</th><th>Kcal zjedzone</th><th class="l">Notatka podopiecznego</th>' + (TR ? '<th></th>' : '') + '</tr>';
+  var out = '<div class="card" id="sek-waz"><h2 class="metal"><span class="ttl">Ważenia i kalorie</span>' + dniWazeniaNag() + '</h2><table class="wt"><tr><th>Dzień</th><th>Waga (kg)</th><th>Zmiana</th><th>Kcal zjedzone</th><th class="wbt" title="węglowodany, g">W</th><th class="wbt" title="białko, g">B</th><th class="wbt" title="tłuszcze, g">T</th><th class="l">Notatka podopiecznego</th>' + (TR ? '<th></th>' : '') + '</tr>';
   rows.forEach(function (w) {
     var d = zmianaWagi(w);
-    out += '<tr data-id="' + w.id + '"><td class="d"><input class="c" type="date" data-f="data" value="' + esc(w.data) + '" style="color:#E6CB80;font-weight:700"></td><td class="kg"><input class="c" data-f="waga" inputmode="decimal" value="' + esc(fmt(w.waga)) + '"></td><td class="' + (d == null ? 'mut' : d < 0 ? 'dn' : d > 0 ? 'up' : 'mut') + '">' + zmianaTxt(d) + '</td><td><input class="c" data-f="kcal" inputmode="numeric" placeholder="–" value="' + esc(w.kcal) + '" style="width:72px"></td><td class="l note"><input class="c" data-f="notatka" value="' + esc(w.notatka) + '" placeholder="na czysto? ostatni posiłek? sen? makro?"></td>' + (TR ? '<td><span class="pbtn" style="padding:2px 8px;font-size:11px" onclick="usunWaz(\'' + w.id + '\')">✕</span></td>' : '') + '</tr>';
+    out += '<tr data-id="' + w.id + '"><td class="d"><input class="c" type="date" data-f="data" value="' + esc(w.data) + '" style="color:#E6CB80;font-weight:700"></td><td class="kg"><input class="c" data-f="waga" inputmode="decimal" value="' + esc(fmt(w.waga)) + '"></td><td class="' + (d == null ? 'mut' : d < 0 ? 'dn' : d > 0 ? 'up' : 'mut') + '">' + zmianaTxt(d) + '</td><td><input class="c" data-f="kcal" inputmode="numeric" placeholder="–" value="' + esc(w.kcal) + '" style="width:72px"></td>' + ['wegle', 'bialko', 'tluszcze'].map(function (f) { return '<td class="wbt"><input class="c" data-f="' + f + '" inputmode="numeric" placeholder="–" value="' + esc(w[f]) + '"></td>'; }).join('') + '<td class="l note"><input class="c" data-f="notatka" value="' + esc(w.notatka) + '" placeholder="na czysto? ostatni posiłek? sen? makro?"></td>' + (TR ? '<td><span class="pbtn" style="padding:2px 8px;font-size:11px" onclick="usunWaz(\'' + w.id + '\')">✕</span></td>' : '') + '</tr>';
   });
-  out += '</table><div style="padding:12px 14px;display:flex;gap:12px;align-items:center"><button class="btn" onclick="dodajWaz()">+ Dodaj dzisiejsze ważenie</button><span class="mut" style="font-size:12px">Data wpisuje się sama, możesz ją poprawić. Zmiana liczy się automatycznie. Kcal = ile realnie zjadł podopieczny.</span></div></div>';
+  out += '</table><div style="padding:12px 14px;display:flex;gap:12px;align-items:center"><button class="btn" onclick="dodajWaz()">+ Dodaj dzisiejsze ważenie</button><span class="mut" style="font-size:12px">Data wpisuje się sama, możesz ją poprawić. Zmiana liczy się automatycznie. Kcal i makro (W, B, T, w gramach) wpisuj tak, jak realnie wyszło. Nowe ważenie dostaje je z aktualnego celu.</span></div></div>';
   return out;
 }
 // telefon: lista ważeń (L1) z rozwijanym wpisem
 function wazeniaTel() {
   var rows = wazSorted().slice().reverse();
-  var h = '<div class="wdodaj" onclick="dodajWaz()">＋ Dodaj dzisiejsze ważenie</div><div class="wlh"><span>Ważenia</span><span>' + rows.length + ' ' + (rows.length === 1 ? 'wpis' : rows.length > 1 && rows.length < 5 ? 'wpisy' : 'wpisów') + '</span></div><div class="wzl">';
+  var h = '<div class="wdodaj" onclick="dodajWaz()">＋ Dodaj dzisiejsze ważenie</div>' + dniWazeniaTel() + '<div class="wlh"><span>Ważenia</span><span>' + rows.length + ' ' + (rows.length === 1 ? 'wpis' : rows.length > 1 && rows.length < 5 ? 'wpisy' : 'wpisów') + '</span></div><div class="wzl">';
   rows.forEach(function (w) {
     var d = zmianaWagi(w), zk = d == null ? 'eq' : d < 0 ? 'dn' : d > 0 ? 'up' : 'eq';
     if (WAZ_ED === w.id) {
-      h += '<div class="wz ed" data-id="' + w.id + '"><div class="r1"><input class="c dt" type="date" data-f="data" value="' + esc(w.data) + '"><span class="inp"><input class="c kg" data-f="waga" inputmode="decimal" placeholder="0,0" value="' + esc(fmt(w.waga)) + '"><small>kg</small></span><input class="c kc" data-f="kcal" inputmode="numeric" placeholder="kcal" value="' + esc(w.kcal) + '"></div><div class="r2"><span class="lbl">Notatka</span><input class="c nt" readonly tabindex="-1" style="cursor:pointer;text-overflow:ellipsis" onclick="arkuszNotWaz(\'' + w.id + '\')" placeholder="na czysto? ostatni posiłek? sen? makro?" value="' + esc(w.notatka) + '"></div><div class="r3">' + (TR ? '<span class="usun" onclick="usunWaz(\'' + w.id + '\')">Usuń</span>' : '') + '<span class="ok" onclick="WAZ_ED = null; render()">Gotowe</span></div></div>';
+      h += '<div class="wz ed" data-id="' + w.id + '"><div class="r1"><input class="c dt" type="date" data-f="data" value="' + esc(w.data) + '"><span class="inp"><input class="c kg" data-f="waga" inputmode="decimal" placeholder="0,0" value="' + esc(fmt(w.waga)) + '"><small>kg</small></span><input class="c kc" data-f="kcal" inputmode="numeric" placeholder="kcal" value="' + esc(w.kcal) + '"></div><div class="r4"><span class="lbl">Makro, g</span><span class="mk3">' + [['W', 'wegle'], ['B', 'bialko'], ['T', 'tluszcze']].map(function (x) { return '<label><i>' + x[0] + '</i><input class="c" data-f="' + x[1] + '" inputmode="numeric" placeholder="–" value="' + esc(w[x[1]]) + '"></label>'; }).join('') + '</span></div><div class="r2"><span class="lbl">Notatka</span><input class="c nt" readonly tabindex="-1" style="cursor:pointer;text-overflow:ellipsis" onclick="arkuszNotWaz(\'' + w.id + '\')" placeholder="na czysto? ostatni posiłek? sen? makro?" value="' + esc(w.notatka) + '"></div><div class="r3">' + (TR ? '<span class="usun" onclick="usunWaz(\'' + w.id + '\')">Usuń</span>' : '') + '<span class="ok" onclick="WAZ_ED = null; render()">Gotowe</span></div></div>';
     } else {
       h += '<div class="wz" onclick="wazEdytuj(\'' + w.id + '\')"><span class="d">' + fmtData(w.data) + (w.notatka ? '<i class="ni">✎</i>' : '') + '</span><span class="kg">' + (w.waga !== '' && w.waga != null ? fmt(w.waga) : '–') + '<small>kg</small></span><span class="z ' + zk + '">' + zmianaTxt(d) + '</span><span class="kc">' + (w.kcal !== '' && w.kcal != null ? '<b>' + esc(w.kcal) + '</b> kcal' : '') + '</span></div>';
     }
@@ -1377,111 +1549,6 @@ function wazeniaTel() {
 // dotknięcie pustego tła zwija rozwinięty wpis ważenia
 document.addEventListener('click', function (e) { if (WAZ_ED == null || WIDOK !== 'waz') return; var t = e.target; if (t.closest && (t.closest('.wz') || t.closest('.wdodaj') || t.closest('#menu') || t.closest('#tlo') || t.closest('.pasek') || t.closest('.msheet') || t.tagName === 'INPUT' || t.tagName === 'SELECT' || t.tagName === 'TEXTAREA')) return; WAZ_ED = null; render(); });
 function wazEdytuj(id) { WAZ_ED = id; render(); setTimeout(function () { var e = document.querySelector('.wz.ed [data-f="waga"]'); if (e) e.focus(); }, 50); }
-var RAP_FORM = false, RAP_OPEN = null;
-function ostatniTrening() { var o = 1; for (var t = 1; t <= aktywne(); t++) if (cw(t).filter(function (c) { return !pusteCw(c); }).length) o = t; return o; }
-function raportCzeka() { var L = (D.raporty || []); if (!L.length) return true; var ost = L.slice().sort(function (x, y) { return String(y.data).localeCompare(String(x.data)); })[0]; var d = new Date(String(ost.data).slice(0, 10)); return isNaN(d) || (Date.now() - d.getTime()) > 7 * 86400000; }
-function rfTyg(d) { var t = RF.tydzien != null ? n(RF.tydzien) : (n(U('zaliczone')) + 1); t = Math.max(1, Math.min(Math.max(1, Math.min(8, n(U('blok')) || 6)), t + d)); RF.tydzien = t; render(); }
-function blokNr() { return (D.historiaLiczba != null ? n(D.historiaLiczba) : (D.historia || []).length) + 1; }
-function blokRaportu(r) { if (r.blok) return n(r.blok); var H = D.historia || [], d = String(r.data || '').slice(0, 10); return 1 + H.filter(function (h) { return String(h.zamknieto || '').slice(0, 10) < d; }).length; }
-function raporty() {
-  var L = (D.raporty || []).slice().sort(function (x, y) { return String(y.data).localeCompare(String(x.data)); });
-  var tyg = RF.tydzien != null ? RF.tydzien : (n(U('zaliczone')) + 1), bl = blokNr();
-  var out = '<div class="rapw" id="sek-rap">';
-  if (!RAP_FORM) out += '<div class="wdodaj" onclick="RAP_FORM = true; render(); setTimeout(function () { var t = document.getElementById(\'rf-tresc\'); if (t) t.focus(); }, 50)">＋ Napisz raport: Blok ' + bl + ' · Tydzień ' + esc(tyg) + '</div>';
-  else {
-    out += '<div class="card rcard"><h2 class="metal"><span class="ttl">Raport <small class="rsub">· Blok ' + bl + ' · <span class="pm" onclick="rfTyg(-1)" title="poprzedni tydzień">−</span></small>Tydzień ' + esc(tyg) + '<small class="rsub"><span class="pm" onclick="rfTyg(1)" title="następny tydzień">+</span></small></span></h2><div class="rform"><textarea id="rf-tresc" placeholder="Jak się czujesz po tym tygodniu? Problemy na treningach? Coś zostawiasz w notatkach przy ćwiczeniach? Waga wpisana? Co chcesz przegadać?">' + esc(RF.tresc) + '</textarea>';
-    out += '<div class="row"><label class="pick" for="rf-file">📎 zdjęcie / film</label><input type="file" id="rf-file" multiple accept="image/*,video/*"></div>';
-    out += '<div class="zal" id="rf-zal">' + RF.pliki.map(function (p, i) { return '<span>' + (p.typ.indexOf('image') === 0 ? '🖼 ' : '🎬 ') + esc(p.nazwa) + ' <em style="color:var(--ivd);font-style:normal">' + rozmiarTxt(p.rozmiar) + '</em><i onclick="rfUsun(' + i + ')" title="usuń załącznik">✕</i></span>'; }).join('') + '</div>';
-    out += '<div class="rsend' + (RF.wysylam ? ' dis' : '') + '" id="rf-send" onclick="' + (RF.wysylam ? '' : 'wyslijRaport()') + '">' + (RF.wysylam ? 'Wysyłam…' : '✉ Wyślij raport') + '</div><div class="mut" style="font-size:12px;text-align:center;margin-top:8px"><a class="lnk" onclick="RAP_FORM = false; render()">Anuluj</a> · zdjęcia zmniejszam automatycznie, film do ok. 12 MB</div></div></div>';
-  }
-  out += '<div class="wlh"><span>Wysłane raporty</span><span>' + L.length + '</span></div><div class="rlst">';
-  var otw = RAP_OPEN != null ? RAP_OPEN : (L.length ? L[0].id : null);
-  L.forEach(function (r) {
-    var ot = otw === r.id, ed = open.rapEd[r.id];
-    out += '<div class="rp2' + (ot ? ' open' : '') + '" data-rid="' + esc(r.id) + '"><div class="rh2" onclick="RAP_OPEN = \'' + (ot ? '__none__' : esc(r.id)) + '\'; render()"><b><small>Blok ' + blokRaportu(r) + ' ·</small>Tydzień ' + esc(r.tydzien || '?') + '</b><span class="dt">' + esc(fmtData(r.data)) + '</span><span class="chev">' + (ot ? '▴' : '▾') + '</span></div>';
-    if (ot) {
-      out += '<div class="rt">' + (ed ? '<textarea id="re-' + esc(r.id) + '">' + esc(r.tresc) + '</textarea>' : (r.tresc ? esc(r.tresc) : '<span class="mut">bez treści</span>')) + '</div>';
-      if (r.pliki && r.pliki.length) out += '<div class="rf">' + r.pliki.map(function (p) { return '<div class="f" data-pid="' + esc(p.id) + '" onclick="pokazPlik(\'' + esc(r.id) + '\',\'' + esc(p.id) + '\')">' + (String(p.typ).indexOf('image') === 0 ? '🖼' : '🎬') + ' <b>' + esc(p.nazwa) + '</b> <span class="mut">' + rozmiarTxt(p.rozmiar) + '</span></div>'; }).join('') + '</div>';
-      var akc = ed ? '<span class="pbtn" style="margin:0;font-size:12px" onclick="zapiszEdycje(\'' + esc(r.id) + '\')">zapisz</span><span class="pbtn" style="margin:0;font-size:12px" onclick="togEd(\'' + esc(r.id) + '\')">anuluj</span>' : '<span class="pbtn" style="margin:0;font-size:12px" onclick="togEd(\'' + esc(r.id) + '\')">edytuj</span>' + (TR ? '<span class="pbtn" style="margin:0;font-size:12px;color:var(--red)" onclick="usunRaport(\'' + esc(r.id) + '\')">usuń</span>' : '');
-      out += '<div class="rakc">' + akc + '</div>';
-    }
-    out += '</div>';
-  });
-  if (!L.length) out += '<div class="mut" style="padding:14px 4px;font-size:12px">Tu pojawią się wysłane raporty. Zostają też po zakończeniu bloku.</div>';
-  return out + '</div></div>';
-}
-function bindRaporty() {
-  var rff = document.getElementById('rf-file'); if (rff) rff.onchange = function () { if (rff.files && rff.files.length) rfDodajPliki(rff.files); rff.value = ''; };
-  var rft = document.getElementById('rf-tresc'); if (rft) rft.addEventListener('input', function () { RF.tresc = rft.value; });
-  var rfy = document.getElementById('rf-tyg'); if (rfy) rfy.addEventListener('input', function () { RF.tydzien = rfy.value; });
-  document.querySelectorAll('textarea[data-odp]').forEach(function (ta) { var r0 = (D.raporty || []).filter(function (x) { return x.id === ta.dataset.odp; })[0]; ta.addEventListener('blur', function () { if (r0 && String(r0.odp || '') !== ta.value) zapiszOdp(ta.dataset.odp, ta.value); }); });
-}
-function rozmiarTxt(b) { b = n(b); return b > 1048576 ? (b / 1048576).toFixed(1).replace('.', ',') + ' MB' : b > 1024 ? Math.round(b / 1024) + ' kB' : b + ' B'; }
-function rfUsun(i) { RF.pliki.splice(i, 1); render(); }
-function togEd(id) { open.rapEd[id] = !open.rapEd[id]; render(); }
-function rfZbierz() { var t = document.getElementById('rf-tresc'), y = document.getElementById('rf-tyg'); if (t) RF.tresc = t.value; if (y) RF.tydzien = y.value; }
-// zmniejszenie zdjęcia: max 1600 px, JPEG 0.82; film bez zmian (limit 12 MB)
-function przygotujPlik(file) {
-  return new Promise(function (res, rej) {
-    var czytaj = function (blob, nazwa, typ) { var fr = new FileReader(); fr.onload = function () { var d = String(fr.result).split(',')[1] || ''; res({ nazwa: nazwa, typ: typ, rozmiar: blob.size, dane: d }); }; fr.onerror = function () { rej(new Error('Nie udało się odczytać pliku ' + nazwa)); }; fr.readAsDataURL(blob); };
-    if (file.type.indexOf('image') === 0) {
-      var img = new Image(), url = URL.createObjectURL(file);
-      img.onload = function () {
-        var max = 1600, w = img.width, h = img.height, sk = Math.min(1, max / Math.max(w, h)); var cv = document.createElement('canvas'); cv.width = Math.round(w * sk); cv.height = Math.round(h * sk);
-        cv.getContext('2d').drawImage(img, 0, 0, cv.width, cv.height); URL.revokeObjectURL(url);
-        cv.toBlob(function (b) { if (!b || b.size >= file.size) czytaj(file, file.name, file.type); else czytaj(b, file.name.replace(/\.[^.]+$/, '') + '.jpg', 'image/jpeg'); }, 'image/jpeg', 0.82);
-      };
-      img.onerror = function () { URL.revokeObjectURL(url); czytaj(file, file.name, file.type); };
-      img.src = url;
-    } else {
-      if (file.size > 12 * 1048576) { rej(new Error('Film „' + file.name + '” jest za duży (' + rozmiarTxt(file.size) + '). Limit ok. 12 MB: nagraj krótszy albo wyślij na Messengerze.')); return; }
-      czytaj(file, file.name, file.type || 'application/octet-stream');
-    }
-  });
-}
-function rfDodajPliki(lista) {
-  rfZbierz(); var ps = []; for (var i = 0; i < lista.length; i++) ps.push(przygotujPlik(lista[i]));
-  status('przygotowuję załączniki…');
-  Promise.all(ps.map(function (p) { return p.then(function (x) { return x; }, function (e) { status(e.message, false, true); return null; }); })).then(function (xs) { xs.forEach(function (x) { if (x) RF.pliki.push(x); }); render(); if (xs.every(Boolean)) status('załączniki gotowe', true); });
-}
-function wyslijRaport() {
-  rfZbierz(); var tresc = String(RF.tresc || '').trim();
-  if (!tresc && !RF.pliki.length) { status('Napisz kilka słów albo dodaj zdjęcie, zanim wyślesz.', true, true); return; }
-  var razem = 0; RF.pliki.forEach(function (p) { razem += p.dane.length; });
-  if (razem > 24000000) { status('Za dużo załączników naraz. Limit to około 15 MB. Usuń część albo wyślij w dwóch raportach.', false, true); return; }
-  RF.wysylam = true; render(); status('wysyłam raport…');
-  wywolaj('raportZapisz', [D.bazaId, { tydzien: RF.tydzien || (n(U('zaliczone')) + 1), tresc: tresc }, RF.pliki, AUTH]).then(function (lista) {
-    D.raporty = lista || []; var tygW = n(RF.tydzien) || (n(U('zaliczone')) + 1), blokW = Math.max(1, Math.min(8, n(U('blok')) || 6)), nz = Math.min(blokW, Math.max(n(U('zaliczone')), tygW));
-    if (nz !== n(U('zaliczone'))) { D.ustawienia.zaliczone = nz; push({ tab: 'Ustawienia', klucz: 'zaliczone', wartosc: nz }); }
-    RF = { pliki: [], wysylam: false, tresc: '', tydzien: null }; open.rap = true; RAP_FORM = false; RAP_OPEN = null; render(); status('raport wysłany, dziękuję! Tydzień ' + tygW + ' odhaczony.', true);
-  }).catch(function (e) { RF.wysylam = false; render(); status('nie udało się wysłać: ' + String(e && e.message || e), false, true); });
-}
-function zapiszEdycje(id) {
-  var ta = document.getElementById('re-' + id); if (!ta) return; var r = (D.raporty || []).filter(function (x) { return x.id === id; })[0]; if (!r) return;
-  status('zapisuję…');
-  wywolaj('raportZapisz', [D.bazaId, { id: id, tydzien: r.tydzien, tresc: ta.value }, [], AUTH]).then(function (lista) { D.raporty = lista || []; open.rapEd[id] = false; render(); status('zapisano', true); }).catch(function (e) { status('błąd: ' + String(e && e.message || e), false, true); });
-}
-function usunRaport(id) {
-  if (!confirm('Usunąć ten raport razem z załącznikami?')) return;
-  wywolaj('raportUsun', [D.bazaId, id]).then(function (lista) { D.raporty = lista || []; render(); status('raport usunięty', true); }).catch(function (e) { status('błąd: ' + String(e && e.message || e), false, true); });
-}
-function zapiszOdp(id, txt) {
-  status('zapisuję odpowiedź…');
-  wywolaj('raportOdp', [D.bazaId, id, txt]).then(function (lista) { D.raporty = lista || []; var f = zapamietajFokus(); render(); przywrocFokus(f); status('odpowiedź zapisana', true); }).catch(function (e) { status('błąd: ' + String(e && e.message || e), false, true); });
-}
-var PLIKI = {};
-function pokazPlik(rid, pid) {
-  var lb = lbOtworz();
-  var wstaw = function (p) {
-    if (!lb.parentNode || !lb.id) return;
-    var src = 'data:' + (p.typ || 'application/octet-stream') + ';base64,' + p.dane, t = String(p.typ || '');
-    lb.querySelector('.lbn').textContent = p.nazwa || '';
-    var d = lb.querySelector('.lbd'); d.href = src; d.setAttribute('download', p.nazwa || 'plik'); d.style.display = '';
-    lb.querySelector('.lbc').innerHTML = t.indexOf('image') === 0 ? '<img src="' + src + '" alt="">' : t.indexOf('video') === 0 ? '<video src="' + src + '" controls playsinline></video>' : '<span class="mut">Tego pliku nie da się tu pokazać. Pobierz go.</span>';
-  };
-  if (PLIKI[pid]) { wstaw(PLIKI[pid]); return; }
-  wywolaj('plik', [D.bazaId, pid, AUTH]).then(function (p) { PLIKI[pid] = p; wstaw(p); }).catch(function (e) { var c = lb.querySelector('.lbc'); if (c) c.innerHTML = '<span style="color:var(--red)">Nie udało się wczytać: ' + esc(e && e.message || e) + '</span>'; });
-}
 var PORY = ['Rano', 'Przed treningiem', 'Po treningu', 'Do posiłku', 'Wieczór', 'Dowolna pora'];
 var PORY_IK = (function () { // patch92: własne ikonki pór dnia (SVG), takie same na każdym telefonie
   var IV = '#F4F1EA', kropki = '';
@@ -1537,7 +1604,7 @@ function renderMob() {
   if (!rows.length) out = '<div class="mut" style="padding:20px">Brak ćwiczeń w tym treningu.</div>';
   box.innerHTML = out;
   box.querySelectorAll('[data-id] [data-f]').forEach(function (el) { var id = el.closest('[data-id]').dataset.id; var o = D.cwiczenia.filter(function (c) { return c.id === id; })[0]; var tab = 'Cwiczenia'; if (!o) { o = D.wazenia.filter(function (c) { return c.id === id; })[0]; tab = 'Wazenia'; } if (o) bind(el, o, el.dataset.f, tab, { change: el.type === 'date' || tab === 'Wazenia', after: tab === 'Wazenia' ? function () { updateKpi(); } : (/^p\d$/.test(el.dataset.f) ? function () { var card = el.closest('.mcard'); var sets = Math.max(0, n(o.sets)), ok = sets > 0; for (var q = 1; q <= sets && q <= 6; q++) if (o['p' + q] === '' || o['p' + q] == null) ok = false; if (card) card.classList.toggle('done', ok); } : (TR && /^(sets|nazwa|partia)$/.test(el.dataset.f) ? function () { odswiezPlanSum(n(o.trening)); } : (el.dataset.f === 'przerwa' ? function () { przerwaPary(o); } : null))) }); });
-  var sel = document.getElementById('mobSel'); if (sel) sel.onchange = function () { mobT = n(sel.value); try { localStorage.setItem('mobT', mobT); } catch (e) {} renderMob(); bindRaporty(); };
+  var sel = document.getElementById('mobSel'); if (sel) sel.onchange = function () { mobT = n(sel.value); try { localStorage.setItem('mobT', mobT); } catch (e) {} renderMob(); };
 }
 function updateKpi() { render(); }
 // ---------- minutnik przerwy (karty „Dziś”) ----------
@@ -1578,10 +1645,11 @@ function bindAll() {
     clearTimeout(window._pm); window._pm = setTimeout(render, cb ? 60 : 900); } }); });
   document.querySelectorAll('.tile textarea').forEach(function (ta) { var fit = function () { ta.style.height = 'auto'; ta.style.height = (ta.scrollHeight || 18) + 'px'; }; fit(); ta.addEventListener('input', fit); });
   document.querySelectorAll('.tile [data-f]').forEach(function (el) { var name = el.closest('.tile').dataset.p; var o = D.partie.filter(function (p) { return p.partia === name; })[0]; if (o) bind(el, o, el.dataset.f, 'Partie', { after: function () { clearTimeout(window._pt); window._pt = setTimeout(render, 900); } }); });
-  document.querySelectorAll('.top .wk').forEach(function (el) { el.onclick = function () { if (TR) klikTydzien(n(el.dataset.i)); else status('Tydzień odhacza się po wysłaniu raportu.', true); }; });
+  document.querySelectorAll('.top .wk').forEach(function (el) { el.onclick = function () { if (TR) klikTydzien(n(el.dataset.i)); else status('Tydzień odhacza Kuba po przeczytaniu raportu.', true); }; });
   var cel = document.getElementById('cel'); if (cel) bind(cel, D.ustawienia, 'cel', 'Ustawienia');
   var blok = document.getElementById('blok'); if (blok) bind(blok, D.ustawienia, 'blok', 'Ustawienia', { change: true, after: render });
   var kcal = document.getElementById('kcal'); if (kcal) bind(kcal, D.ustawienia, 'kcal', 'Ustawienia');
+  var dwz = document.getElementById('ust-dni_wazenia'); if (dwz) { bind(dwz, D.ustawienia, 'dni_wazenia', 'Ustawienia'); dwz.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); dwz.blur(); } }); } // patch111
   ['kcal', 'wegle', 'bialko', 'tluszcze'].forEach(function (k) { var e = document.getElementById('ust-' + k); if (e) bind(e, D.ustawienia, k, 'Ustawienia', { after: function () { clearTimeout(window._mk); window._mk = setTimeout(function () { var f = zapamietajFokus(); render(); przywrocFokus(f); }, 700); } }); });
   var trn = document.getElementById('treningi'); if (trn) bind(trn, D.ustawienia, 'treningi', 'Ustawienia', { change: true, after: render });
   for (var ti = 1; ti <= 5; ti++) { var nt = document.getElementById('nazwa_t' + ti); if (nt) bind(nt, D.ustawienia, 'nazwa_t' + ti, 'Ustawienia'); }
@@ -1591,7 +1659,7 @@ function bindAll() {
 
 }
 function tog(k, i) { if (i == null) open[k] = !open[k]; else open[k][i] = !(open[k][i] == null ? (k === 't' && i === 1) : open[k][i]); render(); }
-function dodajWaz() { var d = new Date(); var iso = d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); var tmp = nowyTmp(); var w = { id: tmp, data: iso, waga: '', kcal: '', wegle: '', bialko: '', tluszcze: '', sol: '', notatka: '' }; D.wazenia.push(w); push({ tab: 'Wazenia', id: 'nowe', tmp: tmp, dane: w }); open.waz = true; WAZ_ED = tmp; render(); setTimeout(function () { var el = document.querySelector('[data-id="' + tmp + '"] [data-f="waga"]'); if (el) el.focus(); }, 50); }
+function dodajWaz() { var d = new Date(); var iso = d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); var tmp = nowyTmp(); var w = { id: tmp, data: iso, waga: '', kcal: String(U('kcal')), wegle: String(U('wegle')), bialko: String(U('bialko')), tluszcze: String(U('tluszcze')), sol: '', notatka: '' }; /* patch112: kcal i makro z celu */ D.wazenia.push(w); push({ tab: 'Wazenia', id: 'nowe', tmp: tmp, dane: w }); open.waz = true; WAZ_ED = tmp; render(); setTimeout(function () { var el = document.querySelector('[data-id="' + tmp + '"] [data-f="waga"]'); if (el) el.focus(); }, 50); }
 function usunWaz(id) { if (!confirm('Usunąć to ważenie?')) return; D.wazenia = D.wazenia.filter(function (w) { return w.id !== id; }); usunWpis('Wazenia', id); render(); }
 function jestSS(c) { var v = c.ss; return v === true || v === 'TRUE' || v === 'true' || v === 1 || v === '1'; }
 function togSS(id) {
@@ -1696,12 +1764,33 @@ function kartaEkran() {
   document.getElementById('a2hsOk').onclick = function () { box.remove(); };
 }
 var OST_WCZYT = Date.now();
+// patch115: na ekranie końca dostępu kolejka czeka na przedłużenie (zapisów nie wysyłamy), więc sprawdzamy wczytaj
+// mimo niej; po powrocie dostępu plan wraca bez przeładowania (dostepWrocil)
 function odswiezCicho() {
-  if (!D || !D.bazaId || queue.length || pending || BLOK_ZAMYKANY || Date.now() - OST_WCZYT < 30 * 1000) return;
+  var kon = !TR && !!(D && D.dostepKoniec);
+  if (!D || !(D.bazaId || kon) || (queue.length && !kon) || pending || BLOK_ZAMYKANY || Date.now() - OST_WCZYT < 30 * 1000) return;
   var ae = document.activeElement; if (ae && (ae.tagName === 'INPUT' || ae.tagName === 'TEXTAREA' || ae.tagName === 'SELECT')) return;
   var p = TR ? api({ akcja: 'plan', bazaId: D.bazaId }) : (AUTH && AUTH.sesja ? api({ akcja: 'wczytaj', sesja: AUTH.sesja }) : null);
   if (!p) return; OST_WCZYT = Date.now(); var rew = ZAPIS_REV, baza = D.bazaId;
-  p.then(function (dane) { if (queue.length || pending || BLOK_ZAMYKANY || ZAPIS_REV !== rew || D.bazaId !== baza) return; dane.url = URL_STRONY; D = dane; render(); status('odświeżono', true); if (AUTH) { try { localStorage.setItem('cache_sesja', JSON.stringify({ t: Date.now(), sesja: SESJA, d: dane })); } catch (e) {} } }).catch(function () {});
+  p.then(function (dane) {
+    if (pending || BLOK_ZAMYKANY || ZAPIS_REV !== rew || D.bazaId !== baza) return;
+    if (kon) { if (D.dostepKoniec) dostepWrocil(dane); return; }
+    if (queue.length) return;
+    dane.url = URL_STRONY; D = dane; render(); status('odświeżono', true); if (AUTH) { try { localStorage.setItem('cache_sesja', JSON.stringify({ t: Date.now(), sesja: SESJA, d: dane })); } catch (e) {} }
+  }).catch(function () {});
+}
+// Ekran końca dostępu, nowa odpowiedź wczytaj: nadal po terminie = ekran i kolejka zostają; plan = wracamy do niego,
+// zmiany z kolejki (odrzucone przy końcu dostępu) nakładamy na nowe dane i zapisujemy od razu, a gdy kolejka jest
+// pusta (ekran przyszedł z wczytaj), przywracamy szkic z tej karty; bez planu (np. zakończone prowadzenie) = ekran statusu.
+function dostepWrocil(dane) {
+  if (dane.dostepKoniec) return;
+  if (dane.bezPlanu) { queue = []; clearTimeout(timer); ekranStatusu(dane.konto); return; }
+  var q = queue, blokPrzed = D.bazaId ? szkicBlok() : null;
+  dane.url = URL_STRONY; D = dane; queue = []; clearTimeout(timer);
+  try { localStorage.setItem('cache_sesja', JSON.stringify({ t: Date.now(), sesja: SESJA, d: dane })); } catch (e) {}
+  if (q.length && blokPrzed !== szkicBlok()) { render(); status('Zachowano niezapisane zmiany z innego bloku. Nie przywracam ich do bieżącego planu.', false, true); return; }
+  if (!q.length) { render(); status('odświeżono', true); przywrocSzkic(); return; }
+  queue = q; ZAPIS_REV++; nalozKolejke(); render(); zachowajSzkic(); status('zapisuję…'); timer = setTimeout(flush, 100);
 }
 document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'visible') odswiezCicho(); });
 window.addEventListener('focus', odswiezCicho);
@@ -1848,8 +1937,8 @@ function ekranStatusu(konto) {
   var im = esc(String(konto.imie || '').split(' ')[0]), st = konto.status, t = '';
   if (st === 'ankieta') t = '<p class="mut">Konto gotowe. Następny krok to <b style="color:var(--iv)">ankieta startowa</b>: pytania o cel, zdrowie, doświadczenie i codzienność, żeby plan był pod Ciebie. Zajmie ok. 15 minut, odpowiedzi zapisują się w trakcie.</p>';
   else if (st === 'czeka') t = '<p class="mut">Dzięki za ankietę. Kuba ją przegląda i zatwierdza Twoje konto. Plan pojawi się tutaj, w tym samym miejscu.</p>';
-  else if (st === 'odrzucone') t = '<p class="mut">To konto nie jest aktywne. Napisz do Kuby na Instagramie.</p>';
-  else if (st === 'zakonczone') t = '<p class="mut">Prowadzenie zakończone. Dzięki za wspólną pracę! Plan nie jest już dostępny. Jeśli chcesz wrócić, napisz do Kuby na Instagramie.</p>';
+  else if (st === 'odrzucone') t = '<p class="mut">To konto nie jest aktywne. Napisz do Kuby.</p>';
+  else if (st === 'zakonczone') t = '<p class="mut">Prowadzenie zakończone. Dzięki za wspólną pracę! Plan nie jest już dostępny. Jeśli chcesz wrócić, napisz do Kuby.</p>';
   else t = '<p class="mut">Twój plan jest już gotowy.</p>';
   ekranKarta('Cześć' + (im ? ', ' + im : '') + '!', t + '<button class="btn" id="st-btn">' + (st === 'aktywne' ? 'Otwórz plan' : st === 'ankieta' ? 'Wypełnij ankietę' : 'Sprawdź ponownie') + '</button><p class="mut" style="font-size:16px;margin-top:22px"><a class="lnk" onclick="wylogujKonto()">Wyloguj</a> · ' + esc(konto.email || '') + '</p>');
   document.getElementById('st-btn').onclick = function () { if (st === 'ankieta') { if (!ANK.odp.imie && konto.imie) ANK.odp.imie = konto.imie; ekranAnkiety(); return; } ladowanie('Sprawdzam…'); wczytajSesja(); };
@@ -1858,13 +1947,13 @@ function wczytajSesja() {
   api({ akcja: 'wczytaj', sesja: SESJA }).then(function (dane) {
     if (dane.bezPlanu) { ekranStatusu(dane.konto); return; }
     var pierwszy = false; try { pierwszy = !localStorage.getItem('cache_sesja'); } catch (e) {}
-    AUTH = { sesja: SESJA }; D = dane; D.url = URL_STRONY; TR = false; OST_WCZYT = Date.now(); render(); przywrocSzkic();
+    AUTH = { sesja: SESJA }; D = dane; D.url = URL_STRONY; TR = false; OST_WCZYT = Date.now(); render(); if (!D.dostepKoniec) przywrocSzkic();
     try { localStorage.setItem('cache_sesja', JSON.stringify({ t: Date.now(), sesja: SESJA, d: dane })); } catch (e) {}
   }).catch(function (e) {
     var msg = String(e.message || e).replace(/^Error:\s*/, '');
     if (/sesja|zaloguj|hasło/i.test(msg)) { wylogujKonto(true); ekranLogowania(msg); return; }
     var c = null; try { c = JSON.parse(localStorage.getItem('cache_sesja') || 'null'); } catch (x) {}
-    if (c && c.d && c.sesja === SESJA) { AUTH = { sesja: SESJA }; D = c.d; D.url = URL_STRONY; TR = false; render(); przywrocSzkic(); status('Brak sieci. Pokazuję plan z ' + new Date(c.t).toLocaleString('pl-PL', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) + '. Wpisy zapiszę, gdy wróci internet.', false, true); }
+    if (c && c.d && c.sesja === SESJA) { AUTH = { sesja: SESJA }; D = c.d; D.url = URL_STRONY; TR = false; render(); if (!D.dostepKoniec) przywrocSzkic(); if (!D.dostepKoniec) status('Brak sieci. Pokazuję plan z ' + new Date(c.t).toLocaleString('pl-PL', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) + '. Wpisy zapiszę, gdy wróci internet.', false, true); }
     else ekranLogowania(msg);
   });
 }

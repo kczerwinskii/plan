@@ -29,6 +29,10 @@ body{margin:0;background:var(--bg);color:var(--iv);font:14px Poppins,Arial,sans-
 .kto b{display:block;font-size:15px}.kto small{display:block;color:var(--ivd);font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .kto small.nt{color:#D9D3C4}.kto small.bk{color:var(--gl)}.kto small.bl{color:#E0798A}
 .v b{display:block;font-size:15px}.v small{display:block;font-size:11px;color:var(--ivd);white-space:nowrap}.v b.zal{color:#E0798A}
+/* patch113: kolumna i panel dostępu */.v b.kon{color:var(--gl)}.v b.bez{color:var(--ivd);font-weight:600;font-size:13px}
+.pan.dp{background:#101010;border-top:1px solid #222;padding:16px 22px 18px 24px}.dst{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.dst .l{font-weight:700}
+.dst input{width:90px;height:40px;border-radius:10px;border:1.5px solid var(--gm);background:#0B0B0B;color:var(--iv);font:700 17px Poppins,Arial,sans-serif;text-align:center;padding:0}
+.dst .mut{font-size:13px}.dst .mut b{color:var(--iv)}.dst .b.bl{height:28px;padding:0 10px;font-size:11px;border-radius:8px}.dst-msg{font-size:12px;color:var(--gl);margin-top:10px}.dst-msg:empty{display:none}.dst-msg.err{color:#E0798A}
 .wk{display:flex;gap:4px;justify-content:center;margin-top:5px}
 .wk i{width:14px;height:14px;border-radius:4px;border:1.5px solid var(--gd);display:inline-flex;align-items:center;justify-content:center;font-style:normal;font-size:9px;font-weight:800;color:#0E0E12}
 .wk i.on{background:linear-gradient(180deg,#E6CB80,#C9A455 55%,#8E6B2E);border-color:#F5E3A6}
@@ -60,7 +64,7 @@ input{background:#101010;color:var(--iv);border:1.5px solid #333;border-radius:1
 </style></head><body>
 <div class="top"><span class="t">Pulpit trenera</span><span class="sp"></span><a class="b gh sm" id="doPlanu">‹ Do planu</a><button class="b gh sm" id="wyloguj" hidden>Wyloguj</button></div>
 <div class="wrap" id="tresc"><div class="mut">Wczytuję…</div></div>
-<script>var API_URL = "https://script.google.com/macros/s/AKfycbz48qRxFlyvGcVBSltMbjR8kfuQNCbq-8a5g2gYG7oJgtWiU2ZJ-HLEyux6WGc_Xesq1Q/exec";</script>
+<script>var API_URL = "https://hnyfncbytkbufobyxeoh.supabase.co/functions/v1/api";</script>
 <script>
 var TSESJA = null; try { TSESJA = localStorage.getItem('trener_sesja'); localStorage.removeItem('trener_haslo'); } catch (e) {}
 function api(b) { if (TSESJA && !b.sesja) b.sesja = TSESJA; return fetch(API_URL, { method: 'POST', body: JSON.stringify(b), redirect: 'follow' }).then(function (r) { return r.text(); }, function () { throw new Error('Brak połączenia z serwerem. Sprawdź internet i spróbuj ponownie.'); }).then(function (t) { try { return JSON.parse(t); } catch (e) { throw new Error('Serwer odpowiedział nieprawidłowo, spróbuj za chwilę.'); } }).then(function (r) { if (!r.ok) throw new Error(r.error || 'Błąd serwera'); return r.dane; }); }
@@ -88,11 +92,52 @@ function wczytaj() {
 function dni(iso) { if (!iso) return null; var d = new Date(String(iso).slice(0, 10)); if (isNaN(d)) return null; return Math.max(0, Math.floor((Date.now() - d.getTime()) / 86400000)); }
 function dniTxt(n) { return n <= 0 ? 'dziś' : n === 1 ? '1 dzień temu' : n + ' dni temu'; }
 function dataKr(iso) { var m = String(iso || '').match(/^(\d{4})-(\d{2})-(\d{2})/); return m ? m[3] + '.' + m[2] : String(iso || ''); }
+// patch113: dostęp na określoną liczbę dni. „Dziś” jak na serwerze: data w Europe/Warsaw; ostatni dzień dostępu = dostepDo włącznie.
+function dzisW() { try { return new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Warsaw' }).format(new Date()); } catch (e) { var d = new Date(); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); } }
+function isoUTC(iso) { var m = String(iso || '').match(/^(\d{4})-(\d{2})-(\d{2})/); return m ? Date.UTC(+m[1], m[2] - 1, +m[3]) : null; }
+function dniDostepu(iso) { var a = isoUTC(iso), b = isoUTC(dzisW()); return a == null || b == null ? null : Math.round((a - b) / 86400000); }
+function dostepUwaga(k) { var d = dniDostepu(k.dostepDo); return d != null && d <= 7; }
+function dataPelna(ms) { var d = new Date(ms); return ('0' + d.getUTCDate()).slice(-2) + '.' + ('0' + (d.getUTCMonth() + 1)).slice(-2) + '.' + d.getUTCFullYear(); }
+function nowyKoniec(iso, dni) { var dz = isoUTC(dzisW()), ob = isoUTC(iso); return dataPelna(Math.max(dz, ob == null ? dz : ob) + dni * 86400000); }
+function komDostep(k) {
+  var d = dniDostepu(k.dostepDo);
+  if (d == null) return '<b class="bez">bez limitu</b>';
+  if (d < 0) return '<b class="zal">Wygasł</b><small>' + esc(dataKr(k.dostepDo)) + '</small>';
+  return '<b' + (d <= 7 ? ' class="kon"' : '') + '>' + (d === 0 ? 'dzisiaj' : d === 1 ? '1 dzień' : d + ' dni') + '</b><small>do ' + esc(dataKr(k.dostepDo)) + '</small>';
+}
+function liczbaDni(v) { v = String(v || '').trim(); if (!/^\d{1,4}$/.test(v)) return null; var x = parseInt(v, 10); return x >= 1 && x <= 3650 ? x : null; }
+function pokazDostep(b, msg, przelacz) {
+  var out = document.getElementById('pan-' + b), k = LISTA.filter(function (x) { return x.bazaId === b; })[0]; if (!out || !k) return;
+  if (przelacz && out.classList.contains('dp')) { out.classList.remove('dp'); out.innerHTML = ''; return; }
+  document.querySelectorAll('.pan.dp').forEach(function (x) { if (x !== out) { x.classList.remove('dp'); x.innerHTML = ''; } }); // jeden panel dostępu naraz
+  out.classList.add('dp');
+  out.innerHTML = '<div class="dst"><span class="l">Dodaj dni dostępu</span><input id="dst-dni" inputmode="numeric" maxlength="4" value="30" aria-label="Liczba dni"><button class="b pr sm" id="dst-zap">Zapisz</button>'
+    + '<span class="mut">Nowy koniec: <b id="dst-kon"></b> (liczone od obecnego końca, a gdy już wygasł, od dziś)</span>'
+    + (k.dostepDo ? '<button class="b gh bl" id="dst-bez">Bez limitu</button>' : '') + '</div><div class="dst-msg" id="dst-msg"></div>';
+  var q = function (id) { return out.querySelector('#' + id); }, inp = q('dst-dni'), kon = q('dst-kon'), zap = q('dst-zap'), m = q('dst-msg');
+  var licz = function () { var d = liczbaDni(inp.value); kon.textContent = d ? nowyKoniec(k.dostepDo, d) : '–'; zap.disabled = !d; };
+  var info = function (t, err) { m.textContent = t; m.classList.toggle('err', !!err); };
+  inp.addEventListener('input', licz); inp.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !zap.disabled) zap.click(); }); licz();
+  if (msg) info(msg);
+  zap.onclick = function () {
+    var d = liczbaDni(inp.value); if (!d) { info('Podaj liczbę dni od 1 do 3650.', true); return; }
+    zap.disabled = true; zap.textContent = 'Zapisuję…';
+    api({ akcja: 'dostepDodaj', bazaId: b, dni: d }).then(function (r) { k.dostepDo = r && r.dostepDo || k.dostepDo; rysuj(); pokazDostep(b, 'Zapisano. Dostęp do ' + dataPelna(isoUTC(k.dostepDo)) + '.'); })
+      .catch(function (e) { zap.disabled = false; zap.textContent = 'Zapisz'; info(e.message, true); });
+  };
+  var bez = q('dst-bez');
+  if (bez) bez.onclick = function () {
+    bez.disabled = true;
+    api({ akcja: 'dostepUsun', bazaId: b }).then(function () { k.dostepDo = ''; rysuj(); pokazDostep(b, 'Zapisano. Dostęp bez limitu.'); })
+      .catch(function (e) { bez.disabled = false; info(e.message, true); });
+  };
+  inp.focus(); inp.select();
+}
 function dataGodz(s) { var m = String(s || '').match(/^(\d{4})-(\d{2})-(\d{2})(?:[ T](\d{2}:\d{2}))?/); return m ? m[3] + '.' + m[2] + (m[4] ? ', ' + m[4] : '') : String(s || ''); }
 function osob(n) { var d = n % 10, s = n % 100; return n === 1 ? '1 osoba czeka' : (d >= 2 && d <= 4 && !(s >= 12 && s <= 14)) ? n + ' osoby czekają' : n + ' osób czeka'; }
 function kontoBazy(b) { return KONTA.filter(function (k) { return k.bazaId === b && (k.status === 'aktywne' || k.status === 'zakonczone'); })[0] || null; }
 function kontoMail(e) { return KONTA.filter(function (k) { return k.email === e; })[0] || null; }
-function zalega(k) { var dw = dni(k.wagaData), dr = dni(k.raportOst); return !!k.blad || Math.min(dw == null ? 999 : dw, dr == null ? 999 : dr) > 8; }
+function zalega(k) { var dw = dni(k.wagaData); return !!k.blad || (dw == null ? 999 : dw) > 8 || dostepUwaga(k); }
 function podzial() {
   var akt = LISTA.filter(function (k) { var c = kontoBazy(k.bazaId); return !(c && c.status === 'zakonczone'); });
   return { akt: akt, uwaga: akt.filter(zalega), nowe: KONTA.filter(function (k) { return k.status === 'ankieta' || k.status === 'czeka'; }), odrz: KONTA.filter(function (k) { return k.status === 'odrzucone'; }), zak: KONTA.filter(function (k) { return k.status === 'zakonczone'; }) };
@@ -110,15 +155,15 @@ function rysuj() {
   if (ZAKL === 'uwaga') h += listaPod(P.uwaga, 'Wszyscy są na bieżąco.');
   if (ZAKL === 'nowe') h += listaNowych(P.nowe, P.odrz);
   if (ZAKL === 'zak') h += listaZak(P.zak);
-  h += '<div class="dol"><span class="mut" style="font-size:12px">' + (ZAKL === 'wszyscy' || ZAKL === 'uwaga' ? 'Pasek z lewej: bordowy = ponad 8 dni bez ważenia i raportu, granatowy = na bieżąco' : '') + '</span><button class="b gh sm" id="dodajBtn">+ Dodaj ręcznie</button></div>'
+  h += '<div class="dol"><span class="mut" style="font-size:12px">' + (ZAKL === 'wszyscy' || ZAKL === 'uwaga' ? 'Pasek z lewej: bordowy = ponad 8 dni bez ważenia albo dostęp kończy się w ciągu 7 dni lub już wygasł, granatowy = na bieżąco' : '') + '</span><button class="b gh sm" id="dodajBtn">+ Dodaj ręcznie</button></div>'
     + '<div class="dodaj" id="dodajForm"><input id="imie" placeholder="imię i nazwisko"><input id="mail" type="email" placeholder="e-mail, widzisz go tylko Ty"><button class="b pr sm" id="dodaj">Dodaj i utwórz bazę</button><span class="mut" id="msg" style="font-size:12px"></span></div>';
   zamknijMenu(); T.innerHTML = h;
 }
 function listaPod(arr, pusto) {
   if (!arr.length) return '<div class="lista"><div class="pusto">' + pusto + '</div></div>';
-  var h = '<div class="lista"><div class="w hd"><span></span><span class="kto">Podopieczny</span><span>Tydzień bloku</span><span>Ostatnie ważenie</span><span>Ostatni raport</span><span></span></div>';
+  var h = '<div class="lista"><div class="w hd"><span></span><span class="kto">Podopieczny</span><span>Tydzień bloku</span><span>Ostatnie ważenie</span><span>Dostęp</span><span></span></div>';
   arr.forEach(function (k) {
-    var dw = dni(k.wagaData), dr = dni(k.raportOst), c = kontoBazy(k.bazaId);
+    var dw = dni(k.wagaData), c = kontoBazy(k.bazaId);
     var blok = parseInt(k.blok, 10) || 0, zal = Math.min(blok, parseInt(k.zaliczone, 10) || 0), wk = '';
     for (var i = 0; i < blok; i++) wk += '<i class="' + (i < zal ? 'on' : '') + '">' + (i < zal ? '✓' : '') + '</i>';
     var kom = function (d, iso) { return d == null ? '<b>–</b><small>brak</small>' : '<b' + (d > 8 ? ' class="zal"' : '') + '>' + dniTxt(d) + '</b><small>' + esc(dataKr(iso)) + '</small>'; };
@@ -127,7 +172,7 @@ function listaPod(arr, pusto) {
       + (k.notatka ? '<small class="nt">✎ ' + esc(k.notatka) + '</small>' : '') + (c ? '' : '<small class="bk">bez konta w aplikacji</small>') + '</div>'
       + '<div class="v" data-l="Tydzień bloku">' + (blok ? '<b>' + zal + ' / ' + blok + '</b><div class="wk">' + wk + '</div>' : '<b>–</b>') + '</div>'
       + '<div class="v" data-l="Ostatnie ważenie">' + kom(dw, k.wagaData) + '</div>'
-      + '<div class="v" data-l="Ostatni raport">' + kom(dr, k.raportOst) + '</div>'
+      + '<div class="v" data-l="Dostęp">' + komDostep(k) + '</div>'
       + '<div class="akc"><a class="b pr sm" href="' + esc(BAZA) + '?klient=' + esc(k.bazaId) + '">Otwórz plan</a><button class="b gh ic sm" data-m="p" data-b="' + esc(k.bazaId) + '" title="Więcej">⋯</button></div></div>'
       + '<div class="pan" id="pan-' + esc(k.bazaId) + '"></div>';
   });
@@ -168,7 +213,7 @@ function blad(er) { alert(er && er.message || er); wczytaj(); }
 function noweHaslo(email) { if (confirm('Ustawić nowe hasło? Stare przestanie działać, a osoba zostanie wylogowana.')) api({ akcja: 'resetHasla', email: email }).then(function (r) { prompt('Nowe hasło, skopiuj je i wyślij podopiecznemu:', r.haslo); }).catch(blad); }
 function pokazAnkiete(email, panId) {
   var out = document.getElementById(panId); if (!out) return;
-  if (out.innerHTML) { out.innerHTML = ''; return; }
+  if (out.innerHTML && !out.classList.contains('dp')) { out.innerHTML = ''; return; } out.classList.remove('dp');
   out.innerHTML = '<span class="mut">Wczytuję ankietę…</span>';
   api({ akcja: 'ankieta', email: email }).then(function (r) {
     var o = r.odpowiedzi || {}, ks = Object.keys(o);
@@ -184,6 +229,7 @@ function menuPod(btn) {
     var em = prompt('E-mail podopiecznego, na niego się zaloguje:', k.email || ''); if (em === null) return; var im = prompt('Imię i nazwisko:', k.imie || ''); if (im === null) return;
     api({ akcja: 'zalozKonto', email: em.trim(), imie: im.trim(), bazaId: b }).then(function (r) { prompt('Konto założone. Skopiuj i wyślij podopiecznemu:', 'Cześć! Twój plan treningowy jest tutaj: ' + BAZA + '\nLogin: ' + em.trim() + '\nHasło: ' + r.haslo + '\nPo zalogowaniu dodaj aplikację do ekranu telefonu, instrukcję znajdziesz w menu.'); wczytaj(); }).catch(blad);
   }]);
+  items.push(['Dostęp', function () { pokazDostep(b, '', true); }]);
   if (c) items.push(['Zakończ prowadzenie', function () { if (confirm('Zakończyć prowadzenie: ' + (k.imie || c.email) + '? Podopieczny straci dostęp do planu i zostanie wylogowany. Możesz wznowić jednym kliknięciem.')) api({ akcja: 'zakoncz', email: c.email }).then(wczytaj).catch(blad); }, 'zak']);
   menu(btn, items);
 }
