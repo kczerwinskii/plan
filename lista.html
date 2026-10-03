@@ -37,7 +37,8 @@ body{margin:0;background:var(--bg);color:var(--iv);font:14px Poppins,Arial,sans-
 .akc{display:flex;gap:8px;justify-content:flex-end;align-items:center}
 .nw{display:grid;grid-template-columns:6px minmax(0,1fr) auto auto;align-items:center;column-gap:14px;padding:14px 18px 14px 0;border-top:1px solid #222}
 .pan{border-top:1px dashed #262626;padding:12px 18px 16px 24px}.pan:empty{display:none}
-.ankv{columns:2;column-gap:24px;font-size:13px}.ankq{break-inside:avoid;margin:0 0 10px;padding:8px 10px;background:#101010;border-left:2px solid var(--gd);border-radius:6px}.ankq span{display:block;color:var(--ivd);font-size:11px;line-height:1.3}.ankq b{display:block;font-weight:500;white-space:pre-wrap;margin-top:3px}
+/* patch118: stan zgody na dane o zdrowiu przy imieniu */
+.ki{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.zp{font-size:10px;font-weight:700;letter-spacing:.3px;padding:2px 9px;border-radius:999px;background:#262626;color:var(--ivd);white-space:nowrap}.zp.wyc{background:#2A1218;color:#E0798A;box-shadow:inset 0 0 0 1px #6E2231}
 select{background:#101010;color:var(--iv);border:1.5px solid #333;border-radius:9px;padding:6px 8px;font:13px Poppins,Arial,sans-serif}
 .pusto{padding:26px;text-align:center;color:var(--ivd)}
 .dol{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:14px}
@@ -70,7 +71,7 @@ input{background:#101010;color:var(--iv);border:1.5px solid #333;border-radius:1
  .w .v{text-align:left}.w .v small{white-space:normal}.w .wk{justify-content:flex-start}.w .v::before{content:attr(data-l);display:block;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--ivd);margin-bottom:2px}
  .w .v[data-l="Tydzień bloku"]{grid-column:2 / 4}
  .nw{grid-template-columns:6px 1fr;row-gap:10px;column-gap:12px;padding:14px 14px 14px 0}.nw .kol{grid-row:span 3}.nw .pill{justify-self:start}.nw .akc{justify-content:flex-start;flex-wrap:wrap}.nw .akc .pr{flex:1}
- .dol{flex-direction:column;align-items:stretch}.ankv{columns:1}
+ .dol{flex-direction:column;align-items:stretch}
  .pr2,.pr2.j{grid-template-columns:1fr}.pr2 > .b{margin-top:0}.lh .sp{display:none}.lh.zm input{flex:1;width:auto;min-width:0}}
 </style></head><body>
 <div class="top"><span class="t">Pulpit trenera</span><span class="sp"></span><a class="b gh sm" id="doPlanu">‹ Do planu</a><button class="b gh sm" id="wyloguj" hidden>Wyloguj</button></div>
@@ -215,7 +216,7 @@ function pokazKonto(b, st) {
     zal.onclick = function () {
       var v = nowy(); if (!v) return; zal.disabled = true; zal.textContent = 'Tworzę…';
       api({ akcja: 'zalozKonto', login: v, imie: k.imie, bazaId: b }).then(function (r) {
-        var lo = r.login || v; KONTA.push({ login: lo, email: lo, imie: k.imie, bazaId: b, status: 'aktywne', ankieta: false });
+        var lo = r.login || v; KONTA.push({ login: lo, email: lo, imie: k.imie, bazaId: b, status: 'aktywne' });
         rysuj(); pokazKonto(b, { tytul: 'Konto gotowe', login: lo, haslo: r.haslo, uwaga: TXT_RAZ });
       }).catch(function (e) { zal.disabled = false; zal.textContent = 'Utwórz konto'; info(e.message, true); });
     };
@@ -242,10 +243,16 @@ function pokazKonto(b, st) {
   };
 }
 function kontoBazy(b) { var z = KONTA.filter(function (k) { return k.bazaId === b && (k.status === 'aktywne' || k.status === 'zakonczone'); }); return z.filter(function (k) { return k.status === 'aktywne'; })[0] || z[0] || null; }
+// patch118: stan zgody z pulpit[].zgoda (brak, wycofana, stara_wersja, wyrazona, brak_konta); pigułka, gdy zgoda nie jest aktywna
+function zgodaStan(k) { return k && k.zgoda && k.zgoda.stan || ''; }
+function imieZgoda(k) {
+  var st = zgodaStan(k), p = st === 'wycofana' ? '<span class="zp wyc">zgoda wycofana</span>' : st === 'brak' || st === 'stara_wersja' ? '<span class="zp">brak zgody</span>' : '';
+  return p ? '<div class="ki"><b>' + esc(k.imie) + '</b>' + p + '</div>' : '<b>' + esc(k.imie) + '</b>';
+}
 function zalega(k) { var dw = dni(k.wagaData); return !!k.blad || (dw == null ? 999 : dw) > 8 || dostepUwaga(k); }
 function podzial() {
   var akt = LISTA.filter(function (k) { var c = kontoBazy(k.bazaId); return !(c && c.status === 'zakonczone'); });
-  return { akt: akt, uwaga: akt.filter(zalega), zak: KONTA.filter(function (k) { return k.status === 'zakonczone'; }), bp: KONTA.filter(function (k) { return k.status === 'ankieta' || k.status === 'czeka'; }) };
+  return { akt: akt, uwaga: akt.filter(function (k) { return zalega(k) || zgodaStan(k) === 'wycofana'; }), zak: KONTA.filter(function (k) { return k.status === 'zakonczone'; }), bp: KONTA.filter(function (k) { return k.status === 'ankieta' || k.status === 'czeka'; }) };
 }
 function rysuj() {
   var P = podzial(), n = { wszyscy: P.akt.length, uwaga: P.uwaga.length, zak: P.zak.length };
@@ -266,7 +273,7 @@ function listaPod(arr, pusto) {
     var blok = parseInt(k.blok, 10) || 0, zal = Math.min(blok, parseInt(k.zaliczone, 10) || 0), wk = '';
     for (var i = 0; i < blok; i++) wk += '<i class="' + (i < zal ? 'on' : '') + '">' + (i < zal ? '✓' : '') + '</i>';
     var kom = function (d, iso) { return d == null ? '<b>–</b><small>brak</small>' : '<b' + (d > 8 ? ' class="zal"' : '') + '>' + dniTxt(d) + '</b><small>' + esc(dataKr(iso)) + '</small>'; };
-    h += '<div class="w"><span class="kol ' + (zalega(k) ? 'r' : 'n') + '"></span><div class="kto"><b>' + esc(k.imie) + '</b>'
+    h += '<div class="w"><span class="kol ' + (zalega(k) ? 'r' : 'n') + '"></span><div class="kto">' + imieZgoda(k)
       + (k.blad ? '<small class="bl">nie udało się wczytać bazy</small>' : '<small>' + (k.cel ? esc(k.cel) : 'bez celu') + '</small>')
       + (k.notatka ? '<small class="nt">✎ ' + esc(k.notatka) + '</small>' : '') + (c ? '' : '<small class="bk">bez konta w aplikacji</small>') + '</div>'
       + '<div class="v" data-l="Tydzień bloku">' + (blok ? '<b>' + zal + ' / ' + blok + '</b><div class="wk">' + wk + '</div>' : '<b>–</b>') + '</div>'
@@ -277,14 +284,13 @@ function listaPod(arr, pusto) {
   });
   return h + '</div>';
 }
-// patch117: konta bez planu (status ankieta / czeka): założone samodzielnie przed zmianą logowania. Trener czyta ankietę
-// i usuwa stare konto; nowe konto z loginem i hasłem daje przyciskiem „+ Dodaj podopiecznego”.
+// patch117: konta bez planu (status ankieta / czeka): założone samodzielnie przed zmianą logowania. Trener usuwa stare
+// konto; nowe konto z loginem i hasłem daje przyciskiem „+ Dodaj podopiecznego” (patch118: bez ankiety).
 function listaBezPlanu(arr) {
   if (!arr.length) return '';
   var h = '<div class="bp"><b>Konta bez planu<span>' + arr.length + '</span></b><small>Założone samodzielnie przed zmianą logowania. Dodaj tę osobę przyciskiem „+ Dodaj podopiecznego”, a stare konto usuń.</small></div><div class="lista">';
   arr.forEach(function (k, i) {
-    h += '<div class="nw"><span class="kol s"></span><div class="kto"><b>' + esc(k.imie || 'bez imienia') + '</b><small>' + esc(bezMaila(lg(k)) || (k.ankieta ? 'ankieta wypełniona' : 'bez ankiety')) + '</small></div><span></span><div class="akc">'
-      + (k.ankieta ? '<button class="b gh sm" data-a="ank" data-e="' + esc(lg(k)) + '" data-p="pan-bp' + i + '">Pokaż ankietę</button>' : '')
+    h += '<div class="nw"><span class="kol s"></span><div class="kto"><b>' + esc(k.imie || 'bez imienia') + '</b><small>' + esc(bezMaila(lg(k))) + '</small></div><span></span><div class="akc">'
       + '<button class="b gh sm" data-a="usunK" data-e="' + esc(lg(k)) + '" data-i="' + esc(k.imie || '') + '">Usuń konto</button></div></div><div class="pan" id="pan-bp' + i + '"></div>';
   });
   return h + '</div>';
@@ -308,19 +314,9 @@ function menu(btn, items) {
 document.addEventListener('click', function (e) { if (MENU_EL && !MENU_EL.contains(e.target)) zamknijMenu(); });
 window.addEventListener('resize', zamknijMenu);
 function blad(er) { alert(er && er.message || er); wczytaj(); }
-function pokazAnkiete(login, panId) {
-  var out = document.getElementById(panId); if (!out) return;
-  if (out.innerHTML && !out.classList.contains('dp') && !out.classList.contains('kp')) { out.innerHTML = ''; return; } out.classList.remove('dp'); out.classList.remove('kp');
-  out.innerHTML = '<span class="mut">Wczytuję ankietę…</span>';
-  api({ akcja: 'ankieta', login: login, email: login }).then(function (r) {
-    var o = r.odpowiedzi || {}, ks = Object.keys(o);
-    out.innerHTML = ks.length ? (r.data ? '<div class="mut" style="margin-bottom:8px;font-size:12px">wypełniona ' + esc(r.data) + '</div>' : '') + '<div class="ankv">' + ks.map(function (q) { var it = o[q]; var pyt = it && typeof it === 'object' ? it.p : q, odp = it && typeof it === 'object' ? it.o : String(it); return '<div class="ankq"><span>' + esc(pyt) + '</span><b>' + esc(odp) + '</b></div>'; }).join('') + '</div>' : '<span class="mut">Ankieta pusta.</span>';
-  }).catch(function (er) { out.innerHTML = '<span class="err">' + esc(er.message) + '</span>'; });
-}
 function menuPod(btn) {
   var b = btn.dataset.b, k = LISTA.filter(function (x) { return x.bazaId === b; })[0] || {}, c = kontoBazy(b), items = [];
   items.push(['Notatka dla siebie', function () { var v = prompt('Notatka trenera, widzisz ją tylko Ty:', k.notatka || ''); if (v === null) return; api({ akcja: 'notatkaTrenera', a0: b, a1: v.trim() }).then(wczytaj).catch(blad); }]);
-  if (c && c.ankieta) items.push(['Pokaż ankietę', function () { pokazAnkiete(lg(c), 'pan-' + b); }]);
   items.push([c ? 'Login i hasło' : 'Załóż konto', function () { pokazKonto(b, { przelacz: true }); }]);
   items.push(['Dostęp', function () { pokazDostep(b, '', true); }]);
   if (c) items.push(['Zakończ prowadzenie', function () { if (confirm('Zakończyć prowadzenie: ' + (k.imie || lg(c)) + '? Podopieczny straci dostęp do planu i zostanie wylogowany. Możesz wznowić jednym kliknięciem.')) api({ akcja: 'zakoncz', login: lg(c), email: lg(c) }).then(wczytaj).catch(blad); }, 'zak']);
@@ -332,8 +328,7 @@ T.addEventListener('click', function (ev) {
   if (b.dataset.m) { ev.stopPropagation(); if (MENU_EL && MENU_EL.__od === b) { zamknijMenu(); return; } menuPod(b); if (MENU_EL) MENU_EL.__od = b; return; }
   var a = b.dataset.a, e = b.dataset.e;
   if (a === 'wznow') { b.textContent = 'Wznawiam…'; b.disabled = true; api({ akcja: 'wznow', login: e, email: e }).then(wczytaj).catch(blad); return; }
-  if (a === 'ank') { pokazAnkiete(e, b.dataset.p); return; }
-  if (a === 'usunK') { if (confirm('Usunąć konto: ' + (b.dataset.i || 'bez imienia') + '? Ankieta tej osoby też zostanie usunięta.')) { b.textContent = 'Usuwam…'; b.disabled = true; api({ akcja: 'usunPodopiecznego', login: e, email: e }).then(wczytaj).catch(blad); } return; }
+  if (a === 'usunK') { if (confirm('Usunąć konto: ' + (b.dataset.i || 'bez imienia') + '?')) { b.textContent = 'Usuwam…'; b.disabled = true; api({ akcja: 'usunPodopiecznego', login: e, email: e }).then(wczytaj).catch(blad); } return; }
   if (b.id === 'dodajBtn') { var on = !NOWY.on; NOWY = nowyStan(); NOWY.on = on; rysuj(); var i = document.getElementById('np-imie'); if (i) i.focus(); return; }
   if (b.id === 'np-utworz') { utworzKonto(b); return; }
   if (b.dataset.kop && NOWY.gotowe) kopiuj(wiadomosc(NOWY.gotowe.login, NOWY.gotowe.haslo), b);
