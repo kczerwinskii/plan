@@ -1,6 +1,7 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="18cde3d027"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="3e7b2dec67"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
-<style>
+<style>/* patch124: odtwarzacz cofnięty (zachowany w webapp/odtwarzacz_zachowany), widok tylko mobilny zostaje */
+
 :root{--bg1:#121212;--bg2:#0D0D0D;--bg3:#080808;--card:#161616;--head:#1C1C1C;--dark:#101010;--empty:#141414;--line:#2C2C2C;--iv:#F4F1EA;--ivd:#A7A49C;--gl:#D9A520;--gm:#B8891A;--gd:#7A5A12;--gx:#4E3A0C;--green:#5FBF7A;--red:#E0684A}
 *{box-sizing:border-box}html,body{margin:0}
 body{background:linear-gradient(180deg,var(--bg1),var(--bg2) 60%,var(--bg3)) fixed;color:var(--iv);font:13px/1.35 Poppins,Arial,sans-serif;min-height:100vh}
@@ -426,67 +427,6 @@ body.tel .kalk{padding:16px 16px 30px}
 .kalk .kk-btn:disabled{opacity:.4;cursor:default}
 .wt th.wbt,.wt td.wbt{width:58px}.wt td.wbt input.c{text-align:center}
 .wz.ed .r4{display:flex;align-items:center;gap:10px;margin-top:10px}.wz.ed .r4 .mk3{flex:1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.wz.ed .r4 label{display:flex;align-items:center;gap:6px;margin:0}.wz.ed .r4 label i{font-style:normal;font-size:12px;font-weight:700;color:#E6CB80}.wz.ed .r4 input.c{text-align:center;font-weight:600;min-width:0}
-/* patch122: własny odtwarzacz YouTube (ODTWARZACZ.md). NIC nie leży na ramce YouTube: .ytr zawiera wyłącznie iframe,
-   złota oprawa .yts jest wokół niego (odstęp 5 px, bez przycinania rogów), sterowanie i rozdziały pod filmem */
-.vpan,.red{--zl:#C9A455;--zlj:#E6CB80;--zlc:#8E6B2E;--grj:#4A64A3;--boj:#A33A4F}
-.vbody.ybody{overflow-y:auto;justify-content:flex-start}
-.ycol{width:100%;max-width:560px;margin:0 auto}.ycol.poz{max-width:900px}.ybody>.ycol{margin:auto}
-.yts{width:max-content;max-width:100%;margin:0 auto;padding:5px;border:1px solid var(--zl);border-radius:16px;background:#000}
-.ytr{position:relative;width:256px;height:456px;background:#000}
-.ytr iframe{position:absolute;left:0;top:0;width:100%;height:100%;border:0;display:block}
-.ytcz{position:absolute;left:0;top:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center}.ytcz i{width:28px;height:28px;border-radius:50%;border:2.5px solid rgba(244,241,234,.2);border-top-color:var(--zlj);animation:ykr .8s linear infinite}
-@keyframes ykr{to{transform:rotate(360deg)}}
-.ytpod{min-height:22px;line-height:18px;padding-top:4px;font-size:12px;color:var(--ivd);text-align:center}
-.yster{display:flex;align-items:flex-start;gap:12px;margin-top:2px}
-.ygp{flex:none;width:56px;height:56px;border-radius:50%;border:1.5px solid var(--zl);background:#141414;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
-.ygp svg{width:22px;height:22px;fill:var(--zlj);pointer-events:none}.ygp.off{opacity:.45;cursor:default}.ygp:focus-visible{outline:2px solid var(--zl);outline-offset:3px}
-.yosw{flex:1;min-width:0}
-.yos{position:relative;height:30px;margin-top:6px;cursor:pointer;touch-action:none;outline:0;-webkit-user-select:none;user-select:none}.yos:focus-visible{outline:2px solid var(--zl);outline-offset:2px;border-radius:6px}.yos.stat{cursor:default}
-.yos::before{content:"";position:absolute;left:0;right:0;top:-7px;bottom:-7px} /* patch123: strefa dotyku 44 px, wygląd bez zmian */
-.ytor{position:absolute;left:0;right:0;top:11px;height:8px;display:flex;gap:3px}
-.ytor .odc{position:relative;height:100%;border-radius:4px;overflow:hidden;min-width:2px}
-.ytor .odc.ok{background:rgba(46,63,102,.75)}.ytor .odc.zle{background:rgba(110,34,49,.75)}.ytor .odc.inne,.ytor .odc.brak{background:#2f2f2f}
-.ytor .odc b{position:absolute;left:0;top:0;bottom:0;width:0}
-.ytor .odc.ok b{background:var(--grj)}.ytor .odc.zle b{background:var(--boj)}.ytor .odc.inne b{background:#777}.ytor .odc.brak b{background:var(--zl)}
-.yos.stat .odc.ok{background:var(--grj)}.yos.stat .odc.zle{background:var(--boj)}.yos.stat .odc.inne{background:#5a5a5a}
-.ygal{position:absolute;top:15px;left:0;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;background:var(--zlj);border:3px solid #0B0B0B;box-shadow:0 0 0 1px var(--zl);pointer-events:none;transition:transform .12s}
-.yos.ciag .ygal{transform:scale(1.2)}
-.ydym{position:absolute;top:30px;left:0;font-size:11px;padding:3px 8px;border-radius:8px;background:#141414;border:1px solid var(--zlc);color:var(--iv);white-space:nowrap;opacity:0;pointer-events:none;z-index:2}
-.yos.ciag .ydym{opacity:1}
-.ypodp{position:relative;height:18px;font-size:11px;color:var(--ivd)}
-.ypodp span{position:absolute;top:0;display:flex;align-items:center;gap:5px;white-space:nowrap;overflow:hidden;padding-right:6px;box-sizing:border-box}
-.ypodp span i{flex:none;width:7px;height:7px;border-radius:50%;background:#777}.ypodp .ok i{background:var(--grj)}.ypodp .zle i{background:var(--boj)}
-.ypodp span em{font-style:normal;overflow:hidden;text-overflow:ellipsis}
-.yczas{font-size:12px;color:var(--ivd);font-variant-numeric:tabular-nums;text-align:right;margin-top:2px;min-height:16px}.yczas b{color:var(--iv);font-weight:600}
-.yrozdz{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}.yrozdz[hidden]{display:none}
-.yrozdz button{flex:1 1 40%;min-width:0;min-height:58px;border-radius:14px;border:1px solid var(--line);background:#141414;color:var(--iv);font:600 13px/1.25 Poppins,Arial,sans-serif;text-align:left;padding:8px 12px 8px 16px;cursor:pointer;position:relative;overflow:hidden}
-.yrozdz button::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:#555}
-.yrozdz button.ok::before{background:var(--grj)}.yrozdz button.zle::before{background:var(--boj)}
-.yrozdz button small{display:block;font-size:11px;font-weight:400;color:var(--ivd)}
-.yrozdz button.teraz{border-color:var(--zl)}.yrozdz button.teraz small{color:var(--zlj)}
-/* patch122: atlas trenera, kolumna „Rozdziały” i edycja (makieta 4) */
-table.atl td.rz{text-align:left;padding:4px 8px}
-.rbtn{display:inline-flex;align-items:center;gap:8px;height:28px;padding:0 10px;border-radius:9px;border:1px solid #8E6B2E;background:#141414;color:var(--iv);font:600 11px Poppins,Arial,sans-serif;cursor:pointer;white-space:nowrap}
-.rbtn .mini{display:flex;gap:2px;width:44px;height:5px}.rbtn .mini i{display:block;height:100%;border-radius:2px}
-.rbtn.pusty{border-style:dashed;border-color:#3A3A3A;color:var(--ivd)}.rbtn.otw{border-color:#C9A455;color:#E6CB80}
-table.atl tr.redyt>td{padding:0;height:auto;text-align:left;border-color:#262626}
-.red{display:flex;gap:24px;padding:20px 22px;background:#121212;border-top:1px solid #8E6B2E;border-bottom:1px solid #8E6B2E;color:var(--iv)}
-.red .mini9{flex:none;width:126px;aspect-ratio:9/16;border:1px solid #C9A455;border-radius:12px;background:#000 center/cover no-repeat;position:relative;cursor:pointer;padding:0;align-self:flex-start}
-.red .mini9.poz{width:224px;aspect-ratio:16/9}
-.red .mini9 span{position:absolute;left:50%;top:50%;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;border:1px solid #C9A455;background:rgba(11,11,11,.6);display:flex;align-items:center;justify-content:center}
-.red .mini9 svg{width:18px;height:18px;fill:var(--iv);margin-left:2px}
-.red .pr{flex:1;min-width:0;max-width:620px}
-.red label{display:block;font-size:13px;font-weight:600;margin-bottom:8px}
-.red textarea{width:100%;height:84px;resize:vertical;border-radius:12px;border:1px solid #8E6B2E;background:#0B0B0B;color:var(--iv);padding:10px 14px;font:14px/1.55 Poppins,Arial,sans-serif;outline:none;text-align:left}
-.red textarea:focus{border-color:#C9A455}
-.red .wsk{font-size:12px;color:var(--ivd);margin:8px 0 16px;line-height:1.5}.red .wsk b{color:var(--iv);font-weight:600}
-.red .podgl{font-size:11px;color:var(--ivd);margin-bottom:2px;text-transform:uppercase;letter-spacing:.06em}
-.red .yosw{max-width:520px}.red .yos{margin-top:0}
-.red .akcje{display:flex;gap:10px;margin-top:16px;align-items:center}
-.red .akcje button{height:40px;padding:0 20px;border-radius:12px;font:600 13px Poppins,Arial,sans-serif;cursor:pointer}
-.red .zap{border:1.5px solid #C9A455;background:#141414;color:#E6CB80}.red .zap:disabled{opacity:.5;cursor:default}.red .anul{border:1px solid var(--line);background:transparent;color:var(--ivd)}
-.red .uwaga{margin-left:auto;font-size:11px;color:var(--ivd);text-align:right}
-.red .bladW{font-size:12px;color:#E0684A;margin-top:6px}.red .bladW:empty{display:none}
 /* patch122: podopieczny ma tylko widok mobilny; na szerokim ekranie wyśrodkowana kolumna jak telefon */
 @media (min-width:700px){body.pmob.karty #app,body.pmob.mobw #app{max-width:560px;margin:0 auto}body.pmob.karty .mnav{left:50%;right:auto;width:560px;transform:translateX(-50%)}}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
@@ -801,7 +741,7 @@ function wywolaj(nazwa, params) { var b = { akcja: nazwa }; (params || []).forEa
 function poleEdyt(el) { return el && (el.tagName === 'INPUT' && el.type !== 'checkbox' && el.type !== 'date' || el.tagName === 'SELECT' || el.tagName === 'TEXTAREA'); }
 function skoczDo(el) { if (!el) return; el.focus(); if (el.select && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA')) el.select(); }
 document.addEventListener('keydown', function (e) {
-  var el = document.activeElement; if (!poleEdyt(el) || !el.closest('#app') || el.closest('.red')) return; // patch122: pole rozdziałów w atlasie
+  var el = document.activeElement; if (!poleEdyt(el) || !el.closest('#app')) return;
   var k = e.key; if (['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown', 'Enter'].indexOf(k) < 0) return;
   if (el.tagName === 'SELECT' && (k === 'ArrowUp' || k === 'ArrowDown')) return;
   var mc = el.closest('#mobcards'); if (mc) { if (k !== 'Enter') return; var wsz0 = Array.prototype.slice.call(mc.querySelectorAll('input')).filter(poleEdyt), i0 = wsz0.indexOf(el); e.preventDefault(); if (wsz0[i0 + 1]) skoczDo(wsz0[i0 + 1]); else el.blur(); return; }
@@ -873,7 +813,7 @@ function wpisane(c) { var s = Math.max(0, Math.min(6, n(c.sets))), k = 0; for (v
 function krokZrobiony(st) { var w = wpisane(st.a), ok = w.s > 0 && w.k >= w.s; if (st.b) { var w2 = wpisane(st.b); ok = ok && (w2.s === 0 || w2.k >= w2.s); } return ok; }
 function idxMob(t) { var k = krokiMob(t), i = MV.idx[t]; if (i == null) { try { i = parseInt(localStorage.getItem('mobIdx' + t), 10); } catch (e) {} } if (!(i >= 0 && i < k.length)) i = 0; MV.idx[t] = i; return i; }
 function idzMob(t, i) { var k = krokiMob(t); if (!k.length) return; i = Math.max(0, Math.min(k.length - 1, i)); MV.idx[t] = i; try { localStorage.setItem('mobIdx' + t, i); } catch (e) {} schowajHint(); zamknijArkusz(); render(); window.scrollTo(0, 0); }
-function hintMob() { if (MV.hint == null) { var dot = false; try { dot = window.matchMedia('(pointer: coarse)').matches || navigator.maxTouchPoints > 0; } catch (e) {} if (!dot) MV.hint = false; /* patch123: gest działa tylko na dotyk */ else try { MV.hint = localStorage.getItem('mobHint') !== '1'; } catch (e) { MV.hint = true; } } return MV.hint; }
+function hintMob() { if (MV.hint == null) { try { MV.hint = localStorage.getItem('mobHint') !== '1'; } catch (e) { MV.hint = true; } } return MV.hint; }
 function schowajHint() { if (!MV.hint) return; MV.hint = false; try { localStorage.setItem('mobHint', '1'); } catch (e) {} var h = document.getElementById('mhint'); if (h) h.remove(); }
 function kgIn(c, pole, mala) { return '<input class="mc" data-f="' + pole + '" inputmode="decimal" value="' + esc(c[pole]) + '" placeholder="–">' + (mala ? '' : '<span>kg</span>'); }
 // ikonka play (granatowy kwadrat, własny rysunek – bez emotki systemowej; patch82)
@@ -964,252 +904,15 @@ function nakWroc() { var t = NAK[NAK.length - 1]; if (!t) return; if (t.h) { try
 window.addEventListener('popstate', function () { var t = NAK.pop(); if (t) t.f(); });
 function ytId(u) { var m = String(u || '').match(/(?:youtu\.be\/|youtube(?:-nocookie)?\.com\/(?:watch\?(?:[^#]*&)?v=|shorts\/|embed\/|live\/|v\/))([A-Za-z0-9_-]{6,})/); return m ? m[1] : ''; }
 function driveId(u) { var m = String(u || '').match(/drive\.google\.com\/(?:file\/d\/|open\?id=)([A-Za-z0-9_-]{10,})/); return m ? m[1] : ''; }
-function filmEmbed(u) { var y = ytId(u); if (y) return { id: y, pion: /\/shorts\//.test(u), yt: true }; var d = driveId(u); if (d) return { src: 'https://drive.google.com/file/d/' + d + '/preview', pion: false, yt: false }; return null; }
-// patch122: YouTube = własny odtwarzacz (ytPanel), Dysk Google = osadzenie jak dotąd. tekst = rozdziały do podglądu (atlas)
-function filmOtworz(u, em, tytul, tekst) {
+function filmEmbed(u) { var y = ytId(u); if (y) return { src: 'https://www.youtube-nocookie.com/embed/' + y + '?rel=0&playsinline=1&modestbranding=1', pion: /\/shorts\//.test(u), yt: true }; var d = driveId(u); if (d) return { src: 'https://drive.google.com/file/d/' + d + '/preview', pion: false, yt: false }; return null; }
+function filmOtworz(u, em, tytul) {
   if (VP.el) return;
   var el = document.createElement('div'); el.className = 'vpan'; el.id = 'vpan';
-  if (em.yt) el.innerHTML = ytPanelHtml(u, em, tytul);
-  else el.innerHTML = '<div class="vtop"><b>' + esc(tytul) + '</b></div><div class="vbody"><div class="vbox' + (em.pion ? ' pion' : '') + '"><iframe src="' + esc(em.src) + '" title="' + esc(tytul) + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div><button class="vwroc" onclick="nakWroc()">‹ Wróć</button><a class="vyt" href="' + esc(u) + '" target="_blank" rel="noopener">Nie działa? Otwórz w nowym oknie</a></div>';
+  el.innerHTML = '<div class="vtop"><b>' + esc(tytul) + '</b></div><div class="vbody"><div class="vbox' + (em.pion ? ' pion' : '') + '"><iframe src="' + esc(em.src) + '" title="' + esc(tytul) + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div><button class="vwroc" onclick="nakWroc()">‹ Wróć</button><a class="vyt" href="' + esc(u) + '" target="_blank" rel="noopener">Nie działa? Otwórz w ' + (em.yt ? 'YouTube' : 'nowym oknie') + '</a></div>';
   document.body.appendChild(el); VP.el = el; void el.offsetWidth; el.classList.add('on');
-  if (em.yt) ytStart(el, u, em, tytul, tekst);
   nakOtworz(filmUsun);
 }
-function filmUsun() { ytZamknij(); var el = VP.el || document.getElementById('vpan'); VP.el = null; if (!el) return; el.style.transition = 'transform .22s ease-in'; el.style.transform = 'translateX(105%)'; setTimeout(function () { el.remove(); }, 240); }
-
-// ----- patch122: rozdziały filmu (ODTWARZACZ.md). Jeden parser dla odtwarzacza i podglądu w atlasie -----
-// Wpisy oddzielone nową linią albo średnikiem: czas (m:ss, h:mm:ss albo sekundy) i nazwa, np. „0:18 Błędy”.
-function rozdzCzas(s) {
-  s = String(s).trim(); var m = s.match(/^(\d{1,2}):([0-5]\d):([0-5]\d)$/); if (m) return (+m[1]) * 3600 + (+m[2]) * 60 + (+m[3]);
-  m = s.match(/^(\d{1,3}):([0-5]\d)$/); if (m) return (+m[1]) * 60 + (+m[2]);
-  m = s.match(/^(\d{1,5})s?$/i); return m ? +m[1] : NaN;
-}
-// kolor po nazwie: „Błędy”, „źle”, „unikaj” bordo; „Prawidłowe wykonanie”, „technika” granat; reszta szara.
-// patch123: najpierw zaprzeczenia i błędy („Nieprawidłowe”, „Niepoprawna technika”, „Złe wykonanie”, „Typowe pomyłki”),
-// dopiero potem słowa „prawidłowe”, „technika” (granat to sygnał prawidłowego wykonania)
-function rozdzRodzaj(nazwa) {
-  var n = String(nazwa || '').toLowerCase();
-  if (/b[łl][ęeąa]d|pomy[łl]k|unikaj|(^|[^a-ząćęłńóśźż])nie\s*(r[óo]b|prawid|popraw|dobrz|tak($|[^a-ząćęłńóśźż]))|(^|[^a-ząćęłńóśźż])[źz][łl](e|y|a|ą|o|ych|ymi|ym|ego|ej)?($|[^a-ząćęłńóśźż])/.test(n)) return 'zle';
-  if (/prawid|poprawn|dobrze|techni|wykonan/.test(n)) return 'ok';
-  return 'inne';
-}
-function parsujRozdzialy(tekst) {
-  var wynik = [], bledy = [];
-  String(tekst || '').split(/[;\n]+/).forEach(function (kaw) {
-    kaw = kaw.replace(/[\u200B-\u200F\u202A-\u202E\u2060-\u2064\u2066-\u2069\uFEFF]/g, '').trim(); if (!kaw) return; // patch123: znaki niewidoczne i kierunku tekstu
-    // po m:ss także „:” albo „.” przed nazwą; po samych sekundach tylko spacja, „-” albo „)” (żeby „0.18” i „1:2” były błędem); patch123: także „—”
-    var m = kaw.match(/^(?:(\d{1,2}:\d{2}:\d{2}|\d{1,3}:\d{2})(?:\s*[-–—.:)]\s*|\s+)|(\d{1,5}s?)(?:\s*[-–—)]\s*|\s+))(\S.*)$/i), t = m ? rozdzCzas(m[1] || m[2]) : NaN;
-    if (!m || isNaN(t)) { bledy.push(kaw); return; }
-    var nazwa = m[3].trim(); wynik.push({ start: t, nazwa: nazwa, rodzaj: rozdzRodzaj(nazwa) });
-  });
-  wynik.sort(function (a, b) { return a.start - b.start; });
-  if (wynik.length && wynik[0].start > 0) wynik.unshift({ start: 0, nazwa: 'Wstęp', rodzaj: 'inne', auto: true });
-  return { rozdzialy: wynik, bledy: bledy };
-}
-function czasTxt(s) { s = Math.max(0, Math.floor(+s || 0)); var h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60), r = s % 60; return (h ? h + ':' + (m < 10 ? '0' : '') : '') + m + ':' + (r < 10 ? '0' : '') + r; }
-// tekst rozdziałów filmu: pole ćwiczenia (pierwszeństwo), mapa z wczytaj (podopieczny, klucz = ID filmu), atlas (trener)
-function rozdzialyFilmu(u, tytul) {
-  var id = ytId(u); if (!id) return '';
-  var cw = (D.cwiczenia || []).filter(function (x) { return x && x.rozdzialy && ytId(x.wideo) === id; });
-  var c1 = cw.filter(function (x) { return x.nazwa === tytul; })[0] || cw[0]; if (c1) return String(c1.rozdzialy);
-  var m = D.rozdzialy, wl = function (k) { return Object.prototype.hasOwnProperty.call(m, k) && m[k]; }; // patch123: tylko własne pola mapy
-  if (m && typeof m === 'object') { if (wl(id)) return String(m[id]); for (var k in m) if (wl(k) && ytId(k) === id) return String(m[k]); }
-  return atlasRozdzialy(id);
-}
-function atlasRozdzialy(id) { var a = (D.atlas || []).filter(function (x) { return x && x.rozdzialy && ytId(x.wideo) === id; })[0]; return a ? String(a.rozdzialy) : ''; }
-// długość filmu poznana w odtwarzaczu (podgląd osi w atlasie, zanim film się wczyta)
-function ytDlZnana(id) { var v = 0; try { v = +localStorage.getItem('ytdl:' + id) || 0; } catch (e) {} return v > 0 ? v : 0; }
-// oś rozdziałów: odcinki (szerokość wg czasu), podpisy pod osią; dl = długość filmu (s)
-function rozdzOs(R, dl) {
-  var lista = R.filter(function (r) { return r.start < dl; });
-  if (!dl || !lista.length) return { lista: [], tor: '<div class="odc brak" style="flex:1 0 0"><b></b></div>', podp: '' };
-  var tor = '', podp = '';
-  lista.forEach(function (r, i) {
-    var kon = i + 1 < lista.length ? lista[i + 1].start : dl;
-    tor += '<div class="odc ' + r.rodzaj + '" style="flex:' + Math.max(0.01, kon - r.start).toFixed(2) + ' 0 0" data-s="' + r.start + '" data-k="' + kon + '"><b></b></div>';
-    podp += rozdzPodpis(r, kon, dl);
-  });
-  return { lista: lista, tor: tor, podp: lista.length === 1 && lista[0].auto ? '' : podp };
-}
-function rozdzPodpis(r, kon, dl) { // podpis pod osią; przy bardzo krótkim odcinku sama kropka nic nie mówi, więc go pomijamy
-  return (kon - r.start) / dl < 0.08 ? '' : '<span class="' + r.rodzaj + '" style="left:' + (r.start / dl * 100).toFixed(2) + '%;max-width:' + ((kon - r.start) / dl * 100).toFixed(2) + '%"><i></i><em>' + esc(r.nazwa) + '</em></span>';
-}
-
-// ----- patch122: własny odtwarzacz YouTube (ODTWARZACZ.md) -----
-// Zasady YouTube: NIC nie leży na ramce odtwarzacza (bez warstw, okładek, napisów, przyciemnień), ramka bez przycinania,
-// co najmniej 200 x 200 px, koniec filmu jak w YouTube. Sterowanie tylko oficjalnym API i własnymi przyciskami POD filmem.
-var YP = null, YT_API = { laduje: false, cb: [] }, YT_PION = {};
-var YT_IK = { play: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l12.5-7.5z"/></svg>', pauza: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="4.5" width="4" height="15" rx="1"/><rect x="14" y="4.5" width="4" height="15" rx="1"/></svg>' };
-function ytPanelHtml(u, em, tytul) {
-  return '<div class="vtop"><b>' + esc(tytul) + '</b></div><div class="vbody ybody"><div class="ycol' + (em.pion ? '' : ' poz') + '">'
-    + '<div class="yts"><div class="ytr"><div class="ytcz"><i></i></div></div></div>'
-    + '<div class="ytpod" aria-live="polite"></div>'
-    + '<div class="yster"><button type="button" class="ygp off" aria-label="Odtwórz">' + YT_IK.play + '</button><div class="yosw"><div class="yos" role="slider" tabindex="0" aria-label="Oś czasu filmu" aria-valuemin="0" aria-valuenow="0"><div class="ytor"></div><div class="ygal"></div><div class="ydym"></div></div><div class="ypodp"></div><div class="yczas"><b class="ytT">0:00</b> / <span class="ytC">0:00</span></div></div></div>'
-    + '<div class="yrozdz" hidden></div>'
-    + '<button class="vwroc" onclick="nakWroc()">‹ Wróć</button><a class="vyt" href="' + esc(u) + '" target="_blank" rel="noopener">Nie działa? Otwórz w YouTube</a></div></div>';
-}
-function ytNum(v) { v = +v; return isFinite(v) && v > 0 ? v : 0; }
-function ytApi(ok, blad) {
-  if (window.YT && YT.Player) { ok(); return; }
-  YT_API.cb.push({ ok: ok, blad: blad }); if (YT_API.laduje) return; YT_API.laduje = true;
-  var poprz = window.onYouTubeIframeAPIReady;
-  window.onYouTubeIframeAPIReady = function () { if (typeof poprz === 'function') { try { poprz(); } catch (e) {} } YT_API.laduje = false; var l = YT_API.cb; YT_API.cb = []; l.forEach(function (x) { x.ok(); }); };
-  var sc = document.createElement('script'); sc.src = 'https://www.youtube.com/iframe_api'; sc.async = true;
-  sc.onerror = function () { YT_API.laduje = false; sc.remove(); var l = YT_API.cb; YT_API.cb = []; l.forEach(function (x) { if (x.blad) x.blad(); }); };
-  document.head.appendChild(sc);
-}
-function ytStart(el, u, em, tytul, tekst) {
-  ytZamknij();
-  var q = function (s) { return el.querySelector(s); };
-  var y = YP = { el: el, q: q, u: u, id: em.id, pion: em.pion || !!YT_PION[em.id], P: null, gotowy: false, dl: ytDlZnana(em.id), cur: 0, gra: false, start: false, koniec: false, ciag: false, celSkoku: null, timer: null };
-  y.R = parsujRozdzialy(tekst != null ? tekst : rozdzialyFilmu(u, tytul)).rozdzialy;
-  y.rs = function () { ytRozmiar(); }; window.addEventListener('resize', y.rs);
-  // iPhone: pierwszy start bywa możliwy tylko dotknięciem samego filmu; gdy fokus przejdzie do ramki, wołamy playVideo
-  y.blur = function () { setTimeout(function () { var a = document.activeElement; if (YP === y && a && a.tagName === 'IFRAME' && y.gotowy && !y.gra && !y.start) y.P.playVideo(); }, 0); };
-  window.addEventListener('blur', y.blur);
-  q('.ygp').onclick = ytGraj;
-  q('.yrozdz').addEventListener('click', function (e) { var b = e.target.closest ? e.target.closest('button[data-t]') : null; if (b) ytSkocz(+b.getAttribute('data-t'), true); });
-  ytOsBind(q('.yos'));
-  ytOs(); ytRysuj(); ytRozmiar(); setTimeout(ytRozmiar, 300); // po wjechaniu panelu
-  if (!em.pion && !YT_PION.hasOwnProperty(em.id)) ytWykryjPion(em.id, function (p) { YT_PION[em.id] = p; if (p && YP === y && !y.pion) { y.pion = true; ytRozmiar(); } });
-  y.apiT = setTimeout(function () { if (YP === y && !y.P) ytZapas(y); }, 15000);
-  ytApi(function () { if (YP === y) ytUtworz(y); }, function () { if (YP === y) ytZapas(y); });
-}
-function ytUtworz(y) {
-  clearTimeout(y.apiT);
-  if (y.zapas || y.P) return; // patch123: zapas (zwykłe osadzenie z przyciskami YouTube) już działa: API wczytane później go nie podmienia
-  var cel = document.createElement('div'); var r = y.q('.ytr'); r.innerHTML = ''; r.appendChild(cel);
-  var pv = { controls: 0, disablekb: 1, fs: 0, rel: 0, iv_load_policy: 3, playsinline: 1, autoplay: 0 };
-  if (/^https?:$/.test(location.protocol)) pv.origin = location.origin;
-  try {
-    y.P = new YT.Player(cel, { videoId: y.id, width: '100%', height: '100%', host: 'https://www.youtube-nocookie.com', playerVars: pv,
-      events: { onReady: function () { if (YP !== y) return; y.gotowy = true; var d = ytNum(y.P.getDuration()); if (d) { y.dl = d; try { localStorage.setItem('ytdl:' + y.id, String(Math.round(d))); } catch (e) {} } ytOs(); ytRysuj(); },
-        onStateChange: function (e) { if (YP === y) ytStan(e.data); },
-        onError: function () { if (YP === y) ytBlad(y); } } });
-  } catch (e) { ytZapas(y); }
-}
-// patch123: film nie daje się odtworzyć (usunięty, prywatny, bez zgody na osadzanie): bez naszego sterowania, rozdziałów
-// i podpowiedzi „Dotknij filmu”; komunikat wskazuje link pod filmem
-function ytBlad(y) {
-  y.blad = true; y.gra = false; clearTimeout(y.podpT); clearInterval(y.timer);
-  ytPodp('Ten film nie daje się odtworzyć w aplikacji. Użyj linku „Otwórz w YouTube” poniżej.');
-  y.q('.yster').style.display = 'none'; y.q('.yrozdz').hidden = true; ytRozmiar();
-}
-// zapas: IFrame API nie wczytało się (sieć, blokada) = zwykłe osadzenie YouTube z jego własnymi przyciskami
-function ytZapas(y) {
-  clearTimeout(y.apiT); if (y.P) return;
-  y.q('.ytr').innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + esc(y.id) + '?rel=0&playsinline=1" title="Film" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>';
-  y.q('.yster').style.display = 'none'; y.q('.yrozdz').hidden = true; y.zapas = true;
-}
-function ytZamknij() {
-  var y = YP; YP = null; if (!y) return;
-  clearInterval(y.timer); clearTimeout(y.podpT); clearTimeout(y.apiT);
-  window.removeEventListener('resize', y.rs); window.removeEventListener('blur', y.blur);
-  try { if (y.P) { if (y.P.stopVideo) y.P.stopVideo(); if (y.P.destroy) y.P.destroy(); } } catch (e) {}
-  y.P = null;
-}
-// rozmiar ramki: proporcja filmu bez przycinania, wszystko mieści się na ekranie, co najmniej 200 x 200 px
-function ytRozmiar() {
-  var y = YP; if (!y || !y.el.parentNode) return;
-  var col = y.q('.ycol'), sc = y.q('.yts'), r = y.q('.ytr'), body = y.q('.vbody'), top = y.q('.vtop');
-  col.classList.toggle('poz', !y.pion);
-  var cs = getComputedStyle(body), padV = (parseFloat(cs.paddingTop) || 0) + (parseFloat(cs.paddingBottom) || 0);
-  var RAM = 12, AW = col.clientWidth - RAM, inne = col.offsetHeight - sc.offsetHeight;
-  var AH = window.innerHeight - top.offsetHeight - padV - inne - RAM - 2, tel = window.innerWidth < 700, w, h;
-  if (y.pion) { h = Math.min(AH, tel ? 460 : 640, AW * 16 / 9); h = Math.max(356, h); w = h * 9 / 16; }
-  else { w = Math.min(AW, 960); h = w * 9 / 16; var mh = Math.min(AH, tel ? 9999 : window.innerHeight * 0.62); if (h > mh) { h = Math.max(200, mh); w = Math.min(w, h * 16 / 9); } if (h < 200) h = 200; if (w < 200) w = 200; }
-  r.style.width = Math.floor(w) + 'px'; r.style.height = Math.floor(h) + 'px';
-}
-function ytStan(st) {
-  var y = YP;
-  if (st === 1) {
-    y.gra = true; y.start = true; y.koniec = false; ytPodp(''); y.dl = ytNum(y.P.getDuration()) || y.dl;
-    // przewinięcie w pauzie albo przed startem bywa gubione przez YouTube: dopilnuj przy starcie
-    if (y.celSkoku != null) { var c = y.celSkoku; y.celSkoku = null; if (Math.abs(ytNum(y.P.getCurrentTime()) - c) > 1) y.P.seekTo(c, true); }
-    clearInterval(y.timer); y.timer = setInterval(ytTik, 200);
-  } else if (st === 2) { y.gra = false; clearInterval(y.timer); ytTik(); }
-  else if (st === 0) { y.gra = false; y.koniec = true; clearInterval(y.timer); y.cur = y.dl || y.cur; }
-  ytOs(); ytRysuj();
-}
-function ytTik() { var y = YP; if (!y || !y.P || !y.gotowy) return; if (!y.ciag && y.celSkoku == null && y.start && !y.koniec) y.cur = ytNum(y.P.getCurrentTime()); ytRysuj(); }
-function ytPlay() {
-  var y = YP;
-  if (y.koniec) { y.koniec = false; var c = y.celSkoku != null ? y.celSkoku : 0; y.celSkoku = null; y.cur = c; y.P.seekTo(c, true); }
-  y.P.playVideo();
-  clearTimeout(y.podpT);
-  y.podpT = setTimeout(function () { if (YP === y && !y.blad && !y.gra && !y.start && !(y.P.getPlayerState && y.P.getPlayerState() === 3)) ytPodp('Dotknij filmu, aby włączyć'); }, 1500);
-}
-function ytGraj() { var y = YP; if (!y || !y.gotowy || y.blad) return; if (y.gra) y.P.pauseVideo(); else ytPlay(); }
-function ytSkocz(t, play) {
-  var y = YP; if (!y || !y.gotowy || y.blad) return;
-  t = Math.max(0, Math.min(y.dl ? y.dl - 0.5 : t, t)); y.cur = t;
-  if (y.start && !y.koniec) { y.P.seekTo(t, true); if (!y.gra) y.celSkoku = t; } else y.celSkoku = t; // przed startem i po końcu seekTo sam włącza film
-  if (play && !y.gra) ytPlay();
-  ytRysuj();
-}
-function ytPodp(t) { var y = YP; if (y) y.q('.ytpod').textContent = t; }
-function ytRozdzW(t) { var R = YP.R, i = -1; for (var k = 0; k < R.length; k++) if (t >= R[k].start - 0.05) i = k; return i; }
-function ytOs() {
-  var y = YP, o = rozdzOs(y.R, y.dl), box = y.q('.yrozdz');
-  y.q('.ytor').innerHTML = o.tor; y.q('.ypodp').innerHTML = o.podp;
-  var bt = y.R.length >= 2 ? y.R.filter(function (r) { return !r.auto && (!y.dl || r.start < y.dl); }) : [];
-  var h = bt.map(function (r) { return '<button type="button" class="' + r.rodzaj + '" data-t="' + r.start + '">' + esc(r.nazwa) + '<small>od ' + czasTxt(r.start) + '</small></button>'; }).join('');
-  if (box.getAttribute('data-h') !== h) { box.innerHTML = h; box.setAttribute('data-h', h); }
-  box.hidden = !h || !!y.zapas || !!y.blad;
-}
-function ytRysuj() {
-  var y = YP; if (!y) return;
-  var dl = y.dl, cur = Math.min(y.cur, dl || y.cur), g = y.q('.ygp');
-  var gi = y.gra ? 'pauza' : 'play'; if (g.getAttribute('data-ik') !== gi) { g.innerHTML = YT_IK[gi]; g.setAttribute('data-ik', gi); g.setAttribute('aria-label', y.gra ? 'Pauza' : 'Odtwórz'); } // patch123
-  g.classList.toggle('off', !y.gotowy || !!y.blad);
-  y.q('.ygal').style.left = (dl ? cur / dl * 100 : 0) + '%';
-  Array.prototype.forEach.call(y.q('.ytor').children, function (o) { var s0 = +o.getAttribute('data-s') || 0, k = +o.getAttribute('data-k') || dl || 1; o.firstChild.style.width = (Math.max(0, Math.min(1, (cur - s0) / Math.max(0.01, k - s0))) * 100) + '%'; });
-  y.q('.ytT').textContent = czasTxt(cur); y.q('.ytC').textContent = czasTxt(dl);
-  var os = y.q('.yos'); os.setAttribute('aria-valuemax', String(Math.round(dl))); os.setAttribute('aria-valuenow', String(Math.round(cur))); os.setAttribute('aria-valuetext', czasTxt(cur));
-  var ri = ytRozdzW(cur), r = ri >= 0 ? y.R[ri] : null, teraz = y.start || cur > 0;
-  Array.prototype.forEach.call(y.q('.yrozdz').children, function (b) { b.classList.toggle('teraz', teraz && !!r && +b.getAttribute('data-t') === r.start); });
-}
-function ytTzX(x) { var y = YP, b = y.q('.yos').getBoundingClientRect(); return Math.max(0, Math.min(1, (x - b.left) / Math.max(1, b.width))) * (y.dl || 0); }
-function ytPrzesun(x) {
-  var y = YP; y.cur = ytTzX(x); ytRysuj();
-  var ri = ytRozdzW(y.cur), d = y.q('.ydym'), os = y.q('.yos');
-  d.textContent = czasTxt(y.cur) + (ri >= 0 && !(y.R.length === 1 && y.R[0].auto) ? ' · ' + y.R[ri].nazwa : '');
-  var W = os.clientWidth, dw = d.offsetWidth, px = y.dl ? y.cur / y.dl * W : 0; d.style.left = Math.max(0, Math.min(W - dw, px - dw / 2)) + 'px';
-  if (y.start && !y.koniec && Date.now() - (y.podglT || 0) > 150) { y.podglT = Date.now(); y.P.seekTo(y.cur, false); } // podgląd klatki
-}
-// przeciąganie po osi (mysz i dotyk); nie uruchamia gestów panelu (gestStart pomija .yos)
-function ytOsBind(os) {
-  os.addEventListener('pointerdown', function (e) { var y = YP; if (!y || !y.gotowy || !y.dl || y.blad) return; e.preventDefault(); y.ciag = true; os.classList.add('ciag'); try { os.setPointerCapture(e.pointerId); } catch (x) {} ytPrzesun(e.clientX); });
-  os.addEventListener('pointermove', function (e) { if (YP && YP.ciag) ytPrzesun(e.clientX); });
-  var kon = function () { var y = YP; if (!y || !y.ciag) return; y.ciag = false; os.classList.remove('ciag'); ytSkocz(y.cur, false); };
-  os.addEventListener('pointerup', kon); os.addEventListener('pointercancel', kon); os.addEventListener('lostpointercapture', kon);
-  os.addEventListener('keydown', function (e) { var y = YP; if (!y) return; if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); e.stopPropagation(); ytSkocz(y.cur + (e.key === 'ArrowRight' ? 5 : -5), false); } });
-}
-// klawiatura przy otwartym filmie: spacja odtwarza i zatrzymuje, strzałki o 5 s (disablekb=1 wyłącza klawisze YouTube)
-document.addEventListener('keydown', function (e) {
-  var y = YP; if (!y || !VP.el || y.zapas || y.blad) return; var a = document.activeElement;
-  if (a && (poleEdyt(a) || a.tagName === 'BUTTON' || a.tagName === 'A' || (a.closest && a.closest('.yos')))) return;
-  if (e.key === ' ') { e.preventDefault(); ytGraj(); }
-  else if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { e.preventDefault(); ytSkocz(y.cur + (e.key === 'ArrowRight' ? 5 : -5), false); }
-});
-// orientacja zwykłego linku: pionowy film ma na miniaturze 320x180 rozmyte pasy po bokach i ostre krawędzie (jak w prototypie)
-function ytWykryjPion(id, gotowe) {
-  var img = new Image(); img.crossOrigin = 'anonymous';
-  img.onload = function () {
-    try {
-      var c = document.createElement('canvas'); c.width = 320; c.height = 180; var x = c.getContext('2d');
-      x.drawImage(img, 0, 0, 320, 180); var d = x.getImageData(0, 0, 320, 180).data;
-      var L = function (px, py) { var k = (py * 320 + px) * 4; return d[k] * 0.3 + d[k + 1] * 0.59 + d[k + 2] * 0.11; };
-      var E = []; for (var px = 1; px < 320; px++) { var s = 0; for (var py = 10; py < 170; py += 2) s += Math.abs(L(px, py) - L(px - 1, py)); E[px] = s / 80; }
-      var sr = function (a, b) { var s = 0; for (var k = a; k < b; k++) s += E[k]; return s / (b - a); };
-      var boki = (sr(8, 100) + sr(222, 312)) / 2, srodek = sr(116, 205);
-      var kraw = Math.min(Math.max(E[108], E[109], E[110], E[111]), Math.max(E[209], E[210], E[211], E[212])), tlo = (sr(90, 104) + sr(216, 230)) / 2;
-      gotowe(boki < srodek * 0.45 || kraw > tlo * 3);
-    } catch (e) { gotowe(false); }
-  };
-  img.onerror = function () { gotowe(false); };
-  img.src = 'https://i.ytimg.com/vi/' + id + '/mqdefault.jpg';
-}
+function filmUsun() { var el = VP.el || document.getElementById('vpan'); VP.el = null; if (!el) return; el.style.transition = 'transform .22s ease-in'; el.style.transform = 'translateX(105%)'; setTimeout(function () { el.remove(); }, 240); }
 document.addEventListener('click', function (e) {
   var a = e.target && e.target.closest ? e.target.closest('a.mfilm, a.pbtn.rz, a.v') : null; if (!a || a.classList.contains('off')) return;
   var u = a.getAttribute('href') || '', em = filmEmbed(u); if (!em) return;
@@ -1247,7 +950,7 @@ function gestStart(e) {
   if (!e.touches || e.touches.length !== 1 || MV.arkusz) return;
   var p = e.touches[0], tg = e.target, w = function (s) { return tg && tg.closest ? tg.closest(s) : null; };
   var g = { x0: p.clientX, y0: p.clientY, t0: Date.now(), dx: 0, dy: 0, lock: null };
-  if (VP.el) { if (w('#vpan') && !w('.yosw')) { g.typ = 'film'; GEST = g; } return; } // patch122: oś czasu bez gestu panelu; patch123: cały blok osi
+  if (VP.el) { if (w('#vpan')) { g.typ = 'film'; GEST = g; } return; }
   if (document.getElementById('lbox')) return;
   if (MENU) { if (w('#menu') || w('#tlo')) { g.typ = 'zamknij'; GEST = g; } return; }
   if (p.clientX <= 24) { g.typ = 'menu'; GEST = g; return; }
@@ -1566,7 +1269,7 @@ function wazPodsumowanie() {
 }
 function fmtData(d) { var m = String(d).match(/^(\d{4})-(\d{2})-(\d{2})/); return m ? m[3] + '.' + m[2] + '.' + m[1].slice(2) : String(d); }
 // ---------- atlas ćwiczeń (widok trenera) ----------
-var ATL = { szukaj: '', ed: null, tekst: '' }; // patch122: ed = wiersz z otwartą edycją rozdziałów, tekst = szkic
+var ATL = { szukaj: '' };
 // kolory jak w arkuszu „Atlas” (chipy list rozwijanych): [tło, tekst]
 var KOL_M = { 'czworogłowe uda': ['#F4CCCC', '#990000'], 'kulszowo-goleniowe': ['#FFE599', '#7F6000'], 'pośladkowy wielki': ['#CFE2F3', '#1155CC'], 'pośladkowy średni': ['#D9D9D9', '#434343'], 'łydki': ['#3C3C3C', '#FFFFFF'], 'przywodziciele': ['#B10202', '#FFFFFF'], 'klatka piersiowa': ['#4A86E8', '#FFFFFF'], 'czworoboczny grzbietu': ['#3D3300', '#FFFFFF'], 'najszerszy grzbietu': ['#46BDC6', '#FFFFFF'], 'barki przód': ['#1C4587', '#FFFFFF'], 'barki bok': ['#8FA31E', '#FFFFFF'], 'barki tył': ['#7B1FA2', '#FFFFFF'], 'triceps': ['#FFE599', '#7F6000'], 'biceps': ['#B5CC18', '#3D3D00'], 'brzuch': ['#5B3A00', '#FFFFFF'], 'prostowniki grzbietu': ['#9FC5E8', '#0B5394'], 'przedramiona': ['#A2C4C9', '#134F5C'], 'inne': ['#FFE599', '#7F6000'] };
 var KOL_R = { 'full': ['#1155CC', '#FFFFFF'], 'przyśrodkowy-boczny': ['#D9D2E9', '#351C75'], 'częściowy': ['#434343', '#FFFFFF'], 'częsciowy': ['#434343', '#FFFFFF'], 'górny': ['#F4CCCC', '#990000'], 'dolny': ['#B10202', '#FFFFFF'], 'środkowy': ['#D9D9D9', '#434343'], 'wielki': ['#34A853', '#0B3D1A'], 'mniejszy,długi': ['#CCCCCC', '#333333'], 'dalszy': ['#C9DAF8', '#1C4587'], 'przednioboczny': ['#FFF2CC', '#7F6000'], 'tylnoboczny': ['#FCE5CD', '#B45F06'], 'bliższy': ['#D9B700', '#3A3000'], 'równoległoboczny': ['#BDB800', '#333300'], 'długa': ['#434343', '#FFFFFF'], 'przyśrodkowa': ['#F4CCCC', '#990000'], 'boczna': ['#1155CC', '#FFFFFF'], 'pośredni': ['#34A853', '#0B3D1A'], 'krótki': ['#D9D9D9', '#434343'], 'ramienno-promieniowy': ['#8E7CC3', '#FFFFFF'], 'ramienny': ['#B4A7D6', '#351C75'], 'skośny': ['#4A86E8', '#FFFFFF'] };
@@ -1582,98 +1285,21 @@ function atlasWidok() {
     if (q && !lista.length) return;
     var partia = (lista[0] && lista[0].partia) || '';
     h += '<div class="atlG"><div class="atlH"><b class="tytG" title="' + (partia ? 'w planowaniu liczy się do: ' + esc(partia) : 'bez partii w planowaniu') + '">' + esc(g) + '</b><span class="mut" style="margin-left:auto">' + lista.filter(function (a) { return a.nazwa; }).length + ' ćw.</span><span class="pbtn" style="font-size:11px" onclick="atlasDodajDo(\'' + esc(g) + '\')">+ ćwiczenie</span></div>';
-    var maxN = 12; rows.forEach(function (a) { maxN = Math.max(maxN, String(a.nazwa || '').length); }); var wN = Math.min(560, Math.round(maxN * 7.4) + 28), wSum = 150 + 130 + wN + 60 + 60 + 170 + 150 + 30;
-    h += '<table class="atl" style="width:' + wSum + 'px"><colgroup><col style="width:150px"><col style="width:130px"><col style="width:' + wN + 'px"><col style="width:60px"><col style="width:60px"><col style="width:170px"><col style="width:150px"><col style="width:30px"></colgroup><tr><th class="l">Region</th><th class="l">Długość</th><th class="l">Nazwa ćwiczenia</th><th>Powt.</th><th>Tempo</th><th class="l">Wideo</th><th class="l">Rozdziały</th><th></th></tr>';
+    var maxN = 12; rows.forEach(function (a) { maxN = Math.max(maxN, String(a.nazwa || '').length); }); var wN = Math.min(560, Math.round(maxN * 7.4) + 28), wSum = 150 + 130 + wN + 60 + 60 + 170 + 30;
+    h += '<table class="atl" style="width:' + wSum + 'px"><colgroup><col style="width:150px"><col style="width:130px"><col style="width:' + wN + 'px"><col style="width:60px"><col style="width:60px"><col style="width:170px"><col style="width:30px"></colgroup><tr><th class="l">Region</th><th class="l">Długość</th><th class="l">Nazwa ćwiczenia</th><th>Powt.</th><th>Tempo</th><th class="l">Wideo</th><th></th></tr>';
     lista.forEach(function (a) {
-      h += '<tr data-aid="' + esc(a.id) + '"><td><input class="c chip" data-f="region" style="' + chipStyl(KOL_R, a.region) + '" value="' + esc(a.region) + '"></td><td><select class="c chip" data-f="dlugosc" style="' + chipStyl(KOL_D, a.dlugosc) + '"><option value=""' + (a.dlugosc ? '' : ' selected') + '></option>' + ['Rozciągnięcie', 'Skrócenie', 'Pośrednie'].map(function (o) { return '<option' + (a.dlugosc === o ? ' selected' : '') + '>' + o + '</option>'; }).join('') + '</select></td><td><input class="c l" data-f="nazwa" value="' + esc(a.nazwa) + '"></td><td><input class="c" data-f="powt" value="' + esc(a.powt) + '"></td><td><input class="c" data-f="tempo" value="' + esc(a.tempo) + '"></td><td><input class="c l" data-f="wideo" placeholder="link" value="' + esc(a.wideo) + '"></td><td class="rz">' + atlasRozdzPrzycisk(a) + '</td><td><i class="del" title="usuń z atlasu" onclick="atlasUsunW(\'' + esc(a.id) + '\')">✕</i></td></tr>';
-      if (ATL.ed === a.id && ytId(a.wideo)) h += atlasRozdzEdytor(a);
+      h += '<tr data-aid="' + esc(a.id) + '"><td><input class="c chip" data-f="region" style="' + chipStyl(KOL_R, a.region) + '" value="' + esc(a.region) + '"></td><td><select class="c chip" data-f="dlugosc" style="' + chipStyl(KOL_D, a.dlugosc) + '"><option value=""' + (a.dlugosc ? '' : ' selected') + '></option>' + ['Rozciągnięcie', 'Skrócenie', 'Pośrednie'].map(function (o) { return '<option' + (a.dlugosc === o ? ' selected' : '') + '>' + o + '</option>'; }).join('') + '</select></td><td><input class="c l" data-f="nazwa" value="' + esc(a.nazwa) + '"></td><td><input class="c" data-f="powt" value="' + esc(a.powt) + '"></td><td><input class="c" data-f="tempo" value="' + esc(a.tempo) + '"></td><td><input class="c l" data-f="wideo" placeholder="link" value="' + esc(a.wideo) + '"></td><td><i class="del" title="usuń z atlasu" onclick="atlasUsunW(\'' + esc(a.id) + '\')">✕</i></td></tr>';
     });
     h += '</table></div>';
   });
   return h + '</div>';
 }
 function bindAtlas() {
-  // patch122: rozdziały filmów (makieta 4)
-  document.querySelectorAll('#sek-atlas .rbtn[data-rz]').forEach(function (b) { b.addEventListener('click', function () { var id = b.getAttribute('data-rz'); if (ATL.ed === id) { ATL.ed = null; render(); return; } var a = atlasWiersz(id); if (!a) return; ATL.ed = id; ATL.tekst = atlasRozdzTekst(a); render(); var t = document.getElementById('redTa'); if (t) { t.focus(); t.setSelectionRange(t.value.length, t.value.length); } }); });
-  var ta = document.getElementById('redTa');
-  if (ta) {
-    ta.addEventListener('input', function () { ATL.tekst = ta.value; atlasRozdzPodglad(); });
-    document.getElementById('redAnul').onclick = function () { ATL.ed = null; ATL.tekst = ''; render(); };
-    document.getElementById('redZap').onclick = atlasRozdzZapisz;
-    document.getElementById('redMini').onclick = function () { var a = atlasWiersz(ATL.ed); if (!a) return; var w0 = String(a.wideo || '').trim(), u = bezpUrl(w0) || (ytId(w0) ? 'https://' + w0.replace(/^\/+/, '') : ''), em = filmEmbed(u); if (em && em.yt) filmOtworz(u, em, a.nazwa || 'Film', ATL.tekst); }; // patch123: link bez https://
-    atlasRozdzPodglad();
-  }
   var s = document.getElementById('atlSzukaj'); if (s) { s.addEventListener('input', function () { ATL.szukaj = s.value; clearTimeout(window._atlS); window._atlS = setTimeout(function () { var f = zapamietajFokus(); render(); przywrocFokus(f); }, 250); }); }
   document.querySelectorAll('tr[data-aid] [data-f]').forEach(function (el) {
     var id = el.closest('tr').dataset.aid, a = (D.atlas || []).filter(function (x) { return x.id === id; })[0]; if (!a) return;
-    el.addEventListener('change', function () { var stary = a[el.dataset.f]; a[el.dataset.f] = el.value; if (el.dataset.f === 'region') el.style.cssText = chipStyl(KOL_R, el.value); if (el.dataset.f === 'dlugosc') el.style.cssText = chipStyl(KOL_D, el.value); status('zapisuję…'); wywolaj('atlasEdytuj', [id, el.dataset.f, el.value]).then(function () { status('zapisano', true); if (el.dataset.f === 'wideo') atlasWideoRozdz(a, stary); if (el.dataset.f === 'region') el.style.cssText = chipStyl(KOL_R, el.value); else if (el.dataset.f === 'dlugosc') el.style.cssText = chipStyl(KOL_D, el.value); else if (el.dataset.f === 'nazwa' || el.dataset.f === 'wideo') { var f = zapamietajFokus(); render(); przywrocFokus(f); } }).catch(function (e) { status('błąd zapisu: ' + e.message, false, true); }); });
+    el.addEventListener('change', function () { a[el.dataset.f] = el.value; if (el.dataset.f === 'region') el.style.cssText = chipStyl(KOL_R, el.value); if (el.dataset.f === 'dlugosc') el.style.cssText = chipStyl(KOL_D, el.value); status('zapisuję…'); wywolaj('atlasEdytuj', [id, el.dataset.f, el.value]).then(function () { status('zapisano', true); if (el.dataset.f === 'region') el.style.cssText = chipStyl(KOL_R, el.value); else if (el.dataset.f === 'dlugosc') el.style.cssText = chipStyl(KOL_D, el.value); else if (el.dataset.f === 'nazwa' || el.dataset.f === 'wideo') { var f = zapamietajFokus(); render(); przywrocFokus(f); } }).catch(function (e) { status('błąd zapisu: ' + e.message, false, true); }); });
   });
-}
-// ----- patch122: rozdziały filmów w atlasie. Rozdziały należą do FILMU: zapis we wszystkich wierszach z tym samym filmem -----
-function atlasWiersz(id) { return (D.atlas || []).filter(function (x) { return x.id === id; })[0] || null; }
-function atlasRozdzTekst(a) { var id = ytId(a.wideo); return String(a.rozdzialy || '') || (id ? atlasRozdzialy(id) : ''); }
-function rozdzLiczba(n) { var d = n % 10, s = n % 100; return n + ' ' + (n === 1 ? 'rozdział' : d >= 2 && d <= 4 && (s < 12 || s > 14) ? 'rozdziały' : 'rozdziałów'); }
-var ROZDZ_KOL = { ok: 'var(--grj, #4A64A3)', zle: 'var(--boj, #A33A4F)', inne: '#777' };
-function rozdzDlPodgladu(R, id) { var dl = ytDlZnana(id); if (dl) return dl; var o = R.length ? R[R.length - 1].start : 0; return o + Math.max(10, o * 0.3); }
-function atlasRozdzPrzycisk(a) {
-  var id = ytId(a.wideo); if (!id) return '';
-  var R = parsujRozdzialy(atlasRozdzTekst(a)).rozdzialy, n = R.filter(function (r) { return !r.auto; }).length, otw = ATL.ed === a.id;
-  if (!n) return '<button type="button" class="rbtn pusty' + (otw ? ' otw' : '') + '" data-rz="' + esc(a.id) + '">+ dodaj</button>';
-  var dl = rozdzDlPodgladu(R, id), L = R.filter(function (r) { return r.start < dl; });
-  var mini = L.map(function (r, i) { var k = i + 1 < L.length ? L[i + 1].start : dl; return '<i style="flex:' + Math.max(0.01, k - r.start).toFixed(2) + ' 0 0;background:' + ROZDZ_KOL[r.rodzaj] + '"></i>'; }).join('');
-  return '<button type="button" class="rbtn' + (otw ? ' otw' : '') + '" data-rz="' + esc(a.id) + '" title="Rozdziały filmu"><span class="mini">' + mini + '</span>' + rozdzLiczba(n) + '</button>';
-}
-function atlasRozdzEdytor(a) {
-  var id = ytId(a.wideo), pion = /\/shorts\//.test(String(a.wideo || '')) || !!YT_PION[id];
-  var inne = (D.atlas || []).filter(function (x) { return x.id !== a.id && x.nazwa && ytId(x.wideo) === id; }).map(function (x) { return '„' + String(x.nazwa).trim() + '”'; });
-  return '<tr class="redyt"><td colspan="8"><div class="red"><button type="button" class="mini9' + (pion ? '' : ' poz') + '" id="redMini" style="background-image:url(\'https://i.ytimg.com/vi/' + esc(id) + '/hqdefault.jpg\')" title="Obejrzyj film z tymi rozdziałami" aria-label="Obejrzyj film z tymi rozdziałami"><span>' + YT_IK.play + '</span></button>'
-    + '<div class="pr"><label for="redTa">Rozdziały filmu</label><textarea id="redTa" maxlength="1000" spellcheck="false" placeholder="0:00 Prawidłowe wykonanie&#10;0:18 Błędy">' + esc(ATL.tekst) + '</textarea>'
-    + '<div class="wsk">Każdy rozdział w nowej linii: <b>czas i nazwa</b>, np. <b>0:18 Błędy</b>.<br>Kolor dobiera się sam: „Prawidłowe” granat, „Błędy” bordo.</div>'
-    + '<div class="podgl">Podgląd</div><div class="yosw" id="redOs"></div><div class="bladW" id="redBlad"></div>'
-    + '<div class="akcje"><button type="button" class="zap" id="redZap">Zapisz</button><button type="button" class="anul" id="redAnul">Anuluj</button>' + (inne.length ? '<span class="uwaga">Ten sam film ma też: ' + esc(inne.join(', ')) + ', rozdziały będą wspólne.</span>' : '') + '</div></div></div></td></tr>';
-}
-// błędy wpisu: niezrozumiałe linie, znaki < >, rozdziały po końcu filmu (gdy długość jest znana)
-function atlasRozdzBledy(tekst, id) {
-  var p = parsujRozdzialy(tekst), dl = ytDlZnana(id), b = [];
-  if (p.bledy.length) b.push('Nie rozumiem: „' + p.bledy.join('”, „') + '”. Wpisz czas i nazwę, np. 0:18 Błędy.');
-  if (/[<>]/.test(tekst)) b.push('Bez znaków < i >.');
-  if (dl) { var po = p.rozdzialy.filter(function (r) { return r.start >= dl; }); if (po.length) b.push('Film trwa ' + czasTxt(dl) + ', więc „' + po.map(function (r) { return r.nazwa; }).join('”, „') + '” się nie pokaże.'); }
-  return { p: p, b: b, twarde: p.bledy.length > 0 || /[<>]/.test(tekst) };
-}
-function atlasRozdzPodglad() {
-  var a = atlasWiersz(ATL.ed), box = document.getElementById('redOs'); if (!a || !box) return;
-  var id = ytId(a.wideo), w = atlasRozdzBledy(ATL.tekst, id), R = w.p.rozdzialy, znana = ytDlZnana(id), dl = rozdzDlPodgladu(R, id);
-  var o = rozdzOs(R.length ? R : [], dl);
-  box.innerHTML = '<div class="yos stat"><div class="ytor">' + o.tor + '</div></div><div class="ypodp">' + o.podp + '</div><div class="yczas">' + (znana ? '<span>' + czasTxt(znana) + '</span>' : '') + '</div>';
-  document.getElementById('redBlad').textContent = w.b.join(' ');
-}
-function atlasRozdzZapisz() {
-  var a = atlasWiersz(ATL.ed), btn = document.getElementById('redZap'); if (!a || !btn) return;
-  var t = String(ATL.tekst || '').replace(/\r/g, '').trim(), id = ytId(a.wideo), w = atlasRozdzBledy(t, id);
-  if (w.twarde) { atlasRozdzPodglad(); var ta = document.getElementById('redTa'); if (ta) ta.focus(); return; }
-  if (t.length > 1000) { document.getElementById('redBlad').textContent = 'Najwyżej 1000 znaków.'; return; }
-  // patch123: jedno wywołanie (serwer zapisuje wszystkie wiersze filmu w jednej transakcji), potem te wiersze i mapa lokalnie
-  var wiersze = (D.atlas || []).filter(function (x) { return x.id === a.id || (id && ytId(x.wideo) === id); });
-  var zmiana = wiersze.some(function (x) { return String(x.rozdzialy || '') !== t; });
-  btn.disabled = true; btn.textContent = 'Zapisuję…'; status('zapisuję…');
-  (zmiana ? wywolaj('atlasEdytuj', [a.id, 'rozdzialy', t]) : Promise.resolve(true))
-    .then(function () { wiersze.forEach(function (x) { x.rozdzialy = t; }); rozdzMapaUstaw(id, t); status('zapisano', true); ATL.ed = null; ATL.tekst = ''; render(); })
-    .catch(function (e) { status('błąd zapisu: ' + e.message, false, true); btn.disabled = false; btn.textContent = 'Zapisz'; var bl = document.getElementById('redBlad'); if (bl) bl.textContent = e.message; });
-}
-// patch123: mapa rozdziałów z akcji plan (trener) po zapisie w atlasie: nowy tekst filmu albo brak (film z tabeli planu
-// pokazuje od razu nowe rozdziały, bez przeładowania)
-function rozdzMapaUstaw(id, t) {
-  var m = D.rozdzialy; if (!id || !m || typeof m !== 'object') return;
-  for (var k in m) if (Object.prototype.hasOwnProperty.call(m, k) && k !== id && ytId(k) === id) delete m[k];
-  if (t) m[id] = t; else delete m[id];
-}
-// patch123: nowy link w wierszu atlasu: rozdziały należą do filmu, więc wiersz bierze rozdziały nowego filmu z innych
-// wierszy atlasu albo żadne (serwer robi to samo); ten sam film w innej postaci linku zostaje z własnymi
-function atlasWideoRozdz(a, stary) {
-  var s0 = ytId(stary), s1 = ytId(a.wideo); if (s0 === s1) return;
-  var inny = s1 ? (D.atlas || []).filter(function (x) { return x !== a && x.rozdzialy && ytId(x.wideo) === s1; })[0] : null;
-  a.rozdzialy = inny ? String(inny.rozdzialy) : '';
-  if (ATL.ed === a.id) { ATL.ed = null; ATL.tekst = ''; }
 }
 function atlasDodajDo(g) {
   var d = { miesien: g === 'Bez mięśnia' ? '' : g, region: '', dlugosc: '', nazwa: '', powt: 10, tempo: 'x211', wideo: '' };
