@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kuba Studio: publishing to YouTube</title>
+<meta name="description" content="How Kuba Studio uses YouTube API Services to upload the owner's videos to his own channel, which scopes it uses and how to revoke access.">
+<meta name="theme-color" content="#0E0E12">
+<link rel="icon" href="favicon.ico" sizes="16x16 24x24 32x32 48x48 64x64">
+<link rel="icon" href="icon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="alternate" hreflang="en" href="https://kczerwinskii.github.io/plan/studio/youtube.html">
+<link rel="alternate" hreflang="pl" href="https://kczerwinskii.github.io/plan/studio/pl/youtube.html">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#tresc">Skip to content</a>
+<header class="naglowek">
+  <div class="ramka">
+    <a class="marka" href="index.html"><img src="icon-180.png" width="40" height="40" alt=""><span>Kuba Studio</span></a>
+    <nav class="nawigacja" aria-label="Main">
+      <a href="index.html">Overview</a>
+      <a href="tiktok.html">TikTok</a>
+      <a href="youtube.html" aria-current="page">YouTube</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a class="jezyk" href="pl/youtube.html" hreflang="pl" lang="pl">Polski</a>
+    </nav>
+  </div>
+</header>
+
+<main id="tresc">
+  <div class="ramka">
+
+    <section class="sekcja">
+      <span class="etykieta">YouTube integration</span>
+      <h1>Publishing to YouTube</h1>
+      <p class="wstep">Studio uses YouTube API Services (YouTube Data API v3) to upload the owner's finished videos to his own YouTube channel and to show the basic statistics of that channel.</p>
+      <div class="yt"><svg width="28" height="20" viewBox="0 0 28 20" aria-hidden="true"><rect width="28" height="20" rx="5" fill="#FF0000"/><path d="M11 5.5v9l7.5-4.5z" fill="#fff"/></svg><span>Works with YouTube. See the <a href="privacy.html#youtube">Privacy Policy</a>, the <a href="https://www.youtube.com/t/terms">YouTube Terms of Service</a> and the <a href="https://policies.google.com/privacy">Google Privacy Policy</a>.</span></div>
+    </section>
+
+    <section class="sekcja" aria-labelledby="zakresy">
+      <span class="etykieta">Scopes</span>
+      <h2 id="zakresy">What Studio asks Google for</h2>
+      <div class="zakresy">
+        <div class="zakres">
+          <code>youtube.upload</code>
+          <p>Uploads a video the owner selected to his own channel, with the title, description and privacy setting he chose for it.</p>
+        </div>
+        <div class="zakres">
+          <code>youtube.readonly</code>
+          <p>Reads the name and public statistics of his own channel: subscribers, views and number of videos.</p>
+        </div>
+      </div>
+      <p>Before each upload the owner sets the YouTube title (up to 100 characters) and the privacy: private, which is the default, unlisted or public. The upload starts only when he clicks Publish now, or at the date and time he set.</p>
+    </section>
+
+    <section class="sekcja" aria-labelledby="dane">
+      <span class="etykieta">Data and access</span>
+      <h2 id="dane">Where the data stays and how to revoke access</h2>
+      <ul class="lista-znacznikow">
+        <li>Tokens and statistics are stored only locally, on the owner's computer. Statistics are refreshed each time the view is opened and kept for no longer than 30 days.</li>
+        <li>Studio does not read data of other YouTube users or data about viewers.</li>
+        <li>To disconnect: Settings, YouTube, the Disconnect button (Rozłącz), which deletes the tokens. Access can also be revoked at <a href="https://security.google.com/settings/security/permissions">security.google.com/settings/security/permissions</a>.</li>
+      </ul>
+      <p>Full details are in the <a href="privacy.html#youtube">Privacy Policy</a>.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer class="stopka">
+  <div class="ramka">
+    <span>Kuba Studio, Jakub Czerwiński · <a href="mailto:kczerwinski033@gmail.com">kczerwinski033@gmail.com</a></span>
+    <nav aria-label="Legal">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="pl/youtube.html" hreflang="pl" lang="pl">Wersja polska</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

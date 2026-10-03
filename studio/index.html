@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kuba Studio: plan, publish and review short videos</title>
+<meta name="description" content="Kuba Studio is a private Windows desktop app of online personal trainer Jakub Czerwiński for planning and publishing his own videos to Instagram, Facebook, YouTube and TikTok and reviewing his own Instagram reels.">
+<meta name="theme-color" content="#0E0E12">
+<link rel="icon" href="favicon.ico" sizes="16x16 24x24 32x32 48x48 64x64">
+<link rel="icon" href="icon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="alternate" hreflang="en" href="https://kczerwinskii.github.io/plan/studio/">
+<link rel="alternate" hreflang="pl" href="https://kczerwinskii.github.io/plan/studio/pl/">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#tresc">Skip to content</a>
+<header class="naglowek">
+  <div class="ramka">
+    <a class="marka" href="index.html"><img src="icon-180.png" width="40" height="40" alt=""><span>Kuba Studio</span></a>
+    <nav class="nawigacja" aria-label="Main">
+      <a href="index.html" aria-current="page">Overview</a>
+      <a href="tiktok.html">TikTok</a>
+      <a href="youtube.html">YouTube</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a class="jezyk" href="pl/index.html" hreflang="pl" lang="pl">Polski</a>
+    </nav>
+  </div>
+</header>
+
+<main id="tresc">
+  <div class="ramka">
+
+    <section class="sekcja">
+      <span class="etykieta">Desktop app for short-form video</span>
+      <h1>Plan, publish and review short videos in one place.</h1>
+      <p class="wstep">Kuba Studio is a Windows desktop app made by Jakub (Kuba) Czerwiński, an online personal trainer. He records short training videos for Instagram and uses Studio to schedule and publish each finished video to his own Instagram, Facebook, YouTube and TikTok accounts, and to see how his own Instagram reels performed.</p>
+      <p class="uwaga">Studio is a private tool. It runs locally on its owner's computer, has no sign-up and no user accounts, and is not sold or distributed. This website describes what the app does, which platform APIs it uses and how it handles data.</p>
+    </section>
+
+    <section class="sekcja" aria-labelledby="dla-kogo">
+      <span class="etykieta">Who it is for</span>
+      <h2 id="dla-kogo">Built around one trainer's publishing routine</h2>
+      <p>Kuba coaches his clients fully online, and Instagram (<a href="https://www.instagram.com/kubaczerwinskii/">@kubaczerwinskii</a>) is his main channel. Every video is made for Instagram first. Facebook, YouTube and TikTok are extra places where the same finished video gets published, so Studio analyses Instagram only and simply publishes to the other platforms.</p>
+      <p>The app is shaped for a creator who works alone: one video at a time, little data on screen at once, and a clear status for every platform after each post.</p>
+    </section>
+
+    <section class="sekcja" aria-labelledby="funkcje">
+      <span class="etykieta">What it does</span>
+      <h2 id="funkcje">Features</h2>
+      <div class="karty">
+        <article class="karta">
+          <span class="etykieta">Analysis</span>
+          <h3>Review your own Instagram reels</h3>
+          <p>Studio reads the statistics of the owner's own reels from the Instagram API: views, reach, average watch time, likes, comments, saves, shares and skip rate. It compares each reel's retention with his own median, taking the video's length into account. Instead of grading a reel as good or bad, it points to where to look: the hook, the middle or the ending.</p>
+        </article>
+        <article class="karta">
+          <span class="etykieta">Publishing</span>
+          <h3>Plan and publish to four platforms</h3>
+          <p>Add a finished video, write the caption, pick a cover frame and choose the date and the platforms: Instagram, Facebook, YouTube and TikTok. A weekly calendar shows what is scheduled. Each platform keeps its own settings, such as the YouTube title and privacy, or the TikTok privacy, interaction and disclosure options.</p>
+        </article>
+        <article class="karta">
+          <span class="etykieta">Accounts</span>
+          <h3>See your own accounts in one view</h3>
+          <p>Follower and subscriber counts of the owner's own Instagram account, Facebook Page and YouTube channel, shown side by side. For TikTok it shows only the name and profile picture of the connected account.</p>
+        </article>
+      </div>
+      <figure class="zrzut">
+        <img src="img/publishing.jpg" width="1625" height="1140" loading="lazy" alt="Studio Publishing tab: a weekly calendar on the left and, on the right, a draft video with its caption, date, cover frame options, Instagram options and platform checkboxes.">
+        <figcaption>The Publishing tab (the app's interface is in Polish). Weekly calendar on the left, the selected draft on the right: caption, date, cover frame, Instagram options and the platforms to publish to. Screenshot from 24 September 2026, taken before TikTok was connected.</figcaption>
+      </figure>
+    </section>
+
+    <section class="sekcja" aria-labelledby="jak-dziala">
+      <span class="etykieta">How it works</span>
+      <h2 id="jak-dziala">From finished video to published post</h2>
+      <ol class="kroki">
+        <li>
+          <h3>Connect the accounts once</h3>
+          <p>In Settings, the owner connects each of his own accounts once: Instagram and Facebook with a Meta access token for his own Meta app, YouTube with Google OAuth and TikTok with TikTok Login Kit. Access tokens are saved only on his computer.</p>
+        </li>
+        <li>
+          <h3>Add a video</h3>
+          <p>He picks a finished MP4 or MOV file from his disk. Studio reads its length and prepares cover frame options locally, on his computer.</p>
+        </li>
+        <li>
+          <h3>Prepare the post</h3>
+          <p>He writes the caption, picks the cover, sets a date or leaves the video unscheduled, and ticks the platforms. For YouTube and TikTok he fills in that platform's own settings before the video can be sent.</p>
+        </li>
+        <li>
+          <h3>Publish</h3>
+          <p>Nothing is posted until he clicks Publish now, or until the date and time he set himself (scheduling works while Studio is open). The video file is uploaded straight from his computer to each platform's official API.</p>
+        </li>
+        <li>
+          <h3>Check the result</h3>
+          <p>Studio shows the status for every platform separately, with a link where the platform returns one. Published Instagram reels then appear in Analysis.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="sekcja" aria-labelledby="platformy">
+      <span class="etykieta">Platforms and APIs</span>
+      <h2 id="platformy">Where Studio publishes</h2>
+      <div class="platformy">
+        <div class="platforma">
+          <h3>Instagram</h3>
+          <p>Instagram Graph API (Meta). Publishes reels to the owner's professional account and reads the statistics of his own reels.</p>
+        </div>
+        <div class="platforma">
+          <h3>Facebook</h3>
+          <p>Graph API (Meta). Publishes the same reel to the owner's own Facebook Page.</p>
+        </div>
+        <div class="platforma">
+          <h3>YouTube</h3>
+          <p>YouTube Data API. Uploads the video to the owner's own channel. <a href="youtube.html">How Studio uses YouTube</a></p>
+        </div>
+        <div class="platforma">
+          <h3>TikTok</h3>
+          <p>Login Kit and Content Posting API with Direct Post. Posts the video to the owner's own profile with the settings he chooses. <a href="tiktok.html">How Studio uses TikTok</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sekcja" aria-labelledby="kontakt">
+      <span class="etykieta">Availability and contact</span>
+      <h2 id="kontakt">No sign-up, no login</h2>
+      <p>Studio is a desktop app that runs only on its owner's computer, so this website has no login and no test account is needed to read it. The <a href="privacy.html">Privacy Policy</a> and <a href="terms.html">Terms of Service</a> are linked at the bottom of every page.</p>
+      <p>Questions about the app or about data: <a href="mailto:kczerwinski033@gmail.com">kczerwinski033@gmail.com</a>.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer class="stopka">
+  <div class="ramka">
+    <span>Kuba Studio, Jakub Czerwiński · <a href="mailto:kczerwinski033@gmail.com">kczerwinski033@gmail.com</a></span>
+    <nav aria-label="Legal">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="pl/index.html" hreflang="pl" lang="pl">Wersja polska</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

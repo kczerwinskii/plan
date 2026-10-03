@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kuba Studio: planowanie, publikacja i analiza rolek</title>
+<meta name="description" content="Kuba Studio to prywatna aplikacja desktopowa trenera personalnego online Jakuba Czerwińskiego do planowania i publikacji własnych filmów na Instagramie, Facebooku, YouTube i TikToku oraz analizy własnych rolek z Instagrama.">
+<meta name="theme-color" content="#0E0E12">
+<link rel="icon" href="../favicon.ico" sizes="16x16 24x24 32x32 48x48 64x64">
+<link rel="icon" href="../icon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../icon-180.png">
+<link rel="alternate" hreflang="en" href="https://kczerwinskii.github.io/plan/studio/">
+<link rel="alternate" hreflang="pl" href="https://kczerwinskii.github.io/plan/studio/pl/">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<a class="skip" href="#tresc">Przejdź do treści</a>
+<header class="naglowek">
+  <div class="ramka">
+    <a class="marka" href="index.html"><img src="../icon-180.png" width="40" height="40" alt=""><span>Kuba Studio</span></a>
+    <nav class="nawigacja" aria-label="Główna">
+      <a href="index.html" aria-current="page">O aplikacji</a>
+      <a href="tiktok.html">TikTok</a>
+      <a href="youtube.html">YouTube</a>
+      <a href="privacy.html">Prywatność</a>
+      <a href="terms.html">Regulamin</a>
+      <a class="jezyk" href="../index.html" hreflang="en" lang="en">English</a>
+    </nav>
+  </div>
+</header>
+
+<main id="tresc">
+  <div class="ramka">
+
+    <section class="sekcja">
+      <span class="etykieta">Aplikacja desktopowa do krótkich filmów</span>
+      <h1>Planowanie, publikacja i analiza rolek w jednym miejscu.</h1>
+      <p class="wstep">Kuba Studio to aplikacja desktopowa na Windows, którą zrobił dla siebie Jakub (Kuba) Czerwiński, trener personalny online. Nagrywa krótkie filmy treningowe na Instagram, a w Studio planuje i publikuje każdy gotowy film na swoich kontach na Instagramie, Facebooku, YouTube i TikToku oraz sprawdza, jak radzą sobie jego rolki na Instagramie.</p>
+      <p class="uwaga">Studio to narzędzie prywatne. Działa lokalnie na komputerze właściciela, nie ma rejestracji ani kont użytkowników, nie jest sprzedawane ani udostępniane. Ta strona opisuje, co aplikacja robi, z jakich API platform korzysta i jak obchodzi się z danymi.</p>
+    </section>
+
+    <section class="sekcja" aria-labelledby="dla-kogo">
+      <span class="etykieta">Dla kogo</span>
+      <h2 id="dla-kogo">Zbudowana pod rytm publikacji jednego trenera</h2>
+      <p>Kuba prowadzi podopiecznych w pełni online, a Instagram (<a href="https://www.instagram.com/kubaczerwinskii/">@kubaczerwinskii</a>) to jego główny kanał. Każdy film powstaje najpierw pod Instagram. Facebook, YouTube i TikTok to dodatkowe miejsca, do których trafia ten sam gotowy film, dlatego Studio analizuje tylko Instagram, a na pozostałe platformy wyłącznie publikuje.</p>
+      <p>Aplikacja jest skrojona pod twórcę, który pracuje sam: jeden film naraz, mało danych na ekranie i jasny status każdej platformy po publikacji.</p>
+    </section>
+
+    <section class="sekcja" aria-labelledby="funkcje">
+      <span class="etykieta">Co robi</span>
+      <h2 id="funkcje">Funkcje</h2>
+      <div class="karty">
+        <article class="karta">
+          <span class="etykieta">Analiza</span>
+          <h3>Własne rolki z Instagrama</h3>
+          <p>Studio pobiera z API Instagrama statystyki własnych rolek właściciela: wyświetlenia, zasięg, średni czas oglądania, polubienia, komentarze, zapisania, udostępnienia i odsetek pominięć. Porównuje retencję każdej rolki z jego własną medianą, z uwzględnieniem długości filmu. Nie ocenia, czy rolka jest dobra, czy zła, tylko wskazuje, gdzie patrzeć: hook, środek albo końcówka.</p>
+        </article>
+        <article class="karta">
+          <span class="etykieta">Publikacje</span>
+          <h3>Planowanie i publikacja na cztery platformy</h3>
+          <p>Dodajesz gotowy film, piszesz opis, wybierasz kadr na okładkę, termin i platformy: Instagram, Facebook, YouTube i TikTok. Kalendarz tygodnia pokazuje, co jest zaplanowane. Każda platforma ma własne ustawienia, np. tytuł i prywatność na YouTube albo widoczność, interakcje i oznaczenie treści komercyjnej na TikToku.</p>
+        </article>
+        <article class="karta">
+          <span class="etykieta">Konta</span>
+          <h3>Własne konta w jednym widoku</h3>
+          <p>Liczba obserwujących i subskrybentów na własnym koncie na Instagramie, stronie na Facebooku i kanale YouTube, obok siebie. Przy TikToku tylko nazwa i zdjęcie profilowe połączonego konta.</p>
+        </article>
+      </div>
+      <figure class="zrzut">
+        <img src="../img/publishing.jpg" width="1625" height="1140" loading="lazy" alt="Zakładka Publikacje w Studio: po lewej kalendarz tygodnia, po prawej szkic filmu z opisem, terminem, kadrami na okładkę, opcjami Instagrama i wyborem platform.">
+        <figcaption>Zakładka Publikacje. Po lewej kalendarz tygodnia, po prawej wybrany szkic: opis, termin, kadr na okładkę, opcje Instagrama i platformy do publikacji. Zrzut z 24 września 2026, zrobiony przed połączeniem TikToka.</figcaption>
+      </figure>
+    </section>
+
+    <section class="sekcja" aria-labelledby="jak-dziala">
+      <span class="etykieta">Jak to działa</span>
+      <h2 id="jak-dziala">Od gotowego filmu do opublikowanego posta</h2>
+      <ol class="kroki">
+        <li>
+          <h3>Jednorazowe połączenie kont</h3>
+          <p>W Ustawieniach właściciel jednorazowo łączy swoje konta: Instagram i Facebook tokenem dostępu Meta dla własnej aplikacji Meta, YouTube przez Google OAuth, a TikTok przez TikTok Login Kit. Tokeny dostępu są zapisane tylko na jego komputerze.</p>
+        </li>
+        <li>
+          <h3>Dodanie filmu</h3>
+          <p>Wybiera gotowy plik MP4 albo MOV z dysku. Studio odczytuje długość filmu i przygotowuje kadry na okładkę lokalnie, na jego komputerze.</p>
+        </li>
+        <li>
+          <h3>Przygotowanie posta</h3>
+          <p>Pisze opis, wybiera okładkę, ustawia termin albo zostawia film bez terminu i zaznacza platformy. Dla YouTube i TikToka uzupełnia ustawienia danej platformy, zanim film da się wysłać.</p>
+        </li>
+        <li>
+          <h3>Publikacja</h3>
+          <p>Nic nie zostaje opublikowane, dopóki nie kliknie „Opublikuj teraz” albo nie nadejdzie termin, który sam ustawił (harmonogram działa, gdy Studio jest otwarte). Plik wideo trafia prosto z jego komputera do oficjalnego API każdej platformy.</p>
+        </li>
+        <li>
+          <h3>Sprawdzenie wyniku</h3>
+          <p>Studio pokazuje status osobno dla każdej platformy, z linkiem, jeśli platforma go zwraca. Opublikowane rolki z Instagrama pojawiają się potem w Analizie.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="sekcja" aria-labelledby="platformy">
+      <span class="etykieta">Platformy i API</span>
+      <h2 id="platformy">Gdzie Studio publikuje</h2>
+      <div class="platformy">
+        <div class="platforma">
+          <h3>Instagram</h3>
+          <p>Instagram Graph API (Meta). Publikuje rolki na koncie profesjonalnym właściciela i pobiera statystyki jego własnych rolek.</p>
+        </div>
+        <div class="platforma">
+          <h3>Facebook</h3>
+          <p>Graph API (Meta). Publikuje tę samą rolkę na własnej stronie właściciela na Facebooku.</p>
+        </div>
+        <div class="platforma">
+          <h3>YouTube</h3>
+          <p>YouTube Data API. Przesyła film na własny kanał właściciela. <a href="youtube.html">Jak Studio korzysta z YouTube</a></p>
+        </div>
+        <div class="platforma">
+          <h3>TikTok</h3>
+          <p>Login Kit i Content Posting API z Direct Post. Publikuje film na własnym profilu właściciela z ustawieniami, które sam wybierze. <a href="tiktok.html">Jak Studio korzysta z TikToka</a></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sekcja" aria-labelledby="kontakt">
+      <span class="etykieta">Dostępność i kontakt</span>
+      <h2 id="kontakt">Bez rejestracji i logowania</h2>
+      <p>Studio to aplikacja desktopowa, która działa tylko na komputerze właściciela, więc ta strona nie ma logowania i do jej przeczytania nie trzeba konta testowego. <a href="privacy.html">Polityka prywatności</a> i <a href="terms.html">regulamin</a> są podlinkowane na dole każdej podstrony.</p>
+      <p>Pytania o aplikację albo o dane: <a href="mailto:kczerwinski033@gmail.com">kczerwinski033@gmail.com</a>.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer class="stopka">
+  <div class="ramka">
+    <span>Kuba Studio, Jakub Czerwiński · <a href="mailto:kczerwinski033@gmail.com">kczerwinski033@gmail.com</a></span>
+    <nav aria-label="Dokumenty">
+      <a href="privacy.html">Polityka prywatności</a>
+      <a href="terms.html">Regulamin</a>
+      <a href="../index.html" hreflang="en" lang="en">English version</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

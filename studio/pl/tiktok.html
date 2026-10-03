@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kuba Studio: publikacja na TikToku</title>
+<meta name="description" content="Jak Kuba Studio korzysta z TikTok Login Kit i Content Posting API z Direct Post, jakich zakresów i danych używa, co właściciel wybiera przed każdą publikacją i jak odłączyć konto.">
+<meta name="theme-color" content="#0E0E12">
+<link rel="icon" href="../favicon.ico" sizes="16x16 24x24 32x32 48x48 64x64">
+<link rel="icon" href="../icon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../icon-180.png">
+<link rel="alternate" hreflang="en" href="https://kczerwinskii.github.io/plan/studio/tiktok.html">
+<link rel="alternate" hreflang="pl" href="https://kczerwinskii.github.io/plan/studio/pl/tiktok.html">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<a class="skip" href="#tresc">Przejdź do treści</a>
+<header class="naglowek">
+  <div class="ramka">
+    <a class="marka" href="index.html"><img src="../icon-180.png" width="40" height="40" alt=""><span>Kuba Studio</span></a>
+    <nav class="nawigacja" aria-label="Główna">
+      <a href="index.html">O aplikacji</a>
+      <a href="tiktok.html" aria-current="page">TikTok</a>
+      <a href="youtube.html">YouTube</a>
+      <a href="privacy.html">Prywatność</a>
+      <a href="terms.html">Regulamin</a>
+      <a class="jezyk" href="../tiktok.html" hreflang="en" lang="en">English</a>
+    </nav>
+  </div>
+</header>
+
+<main id="tresc">
+  <div class="ramka">
+
+    <section class="sekcja">
+      <span class="etykieta">Integracja z TikTokiem</span>
+      <h1>Publikacja na TikToku</h1>
+      <p class="wstep">Studio korzysta z dwóch produktów TikTok for Developers, żeby publikować gotowe filmy właściciela na jego własnym profilu TikTok: Login Kit, do połączenia jego konta TikTok, oraz Content Posting API z Direct Post, do publikacji filmu przygotowanego w Studio.</p>
+      <p class="uwaga">Studio publikuje tylko na koncie TikTok, które właściciel sam połączył. Nigdy nie publikuje z własnej inicjatywy i nie odczytuje danych innych użytkowników TikToka.</p>
+    </section>
+
+    <section class="sekcja" aria-labelledby="produkty">
+      <span class="etykieta">Produkty i zakresy</span>
+      <h2 id="produkty">O co Studio prosi TikToka</h2>
+      <div class="zakresy">
+        <div class="zakres">
+          <b>Login Kit for Desktop</b>
+          <p>Łączy konto TikTok właściciela przez OAuth 2.0 z PKCE. Strona logowania otwiera się w jego przeglądarce na tiktok.com, a TikTok odsyła go z powrotem do Studio działającego na jego komputerze (127.0.0.1).</p>
+        </div>
+        <div class="zakres">
+          <b>Content Posting API, Direct Post</b>
+          <p>Publikuje plik wideo z jego komputera na jego własnym profilu. Plik jest wysyłany metodą FILE_UPLOAD, w jednej lub kilku częściach, a potem Studio sprawdza status publikacji, aż TikTok ją potwierdzi.</p>
+        </div>
+        <div class="zakres">
+          <code>user.info.basic</code>
+          <p>Pokazuje nazwę i zdjęcie profilowe połączonego konta, żeby właściciel zawsze widział, z którego konta publikuje. Używane pola: <code>open_id</code>, <code>display_name</code>, <code>avatar_url</code>.</p>
+        </div>
+        <div class="zakres">
+          <code>video.upload</code>
+          <p>Wysyła do TikToka plik wideo, który właściciel wybrał do publikacji.</p>
+        </div>
+        <div class="zakres">
+          <code>video.publish</code>
+          <p>Publikuje ten film bezpośrednio na własnym profilu właściciela z opisem, kadrem okładki i ustawieniami, które wybrał dla tej publikacji.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sekcja" aria-labelledby="przed-publikacja">
+      <span class="etykieta">Przed każdą publikacją</span>
+      <h2 id="przed-publikacja">Co właściciel wybiera sam</h2>
+      <p>Gdy przy filmie zaznaczony jest TikTok, Studio pokazuje panel TikToka zbudowany z danych twórcy (creator info) dla połączonego konta. Film nie zostanie wysłany, dopóki wymagane pola nie są wybrane.</p>
+      <ul class="lista-znacznikow">
+        <li><b>Publikujesz jako.</b> Nazwa, nazwa użytkownika i zdjęcie połączonego konta TikTok, pobierane z danych twórcy (creator info) przy otwarciu panelu.</li>
+        <li><b>Kto może obejrzeć film.</b> Lista poziomów prywatności, które TikTok zwraca dla tego konta. Nie ma wartości domyślnej: właściciel musi wybrać jedną, inaczej publikacja jest zablokowana.</li>
+        <li><b>Interakcje.</b> Komentarze, duety i stitch to osobne przełączniki, domyślnie wyłączone. Interakcja wyłączona w ustawieniach konta TikTok jest wyszarzona.</li>
+        <li><b>Długość filmu.</b> Jeśli film jest dłuższy, niż TikTok pozwala temu kontu, Studio o tym informuje i go nie wysyła.</li>
+        <li><b>Oznaczenie treści komercyjnej.</b> Przełącznik dla filmu, który promuje markę, produkt lub usługę, z dwiema opcjami: własna marka właściciela albo treść sponsorowana dla partnera. Studio pokazuje etykietę, którą doda TikTok („Treść promocyjna” albo „Płatna współpraca”). Trzeba wybrać przynajmniej jedną opcję, a treści sponsorowanej nie da się ustawić jako „Tylko ja”.</li>
+        <li><b>Zgoda.</b> Na końcu panelu: „Publikując, akceptujesz zasady TikToka dotyczące muzyki (Music Usage Confirmation)”, z linkiem do strony TikToka, a przy treści sponsorowanej także zasady Branded Content Policy.</li>
+        <li><b>Wysyłka.</b> Film zostaje opublikowany dopiero, gdy właściciel kliknie „Opublikuj teraz”, albo w terminie, który sam dla niego ustawił. Potem Studio informuje, że post może pojawić się na profilu dopiero po kilku minutach.</li>
+      </ul>
+    </section>
+
+    <section class="sekcja" aria-labelledby="dane">
+      <span class="etykieta">Dane</span>
+      <h2 id="dane">Jakie dane TikToka są używane i po co</h2>
+      <div class="zakresy">
+        <div class="zakres">
+          <b>Tożsamość konta</b>
+          <p>Open ID, nazwa, nazwa użytkownika i zdjęcie profilowe. Służą do pokazania, które konto jest połączone, i do potwierdzenia po zalogowaniu, że token należy do tego konta.</p>
+        </div>
+        <div class="zakres">
+          <b>Ustawienia publikacji</b>
+          <p>Dostępne poziomy prywatności, ustawienia interakcji i maksymalna długość filmu z creator info. Służą do zbudowania panelu TikToka i do sprawdzenia każdej publikacji przed wysyłką.</p>
+        </div>
+        <div class="zakres">
+          <b>Film i jego ustawienia</b>
+          <p>Plik wideo, opis, kadr okładki, wybór prywatności, interakcji i oznaczenia treści. Trafiają do TikToka wyłącznie po to, żeby utworzyć post, o który poprosił właściciel.</p>
+        </div>
+        <div class="zakres">
+          <b>Status publikacji</b>
+          <p>Identyfikator publikacji i status zwrócone przez TikToka. Służą do pokazania, czy film został opublikowany.</p>
+        </div>
+        <div class="zakres">
+          <b>Tokeny dostępu</b>
+          <p>Służą do działania w imieniu właściciela. Zapisane tylko lokalnie na jego komputerze, nigdy nie są pokazywane w aplikacji w całości.</p>
+        </div>
+      </div>
+      <p>Studio nie odczytuje filmów, obserwujących ani wiadomości właściciela i nie ma dostępu do danych innych użytkowników TikToka. Nic nie jest sprzedawane ani przekazywane podmiotom trzecim. Szczegóły są w <a href="privacy.html#tiktok">polityce prywatności</a>.</p>
+    </section>
+
+    <section class="sekcja" aria-labelledby="odlaczenie">
+      <span class="etykieta">Odłączenie i usunięcie danych</span>
+      <h2 id="odlaczenie">Jak odłączyć TikToka i usunąć dane</h2>
+      <ol class="kroki">
+        <li>
+          <h3>W Studio</h3>
+          <p>Ustawienia, TikTok, przycisk „Rozłącz”. Od razu kasuje zapisane tokeny i dane konta z komputera właściciela.</p>
+        </li>
+        <li>
+          <h3>W aplikacji TikTok</h3>
+          <p>Ustawienia i prywatność, Bezpieczeństwo, Zarządzaj uprawnieniami aplikacji. Usunięcie tam Kuba Studio cofa dostęp aplikacji po stronie TikToka.</p>
+        </li>
+        <li>
+          <h3>Opublikowane filmy</h3>
+          <p>Filmy, które już zostały opublikowane, zostają na TikToku jako zwykłe posty i można je edytować albo usunąć w aplikacji TikTok jak każdy inny film.</p>
+        </li>
+      </ol>
+      <p>Pytania: <a href="mailto:kczerwinski033@gmail.com">kczerwinski033@gmail.com</a>.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer class="stopka">
+  <div class="ramka">
+    <span>Kuba Studio, Jakub Czerwiński · <a href="mailto:kczerwinski033@gmail.com">kczerwinski033@gmail.com</a></span>
+    <nav aria-label="Dokumenty">
+      <a href="privacy.html">Polityka prywatności</a>
+      <a href="terms.html">Regulamin</a>
+      <a href="../tiktok.html" hreflang="en" lang="en">English version</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>

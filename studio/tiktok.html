@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kuba Studio: publishing to TikTok</title>
+<meta name="description" content="How Kuba Studio uses TikTok Login Kit and the Content Posting API with Direct Post, which scopes and data it uses, what the owner chooses before each post and how to disconnect.">
+<meta name="theme-color" content="#0E0E12">
+<link rel="icon" href="favicon.ico" sizes="16x16 24x24 32x32 48x48 64x64">
+<link rel="icon" href="icon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="alternate" hreflang="en" href="https://kczerwinskii.github.io/plan/studio/tiktok.html">
+<link rel="alternate" hreflang="pl" href="https://kczerwinskii.github.io/plan/studio/pl/tiktok.html">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#tresc">Skip to content</a>
+<header class="naglowek">
+  <div class="ramka">
+    <a class="marka" href="index.html"><img src="icon-180.png" width="40" height="40" alt=""><span>Kuba Studio</span></a>
+    <nav class="nawigacja" aria-label="Main">
+      <a href="index.html">Overview</a>
+      <a href="tiktok.html" aria-current="page">TikTok</a>
+      <a href="youtube.html">YouTube</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a class="jezyk" href="pl/tiktok.html" hreflang="pl" lang="pl">Polski</a>
+    </nav>
+  </div>
+</header>
+
+<main id="tresc">
+  <div class="ramka">
+
+    <section class="sekcja">
+      <span class="etykieta">TikTok integration</span>
+      <h1>Publishing to TikTok</h1>
+      <p class="wstep">Studio uses two TikTok for Developers products to post the owner's finished videos to his own TikTok profile: Login Kit, to connect his TikTok account, and the Content Posting API with Direct Post, to publish a video he has prepared in Studio.</p>
+      <p class="uwaga">Studio only posts to the TikTok account its owner connected himself. It never posts on its own initiative and never reads the data of other TikTok users.</p>
+    </section>
+
+    <section class="sekcja" aria-labelledby="produkty">
+      <span class="etykieta">Products and scopes</span>
+      <h2 id="produkty">What Studio asks TikTok for</h2>
+      <div class="zakresy">
+        <div class="zakres">
+          <b>Login Kit for Desktop</b>
+          <p>Connects the owner's TikTok account with OAuth 2.0 and PKCE. The sign-in page opens in his browser on tiktok.com, and TikTok sends him back to Studio running on his own computer (127.0.0.1).</p>
+        </div>
+        <div class="zakres">
+          <b>Content Posting API, Direct Post</b>
+          <p>Publishes a video file from his computer to his own profile. The file is uploaded with the FILE_UPLOAD method, in one or more chunks, then Studio checks the publishing status until TikTok confirms the post.</p>
+        </div>
+        <div class="zakres">
+          <code>user.info.basic</code>
+          <p>Shows the display name and profile picture of the connected account, so the owner always sees which account he is posting as. Fields used: <code>open_id</code>, <code>display_name</code>, <code>avatar_url</code>.</p>
+        </div>
+        <div class="zakres">
+          <code>video.upload</code>
+          <p>Sends the video file the owner selected for a post to TikTok.</p>
+        </div>
+        <div class="zakres">
+          <code>video.publish</code>
+          <p>Publishes that video directly to the owner's own profile with the caption, cover frame and settings he chose for that post.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sekcja" aria-labelledby="przed-publikacja">
+      <span class="etykieta">Before each post</span>
+      <h2 id="przed-publikacja">What the owner chooses himself</h2>
+      <p>When TikTok is ticked for a video, Studio shows a TikTok panel built from TikTok's creator info for the connected account. The video is not sent until the required choices are made.</p>
+      <ul class="lista-znacznikow">
+        <li><b>Posting as.</b> The display name, username and avatar of the connected TikTok account, read from TikTok's creator info when the panel opens.</li>
+        <li><b>Who can view this video.</b> A list of the privacy options TikTok returns for this account. There is no default: the owner has to pick one, and the post is blocked until he does.</li>
+        <li><b>Interactions.</b> Comments, Duet and Stitch are separate switches, all off by default. An interaction that is turned off in the account's TikTok settings is shown greyed out.</li>
+        <li><b>Video length.</b> If the video is longer than the maximum TikTok allows for this account, Studio says so and does not send it.</li>
+        <li><b>Commercial content disclosure.</b> A switch for a video that promotes a brand, product or service, with two options: the owner's own brand, or branded content for a partner. Studio shows the label TikTok will add (Promotional content or Paid partnership). At least one option must be selected, and branded content cannot be set to "Only me".</li>
+        <li><b>Consent.</b> At the end of the panel Studio shows "By posting, you agree to TikTok's Music Usage Confirmation" (in Polish, like the rest of the app), linked to TikTok's Music Usage Confirmation page, plus TikTok's Branded Content Policy when branded content is selected.</li>
+        <li><b>Sending.</b> The video is posted only when the owner clicks Publish now, or at the date and time he set for it. Afterwards Studio tells him it may take a few minutes before the post appears on his profile.</li>
+      </ul>
+    </section>
+
+    <section class="sekcja" aria-labelledby="dane">
+      <span class="etykieta">Data</span>
+      <h2 id="dane">Which TikTok data is used, and why</h2>
+      <div class="zakresy">
+        <div class="zakres">
+          <b>Account identity</b>
+          <p>Open ID, display name, username and avatar. Used to show which account is connected and to confirm, after sign-in, that the token belongs to that account.</p>
+        </div>
+        <div class="zakres">
+          <b>Posting settings</b>
+          <p>Available privacy options, interaction settings and maximum video length from creator info. Used to build the TikTok panel and to check each post before it is sent.</p>
+        </div>
+        <div class="zakres">
+          <b>The video and its settings</b>
+          <p>The video file, caption, cover frame, privacy, interaction and disclosure choices. Sent to TikTok only to create the post the owner asked for.</p>
+        </div>
+        <div class="zakres">
+          <b>Post status</b>
+          <p>The publish ID and status returned by TikTok. Used to show whether the video was published.</p>
+        </div>
+        <div class="zakres">
+          <b>Access tokens</b>
+          <p>Used to act on the owner's behalf. Saved only locally on his computer, never shown in full in the app.</p>
+        </div>
+      </div>
+      <p>Studio does not read the owner's videos, followers or messages, and it does not access any data of other TikTok users. Nothing is sold or passed on to third parties. Full details are in the <a href="privacy.html#tiktok">Privacy Policy</a>.</p>
+    </section>
+
+    <section class="sekcja" aria-labelledby="odlaczenie">
+      <span class="etykieta">Disconnect and delete</span>
+      <h2 id="odlaczenie">How to disconnect TikTok and delete the data</h2>
+      <ol class="kroki">
+        <li>
+          <h3>In Studio</h3>
+          <p>Settings, TikTok, the Disconnect button (Rozłącz). It immediately deletes the saved tokens and the account details from the owner's computer.</p>
+        </li>
+        <li>
+          <h3>In the TikTok app</h3>
+          <p>Settings and privacy, Security, Manage app permissions. Removing Kuba Studio there revokes the app's access on TikTok's side.</p>
+        </li>
+        <li>
+          <h3>Posted videos</h3>
+          <p>Videos that were already published stay on TikTok as normal posts and can be edited or deleted in the TikTok app like any other video.</p>
+        </li>
+      </ol>
+      <p>Questions: <a href="mailto:kczerwinski033@gmail.com">kczerwinski033@gmail.com</a>.</p>
+    </section>
+
+  </div>
+</main>
+
+<footer class="stopka">
+  <div class="ramka">
+    <span>Kuba Studio, Jakub Czerwiński · <a href="mailto:kczerwinski033@gmail.com">kczerwinski033@gmail.com</a></span>
+    <nav aria-label="Legal">
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+      <a href="pl/tiktok.html" hreflang="pl" lang="pl">Wersja polska</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
