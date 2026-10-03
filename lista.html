@@ -17,9 +17,7 @@ body{margin:0;background:var(--bg);color:var(--iv);font:14px Poppins,Arial,sans-
 .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
 .tab{padding:9px 16px;border-radius:12px;border:1.5px solid #2F2F2F;background:var(--c1);color:var(--ivd);font:700 13px Poppins,Arial,sans-serif;display:flex;align-items:center;gap:8px;cursor:pointer}
 .tab b{font-size:12px;background:#262626;color:var(--iv);border-radius:999px;padding:1px 8px}
-.tab.on{border-color:var(--gm);color:var(--gl);background:#17140C}.tab.on b,.tab.g b{background:var(--gm);color:#0E0E12}
-.baner{display:flex;align-items:center;gap:14px;border:1.5px solid var(--gm);background:#15120A;border-radius:14px;padding:12px 16px;margin-bottom:16px}
-.baner span{flex:1;font-weight:600}.baner span small{display:block;font-weight:400;color:var(--ivd);font-size:12px}
+.tab.on{border-color:var(--gm);color:var(--gl);background:#17140C}.tab.on b{background:var(--gm);color:#0E0E12}
 .lista{background:var(--c1);border:1px solid var(--ln);border-radius:16px;overflow:hidden}
 .w{display:grid;grid-template-columns:6px minmax(0,1fr) 170px 170px 170px 180px;align-items:center;column-gap:14px;padding:14px 18px 14px 0;border-top:1px solid #222}
 .lista > :first-child{border-top:none}
@@ -38,17 +36,29 @@ body{margin:0;background:var(--bg);color:var(--iv);font:14px Poppins,Arial,sans-
 .wk i.on{background:linear-gradient(180deg,#E6CB80,#C9A455 55%,#8E6B2E);border-color:#F5E3A6}
 .akc{display:flex;gap:8px;justify-content:flex-end;align-items:center}
 .nw{display:grid;grid-template-columns:6px minmax(0,1fr) auto auto;align-items:center;column-gap:14px;padding:14px 18px 14px 0;border-top:1px solid #222}
-.pill{display:inline-flex;align-items:center;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;white-space:nowrap}
-.pill.g{background:linear-gradient(180deg,#E6CB80,#B8891A);color:#0E0E12}.pill.s{background:#232323;color:var(--ivd);border:1px solid #333}
 .pan{border-top:1px dashed #262626;padding:12px 18px 16px 24px}.pan:empty{display:none}
 .ankv{columns:2;column-gap:24px;font-size:13px}.ankq{break-inside:avoid;margin:0 0 10px;padding:8px 10px;background:#101010;border-left:2px solid var(--gd);border-radius:6px}.ankq span{display:block;color:var(--ivd);font-size:11px;line-height:1.3}.ankq b{display:block;font-weight:500;white-space:pre-wrap;margin-top:3px}
-.przyp{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 select{background:#101010;color:var(--iv);border:1.5px solid #333;border-radius:9px;padding:6px 8px;font:13px Poppins,Arial,sans-serif}
 .pusto{padding:26px;text-align:center;color:var(--ivd)}
 .dol{display:flex;justify-content:space-between;align-items:center;gap:14px;margin-top:14px}
-.dodaj{display:none;margin-top:12px;gap:8px;flex-wrap:wrap;align-items:center}.dodaj.on{display:flex}
+/* patch116: konta bez maila (panel „Nowy podopieczny”, ramka z loginem i hasłem, panel „Login i hasło”) */
+/* patch117: konta bez planu (zarejestrowane same przed zmianą logowania) */
+.bp{margin:22px 0 8px}.bp b{font-size:14px}.bp b span{color:var(--ivd);font-weight:600;margin-left:4px}.bp small{display:block;font-size:12px;color:var(--ivd);margin-top:3px}
+.np{background:#141414;border:1px solid var(--ln);border-radius:14px;padding:16px 18px;margin-top:12px}.np h4{margin:0 0 12px;font-size:15px}
+.pr2{display:grid;grid-template-columns:1fr 1fr auto;gap:10px;align-items:start}.pr2.j{grid-template-columns:minmax(0,320px) auto;justify-content:start}
+.pl label{display:block;font-size:10px;letter-spacing:1.4px;text-transform:uppercase;color:var(--ivd);font-weight:700;margin-bottom:6px}
+.pl input{display:block;width:100%;height:42px;border-radius:10px;border:1.5px solid #3A3A3A;background:#0B0B0B;font-weight:600;padding:0 12px}
+.pl small{display:block;font-size:11px;color:var(--ivd);margin-top:5px}.pr2 > .b{margin-top:21px;height:42px}
+.np-msg{font-size:13px;color:#E0798A;margin-top:10px}.np-msg:empty{display:none}
+.gotowe{margin-top:14px;border:1.5px solid var(--gd);background:#15130D;border-radius:14px;padding:14px 16px}.gotowe > b{color:var(--gl)}
+.gotowe .dd{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:15px;margin:10px 0 12px;align-items:baseline}.gotowe > .dd:first-child{margin-top:0}
+.gotowe .dd span{color:var(--ivd)}.gotowe .dd b{font-family:Consolas,Menlo,monospace;font-size:17px;letter-spacing:.5px;overflow-wrap:anywhere}.gotowe .dd b.ad{font-family:Poppins,Arial,sans-serif;font-size:14px;letter-spacing:0}
+.gotowe .kd{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.gotowe .uw{font-size:12px;color:var(--ivd)}
+.pan.kp{background:#101010;border-top:1px solid #222;padding:16px 22px 18px 24px}
+.lh{display:flex;align-items:center;gap:14px;flex-wrap:wrap}.lh .l{color:var(--ivd)}.lh .lgv{font-family:Consolas,Menlo,monospace;font-size:17px;letter-spacing:.5px;overflow-wrap:anywhere}.lh .sp{flex:1}
+.lh .lnk{background:none;border:0;padding:0;color:var(--gl);font:600 12px Poppins,Arial,sans-serif;text-decoration:underline;cursor:pointer}
+.lh.zm{margin-top:12px}.lh.zm[hidden]{display:none}.lh.zm input{width:220px;height:40px;border-radius:10px;border:1.5px solid var(--gm);background:#0B0B0B;font-weight:600;padding:0 12px}
 input{background:#101010;color:var(--iv);border:1.5px solid #333;border-radius:10px;padding:10px 12px;font:14px Poppins,Arial,sans-serif}input:focus,select:focus{outline:0;border-color:var(--gm)}
-.dodaj input{flex:1;min-width:200px}
 .mut{color:var(--ivd)}.err{color:#E0798A;font-size:13px;min-height:18px}
 .pmenu{position:absolute;z-index:50;background:#161616;border:1px solid var(--gd);border-radius:12px;padding:6px;min-width:220px;box-shadow:0 12px 30px rgba(0,0,0,.6)}
 .pmenu div{padding:10px 12px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer}.pmenu div:hover{background:#222}.pmenu .zak{color:#E0798A}
@@ -60,7 +70,8 @@ input{background:#101010;color:var(--iv);border:1.5px solid #333;border-radius:1
  .w .v{text-align:left}.w .v small{white-space:normal}.w .wk{justify-content:flex-start}.w .v::before{content:attr(data-l);display:block;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--ivd);margin-bottom:2px}
  .w .v[data-l="Tydzień bloku"]{grid-column:2 / 4}
  .nw{grid-template-columns:6px 1fr;row-gap:10px;column-gap:12px;padding:14px 14px 14px 0}.nw .kol{grid-row:span 3}.nw .pill{justify-self:start}.nw .akc{justify-content:flex-start;flex-wrap:wrap}.nw .akc .pr{flex:1}
- .baner{flex-wrap:wrap}.baner .b{width:100%}.dol{flex-direction:column;align-items:stretch}.ankv{columns:1}}
+ .dol{flex-direction:column;align-items:stretch}.ankv{columns:1}
+ .pr2,.pr2.j{grid-template-columns:1fr}.pr2 > .b{margin-top:0}.lh .sp{display:none}.lh.zm input{flex:1;width:auto;min-width:0}}
 </style></head><body>
 <div class="top"><span class="t">Pulpit trenera</span><span class="sp"></span><a class="b gh sm" id="doPlanu">‹ Do planu</a><button class="b gh sm" id="wyloguj" hidden>Wyloguj</button></div>
 <div class="wrap" id="tresc"><div class="mut">Wczytuję…</div></div>
@@ -80,7 +91,7 @@ function pokazHaslo(msg) {
   var go = function () {
     var em = document.getElementById('he').value.trim(), ha = document.getElementById('h').value; if (!em || !ha) return;
     document.getElementById('hb').textContent = 'Sprawdzam…';
-    api({ akcja: 'logowanie', email: em, haslo: ha }).then(function (r) { if (r.rola !== 'trener') throw new Error('To nie jest konto trenera.'); TSESJA = r.sesja; try { localStorage.setItem('trener_sesja', TSESJA); } catch (e) {} wczytaj(); }).catch(function (e) { pokazHaslo(e.message); });
+    api({ akcja: 'logowanie', login: em, email: em, haslo: ha }).then(function (r) { if (r.rola !== 'trener') throw new Error('To nie jest konto trenera.'); TSESJA = r.sesja; try { localStorage.setItem('trener_sesja', TSESJA); } catch (e) {} wczytaj(); }).catch(function (e) { pokazHaslo(e.message); });
   };
   document.getElementById('hb').onclick = go; document.getElementById('h').addEventListener('keydown', function (e) { if (e.key === 'Enter') go(); }); document.getElementById('he').focus();
 }
@@ -110,7 +121,7 @@ function pokazDostep(b, msg, przelacz) {
   var out = document.getElementById('pan-' + b), k = LISTA.filter(function (x) { return x.bazaId === b; })[0]; if (!out || !k) return;
   if (przelacz && out.classList.contains('dp')) { out.classList.remove('dp'); out.innerHTML = ''; return; }
   document.querySelectorAll('.pan.dp').forEach(function (x) { if (x !== out) { x.classList.remove('dp'); x.innerHTML = ''; } }); // jeden panel dostępu naraz
-  out.classList.add('dp');
+  out.classList.remove('kp'); out.classList.add('dp');
   out.innerHTML = '<div class="dst"><span class="l">Dodaj dni dostępu</span><input id="dst-dni" inputmode="numeric" maxlength="4" value="30" aria-label="Liczba dni"><button class="b pr sm" id="dst-zap">Zapisz</button>'
     + '<span class="mut">Nowy koniec: <b id="dst-kon"></b> (liczone od obecnego końca, a gdy już wygasł, od dziś)</span>'
     + (k.dostepDo ? '<button class="b gh bl" id="dst-bez">Bez limitu</button>' : '') + '</div><div class="dst-msg" id="dst-msg"></div>';
@@ -133,30 +144,118 @@ function pokazDostep(b, msg, przelacz) {
   };
   inp.focus(); inp.select();
 }
-function dataGodz(s) { var m = String(s || '').match(/^(\d{4})-(\d{2})-(\d{2})(?:[ T](\d{2}:\d{2}))?/); return m ? m[3] + '.' + m[2] + (m[4] ? ', ' + m[4] : '') : String(s || ''); }
-function osob(n) { var d = n % 10, s = n % 100; return n === 1 ? '1 osoba czeka' : (d >= 2 && d <= 4 && !(s >= 12 && s <= 14)) ? n + ' osoby czekają' : n + ' osób czeka'; }
-function kontoBazy(b) { return KONTA.filter(function (k) { return k.bazaId === b && (k.status === 'aktywne' || k.status === 'zakonczone'); })[0] || null; }
-function kontoMail(e) { return KONTA.filter(function (k) { return k.email === e; })[0] || null; }
+// patch116: konta bez maila. Identyfikator konta to login (serwer zwraca login, a email zostaje dla zgodności).
+var ADRES = 'https://kczerwinskii.github.io/plan/', LOGIN_RE = /^[a-z0-9][a-z0-9._-]{2,29}$/;
+var TXT_LOGIN = 'Login: 3 do 30 znaków, małe litery, cyfry, kropka, myślnik albo podkreślenie.';
+var TXT_RAZ = 'Hasło widać tylko teraz. Potem można nadać nowe.';
+function lg(k) { return k ? String(k.login || k.email || '') : ''; }
+function bezMaila(v) { v = String(v || ''); return v.indexOf('@') < 0 ? v : ''; }
+function los3() { var n; try { var a = new Uint32Array(1); crypto.getRandomValues(a); n = a[0] % 900; } catch (e) { n = Math.floor(Math.random() * 900); } return String(100 + n); }
+// podpowiedź loginu: pierwsze słowo imienia, małe litery, bez polskich znaków, + 3 losowe cyfry
+function loginZImienia(imie, cyfry) {
+  var s = String(imie || '').trim().split(/\s+/)[0].toLowerCase().replace(/ł/g, 'l');
+  try { s = s.normalize('NFD').replace(/[̀-ͯ]/g, ''); } catch (e) {}
+  s = s.replace(/[^a-z0-9]/g, '').slice(0, 27);
+  return (s || 'osoba') + cyfry;
+}
+function wiadomosc(login, haslo) { return 'Twój plan treningowy:\n' + ADRES + '\nLogin: ' + login + '\nHasło: ' + haslo; }
+function kopiuj(tekst, btn) {
+  var ok = function () { btn.textContent = 'Skopiowano'; setTimeout(function () { btn.textContent = 'Kopiuj dane do wysłania'; }, 2000); };
+  var zapas = function () { var ta = document.createElement('textarea'), u = false; ta.value = tekst; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); try { u = document.execCommand('copy'); } catch (e) {} ta.remove(); if (u) ok(); else prompt('Skopiuj dane i wyślij:', tekst); };
+  try { navigator.clipboard.writeText(tekst).then(ok, zapas); } catch (e) { zapas(); }
+}
+// ramka z danymi do wysłania: wiersze [etykieta, wartość, klasa]
+function ramka(tytul, wiersze, uwaga) {
+  return '<div class="gotowe">' + (tytul ? '<b>' + esc(tytul) + '</b>' : '') + '<div class="dd">' + wiersze.map(function (w) { return '<span>' + esc(w[0]) + '</span><b' + (w[2] ? ' class="' + w[2] + '"' : '') + '>' + esc(w[1]) + '</b>'; }).join('') + '</div>'
+    + '<div class="kd"><button class="b pr sm" data-kop="1">Kopiuj dane do wysłania</button><span class="uw">' + esc(uwaga) + '</span></div></div>';
+}
+// panel „Nowy podopieczny”: stan poza DOM, bo rysuj() buduje stronę od nowa (ramka z hasłem zostaje do zamknięcia panelu)
+var NOWY = nowyStan();
+function nowyStan() { return { on: false, imie: '', login: '', recznie: false, cyfry: los3(), gotowe: null }; }
+function panelNowy() {
+  if (!NOWY.on) return '';
+  var g = NOWY.gotowe;
+  return '<div class="np" id="np"><h4>Nowy podopieczny</h4><div class="pr2"><div class="pl"><label for="np-imie">Imię i nazwisko</label><input id="np-imie" autocomplete="off" maxlength="200" value="' + esc(NOWY.imie) + '"></div>'
+    + '<div class="pl"><label for="np-login">Login</label><input id="np-login" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" maxlength="30" value="' + esc(NOWY.login) + '"><small>tworzy się sam z imienia, można zmienić</small></div>'
+    + '<button class="b pr" id="np-utworz">Utwórz konto</button></div><div class="np-msg" id="np-msg"></div>'
+    + (g ? ramka('Konto gotowe', [['Adres', ADRES.replace(/^https:\/\//, '').replace(/\/$/, ''), 'ad'], ['Login', g.login], ['Hasło', g.haslo]], TXT_RAZ) : '') + '</div>';
+}
+function utworzKonto(btn) {
+  var im = NOWY.imie.trim(), lo = NOWY.login.trim().toLowerCase(), m = document.getElementById('np-msg');
+  if (im.length < 2 || im.length > 200) { m.textContent = 'Podaj imię i nazwisko.'; return; }
+  if (!LOGIN_RE.test(lo)) { m.textContent = TXT_LOGIN; return; }
+  m.textContent = ''; btn.disabled = true; btn.textContent = 'Tworzę…';
+  api({ akcja: 'nowyPodopieczny', imie: im, login: lo }).then(function (r) {
+    NOWY.gotowe = { login: r.login || lo, haslo: r.haslo }; NOWY.recznie = false; NOWY.cyfry = los3();
+    rysuj(); var np = document.getElementById('np'); if (np && np.scrollIntoView) np.scrollIntoView({ block: 'nearest' });
+    // lista odświeżona w tle; ramka z hasłem zostaje także wtedy, gdy odświeżenie się nie uda
+    Promise.all([api({ akcja: 'pulpit' }), api({ akcja: 'konta' })]).then(function (x) { LISTA = x[0] || []; KONTA = x[1] || []; rysuj(); }).catch(function () {});
+  }).catch(function (e) { btn.disabled = false; btn.textContent = 'Utwórz konto'; m.textContent = e.message; });
+}
+// panel „Login i hasło” pod wierszem (menu ⋯): login, zmiana loginu, nowe hasło; dla bazy bez konta: założenie konta
+function pokazKonto(b, st) {
+  st = st || {};
+  var out = document.getElementById('pan-' + b), k = LISTA.filter(function (x) { return x.bazaId === b; })[0], c = kontoBazy(b); if (!out || !k) return;
+  if (st.przelacz && out.classList.contains('kp')) { out.classList.remove('kp'); out.innerHTML = ''; return; }
+  document.querySelectorAll('.pan.kp').forEach(function (x) { if (x !== out) { x.classList.remove('kp'); x.innerHTML = ''; } });
+  out.classList.remove('dp'); out.classList.add('kp');
+  var h;
+  if (c) h = '<div class="lh"><span class="l">Login</span><b class="lgv">' + esc(lg(c)) + '</b><button class="lnk" id="kp-zm">Zmień login</button><span class="sp"></span><button class="b sm" id="kp-nh">Nadaj nowe hasło</button></div>'
+    + '<div class="lh zm" id="kp-zmr" hidden><input id="kp-nl" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" maxlength="30" placeholder="nowy login" aria-label="Nowy login"><button class="b pr sm" id="kp-zap">Zapisz</button></div>';
+  else h = '<div class="pr2 j"><div class="pl"><label for="kp-nl">Login</label><input id="kp-nl" autocomplete="off" autocapitalize="none" autocorrect="off" spellcheck="false" maxlength="30" value="' + esc(loginZImienia(k.imie, los3())) + '"><small>ta osoba nie ma jeszcze konta; login tworzy się sam z imienia, można zmienić</small></div><button class="b pr" id="kp-zal">Utwórz konto</button></div>';
+  h += '<div class="dst-msg" id="kp-msg"></div>' + (st.haslo ? ramka(st.tytul || '', [['Login', st.login], [st.tytul ? 'Hasło' : 'Nowe hasło', st.haslo]], st.uwaga) : '');
+  out.innerHTML = h;
+  var q = function (id) { return out.querySelector('#' + id); }, m = q('kp-msg');
+  var info = function (t, err) { m.textContent = t; m.classList.toggle('err', !!err); };
+  if (st.msg) info(st.msg);
+  var kop = out.querySelector('[data-kop]'); if (kop) kop.onclick = function () { kopiuj(wiadomosc(st.login, st.haslo), kop); };
+  var nl = q('kp-nl'), nowy = function () { var v = nl.value.trim().toLowerCase(); if (!LOGIN_RE.test(v)) { info(TXT_LOGIN, true); return ''; } return v; };
+  if (!c) {
+    var zal = q('kp-zal');
+    zal.onclick = function () {
+      var v = nowy(); if (!v) return; zal.disabled = true; zal.textContent = 'Tworzę…';
+      api({ akcja: 'zalozKonto', login: v, imie: k.imie, bazaId: b }).then(function (r) {
+        var lo = r.login || v; KONTA.push({ login: lo, email: lo, imie: k.imie, bazaId: b, status: 'aktywne', ankieta: false });
+        rysuj(); pokazKonto(b, { tytul: 'Konto gotowe', login: lo, haslo: r.haslo, uwaga: TXT_RAZ });
+      }).catch(function (e) { zal.disabled = false; zal.textContent = 'Utwórz konto'; info(e.message, true); });
+    };
+    nl.addEventListener('keydown', function (e) { if (e.key === 'Enter') zal.click(); });
+    return;
+  }
+  var stary = lg(c), zap = q('kp-zap'), nh = q('kp-nh');
+  q('kp-zm').onclick = function () { var r = q('kp-zmr'); r.hidden = !r.hidden; if (!r.hidden) nl.focus(); };
+  zap.onclick = function () {
+    var v = nowy(); if (!v) return; if (v === stary) { info('To jest obecny login.', true); return; }
+    zap.disabled = true; zap.textContent = 'Zapisuję…';
+    api({ akcja: 'zmienLogin', login: stary, nowyLogin: v }).then(function (r) {
+      var lo = r && r.login || v;
+      KONTA.concat(LISTA).forEach(function (x) { if (x.login === stary) x.login = lo; if (x.email === stary) x.email = lo; });
+      pokazKonto(b, { msg: 'Zapisano. Nowy login: ' + lo });
+    }).catch(function (e) { zap.disabled = false; zap.textContent = 'Zapisz'; info(e.message, true); });
+  };
+  nl.addEventListener('keydown', function (e) { if (e.key === 'Enter') zap.click(); });
+  nh.onclick = function () {
+    if (!confirm('Nadać nowe hasło? Stare przestanie działać, a ta osoba będzie musiała zalogować się na nowo.')) return;
+    nh.disabled = true; nh.textContent = 'Nadaję…';
+    api({ akcja: 'resetHasla', login: stary }).then(function (r) { pokazKonto(b, { login: r.login || stary, haslo: r.haslo, uwaga: 'Stare hasło przestało działać. Ta osoba musi zalogować się na nowo.' }); })
+      .catch(function (e) { nh.disabled = false; nh.textContent = 'Nadaj nowe hasło'; info(e.message, true); });
+  };
+}
+function kontoBazy(b) { var z = KONTA.filter(function (k) { return k.bazaId === b && (k.status === 'aktywne' || k.status === 'zakonczone'); }); return z.filter(function (k) { return k.status === 'aktywne'; })[0] || z[0] || null; }
 function zalega(k) { var dw = dni(k.wagaData); return !!k.blad || (dw == null ? 999 : dw) > 8 || dostepUwaga(k); }
 function podzial() {
   var akt = LISTA.filter(function (k) { var c = kontoBazy(k.bazaId); return !(c && c.status === 'zakonczone'); });
-  return { akt: akt, uwaga: akt.filter(zalega), nowe: KONTA.filter(function (k) { return k.status === 'ankieta' || k.status === 'czeka'; }), odrz: KONTA.filter(function (k) { return k.status === 'odrzucone'; }), zak: KONTA.filter(function (k) { return k.status === 'zakonczone'; }) };
+  return { akt: akt, uwaga: akt.filter(zalega), zak: KONTA.filter(function (k) { return k.status === 'zakonczone'; }), bp: KONTA.filter(function (k) { return k.status === 'ankieta' || k.status === 'czeka'; }) };
 }
 function rysuj() {
-  var P = podzial(), n = { wszyscy: P.akt.length, nowe: P.nowe.length, uwaga: P.uwaga.length, zak: P.zak.length };
+  var P = podzial(), n = { wszyscy: P.akt.length, uwaga: P.uwaga.length, zak: P.zak.length };
   if (!(ZAKL in n)) ZAKL = 'wszyscy';
-  var tab = function (id, t, g) { return '<button class="tab' + (ZAKL === id ? ' on' : '') + (g && n[id] ? ' g' : '') + '" data-z="' + id + '">' + t + ' <b>' + n[id] + '</b></button>'; };
-  var h = '<div class="tabs">' + tab('wszyscy', 'Wszyscy') + tab('nowe', 'Do zatwierdzenia', true) + tab('uwaga', 'Wymagają uwagi') + tab('zak', 'Zakończeni') + '</div>';
-  if (P.nowe.length && ZAKL !== 'nowe') {
-    var wyp = P.nowe.filter(function (k) { return k.status === 'czeka'; }).map(function (k) { return esc(k.imie); }), bez = P.nowe.filter(function (k) { return k.status !== 'czeka'; }).map(function (k) { return esc(k.imie); });
-    h += '<div class="baner"><span>' + osob(P.nowe.length) + ' na zatwierdzenie<small>' + [wyp.length ? 'ankieta wypełniona: ' + wyp.join(', ') : '', bez.length ? 'bez ankiety: ' + bez.join(', ') : ''].filter(Boolean).join(' · ') + '</small></span><button class="b pr sm" data-z="nowe">Pokaż</button></div>';
-  }
-  if (ZAKL === 'wszyscy') h += listaPod(P.akt, 'Nie masz jeszcze podopiecznych. Nowe osoby pojawią się w zakładce „Do zatwierdzenia” po założeniu konta.');
+  var tab = function (id, t) { return '<button class="tab' + (ZAKL === id ? ' on' : '') + '" data-z="' + id + '">' + t + ' <b>' + n[id] + '</b></button>'; };
+  var h = '<div class="tabs">' + tab('wszyscy', 'Wszyscy') + tab('uwaga', 'Wymagają uwagi') + tab('zak', 'Zakończeni') + '</div>';
+  if (ZAKL === 'wszyscy') h += listaPod(P.akt, 'Nie masz jeszcze podopiecznych. Dodaj pierwszą osobę przyciskiem „+ Dodaj podopiecznego”.') + listaBezPlanu(P.bp);
   if (ZAKL === 'uwaga') h += listaPod(P.uwaga, 'Wszyscy są na bieżąco.');
-  if (ZAKL === 'nowe') h += listaNowych(P.nowe, P.odrz);
   if (ZAKL === 'zak') h += listaZak(P.zak);
-  h += '<div class="dol"><span class="mut" style="font-size:12px">' + (ZAKL === 'wszyscy' || ZAKL === 'uwaga' ? 'Pasek z lewej: bordowy = ponad 8 dni bez ważenia albo dostęp kończy się w ciągu 7 dni lub już wygasł, granatowy = na bieżąco' : '') + '</span><button class="b gh sm" id="dodajBtn">+ Dodaj ręcznie</button></div>'
-    + '<div class="dodaj" id="dodajForm"><input id="imie" placeholder="imię i nazwisko"><input id="mail" type="email" placeholder="e-mail, widzisz go tylko Ty"><button class="b pr sm" id="dodaj">Dodaj i utwórz bazę</button><span class="mut" id="msg" style="font-size:12px"></span></div>';
+  h += '<div class="dol"><span class="mut" style="font-size:12px">' + (ZAKL === 'wszyscy' || ZAKL === 'uwaga' ? 'Pasek z lewej: bordowy = ponad 8 dni bez ważenia albo dostęp kończy się w ciągu 7 dni lub już wygasł, granatowy = na bieżąco' : '') + '</span><button class="b gh sm" id="dodajBtn">+ Dodaj podopiecznego</button></div>' + panelNowy();
   zamknijMenu(); T.innerHTML = h;
 }
 function listaPod(arr, pusto) {
@@ -178,23 +277,22 @@ function listaPod(arr, pusto) {
   });
   return h + '</div>';
 }
-function listaNowych(nowe, odrz) {
-  if (!nowe.length && !odrz.length) return '<div class="lista"><div class="pusto">Nikt nie czeka na zatwierdzenie.</div></div>';
-  var h = '<div class="lista">';
-  nowe.concat(odrz).forEach(function (k) {
-    var od = k.status === 'odrzucone', e = esc(k.email);
-    h += '<div class="nw"><span class="kol ' + (od ? 's' : 'g') + '"></span><div class="kto"><b>' + esc(k.imie) + '</b><small>' + e + ' · konto z ' + esc(dataGodz(k.utworzono)) + '</small></div>'
-      + (od ? '<span class="pill s">odrzucone</span>' : k.status === 'czeka' ? '<span></span>' : '<span class="pill s">bez ankiety</span>') + '<div class="akc">'
-      + (od ? '<button class="b gh sm" data-a="zatw" data-e="' + e + '">Przywróć i zatwierdź</button>'
-        : (k.ankieta ? '<button class="b gh sm" data-a="ank" data-e="' + e + '">Ankieta</button>' : '') + '<button class="b gh ic sm" data-m="n" data-e="' + e + '" title="Więcej">⋯</button><button class="b pr sm" data-a="zatw" data-e="' + e + '">Zatwierdź</button>')
-      + '</div></div><div class="pan" id="pan-' + e + '"></div>';
+// patch117: konta bez planu (status ankieta / czeka): założone samodzielnie przed zmianą logowania. Trener czyta ankietę
+// i usuwa stare konto; nowe konto z loginem i hasłem daje przyciskiem „+ Dodaj podopiecznego”.
+function listaBezPlanu(arr) {
+  if (!arr.length) return '';
+  var h = '<div class="bp"><b>Konta bez planu<span>' + arr.length + '</span></b><small>Założone samodzielnie przed zmianą logowania. Dodaj tę osobę przyciskiem „+ Dodaj podopiecznego”, a stare konto usuń.</small></div><div class="lista">';
+  arr.forEach(function (k, i) {
+    h += '<div class="nw"><span class="kol s"></span><div class="kto"><b>' + esc(k.imie || 'bez imienia') + '</b><small>' + esc(bezMaila(lg(k)) || (k.ankieta ? 'ankieta wypełniona' : 'bez ankiety')) + '</small></div><span></span><div class="akc">'
+      + (k.ankieta ? '<button class="b gh sm" data-a="ank" data-e="' + esc(lg(k)) + '" data-p="pan-bp' + i + '">Pokaż ankietę</button>' : '')
+      + '<button class="b gh sm" data-a="usunK" data-e="' + esc(lg(k)) + '" data-i="' + esc(k.imie || '') + '">Usuń konto</button></div></div><div class="pan" id="pan-bp' + i + '"></div>';
   });
   return h + '</div>';
 }
 function listaZak(zak) {
   if (!zak.length) return '<div class="lista"><div class="pusto">Brak zakończonych prowadzeń.</div></div>';
   var h = '<div class="lista">';
-  zak.forEach(function (k) { h += '<div class="nw"><span class="kol s"></span><div class="kto"><b>' + esc(k.imie) + '</b><small>' + esc(k.email) + '</small></div><span></span><div class="akc"><button class="b gh sm" data-a="wznow" data-e="' + esc(k.email) + '">Wznów prowadzenie</button></div></div>'; });
+  zak.forEach(function (k) { h += '<div class="nw"><span class="kol s"></span><div class="kto"><b>' + esc(k.imie) + '</b><small>' + esc(bezMaila(lg(k))) + '</small></div><span></span><div class="akc"><button class="b gh sm" data-a="wznow" data-e="' + esc(lg(k)) + '">Wznów prowadzenie</button></div></div>'; });
   return h + '</div>';
 }
 // ----- menu ⋯ -----
@@ -210,12 +308,11 @@ function menu(btn, items) {
 document.addEventListener('click', function (e) { if (MENU_EL && !MENU_EL.contains(e.target)) zamknijMenu(); });
 window.addEventListener('resize', zamknijMenu);
 function blad(er) { alert(er && er.message || er); wczytaj(); }
-function noweHaslo(email) { if (confirm('Ustawić nowe hasło? Stare przestanie działać, a osoba zostanie wylogowana.')) api({ akcja: 'resetHasla', email: email }).then(function (r) { prompt('Nowe hasło, skopiuj je i wyślij podopiecznemu:', r.haslo); }).catch(blad); }
-function pokazAnkiete(email, panId) {
+function pokazAnkiete(login, panId) {
   var out = document.getElementById(panId); if (!out) return;
-  if (out.innerHTML && !out.classList.contains('dp')) { out.innerHTML = ''; return; } out.classList.remove('dp');
+  if (out.innerHTML && !out.classList.contains('dp') && !out.classList.contains('kp')) { out.innerHTML = ''; return; } out.classList.remove('dp'); out.classList.remove('kp');
   out.innerHTML = '<span class="mut">Wczytuję ankietę…</span>';
-  api({ akcja: 'ankieta', email: email }).then(function (r) {
+  api({ akcja: 'ankieta', login: login, email: login }).then(function (r) {
     var o = r.odpowiedzi || {}, ks = Object.keys(o);
     out.innerHTML = ks.length ? (r.data ? '<div class="mut" style="margin-bottom:8px;font-size:12px">wypełniona ' + esc(r.data) + '</div>' : '') + '<div class="ankv">' + ks.map(function (q) { var it = o[q]; var pyt = it && typeof it === 'object' ? it.p : q, odp = it && typeof it === 'object' ? it.o : String(it); return '<div class="ankq"><span>' + esc(pyt) + '</span><b>' + esc(odp) + '</b></div>'; }).join('') + '</div>' : '<span class="mut">Ankieta pusta.</span>';
   }).catch(function (er) { out.innerHTML = '<span class="err">' + esc(er.message) + '</span>'; });
@@ -223,44 +320,31 @@ function pokazAnkiete(email, panId) {
 function menuPod(btn) {
   var b = btn.dataset.b, k = LISTA.filter(function (x) { return x.bazaId === b; })[0] || {}, c = kontoBazy(b), items = [];
   items.push(['Notatka dla siebie', function () { var v = prompt('Notatka trenera, widzisz ją tylko Ty:', k.notatka || ''); if (v === null) return; api({ akcja: 'notatkaTrenera', a0: b, a1: v.trim() }).then(wczytaj).catch(blad); }]);
-  if (c && c.ankieta) items.push(['Pokaż ankietę', function () { pokazAnkiete(c.email, 'pan-' + b); }]);
-  if (c) items.push(['Nowe hasło', function () { noweHaslo(c.email); }]);
-  else items.push(['Załóż konto', function () {
-    var em = prompt('E-mail podopiecznego, na niego się zaloguje:', k.email || ''); if (em === null) return; var im = prompt('Imię i nazwisko:', k.imie || ''); if (im === null) return;
-    api({ akcja: 'zalozKonto', email: em.trim(), imie: im.trim(), bazaId: b }).then(function (r) { prompt('Konto założone. Skopiuj i wyślij podopiecznemu:', 'Cześć! Twój plan treningowy jest tutaj: ' + BAZA + '\nLogin: ' + em.trim() + '\nHasło: ' + r.haslo + '\nPo zalogowaniu dodaj aplikację do ekranu telefonu, instrukcję znajdziesz w menu.'); wczytaj(); }).catch(blad);
-  }]);
+  if (c && c.ankieta) items.push(['Pokaż ankietę', function () { pokazAnkiete(lg(c), 'pan-' + b); }]);
+  items.push([c ? 'Login i hasło' : 'Załóż konto', function () { pokazKonto(b, { przelacz: true }); }]);
   items.push(['Dostęp', function () { pokazDostep(b, '', true); }]);
-  if (c) items.push(['Zakończ prowadzenie', function () { if (confirm('Zakończyć prowadzenie: ' + (k.imie || c.email) + '? Podopieczny straci dostęp do planu i zostanie wylogowany. Możesz wznowić jednym kliknięciem.')) api({ akcja: 'zakoncz', email: c.email }).then(wczytaj).catch(blad); }, 'zak']);
-  menu(btn, items);
-}
-function menuNowy(btn) {
-  var e = btn.dataset.e, items = [];
-  if (LISTA.length) items.push(['Przypnij do istniejącej bazy', function () {
-    var p = document.getElementById('pan-' + e); if (!p) return;
-    p.innerHTML = '<div class="przyp"><span class="mut" style="font-size:12px">Przypnij do bazy:</span><select id="ps-sel">' + LISTA.map(function (x) { return '<option value="' + esc(x.bazaId) + '">' + esc(x.imie) + '</option>'; }).join('') + '</select><button class="b pr sm" data-a="przyp" data-e="' + esc(e) + '">Przypnij</button><button class="b gh sm" data-a="anuluj" data-e="' + esc(e) + '">Anuluj</button></div>';
-  }]);
-  items.push(['Nowe hasło', function () { noweHaslo(e); }]);
-  items.push(['Odrzuć', function () { if (confirm('Odrzucić to konto? Osoba nie zaloguje się.')) api({ akcja: 'odrzuc', email: e }).then(wczytaj).catch(blad); }, 'zak']);
+  if (c) items.push(['Zakończ prowadzenie', function () { if (confirm('Zakończyć prowadzenie: ' + (k.imie || lg(c)) + '? Podopieczny straci dostęp do planu i zostanie wylogowany. Możesz wznowić jednym kliknięciem.')) api({ akcja: 'zakoncz', login: lg(c), email: lg(c) }).then(wczytaj).catch(blad); }, 'zak']);
   menu(btn, items);
 }
 T.addEventListener('click', function (ev) {
-  var b = ev.target.closest ? ev.target.closest('[data-z],[data-m],[data-a],#dodajBtn,#dodaj') : null; if (!b) return;
+  var b = ev.target.closest ? ev.target.closest('[data-z],[data-m],[data-a],#dodajBtn,#np-utworz,#np [data-kop]') : null; if (!b) return;
   if (b.dataset.z) { ZAKL = b.dataset.z; try { localStorage.setItem('pulpit_zakl', ZAKL); } catch (x) {} rysuj(); return; }
-  if (b.dataset.m) { ev.stopPropagation(); if (MENU_EL && MENU_EL.__od === b) { zamknijMenu(); return; } (b.dataset.m === 'p' ? menuPod : menuNowy)(b); if (MENU_EL) MENU_EL.__od = b; return; }
+  if (b.dataset.m) { ev.stopPropagation(); if (MENU_EL && MENU_EL.__od === b) { zamknijMenu(); return; } menuPod(b); if (MENU_EL) MENU_EL.__od = b; return; }
   var a = b.dataset.a, e = b.dataset.e;
-  if (a === 'zatw') { var k = kontoMail(e); if (confirm('Zatwierdzić konto' + (k ? ': ' + k.imie : '') + ' i utworzyć nową bazę planu?')) { b.textContent = 'Tworzę…'; b.disabled = true; api({ akcja: 'zatwierdz', email: e }).then(wczytaj).catch(blad); } return; }
-  if (a === 'ank') { pokazAnkiete(e, 'pan-' + e); return; }
-  if (a === 'wznow') { b.textContent = 'Wznawiam…'; b.disabled = true; api({ akcja: 'wznow', email: e }).then(wczytaj).catch(blad); return; }
-  if (a === 'anuluj') { var p = document.getElementById('pan-' + e); if (p) p.innerHTML = ''; return; }
-  if (a === 'przyp') { var s = document.getElementById('ps-sel'); if (s && confirm('Przypiąć konto do bazy „' + s.options[s.selectedIndex].text + '”?')) api({ akcja: 'zatwierdz', email: e, bazaId: s.value }).then(wczytaj).catch(blad); return; }
-  if (b.id === 'dodajBtn') { document.getElementById('dodajForm').classList.toggle('on'); var i = document.getElementById('imie'); if (i) i.focus(); return; }
-  if (b.id === 'dodaj') {
-    var im = document.getElementById('imie').value.trim(), m = document.getElementById('mail').value.trim(), msg = document.getElementById('msg');
-    if (!im || !m) { msg.textContent = 'Wpisz imię i e-mail.'; return; }
-    msg.textContent = 'Tworzę bazę…'; b.disabled = true;
-    api({ akcja: 'dodaj', email: m, imie: im }).then(function (id) { location.href = BAZA + '?klient=' + id; }).catch(function (er) { msg.textContent = 'Błąd: ' + er.message; b.disabled = false; });
-  }
+  if (a === 'wznow') { b.textContent = 'Wznawiam…'; b.disabled = true; api({ akcja: 'wznow', login: e, email: e }).then(wczytaj).catch(blad); return; }
+  if (a === 'ank') { pokazAnkiete(e, b.dataset.p); return; }
+  if (a === 'usunK') { if (confirm('Usunąć konto: ' + (b.dataset.i || 'bez imienia') + '? Ankieta tej osoby też zostanie usunięta.')) { b.textContent = 'Usuwam…'; b.disabled = true; api({ akcja: 'usunPodopiecznego', login: e, email: e }).then(wczytaj).catch(blad); } return; }
+  if (b.id === 'dodajBtn') { var on = !NOWY.on; NOWY = nowyStan(); NOWY.on = on; rysuj(); var i = document.getElementById('np-imie'); if (i) i.focus(); return; }
+  if (b.id === 'np-utworz') { utworzKonto(b); return; }
+  if (b.dataset.kop && NOWY.gotowe) kopiuj(wiadomosc(NOWY.gotowe.login, NOWY.gotowe.haslo), b);
 });
-document.getElementById('wyloguj').onclick = function () { var s = TSESJA; TSESJA = null; LISTA = []; KONTA = []; try { localStorage.removeItem('trener_sesja'); } catch (x) {} if (s) api({ akcja: 'wyloguj', sesja: s }).catch(function () {}); pokazHaslo(); };
+// pola panelu „Nowy podopieczny”: login podpowiadany z imienia, dopóki trener nie wpisze własnego
+T.addEventListener('input', function (ev) {
+  var el = ev.target;
+  if (el.id === 'np-imie') { NOWY.imie = el.value; if (!NOWY.recznie) { NOWY.login = NOWY.imie.trim() ? loginZImienia(NOWY.imie, NOWY.cyfry) : ''; document.getElementById('np-login').value = NOWY.login; } }
+  else if (el.id === 'np-login') { NOWY.login = el.value; NOWY.recznie = el.value !== ''; }
+});
+T.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' && (ev.target.id === 'np-imie' || ev.target.id === 'np-login')) { var u = document.getElementById('np-utworz'); if (u && !u.disabled) u.click(); } });
+document.getElementById('wyloguj').onclick = function () { var s = TSESJA; TSESJA = null; LISTA = []; KONTA = []; NOWY = nowyStan(); try { localStorage.removeItem('trener_sesja'); } catch (x) {} if (s) api({ akcja: 'wyloguj', sesja: s }).catch(function () {}); pokazHaslo(); };
 wczytaj();
 </script></body></html>
