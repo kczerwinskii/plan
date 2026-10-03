@@ -150,6 +150,13 @@ var ADRES = 'https://kczerwinskii.github.io/plan/', LOGIN_RE = /^[a-z0-9][a-z0-9
 var TXT_LOGIN = 'Login: 3 do 30 znaków, małe litery, cyfry, kropka, myślnik albo podkreślenie.';
 var TXT_RAZ = 'Hasło widać tylko teraz. Potem można nadać nowe.';
 function lg(k) { return k ? String(k.login || k.email || '') : ''; }
+// patch122: pole loginu pokazuje od razu to, co zapisze serwer (małe litery, bez spacji na brzegach); kursor zostaje na miejscu
+function loginNaZywo(el) {
+  var v = el.value, p = el.selectionStart == null ? v.length : el.selectionStart;
+  var n = v.toLowerCase().replace(/^\s+|\s+$/g, ''); if (n === v) return;
+  var przed = v.slice(0, p).toLowerCase().replace(/^\s+/, '').length; el.value = n;
+  try { var k = Math.max(0, Math.min(n.length, przed)); el.setSelectionRange(k, k); } catch (e) {}
+}
 function bezMaila(v) { v = String(v || ''); return v.indexOf('@') < 0 ? v : ''; }
 function los3() { var n; try { var a = new Uint32Array(1); crypto.getRandomValues(a); n = a[0] % 900; } catch (e) { n = Math.floor(Math.random() * 900); } return String(100 + n); }
 // podpowiedź loginu: pierwsze słowo imienia, małe litery, bez polskich znaków, + 3 losowe cyfry
@@ -337,7 +344,8 @@ T.addEventListener('click', function (ev) {
 T.addEventListener('input', function (ev) {
   var el = ev.target;
   if (el.id === 'np-imie') { NOWY.imie = el.value; if (!NOWY.recznie) { NOWY.login = NOWY.imie.trim() ? loginZImienia(NOWY.imie, NOWY.cyfry) : ''; document.getElementById('np-login').value = NOWY.login; } }
-  else if (el.id === 'np-login') { NOWY.login = el.value; NOWY.recznie = el.value !== ''; }
+  else if (el.id === 'np-login') { if (!ev.isComposing) loginNaZywo(el); NOWY.login = el.value; NOWY.recznie = el.value !== ''; }
+  else if (el.id === 'kp-nl' && !ev.isComposing) loginNaZywo(el);
 });
 T.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' && (ev.target.id === 'np-imie' || ev.target.id === 'np-login')) { var u = document.getElementById('np-utworz'); if (u && !u.disabled) u.click(); } });
 document.getElementById('wyloguj').onclick = function () { var s = TSESJA; TSESJA = null; LISTA = []; KONTA = []; NOWY = nowyStan(); try { localStorage.removeItem('trener_sesja'); } catch (x) {} if (s) api({ akcja: 'wyloguj', sesja: s }).catch(function () {}); pokazHaslo(); };
