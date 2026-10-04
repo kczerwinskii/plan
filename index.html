@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="b4cc1f5d46"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="8a91500ac0"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>/* patch124: odtwarzacz cofnięty (zachowany w webapp/odtwarzacz_zachowany), widok tylko mobilny zostaje */
 
@@ -480,6 +480,12 @@ body.tel .kalk{padding:16px 16px 30px}
 @media(max-width:600px){.yp-menu{left:0;right:0;bottom:0;border-radius:16px 16px 0 0}}
 /* patch128: poziomy ruch na odtwarzaczu nie cofa strony */
 .yp-player{touch-action:pan-y;overscroll-behavior:contain}
+/* patch129: te same białe SVG na środku i w dolnym pasku */
+.yp-btn svg{display:block;width:22px;height:22px;pointer-events:none}
+.yp-big svg{width:34px;height:34px}
+.yp-row [data-yp="play"]{border-radius:50%;background:rgba(0,0,0,.66)}
+.yp-item>svg{width:18px;height:18px;margin-right:8px;flex:none}
+.yp-detail svg{display:block;width:17px;height:17px;color:#fff}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
 .pinbox.lg{max-width:1060px;margin:0 auto;padding:24px 16px;min-height:100vh;display:flex;align-items:center;box-sizing:border-box}.pinbox.lg .card{width:100%;box-sizing:border-box;padding:60px;border-radius:14px}.pinbox.lg .sub{font-size:24px}.pinbox.lg h1{margin:8px 0 26px;font-size:56px}.pinbox.lg input{height:96px;font-size:32px}.pinbox.lg .btn{height:96px;font-size:34px}.pinbox.lg .mut{font-size:24px}
 body.lgmob .pinbox.lg{padding:16px;min-height:100vh}body.lgmob .pinbox.lg .card{padding:26px 20px;border-radius:14px}body.lgmob .pinbox.lg .sub{font-size:12px}body.lgmob .pinbox.lg h1{font-size:30px;margin:6px 0 18px}body.lgmob .pinbox.lg input{height:54px;font-size:17px;padding:0 14px;margin-bottom:10px;border-radius:10px}body.lgmob .pinbox.lg .btn{height:56px;font-size:18px;border-radius:10px;margin-top:4px}body.lgmob .pinbox.lg .err{font-size:15px;min-height:20px;margin-top:10px}body.lgmob .pinbox.lg .mut{font-size:15px;margin:14px 0 0;line-height:1.5}
@@ -977,14 +983,26 @@ function odtwBiblioteka() {
   }).catch(function (e) { ODT_HLS_PROMISE = null; throw e; });
   return ODT_HLS_PROMISE;
 }
+// patch129: wbudowane ikony, bez znaków zależnych od czcionki telefonu.
+function odtwIkona(typ) {
+  var a = {
+    play: '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="currentColor"><path d="M7.5 5.5v13L18.5 12z"/></svg>',
+    pause: '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="currentColor"><rect x="6.5" y="5" width="4" height="14" rx=".7"/><rect x="13.5" y="5" width="4" height="14" rx=".7"/></svg>',
+    settings: '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M10.3 2.8h3.4l.5 2.1 1.8.8 1.9-1.1 2.4 2.4-1.1 1.9.8 1.8 2.1.5v3.4l-2.1.5-.8 1.8 1.1 1.9-2.4 2.4-1.9-1.1-1.8.8-.5 2.1h-3.4l-.5-2.1-1.8-.8-1.9 1.1-2.4-2.4 1.1-1.9-.8-1.8-2.1-.5v-3.4l2.1-.5.8-1.8-1.1-1.9 2.4-2.4 1.9 1.1 1.8-.8z"/></svg>',
+    full: '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9 4H4v5m11-5h5v5M4 15v5h5m11-5v5h-5"/></svg>',
+    back: '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 5-7 7 7 7"/></svg>',
+    check: '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 12 5 5L20 6"/></svg>'
+  };
+  return a[typ] || '';
+}
 function odtwHtml(poster) {
   return '<div class="yp-player yp-controls">'
     + '<div class="yp-screen">'
     + '<video playsinline webkit-playsinline preload="metadata" poster="' + esc(poster) + '"></video>'
     + '<div class="yp-shade"></div>'
-    + '<button type="button" class="yp-big yp-btn" data-yp="play" aria-label="Odtwórz">▶</button>'
+    + '<button type="button" class="yp-big yp-btn" data-yp="play" aria-label="Odtwórz">' + odtwIkona('play') + '</button>'
     + '<div class="yp-bottom"><div class="yp-timeline" role="slider" tabindex="0" aria-label="Przewiń film" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"><span class="yp-track"><span class="yp-buffer"></span><span class="yp-progress"></span><span class="yp-thumb"></span></span></div>'
-    + '<div class="yp-row"><button type="button" class="yp-btn" data-yp="play" aria-label="Odtwórz">▶</button><span class="yp-time">0:00 / 0:00</span><span class="yp-grow"></span><button type="button" class="yp-btn" data-yp="settings" aria-label="Ustawienia">⚙</button><button type="button" class="yp-btn" data-yp="full" aria-label="Pełny ekran">⛶</button></div></div>'
+    + '<div class="yp-row"><button type="button" class="yp-btn" data-yp="play" aria-label="Odtwórz">' + odtwIkona('play') + '</button><span class="yp-time">0:00 / 0:00</span><span class="yp-grow"></span><button type="button" class="yp-btn" data-yp="settings" aria-label="Ustawienia">' + odtwIkona('settings') + '</button><button type="button" class="yp-btn" data-yp="full" aria-label="Pełny ekran">' + odtwIkona('full') + '</button></div></div>'
     + '<div class="yp-status" hidden><div class="yp-status-inner"></div></div><div class="yp-menu" hidden></div>'
     + '</div></div>';
 }
@@ -1029,8 +1047,12 @@ function odtwStart(el, src) {
     os.setAttribute('aria-valuetext', odtwCzas(teraz) + ' z ' + odtwCzas(dl));
     p.querySelector('.yp-time').textContent = odtwCzas(teraz) + ' / ' + odtwCzas(dl);
     Array.prototype.forEach.call(p.querySelectorAll('[data-yp="play"]'), function (b) {
-      b.textContent = !v.paused && !v.ended ? '❚❚' : '▶';
-      b.setAttribute('aria-label', !v.paused && !v.ended ? 'Pauza' : 'Odtwórz');
+      var gra = !v.paused && !v.ended, ikona = gra ? 'pause' : 'play';
+      if (b.getAttribute('data-yp-icon') !== ikona) {
+        b.innerHTML = odtwIkona(ikona); // patch129: podmiana SVG tylko przy zmianie stanu
+        b.setAttribute('data-yp-icon', ikona);
+      }
+      b.setAttribute('aria-label', gra ? 'Pauza' : 'Odtwórz');
     });
   }
   function odtwStan(typ) {
@@ -1158,10 +1180,12 @@ function odtwStart(el, src) {
     var b = document.createElement('button');
     b.type = 'button'; b.className = 'yp-item';
     b.textContent = tekst;
+    if (tekst === 'Wstecz') b.insertAdjacentHTML('afterbegin', odtwIkona('back')); // patch129
     if (szczegol || wybrane) {
       var s = document.createElement('span');
       s.className = 'yp-detail';
-      s.textContent = wybrane ? '✓' : szczegol;
+      if (wybrane) s.innerHTML = odtwIkona('check'); // patch129
+      else s.textContent = szczegol;
       b.appendChild(s);
     }
     b.onclick = akcja; menu.appendChild(b);
@@ -1173,7 +1197,7 @@ function odtwStart(el, src) {
     nag.className = 'yp-menu-head';
     nag.textContent = strona === 'main' ? 'Ustawienia' : strona === 'speed' ? 'Szybkość odtwarzania' : 'Jakość';
     menu.appendChild(nag);
-    if (strona !== 'main') odtwPozycjaMenu('‹  Wstecz', '', function () { odtwOtworzMenu('main'); }, false);
+    if (strona !== 'main') odtwPozycjaMenu('Wstecz', '', function () { odtwOtworzMenu('main'); }, false); // patch129
     if (strona === 'main') {
       odtwPozycjaMenu('Szybkość odtwarzania', v.playbackRate + '×', function () { odtwOtworzMenu('speed'); }, false);
       odtwPozycjaMenu('Jakość', odtwPozycja(), function () { odtwOtworzMenu('quality'); }, false);
@@ -1292,7 +1316,8 @@ function odtwStart(el, src) {
     }
     if (ekran.contains(e.target) && !e.target.closest('.yp-timeline, .yp-menu, .yp-status')) {
       if (strona) odtwZamknijMenu();
-      else odtwPrzelacz();
+      else if (p.classList.contains('yp-controls')) odtwPrzelacz();
+      // patch129: przy ukrytych kontrolkach pierwszy dotyk tylko je pokazuje.
       odtwPokaz();
     }
   });
@@ -1325,6 +1350,7 @@ function odtwStart(el, src) {
     clearTimeout(timerStart); chceGrac = false; odtwStan(''); odtwAktualizuj(); odtwPokaz();
   });
   v.addEventListener('pause', function () { odtwAktualizuj(); odtwPokaz(); });
+  v.addEventListener('play', function () { odtwAktualizuj(); }); // patch129
   v.addEventListener('ended', function () {
     clearTimeout(timerStart); chceGrac = false; uzytkownikGra = false;
     odtwStan('end'); odtwAktualizuj();
