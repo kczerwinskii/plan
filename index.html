@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="8a91500ac0"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="a5ee61221a"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>/* patch124: odtwarzacz cofnięty (zachowany w webapp/odtwarzacz_zachowany), widok tylko mobilny zostaje */
 
@@ -486,6 +486,11 @@ body.tel .kalk{padding:16px 16px 30px}
 .yp-row [data-yp="play"]{border-radius:50%;background:rgba(0,0,0,.66)}
 .yp-item>svg{width:18px;height:18px;margin-right:8px;flex:none}
 .yp-detail svg{display:block;width:17px;height:17px;color:#fff}
+/* patch130: małe sterowanie filmem pod linkiem atlasu */
+.atl-wakc{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-top:4px}
+.atl-wakc .pbtn{font-size:10px;padding:2px 5px;white-space:nowrap}
+.atl-wstan{font-size:10px;color:var(--ivd)}
+.atl-wakc [hidden]{display:none!important}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
 .pinbox.lg{max-width:1060px;margin:0 auto;padding:24px 16px;min-height:100vh;display:flex;align-items:center;box-sizing:border-box}.pinbox.lg .card{width:100%;box-sizing:border-box;padding:60px;border-radius:14px}.pinbox.lg .sub{font-size:24px}.pinbox.lg h1{margin:8px 0 26px;font-size:56px}.pinbox.lg input{height:96px;font-size:32px}.pinbox.lg .btn{height:96px;font-size:34px}.pinbox.lg .mut{font-size:24px}
 body.lgmob .pinbox.lg{padding:16px;min-height:100vh}body.lgmob .pinbox.lg .card{padding:26px 20px;border-radius:14px}body.lgmob .pinbox.lg .sub{font-size:12px}body.lgmob .pinbox.lg h1{font-size:30px;margin:6px 0 18px}body.lgmob .pinbox.lg input{height:54px;font-size:17px;padding:0 14px;margin-bottom:10px;border-radius:10px}body.lgmob .pinbox.lg .btn{height:56px;font-size:18px;border-radius:10px;margin-top:4px}body.lgmob .pinbox.lg .err{font-size:15px;min-height:20px;margin-top:10px}body.lgmob .pinbox.lg .mut{font-size:15px;margin:14px 0 0;line-height:1.5}
@@ -1756,6 +1761,124 @@ function wazPodsumowanie() {
 function fmtData(d) { var m = String(d).match(/^(\d{4})-(\d{2})-(\d{2})/); return m ? m[3] + '.' + m[2] + '.' + m[1].slice(2) : String(d); }
 // ---------- atlas ćwiczeń (widok trenera) ----------
 var ATL = { szukaj: '' };
+// patch130: stan wgrywania żyje dłużej niż pojedynczy render atlasu.
+var ATL_WIDEO = {}, ATL_TUS_PROMISE = null, ATL_AKTYWNE = 0;
+window.addEventListener('beforeunload', function (e) {
+  if (!ATL_AKTYWNE) return;
+  e.preventDefault(); e.returnValue = '';
+});
+function atlasWideoStan(id, tekst, anuluj) {
+  var w = ATL_WIDEO[id]; if (!w) return;
+  w.tekst = tekst; w.anuluj = !!anuluj;
+  var row = document.querySelector('tr[data-aid="' + id + '"]');
+  if (!row) return;
+  var label = row.querySelector('.atl-wstan'), btn = row.querySelector('.atl-anuluj');
+  if (label) label.textContent = tekst;
+  if (btn) btn.hidden = !anuluj;
+}
+function atlasTusBiblioteka() {
+  if (window.tus && window.tus.Upload) return Promise.resolve(window.tus);
+  if (ATL_TUS_PROMISE) return ATL_TUS_PROMISE;
+  ATL_TUS_PROMISE = new Promise(function (ok, blad) {
+    var sc = document.createElement('script');
+    sc.src = 'https://cdn.jsdelivr.net/npm/tus-js-client@4.3.1/dist/tus.min.js'; // brak na cdnjs; wersja przypięta + suma kontrolna
+    sc.integrity = 'sha384-UlHjK3F7TCQCEUpnoa1ohMbP2oaWB3Aypv4gMo511vaZ86uUZ0Zv7UzZ0J1zRUT1'; sc.crossOrigin = 'anonymous';
+    sc.onload = function () {
+      if (window.tus && window.tus.Upload) ok(window.tus);
+      else blad(new Error('Nie udało się wczytać biblioteki wgrywania.'));
+    };
+    sc.onerror = function () { blad(new Error('Nie udało się wczytać biblioteki wgrywania.')); };
+    document.head.appendChild(sc);
+  }).catch(function (e) { ATL_TUS_PROMISE = null; throw e; });
+  return ATL_TUS_PROMISE;
+}
+function atlasWgraj(btn) {
+  if (!TR) return;
+  var row = btn.closest('tr[data-aid]'), input = row && row.querySelector('.atl-plik');
+  if (input) input.click();
+}
+function atlasAnuluj(btn) {
+  var row = btn.closest('tr[data-aid]'), id = row && row.dataset.aid, w = ATL_WIDEO[id];
+  if (!w || !w.anuluj) return;
+  w.przerwane = true;
+  if (w.upload) w.upload.abort(true);
+  if (w.liczone) { ATL_AKTYWNE--; w.liczone = false; }
+  atlasWideoStan(id, 'Anulowano', false);
+}
+function atlasWideoPlik(input) {
+  if (!TR || !input.files || !input.files.length) return;
+  var row = input.closest('tr[data-aid]'), id = row && row.dataset.aid;
+  var a = (D.atlas || []).filter(function (x) { return x.id === id; })[0];
+  var file = input.files[0]; input.value = '';
+  if (!a || !file) return;
+  if (file.size > 2 * 1024 * 1024 * 1024 &&
+      !confirm('Film ma ponad 2 GB. Wgrywanie może potrwać długo. Kontynuować?')) return;
+  if (ATL_WIDEO[id] && ATL_WIDEO[id].anuluj) return;
+  var w = ATL_WIDEO[id] = { tekst: '', anuluj: true, przerwane: false, upload: null, liczone: false };
+  atlasWideoStan(id, 'Przygotowywanie...', true);
+  var tytul = String(a.nazwa || '').trim() || file.name.replace(/\.[^.]+$/, '');
+  wywolaj('wideoWgrajStart', [{ tytul: tytul }]).then(function (d) {
+    if (w.przerwane) return null;
+    w.dane = d;
+    return atlasTusBiblioteka();
+  }).then(function (tusLib) {
+    if (!tusLib || w.przerwane) return;
+    w.upload = new tusLib.Upload(file, {
+      endpoint: 'https://video.bunnycdn.com/tusupload',
+      retryDelays: [0, 1000, 3000, 5000],
+      chunkSize: 5 * 1024 * 1024,
+      headers: {
+        AuthorizationSignature: w.dane.signature,
+        AuthorizationExpire: String(w.dane.expire),
+        VideoId: w.dane.guid,
+        LibraryId: String(w.dane.libraryId)
+      },
+      metadata: { filetype: file.type || 'video/mp4', title: tytul },
+      onError: function () {
+        if (w.liczone) { ATL_AKTYWNE--; w.liczone = false; }
+        if (!w.przerwane) atlasWideoStan(id, 'Błąd wgrywania. Spróbuj ponownie.', false);
+      },
+      onProgress: function (sent, total) {
+        if (!w.przerwane) atlasWideoStan(id, 'Wgrywanie ' + Math.floor(sent * 100 / total) + '%', true);
+      },
+      onSuccess: function () {
+        if (w.liczone) { ATL_AKTYWNE--; w.liczone = false; }
+        if (w.przerwane) return;
+        atlasWideoStan(id, 'Zapisywanie linku...', false);
+        var pole = document.querySelector('tr[data-aid="' + id + '"] input[data-f="wideo"]');
+        if (!pole) { atlasWideoStan(id, 'Nie ma już tego wiersza atlasu.', false); return; }
+        pole.value = w.dane.url;
+        atlasZapiszPole(pole).then(function () {
+          atlasWideoStan(id, 'Przetwarzanie...', false);
+          atlasWideoCzekaj(id, w.dane.guid, w, Date.now() + 5 * 60 * 1000);
+        }).catch(function (e) {
+          atlasWideoStan(id, 'Błąd zapisu linku: ' + e.message, false);
+        });
+      }
+    });
+    w.liczone = true; ATL_AKTYWNE++;
+    atlasWideoStan(id, 'Wgrywanie 0%', true);
+    w.upload.start();
+  }).catch(function (e) {
+    if (!w.przerwane) atlasWideoStan(id, 'Błąd: ' + e.message, false);
+  });
+}
+function atlasWideoCzekaj(id, guid, w, koniec) {
+  if (w.przerwane || ATL_WIDEO[id] !== w) return;
+  wywolaj('wideoStatus', [{ guid: guid }]).then(function (r) {
+    if (w.przerwane || ATL_WIDEO[id] !== w) return;
+    if (r.gotowe) { atlasWideoStan(id, 'Gotowe', false); return; }
+    if (r.blad) { atlasWideoStan(id, 'Błąd przetwarzania filmu.', false); return; }
+    if (Date.now() >= koniec) {
+      atlasWideoStan(id, 'Film nadal się przetwarza. Sprawdź później.', false);
+      return;
+    }
+    atlasWideoStan(id, 'Przetwarzanie' + (r.postep ? ' ' + r.postep + '%' : '') + '...', false);
+    setTimeout(function () { atlasWideoCzekaj(id, guid, w, koniec); }, 10000);
+  }).catch(function (e) {
+    atlasWideoStan(id, 'Błąd sprawdzania filmu: ' + e.message, false);
+  });
+}
 // kolory jak w arkuszu „Atlas” (chipy list rozwijanych): [tło, tekst]
 var KOL_M = { 'czworogłowe uda': ['#F4CCCC', '#990000'], 'kulszowo-goleniowe': ['#FFE599', '#7F6000'], 'pośladkowy wielki': ['#CFE2F3', '#1155CC'], 'pośladkowy średni': ['#D9D9D9', '#434343'], 'łydki': ['#3C3C3C', '#FFFFFF'], 'przywodziciele': ['#B10202', '#FFFFFF'], 'klatka piersiowa': ['#4A86E8', '#FFFFFF'], 'czworoboczny grzbietu': ['#3D3300', '#FFFFFF'], 'najszerszy grzbietu': ['#46BDC6', '#FFFFFF'], 'barki przód': ['#1C4587', '#FFFFFF'], 'barki bok': ['#8FA31E', '#FFFFFF'], 'barki tył': ['#7B1FA2', '#FFFFFF'], 'triceps': ['#FFE599', '#7F6000'], 'biceps': ['#B5CC18', '#3D3D00'], 'brzuch': ['#5B3A00', '#FFFFFF'], 'prostowniki grzbietu': ['#9FC5E8', '#0B5394'], 'przedramiona': ['#A2C4C9', '#134F5C'], 'inne': ['#FFE599', '#7F6000'] };
 var KOL_R = { 'full': ['#1155CC', '#FFFFFF'], 'przyśrodkowy-boczny': ['#D9D2E9', '#351C75'], 'częściowy': ['#434343', '#FFFFFF'], 'częsciowy': ['#434343', '#FFFFFF'], 'górny': ['#F4CCCC', '#990000'], 'dolny': ['#B10202', '#FFFFFF'], 'środkowy': ['#D9D9D9', '#434343'], 'wielki': ['#34A853', '#0B3D1A'], 'mniejszy,długi': ['#CCCCCC', '#333333'], 'dalszy': ['#C9DAF8', '#1C4587'], 'przednioboczny': ['#FFF2CC', '#7F6000'], 'tylnoboczny': ['#FCE5CD', '#B45F06'], 'bliższy': ['#D9B700', '#3A3000'], 'równoległoboczny': ['#BDB800', '#333300'], 'długa': ['#434343', '#FFFFFF'], 'przyśrodkowa': ['#F4CCCC', '#990000'], 'boczna': ['#1155CC', '#FFFFFF'], 'pośredni': ['#34A853', '#0B3D1A'], 'krótki': ['#D9D9D9', '#434343'], 'ramienno-promieniowy': ['#8E7CC3', '#FFFFFF'], 'ramienny': ['#B4A7D6', '#351C75'], 'skośny': ['#4A86E8', '#FFFFFF'] };
@@ -1774,7 +1897,7 @@ function atlasWidok() {
     var maxN = 12; rows.forEach(function (a) { maxN = Math.max(maxN, String(a.nazwa || '').length); }); var wN = Math.min(560, Math.round(maxN * 7.4) + 28), wSum = 150 + 130 + wN + 60 + 60 + 170 + 30;
     h += '<table class="atl" style="width:' + wSum + 'px"><colgroup><col style="width:150px"><col style="width:130px"><col style="width:' + wN + 'px"><col style="width:60px"><col style="width:60px"><col style="width:170px"><col style="width:30px"></colgroup><tr><th class="l">Region</th><th class="l">Długość</th><th class="l">Nazwa ćwiczenia</th><th>Powt.</th><th>Tempo</th><th class="l">Wideo</th><th></th></tr>';
     lista.forEach(function (a) {
-      h += '<tr data-aid="' + esc(a.id) + '"><td><input class="c chip" data-f="region" style="' + chipStyl(KOL_R, a.region) + '" value="' + esc(a.region) + '"></td><td><select class="c chip" data-f="dlugosc" style="' + chipStyl(KOL_D, a.dlugosc) + '"><option value=""' + (a.dlugosc ? '' : ' selected') + '></option>' + ['Rozciągnięcie', 'Skrócenie', 'Pośrednie'].map(function (o) { return '<option' + (a.dlugosc === o ? ' selected' : '') + '>' + o + '</option>'; }).join('') + '</select></td><td><input class="c l" data-f="nazwa" value="' + esc(a.nazwa) + '"></td><td><input class="c" data-f="powt" value="' + esc(a.powt) + '"></td><td><input class="c" data-f="tempo" value="' + esc(a.tempo) + '"></td><td><input class="c l" data-f="wideo" placeholder="link" value="' + esc(a.wideo) + '"></td><td><i class="del" title="usuń z atlasu" onclick="atlasUsunW(\'' + esc(a.id) + '\')">✕</i></td></tr>';
+      h += '<tr data-aid="' + esc(a.id) + '"><td><input class="c chip" data-f="region" style="' + chipStyl(KOL_R, a.region) + '" value="' + esc(a.region) + '"></td><td><select class="c chip" data-f="dlugosc" style="' + chipStyl(KOL_D, a.dlugosc) + '"><option value=""' + (a.dlugosc ? '' : ' selected') + '></option>' + ['Rozciągnięcie', 'Skrócenie', 'Pośrednie'].map(function (o) { return '<option' + (a.dlugosc === o ? ' selected' : '') + '>' + o + '</option>'; }).join('') + '</select></td><td><input class="c l" data-f="nazwa" value="' + esc(a.nazwa) + '"></td><td><input class="c" data-f="powt" value="' + esc(a.powt) + '"></td><td><input class="c" data-f="tempo" value="' + esc(a.tempo) + '"></td><td><input class="c l" data-f="wideo" placeholder="link" value="' + esc(a.wideo) + '"><div class="atl-wakc"><button type="button" class="pbtn" onclick="atlasWgraj(this)">Wgraj film</button><input class="atl-plik" type="file" accept="video/*" hidden onchange="atlasWideoPlik(this)"><span class="atl-wstan">' + esc((ATL_WIDEO[a.id] || {}).tekst || '') + '</span><button type="button" class="pbtn atl-anuluj" onclick="atlasAnuluj(this)"' + ((ATL_WIDEO[a.id] || {}).anuluj ? '' : ' hidden') + '>Anuluj</button></div></td><td><i class="del" title="usuń z atlasu" onclick="atlasUsunW(\'' + esc(a.id) + '\')">✕</i></td></tr>';
     });
     h += '</table></div>';
   });
@@ -1784,7 +1907,27 @@ function bindAtlas() {
   var s = document.getElementById('atlSzukaj'); if (s) { s.addEventListener('input', function () { ATL.szukaj = s.value; clearTimeout(window._atlS); window._atlS = setTimeout(function () { var f = zapamietajFokus(); render(); przywrocFokus(f); }, 250); }); }
   document.querySelectorAll('tr[data-aid] [data-f]').forEach(function (el) {
     var id = el.closest('tr').dataset.aid, a = (D.atlas || []).filter(function (x) { return x.id === id; })[0]; if (!a) return;
-    el.addEventListener('change', function () { a[el.dataset.f] = el.value; if (el.dataset.f === 'region') el.style.cssText = chipStyl(KOL_R, el.value); if (el.dataset.f === 'dlugosc') el.style.cssText = chipStyl(KOL_D, el.value); status('zapisuję…'); wywolaj('atlasEdytuj', [id, el.dataset.f, el.value]).then(function () { status('zapisano', true); if (el.dataset.f === 'region') el.style.cssText = chipStyl(KOL_R, el.value); else if (el.dataset.f === 'dlugosc') el.style.cssText = chipStyl(KOL_D, el.value); else if (el.dataset.f === 'nazwa' || el.dataset.f === 'wideo') { var f = zapamietajFokus(); render(); przywrocFokus(f); } }).catch(function (e) { status('błąd zapisu: ' + e.message, false, true); }); });
+    el.addEventListener('change', function () { atlasZapiszPole(el).catch(function () {}); });
+  });
+}
+function atlasZapiszPole(el) {
+  var id = el.closest('tr[data-aid]').dataset.aid;
+  var a = (D.atlas || []).filter(function (x) { return x.id === id; })[0];
+  if (!a) return Promise.reject(new Error('Nie ma już tego wiersza atlasu.'));
+  var pole = el.dataset.f, poprzednio = a[pole], wartosc = el.value;
+  a[pole] = wartosc;
+  if (pole === 'region') el.style.cssText = chipStyl(KOL_R, wartosc);
+  if (pole === 'dlugosc') el.style.cssText = chipStyl(KOL_D, wartosc);
+  status('zapisując...');
+  return wywolaj('atlasEdytuj', [id, pole, wartosc]).then(function () {
+    status('zapisano', true);
+    if (pole === 'nazwa' || pole === 'wideo') {
+      var f = zapamietajFokus(); render(); przywrocFokus(f);
+    }
+  }).catch(function (e) {
+    a[pole] = poprzednio;
+    status('błąd zapisu: ' + e.message, false, true);
+    throw e;
   });
 }
 function atlasDodajDo(g) {
