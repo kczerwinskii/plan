@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="e83c68a05b"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="e876c83a9e"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>/* patch124: odtwarzacz cofnięty (zachowany w webapp/odtwarzacz_zachowany), widok tylko mobilny zostaje */
 
@@ -429,6 +429,16 @@ body.tel .kalk{padding:16px 16px 30px}
 .wz.ed .r4{display:flex;align-items:center;gap:10px;margin-top:10px}.wz.ed .r4 .mk3{flex:1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.wz.ed .r4 label{display:flex;align-items:center;gap:6px;margin:0}.wz.ed .r4 label i{font-style:normal;font-size:12px;font-weight:700;color:#E6CB80}.wz.ed .r4 input.c{text-align:center;font-weight:600;min-width:0}
 /* patch122: podopieczny ma tylko widok mobilny; na szerokim ekranie wyśrodkowana kolumna jak telefon */
 @media (min-width:700px){body.pmob.karty #app,body.pmob.mobw #app{max-width:560px;margin:0 auto}body.pmob.karty .mnav{left:50%;right:auto;width:560px;transform:translateX(-50%)}}
+/* patch126: tabela treningu: nazwa ćwiczenia do 2 linii, notatka podopiecznego 2 linie z „…”, panel notatki na środku */
+.tpl td.ex .nzw{position:relative;min-height:28px;display:flex;align-items:center}
+.tpl td.ex .nzt{flex:1;min-width:0;margin:4px 5px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;white-space:normal;overflow-wrap:anywhere;line-height:1.3}
+.tpl td.ex .nzw input[data-f=nazwa]{position:absolute;left:0;top:0;height:100%;opacity:0}
+.tpl td.ex .nzw:focus-within input[data-f=nazwa]{opacity:1}.tpl td.ex .nzw:focus-within .nzt{visibility:hidden}
+.tpl td.note .ntw{display:flex;align-items:center;min-height:28px;padding:4px 6px;border:1px solid transparent;border-radius:6px;text-align:left;cursor:pointer}
+.tpl td.note .ntt{flex:1;min-width:0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;white-space:pre-line;overflow-wrap:anywhere;line-height:1.35}
+.tpl td.note .ntw:hover{background:rgba(201,164,85,.10)}.tpl td.note .ntw:focus{outline:0;border-color:#F5E3A6}.tpl td.note .ntw.pusta{color:#6f6c66}
+.msheet.msrod{top:50%;bottom:auto;left:50%;right:auto;transform:translate(-50%,-50%);width:640px;max-width:calc(100vw - 32px);max-height:calc(100vh - 48px);margin:0;border:1.5px solid #8E6B2E;border-radius:18px}.msheet.msrod textarea{min-height:160px}
+.msheet .b:focus{outline:0}.msheet .b:focus-visible{outline:2px solid #F5E3A6;outline-offset:2px}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
 .pinbox.lg{max-width:1060px;margin:0 auto;padding:24px 16px;min-height:100vh;display:flex;align-items:center;box-sizing:border-box}.pinbox.lg .card{width:100%;box-sizing:border-box;padding:60px;border-radius:14px}.pinbox.lg .sub{font-size:24px}.pinbox.lg h1{margin:8px 0 26px;font-size:56px}.pinbox.lg input{height:96px;font-size:32px}.pinbox.lg .btn{height:96px;font-size:34px}.pinbox.lg .mut{font-size:24px}
 body.lgmob .pinbox.lg{padding:16px;min-height:100vh}body.lgmob .pinbox.lg .card{padding:26px 20px;border-radius:14px}body.lgmob .pinbox.lg .sub{font-size:12px}body.lgmob .pinbox.lg h1{font-size:30px;margin:6px 0 18px}body.lgmob .pinbox.lg input{height:54px;font-size:17px;padding:0 14px;margin-bottom:10px;border-radius:10px}body.lgmob .pinbox.lg .btn{height:56px;font-size:18px;border-radius:10px;margin-top:4px}body.lgmob .pinbox.lg .err{font-size:15px;min-height:20px;margin-top:10px}body.lgmob .pinbox.lg .mut{font-size:15px;margin:14px 0 0;line-height:1.5}
@@ -1015,8 +1025,19 @@ document.addEventListener('touchmove', gestMove, { passive: false });
 document.addEventListener('touchend', gestKoniec, { passive: true });
 document.addEventListener('touchcancel', gestPrzerwany, { passive: true });
 // ----- arkusze od dołu -----
-function arkusz(html, klasa) { zamknijArkusz(); var tlo = document.createElement('div'); tlo.className = 'mtlo'; tlo.id = 'mtlo'; tlo.onclick = zamknijArkusz; var sh = document.createElement('div'); sh.className = 'msheet' + (klasa ? ' ' + klasa : ''); sh.id = 'msheet'; sh.innerHTML = '<div class="grab"></div>' + html; document.body.appendChild(tlo); document.body.appendChild(sh); MV.arkusz = sh; return sh; }
-function zamknijArkusz() { var a = document.getElementById('msheet'), t = document.getElementById('mtlo'); if (a) a.remove(); if (t) t.remove(); MV.arkusz = null; if (MV.vv) { try { window.visualViewport.removeEventListener('resize', MV.vv); } catch (e) {} MV.vv = null; } }
+function arkusz(html, klasa) { zamknijArkusz(); var tlo = document.createElement('div'); tlo.className = 'mtlo'; tlo.id = 'mtlo'; tlo.onclick = zamknijArkusz; var sh = document.createElement('div'); sh.className = 'msheet' + (klasa ? ' ' + klasa : ''); sh.id = 'msheet'; sh.innerHTML = '<div class="grab"></div>' + html; Array.prototype.forEach.call(sh.querySelectorAll('.b'), function (x) { if (!x.hasAttribute('tabindex')) { x.tabIndex = 0; x.setAttribute('role', 'button'); } }); /* patch126 */ document.body.appendChild(tlo); document.body.appendChild(sh); MV.arkusz = sh; return sh; }
+// patch126: panel z klawiatury: Escape zamyka, Tab krąży w panelu, Enter/Spacja na przycisku
+document.addEventListener('keydown', function (e) {
+  var sh = document.getElementById('msheet'); if (!sh) return;
+  if (e.key === 'Escape') { zamknijArkusz(); return; }
+  var ae = document.activeElement;
+  if ((e.key === 'Enter' || e.key === ' ') && ae && ae.classList && ae.classList.contains('b') && sh.contains(ae)) { e.preventDefault(); ae.click(); return; }
+  if (e.key !== 'Tab') return;
+  var f = Array.prototype.filter.call(sh.querySelectorAll('textarea,input,select,button,a[href],[tabindex="0"]'), function (x) { return !x.disabled && x.offsetParent !== null; }); if (!f.length) return;
+  var i = f.indexOf(ae), cel = i < 0 ? f[e.shiftKey ? f.length - 1 : 0] : e.shiftKey && i === 0 ? f[f.length - 1] : !e.shiftKey && i === f.length - 1 ? f[0] : null;
+  if (cel) { e.preventDefault(); cel.focus(); }
+});
+function zamknijArkusz() { var wroc = MV.wroc; MV.wroc = null; if (wroc) setTimeout(function () { var e = document.querySelector('tr[data-id="' + wroc + '"] .ntw'); if (e) e.focus(); }, 0); /* patch126 */ var a = document.getElementById('msheet'), t = document.getElementById('mtlo'); if (a) a.remove(); if (t) t.remove(); MV.arkusz = null; if (MV.vv) { try { window.visualViewport.removeEventListener('resize', MV.vv); } catch (e) {} MV.vv = null; } }
 function arkuszInfo(tempo) { var t = String(tempo || '').replace(/\s/g, ''), f = ['skrócenie', 'opuszczanie', 'pauza w skróceniu', 'pauza w rozciąg&shy;nięciu'], ex = ''; if (t.length === 4) ex = '<div class="ex4">' + t.split('').map(function (ch, i) { return '<span><b>' + esc(ch) + '</b>' + f[i] + '</span>'; }).join('') + '</div>'; arkusz('<h3>Tempo' + (t ? ' ' + esc(t) : '') + '</h3><p>' + esc(TIPS.tempo || '') + '</p>' + ex + '<h3>RiR</h3><p>' + esc(TIPS.rir || '') + '</p><div class="row"><div class="b ok" onclick="zamknijArkusz()">Rozumiem</div></div>'); }
 // legenda priorytetów (telefon, patch80)
 var KOLORY_OPIS = { P: 'Co tydzień staraj się dołożyć ciężar przy dobrej technice. Jeśli nie idzie, dołóż powtórzenia.', N: 'Tak samo jak w priorytecie.', U: 'Dobierasz ciężar do powtórzeń i RiR i trzymasz go przez cały blok. Te partie mają się utrzymać, a nie rosnąć, i nie zabierać siły adaptacyjnej.' };
@@ -1028,17 +1049,18 @@ function arkuszKolory(k) {
   arkusz(h + '<div class="row"><div class="b ok" onclick="zamknijArkusz()">Rozumiem</div></div>');
 }
 function arkuszPrio(k) { arkuszKolory(k); }
-function arkuszNotatki(idA, idB) {
+function arkuszNotatki(idA, idB, zTabeli) { // patch126: zTabeli 1 = klik, 2 = klawiatura
   var a = D.cwiczenia.filter(function (c) { return c.id === idA; })[0], b = idB ? D.cwiczenia.filter(function (c) { return c.id === idB; })[0] : null; if (!a) return;
   var h = '<h3>Notatka podopiecznego <small>' + esc(a.nazwa) + (b ? ' · ' + esc(b.nazwa) : '') + '</small></h3>';
   if (b) h += '<label class="nl">A · ' + esc(a.nazwa) + '</label><textarea id="mnA" placeholder="Jak poszło, co zmienić…">' + esc(a.notatka || '') + '</textarea><label class="nl">B · ' + esc(b.nazwa) + '</label><textarea id="mnB" placeholder="Jak poszło, co zmienić…">' + esc(b.notatka || '') + '</textarea>';
   else h += '<textarea id="mnA" placeholder="Jak poszło, co zmienić…">' + esc(a.notatka || '') + '</textarea>';
   h += '<div class="row"><div class="b" onclick="zamknijArkusz()">Anuluj</div><div class="b ok" id="mnZapisz">Zapisz</div></div>';
-  var sh = arkusz(h);
-  var zapisz = function (c, id) { var el = document.getElementById(id); if (!el || !c) return; var v = el.value.trim(); if (v !== String(c.notatka || '')) { c.notatka = v; push({ tab: 'Cwiczenia', id: c.id, pole: 'notatka', wartosc: v }); } };
-  document.getElementById('mnZapisz').onclick = function () { zapisz(a, 'mnA'); zapisz(b, 'mnB'); zamknijArkusz(); render(); };
+  var srodek = zTabeli && !telefon(); // patch126: na komputerze na środku, na dotykowym dolny panel nad klawiaturą
+  var sh = arkusz(h, srodek ? 'msrod' : ''); if (zTabeli === 2) MV.wroc = idA;
+  var zapisz = function (c, id) { var el = document.getElementById(id); if (!el || !c) return; c = D.cwiczenia.filter(function (x) { return x.id === c.id; })[0] || c; var v = el.value.trim(); if (v !== String(c.notatka || '')) { c.notatka = v; push({ tab: 'Cwiczenia', id: c.id, pole: 'notatka', wartosc: v }); } };
+  document.getElementById('mnZapisz').onclick = function () { if (BLOK_ZAMYKANY) return; zapisz(a, 'mnA'); zapisz(b, 'mnB'); zamknijArkusz(); render(); };
   // panel trzyma się górnej krawędzi klawiatury
-  if (window.visualViewport) { MV.vv = function () { var vv = window.visualViewport; sh.style.bottom = Math.max(0, window.innerHeight - vv.height - vv.offsetTop) + 'px'; sh.style.maxHeight = Math.max(200, vv.height - 40) + 'px'; }; window.visualViewport.addEventListener('resize', MV.vv); MV.vv(); }
+  if (window.visualViewport && !srodek) { MV.vv = function () { var vv = window.visualViewport; sh.style.bottom = Math.max(0, window.innerHeight - vv.height - vv.offsetTop) + 'px'; sh.style.maxHeight = Math.max(200, vv.height - 40) + 'px'; }; window.visualViewport.addEventListener('resize', MV.vv); MV.vv(); }
   setTimeout(function () { var ta = document.getElementById('mnA'); if (ta) { ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length); } }, 50);
 }
 // patch108: notatka przy ważeniu na telefonie w tym samym panelu co notatka podopiecznego w treningu
@@ -1324,12 +1346,13 @@ function tabela(t) {
     var isB = wB; wB = false; var isA = !isB && jestSS(c) && i + 1 < rows.length; if (isA) wB = true;
     var moznaPolaczyc = TR && !isA && !isB && i + 1 < rows.length && !jestSS(rows[i + 1]);
     var nrCell = isB ? '' : '<td class="' + (TR ? 'nrc' : '') + (isA ? ' nrSS' : '') + '"' + (isA ? ' rowspan="2"' : '') + '>' + (TR ? '<input class="c nr" data-nr="' + c.id + '" inputmode="numeric" value="' + (i + 1) + '">' : (i + 1)) + (isA ? '<span class="ssg">SS</span>' : '') + (isA ? '<i class="ssl" title="Rozłącz superserię" onclick="togSS(\'' + c.id + '\')">✕</i>' : '') + (moznaPolaczyc ? '<i class="ssl" title="Połącz z następnym ćwiczeniem w superserię" onclick="togSS(\'' + c.id + '\')">⛓</i>' : '') + '</td>';
-    out += '<tr class="r' + k + (TR && SEL[c.id] ? ' sel' : '') + (isA ? ' ssa' : '') + (isB ? ' ssb2' : '') + '" data-id="' + c.id + '">' + nrCell + '<td class="ex">' + (TR ? '<input class="c" data-f="nazwa" list="nazwy" autocomplete="off" value="' + esc(c.nazwa) + '">'  : esc(c.nazwa)) + (isA ? '<span class="tag" title="Superseria: dwa ćwiczenia robisz jedno po drugim, bez przerwy między nimi. Przerwę robisz dopiero po obu.">superseria</span>' : '') + '</td>';
+    out += '<tr class="r' + k + (TR && SEL[c.id] ? ' sel' : '') + (isA ? ' ssa' : '') + (isB ? ' ssb2' : '') + '" data-id="' + c.id + '">' + nrCell + '<td class="ex">' + (TR ? '<div class="nzw"><span class="nzt">' + esc(c.nazwa) + '</span><input class="c" data-f="nazwa" list="nazwy" autocomplete="off" value="' + esc(c.nazwa) + '"></div>' : esc(c.nazwa)) + (isA ? '<span class="tag" title="Superseria: dwa ćwiczenia robisz jedno po drugim, bez przerwy między nimi. Przerwę robisz dopiero po obu.">superseria</span>' : '') + '</td>';
     for (var p = 1; p <= 6; p++) out += '<td class="rep ' + (p <= sets ? 'plan' : '') + '">' + (p <= sets ? '<input class="c" data-f="p' + p + '" inputmode="numeric" value="' + esc(c['p' + p]) + '">' : '') + '</td>';
     out += '<td class="w"><input class="c" data-f="ciezar_akt" inputmode="decimal" value="' + esc(c.ciezar_akt) + '"></td><td class="w"><input class="c" data-f="ciezar_start" inputmode="decimal" value="' + esc(c.ciezar_start) + '"></td>';
     ['sets', 'reps', 'przerwa', 'rir', 'tempo'].forEach(function (f) { if (f === 'przerwa' && isB) return; out += '<td' + (f === 'przerwa' && isA ? ' class="przSS" rowspan="2"' : '') + '>' + (TR ? '<input class="c" data-f="' + f + '" value="' + esc(c[f]) + '" style="width:56px">' : esc(c[f])) + '</td>'; });
     out += '<td>' + (TR ? '<span class="vw' + (bezpUrl(c.wideo) ? '' : ' ed') + '"><a class="v" data-t="' + esc(c.nazwa) + '" target="_blank" rel="noopener" href="' + esc(bezpUrl(c.wideo) || '#') + '">' + playIkona(24) + '</a><i class="ved" title="Zmień link do filmu" onclick="vwEdytuj(this)">✎</i><input class="c" data-f="wideo" placeholder="link" title="Wklej link do filmu" value="' + esc(c.wideo) + '" style="width:64px;font-size:10px;text-overflow:ellipsis" onblur="vwKoniec(this)" onkeydown="if(event.key===\'Enter\')this.blur()"></span>' : '<a class="v ' + (bezpUrl(c.wideo) ? '' : 'off') + '" data-t="' + esc(c.nazwa) + '" target="_blank" rel="noopener" href="' + esc(bezpUrl(c.wideo) || '#') + '">' + playIkona(24) + '</a>') + '</td>';
-    out += '<td class="note"><input class="c" data-f="notatka" value="' + esc(c.notatka) + '" placeholder="…"></td>';
+    var nt = String(c.notatka || '').trim(); // patch126
+    out += '<td class="note"><div class="ntw' + (nt ? '' : ' pusta') + '" tabindex="0" role="button" onclick="arkuszNotatki(\'' + c.id + '\', null, event.detail ? 1 : 2)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();this.click()}"><span class="ntt">' + (nt ? esc(nt) : '…') + '</span></div></td>';
     out += '</tr>';
   }
   out += '</table>' + (TR ? '<div class="dodaj-cw"><span class="split"><button class="btn" onclick="dodajCw(' + t + ',' + (rows.length + 1) + ')" title="Dodaje pusty wiersz na końcu">+ dodaj</button><button class="btn usun" onclick="usunOstatni(' + t + ')" title="Usuwa ostatni wiersz tego treningu"' + (rows.length ? '' : ' disabled') + '>− usuń</button></span>' + legenda() + '</div>' : (rows.length ? '' : '<div class="mut" style="padding:14px">Kuba jeszcze nie dodał ćwiczeń do tego treningu.</div>') + legenda());
@@ -1435,7 +1458,7 @@ function prio(name) { var v = U('prio_' + name); return v === 'P' || v === 'U' ?
 function kolorCw(c) { var p = c.partia || (atlasDlaNazwy(c.nazwa) || {}).partia; if (p) return prio(p); return TYP[c.typ] || 'N'; }
 function atlasDlaNazwy(nazwa) { var nz = norm(nazwa); if (!nz || !D.atlas) return null; return D.atlas.filter(function (a) { return a.nazwa && norm(a.nazwa) === nz; })[0] || null; }
 // po wpisaniu nazwy z atlasu: partia, film, powtórzenia i tempo (tylko w puste / domyślne pola); serii, RiR ani przerwy NIE uzupełnia (Kuba, 28.09)
-var AUTO_CW = new WeakMap(), NAZWA_TIMERY = new WeakMap();
+var AUTO_CW = new WeakMap(), NAZWA_TIMERY = new WeakMap(), NAZWA_ZM = new WeakMap(); // NAZWA_ZM: patch126
 function przygotujAuto(c) {
   if (AUTO_CW.has(c)) return;
   var a = atlasDlaNazwy(c.nazwa), pola = {};
@@ -1669,10 +1692,12 @@ function bindAll() {
     if (!o) return;
     var after = null;
     if (tab === 'Cwiczenia' && (el.dataset.f === 'typ' || el.dataset.f === 'sets' || el.dataset.f === 'partia')) after = function () { var f = zapamietajFokus(); render(); przywrocFokus(f); };
-    if (tab === 'Cwiczenia' && el.dataset.f === 'nazwa') after = function () { var zm = zAtlasu(o); clearTimeout(NAZWA_TIMERY.get(o)); NAZWA_TIMERY.set(o, setTimeout(function () { podpowiedzCiezar(o); if (zm) { var f = zapamietajFokus(); render(); przywrocFokus(f); } }, 400)); };
+    if (tab === 'Cwiczenia' && el.dataset.f === 'nazwa') after = function () { var zm = zAtlasu(o) || !!NAZWA_ZM.get(o); NAZWA_ZM.set(o, zm); clearTimeout(NAZWA_TIMERY.get(o)); NAZWA_TIMERY.set(o, setTimeout(function () { NAZWA_ZM.delete(o); podpowiedzCiezar(o); if (zm) { var f = zapamietajFokus(); render(); przywrocFokus(f); } }, 400)); };
     if (tab === 'Wazenia' && (el.dataset.f === 'waga' || el.dataset.f === 'data')) after = function () { clearTimeout(window._kt); window._kt = setTimeout(function () { var f = zapamietajFokus(); render(); przywrocFokus(f); }, 900); };
     if (tab === 'Cwiczenia' && el.dataset.f === 'przerwa') after = function () { przerwaPary(o); };
     bind(el, o, el.dataset.f, tab, { change: el.tagName === 'SELECT' || el.type === 'date', after: after });
+    // patch126: tekst nazwy pod polem edycji z danych, po bind (bind cofa wpis przy zamykaniu bloku)
+    if (tab === 'Cwiczenia' && el.dataset.f === 'nazwa' && el.parentNode.classList.contains('nzw')) el.addEventListener('input', function () { el.previousElementSibling.textContent = o.nazwa == null ? '' : o.nazwa; });
   });
   document.querySelectorAll('.pm [data-p] [data-f]').forEach(function (el) { var name = el.closest('[data-p]').dataset.p; var o = D.partie.filter(function (p) { return p.partia === name; })[0]; if (!o) return; var cb = el.type === 'checkbox'; bind(el, o, el.dataset.f, 'Partie', { change: cb, after: function () {
     if (cb && !el.checked) { var t = el.dataset.f.replace(/\D/g, ''); ['_r', '_s'].forEach(function (suf) { var f = 't' + t + suf; if (o[f] !== '' && o[f] != null) { o[f] = ''; push({ tab: 'Partie', id: name, pole: f, wartosc: '' }); } }); }
@@ -1803,12 +1828,12 @@ var OST_WCZYT = Date.now();
 // mimo niej; po powrocie dostępu plan wraca bez przeładowania (dostepWrocil)
 function odswiezCicho() {
   var kon = !TR && !!(D && D.dostepKoniec);
-  if (!D || !(D.bazaId || kon) || D.zgodaEkran || (queue.length && !kon) || pending || BLOK_ZAMYKANY || Date.now() - OST_WCZYT < 30 * 1000) return;
+  if (!D || !(D.bazaId || kon) || D.zgodaEkran || (queue.length && !kon) || pending || BLOK_ZAMYKANY || (typeof MV !== 'undefined' && MV && MV.arkusz) || Date.now() - OST_WCZYT < 30 * 1000) return; // MV.arkusz: patch126
   var ae = document.activeElement; if (ae && (ae.tagName === 'INPUT' || ae.tagName === 'TEXTAREA' || ae.tagName === 'SELECT')) return;
   var p = TR ? api({ akcja: 'plan', bazaId: D.bazaId }) : (AUTH && AUTH.sesja ? api({ akcja: 'wczytaj', sesja: AUTH.sesja, frontZgody: 1 }) : null);
   if (!p) return; OST_WCZYT = Date.now(); var rew = ZAPIS_REV, baza = D.bazaId;
   p.then(function (dane) {
-    if (pending || BLOK_ZAMYKANY || ZAPIS_REV !== rew || D.bazaId !== baza) return;
+    if (pending || BLOK_ZAMYKANY || ZAPIS_REV !== rew || D.bazaId !== baza || (typeof MV !== 'undefined' && MV && MV.arkusz)) return; // MV.arkusz: patch126 (odpowiedź przyszła przy otwartym panelu)
     if (kon) { if (D.dostepKoniec) dostepWrocil(dane); return; }
     if (queue.length) return;
     if (dane.zgodaWymagana) { pokazZgode(dane); return; }
