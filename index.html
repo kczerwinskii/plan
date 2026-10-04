@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="a5ee61221a"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="2a1ab095ed"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>/* patch124: odtwarzacz cofnięty (zachowany w webapp/odtwarzacz_zachowany), widok tylko mobilny zostaje */
 
@@ -1910,6 +1910,45 @@ function bindAtlas() {
     el.addEventListener('change', function () { atlasZapiszPole(el).catch(function () {}); });
   });
 }
+// patch131: forma liczebnika w pytaniu i komunikacie.
+function atlasFormaCwiczen(n) { return n === 1 ? 'ćwiczeniu' : 'ćwiczeniach'; }
+function atlasFormaPodopiecznych(n) { return n === 1 ? 'podopiecznego' : 'podopiecznych'; }
+function atlasWPlanachZapytaj(stary, nowy) {
+  if (!TR || !stary || stary === nowy) return;
+  wywolaj('wideoWPlanachIle', [{ stary: stary }]).then(function (r) {
+    var ile = Number(r && r.wiersze) || 0, baz = Number(r && r.bazy) || 0;
+    if (!ile) return;
+    var h = '<h3>Podmiana filmu w planach</h3><p>Ten film jest w ' + ile + ' '
+      + atlasFormaCwiczen(ile) + ' w planach ' + baz + ' '
+      + atlasFormaPodopiecznych(baz) + '. Podmienić go tam na nowy?</p>'
+      + '<div class="row"><div class="b" id="awpNie">Nie</div>'
+      + '<div class="b ok" id="awpTak">Podmień</div></div>';
+    var sh = arkusz(h, !telefon() ? 'msrod' : '');
+    sh.querySelector('#awpNie').onclick = function () {
+      if (document.getElementById('msheet') === sh) zamknijArkusz();
+    };
+    var zajety = false;
+    sh.querySelector('#awpTak').onclick = function () {
+      if (zajety || !TR) return;
+      zajety = true;
+      wywolaj('wideoWPlanachPodmien', [{ stary: stary, nowy: nowy }]).then(function (wynik) {
+        if (document.getElementById('msheet') === sh) zamknijArkusz();
+        var zmienione = Number(wynik && wynik.zmienione) || 0;
+        var lokalnie = false;
+        (D.cwiczenia || []).forEach(function (c) {
+          if (c.wideo === stary) { c.wideo = nowy; lokalnie = true; }
+        });
+        if (lokalnie) render();
+        status('Podmieniono w ' + zmienione + ' ' + atlasFormaCwiczen(zmienione), true);
+      }).catch(function (e) {
+        zajety = false;
+        status('Błąd podmiany filmu: ' + e.message, false, true);
+      });
+    };
+  }).catch(function (e) {
+    status('Błąd sprawdzania planów: ' + e.message, false, true);
+  });
+}
 function atlasZapiszPole(el) {
   var id = el.closest('tr[data-aid]').dataset.aid;
   var a = (D.atlas || []).filter(function (x) { return x.id === id; })[0];
@@ -1924,6 +1963,8 @@ function atlasZapiszPole(el) {
     if (pole === 'nazwa' || pole === 'wideo') {
       var f = zapamietajFokus(); render(); przywrocFokus(f);
     }
+    if (pole === 'wideo' && TR && poprzednio && poprzednio !== wartosc)
+      atlasWPlanachZapytaj(poprzednio, wartosc); // patch131: także po Wgraj film
   }).catch(function (e) {
     a[pole] = poprzednio;
     status('błąd zapisu: ' + e.message, false, true);
