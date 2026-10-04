@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="3e7b2dec67"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="e83c68a05b"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>/* patch124: odtwarzacz cofnięty (zachowany w webapp/odtwarzacz_zachowany), widok tylko mobilny zostaje */
 
@@ -1447,19 +1447,22 @@ function przygotujAuto(c) {
 }
 function zAtlasu(c) {
   przygotujAuto(c); var auto = AUTO_CW.get(c), zm = false;
-  if (!String(c.nazwa || '').trim()) {
+  // patch125: pusta nazwa albo nazwa spoza atlasu czyści wartości wpisane z atlasu dla poprzedniej nazwy
+  var a = String(c.nazwa || '').trim() ? atlasDlaNazwy(c.nazwa) : null;
+  if (!a) {
     Object.keys(auto).forEach(function (pole) {
       if (String(c[pole]) === String(auto[pole])) { c[pole] = ''; push({ tab: 'Cwiczenia', id: c.id, pole: pole, wartosc: '' }); zm = true; }
       delete auto[pole];
     });
     return zm;
   }
-  var a = atlasDlaNazwy(c.nazwa); if (!a) return false;
-  var ust = function (pole, val, gdy) { if (val === '' || val == null || !gdy) return; c[pole] = val; auto[pole] = val; push({ tab: 'Cwiczenia', id: c.id, pole: pole, wartosc: val }); zm = true; };
+  // z atlasu = wartość pochodzi z atlasu dla poprzedniej nazwy (zamiana ćwiczenia w wierszu); ręcznie wpisanej nie ruszamy
+  var zAt = function (pole) { return Object.prototype.hasOwnProperty.call(auto, pole) && String(c[pole]) === String(auto[pole]); };
+  var ust = function (pole, val, gdy) { if (val === '' || val == null || !gdy) return; if (String(c[pole]) === String(val)) { auto[pole] = val; return; } c[pole] = val; auto[pole] = val; push({ tab: 'Cwiczenia', id: c.id, pole: pole, wartosc: val }); zm = true; };
   ust('partia', a.partia, c.partia !== a.partia);
-  ust('wideo', a.wideo, !c.wideo);
-  ust('reps', a.powt, c.reps === '' || c.reps == null || String(c.reps) === '10');
-  ust('tempo', a.tempo, !c.tempo || c.tempo === 'x211');
+  ust('wideo', a.wideo, !c.wideo || zAt('wideo'));
+  ust('reps', a.powt, c.reps === '' || c.reps == null || String(c.reps) === '10' || zAt('reps'));
+  ust('tempo', a.tempo, !c.tempo || c.tempo === 'x211' || zAt('tempo'));
   return zm;
 }
 function pusteCw(c) { return !String(c.nazwa || '').trim(); }
