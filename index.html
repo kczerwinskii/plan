@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="e876c83a9e"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="b4cc1f5d46"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>/* patch124: odtwarzacz cofnięty (zachowany w webapp/odtwarzacz_zachowany), widok tylko mobilny zostaje */
 
@@ -439,6 +439,47 @@ body.tel .kalk{padding:16px 16px 30px}
 .tpl td.note .ntw:hover{background:rgba(201,164,85,.10)}.tpl td.note .ntw:focus{outline:0;border-color:#F5E3A6}.tpl td.note .ntw.pusta{color:#6f6c66}
 .msheet.msrod{top:50%;bottom:auto;left:50%;right:auto;transform:translate(-50%,-50%);width:640px;max-width:calc(100vw - 32px);max-height:calc(100vh - 48px);margin:0;border:1.5px solid #8E6B2E;border-radius:18px}.msheet.msrod textarea{min-height:160px}
 .msheet .b:focus{outline:0}.msheet .b:focus-visible{outline:2px solid #F5E3A6;outline-offset:2px}
+/* patch127: odtwarzacz HLS Bunny Stream, wariant A */
+.vbox:has(.yp-player){overflow:visible}
+.yp-player{position:absolute;inset:0;background:#000;color:#fff;font:14px Roboto,Arial,sans-serif;overflow:hidden}
+.yp-player *{box-sizing:border-box}
+.yp-screen{position:relative;width:100%;height:100%;background:#000;overflow:hidden}
+.yp-screen video{display:block;width:100%;height:100%;object-fit:contain}
+.yp-player button{font:inherit;cursor:pointer}
+.yp-player button:focus-visible,.yp-timeline:focus-visible{outline:2px solid #fff;outline-offset:2px}
+.yp-shade{position:absolute;inset:45% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.35) 38%,rgba(0,0,0,.82));pointer-events:none}
+.yp-btn,.yp-big{border:0;color:#fff;background:transparent}
+.yp-btn{display:grid;place-items:center;min-width:44px;min-height:44px;padding:0;font-size:23px}
+.yp-big{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:68px;height:68px;border-radius:50%;background:rgba(0,0,0,.66);z-index:3;font-size:32px}
+.yp-bottom{position:absolute;z-index:3;left:0;right:0;bottom:0;padding:0 8px 8px}
+.yp-row{display:flex;align-items:center;gap:2px}
+.yp-grow{flex:1}
+.yp-time{font-size:12px;white-space:nowrap;padding:0 5px;font-variant-numeric:tabular-nums}
+.yp-timeline{position:relative;height:44px;display:flex;align-items:center;touch-action:none;cursor:pointer}
+.yp-track{position:relative;display:block;width:100%;height:4px;background:rgba(255,255,255,.35)}
+.yp-buffer,.yp-progress{position:absolute;left:0;top:0;bottom:0;width:0}
+.yp-buffer{background:rgba(255,255,255,.5)}
+.yp-progress{background:#f00}
+.yp-thumb{position:absolute;left:0;top:50%;width:12px;height:12px;border-radius:50%;background:#f00;transform:translate(-50%,-50%) scale(0)}
+.yp-timeline:hover .yp-thumb,.yp-timeline.yp-drag .yp-thumb{transform:translate(-50%,-50%) scale(1)}
+.yp-timeline.yp-drag .yp-track{height:7px}
+.yp-status{position:absolute;z-index:4;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.64);text-align:center;padding:24px;pointer-events:none}
+.yp-status-inner{max-width:300px}
+.yp-spinner{display:block;width:34px;height:34px;margin:auto;border:3px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:yp-spin .7s linear infinite}
+@keyframes yp-spin{to{transform:rotate(360deg)}}
+.yp-retry{min-height:44px;margin-top:12px;padding:0 16px;border:0;border-radius:22px;background:#fff;color:#0f0f0f;font-weight:600!important;pointer-events:auto}
+.yp-menu{position:absolute;z-index:6;left:8px;right:8px;bottom:8px;max-height:min(70%,490px);overflow:auto;border-radius:14px;background:#242424;box-shadow:0 8px 30px #0009}
+.yp-menu-head{display:flex;align-items:center;min-height:48px;padding:0 12px;border-bottom:1px solid #ffffff24;font-weight:600}
+.yp-item{display:flex;align-items:center;width:100%;min-height:48px;padding:8px 16px;border:0;background:transparent;color:#fff;text-align:left}
+.yp-item:hover{background:#ffffff16}
+.yp-detail{margin-left:auto;color:#ddd;font-size:12px}
+.yp-player:not(.yp-controls) .yp-big,.yp-player:not(.yp-controls) .yp-bottom,.yp-player:not(.yp-controls) .yp-shade{opacity:0;pointer-events:none}
+.yp-player:fullscreen,.yp-player.yp-pseudo{position:fixed;inset:0;z-index:1000;width:100%;height:100%;background:#000}
+.yp-player:fullscreen .yp-menu,.yp-player.yp-pseudo .yp-menu{bottom:max(8px,env(safe-area-inset-bottom))}
+.yp-player [hidden]{display:none!important}
+@media(max-width:600px){.yp-menu{left:0;right:0;bottom:0;border-radius:16px 16px 0 0}}
+/* patch128: poziomy ruch na odtwarzaczu nie cofa strony */
+.yp-player{touch-action:pan-y;overscroll-behavior:contain}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
 .pinbox.lg{max-width:1060px;margin:0 auto;padding:24px 16px;min-height:100vh;display:flex;align-items:center;box-sizing:border-box}.pinbox.lg .card{width:100%;box-sizing:border-box;padding:60px;border-radius:14px}.pinbox.lg .sub{font-size:24px}.pinbox.lg h1{margin:8px 0 26px;font-size:56px}.pinbox.lg input{height:96px;font-size:32px}.pinbox.lg .btn{height:96px;font-size:34px}.pinbox.lg .mut{font-size:24px}
 body.lgmob .pinbox.lg{padding:16px;min-height:100vh}body.lgmob .pinbox.lg .card{padding:26px 20px;border-radius:14px}body.lgmob .pinbox.lg .sub{font-size:12px}body.lgmob .pinbox.lg h1{font-size:30px;margin:6px 0 18px}body.lgmob .pinbox.lg input{height:54px;font-size:17px;padding:0 14px;margin-bottom:10px;border-radius:10px}body.lgmob .pinbox.lg .btn{height:56px;font-size:18px;border-radius:10px;margin-top:4px}body.lgmob .pinbox.lg .err{font-size:15px;min-height:20px;margin-top:10px}body.lgmob .pinbox.lg .mut{font-size:15px;margin:14px 0 0;line-height:1.5}
@@ -914,15 +955,408 @@ function nakWroc() { var t = NAK[NAK.length - 1]; if (!t) return; if (t.h) { try
 window.addEventListener('popstate', function () { var t = NAK.pop(); if (t) t.f(); });
 function ytId(u) { var m = String(u || '').match(/(?:youtu\.be\/|youtube(?:-nocookie)?\.com\/(?:watch\?(?:[^#]*&)?v=|shorts\/|embed\/|live\/|v\/))([A-Za-z0-9_-]{6,})/); return m ? m[1] : ''; }
 function driveId(u) { var m = String(u || '').match(/drive\.google\.com\/(?:file\/d\/|open\?id=)([A-Za-z0-9_-]{10,})/); return m ? m[1] : ''; }
-function filmEmbed(u) { var y = ytId(u); if (y) return { src: 'https://www.youtube-nocookie.com/embed/' + y + '?rel=0&playsinline=1&modestbranding=1', pion: /\/shorts\//.test(u), yt: true }; var d = driveId(u); if (d) return { src: 'https://drive.google.com/file/d/' + d + '/preview', pion: false, yt: false }; return null; }
+// patch127: Bunny HLS, pozostałe adresy filmów zachowują dotychczasowe osadzanie.
+function filmEmbed(u) {
+  u = String(u || '');
+  if (/^https:\/\/vz-[a-z0-9-]+\.b-cdn\.net\/[0-9a-f-]{36}\/playlist\.m3u8$/i.test(u))
+    return { hls: true, src: u, pion: true, poster: u.replace(/playlist\.m3u8$/i, 'thumbnail.jpg') };
+  var y = ytId(u); if (y) return { src: 'https://www.youtube-nocookie.com/embed/' + y + '?rel=0&playsinline=1&modestbranding=1', pion: /\/shorts\//.test(u), yt: true };
+  var d = driveId(u); if (d) return { src: 'https://drive.google.com/file/d/' + d + '/preview', pion: false, yt: false };
+  return null;
+}
+var ODT = null, ODT_HLS_PROMISE = null;
+function odtwBiblioteka() {
+  if (window.Hls) return Promise.resolve(window.Hls);
+  if (ODT_HLS_PROMISE) return ODT_HLS_PROMISE;
+  ODT_HLS_PROMISE = new Promise(function (ok, blad) {
+    var sc = document.createElement('script');
+    sc.src = 'https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.5.17/hls.min.js';
+    sc.onload = function () { if (window.Hls) ok(window.Hls); else blad(new Error('Brak Hls')); };
+    sc.onerror = function () { blad(new Error('Nie udało się pobrać hls.js')); };
+    document.head.appendChild(sc);
+  }).catch(function (e) { ODT_HLS_PROMISE = null; throw e; });
+  return ODT_HLS_PROMISE;
+}
+function odtwHtml(poster) {
+  return '<div class="yp-player yp-controls">'
+    + '<div class="yp-screen">'
+    + '<video playsinline webkit-playsinline preload="metadata" poster="' + esc(poster) + '"></video>'
+    + '<div class="yp-shade"></div>'
+    + '<button type="button" class="yp-big yp-btn" data-yp="play" aria-label="Odtwórz">▶</button>'
+    + '<div class="yp-bottom"><div class="yp-timeline" role="slider" tabindex="0" aria-label="Przewiń film" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0"><span class="yp-track"><span class="yp-buffer"></span><span class="yp-progress"></span><span class="yp-thumb"></span></span></div>'
+    + '<div class="yp-row"><button type="button" class="yp-btn" data-yp="play" aria-label="Odtwórz">▶</button><span class="yp-time">0:00 / 0:00</span><span class="yp-grow"></span><button type="button" class="yp-btn" data-yp="settings" aria-label="Ustawienia">⚙</button><button type="button" class="yp-btn" data-yp="full" aria-label="Pełny ekran">⛶</button></div></div>'
+    + '<div class="yp-status" hidden><div class="yp-status-inner"></div></div><div class="yp-menu" hidden></div>'
+    + '</div></div>';
+}
+function odtwStart(el, src) {
+  var p = el.querySelector('.yp-player'), ekran = p.querySelector('.yp-screen');
+  var v = p.querySelector('video'), menu = p.querySelector('.yp-menu');
+  var status = p.querySelector('.yp-status'), statusInner = p.querySelector('.yp-status-inner');
+  var os = p.querySelector('.yp-timeline'), hls = null, zamkniety = false;
+  var strona = '', recznie = -1, proba = false, chceGrac = false;
+  var uzytkownikGra = false, generacja = 0; // patch128: intencja i ważność źródła
+  var timerChowaj = null, timerStart = null, seek = null, przeciaga = false;
+  var stareOverflow = '', stan = '';
+  var o = { video: v, hls: null, zamknij: odtwZamknij };
+  ODT = o;
+
+  function odtwBok(poziom) {
+    if (!poziom) return 0;
+    return Math.min(poziom.width || poziom.height || 0, poziom.height || poziom.width || 0);
+  }
+  function odtwCzas(t) {
+    t = Math.max(0, Math.floor(isFinite(t) ? t : 0));
+    return Math.floor(t / 60) + ':' + ('0' + (t % 60)).slice(-2);
+  }
+  function odtwDlugosc() { return isFinite(v.duration) ? v.duration : 0; }
+  function odtwPokaz() {
+    if (zamkniety) return;
+    p.classList.add('yp-controls');
+    clearTimeout(timerChowaj);
+    if (!v.paused && !strona && !przeciaga)
+      timerChowaj = setTimeout(function () { p.classList.remove('yp-controls'); }, 2000);
+  }
+  function odtwAktualizuj() {
+    if (zamkniety) return;
+    var dl = odtwDlugosc(), teraz = v.currentTime || 0, bufor = 0, i;
+    for (i = 0; i < v.buffered.length; i++)
+      if (v.buffered.start(i) <= teraz + .2) bufor = Math.max(bufor, v.buffered.end(i));
+    os.querySelector('.yp-progress').style.width = (dl ? Math.min(100, teraz / dl * 100) : 0) + '%';
+    os.querySelector('.yp-buffer').style.width = (dl ? Math.min(100, bufor / dl * 100) : 0) + '%';
+    os.querySelector('.yp-thumb').style.left = (dl ? Math.min(100, teraz / dl * 100) : 0) + '%';
+    os.setAttribute('aria-valuemax', Math.floor(dl));
+    os.setAttribute('aria-valuenow', Math.floor(teraz));
+    os.setAttribute('aria-valuetext', odtwCzas(teraz) + ' z ' + odtwCzas(dl));
+    p.querySelector('.yp-time').textContent = odtwCzas(teraz) + ' / ' + odtwCzas(dl);
+    Array.prototype.forEach.call(p.querySelectorAll('[data-yp="play"]'), function (b) {
+      b.textContent = !v.paused && !v.ended ? '❚❚' : '▶';
+      b.setAttribute('aria-label', !v.paused && !v.ended ? 'Pauza' : 'Odtwórz');
+    });
+  }
+  function odtwStan(typ) {
+    stan = typ;
+    status.hidden = !typ;
+    statusInner.innerHTML = '';
+    if (!typ) return;
+    if (typ === 'loading') {
+      statusInner.innerHTML = '<span class="yp-spinner" aria-label="Ładowanie"></span>';
+      return;
+    }
+    var msg = document.createElement('div'), b = document.createElement('button');
+    b.type = 'button'; b.className = 'yp-retry';
+    msg.textContent = typ === 'end' ? 'Koniec filmu' : 'Nie udało się wczytać filmu.';
+    b.textContent = typ === 'end' ? 'Odtwórz ponownie' : 'Spróbuj ponownie';
+    b.onclick = function () {
+      if (typ === 'end') { v.currentTime = 0; odtwGraj(true); }
+      else { proba = false; odtwPonow(v.currentTime || 0); }
+    };
+    statusInner.appendChild(msg); statusInner.appendChild(b);
+    odtwPokaz();
+  }
+  function odtwBlad() {
+    if (zamkniety) return;
+    clearTimeout(timerStart); chceGrac = false; uzytkownikGra = false;
+    v.pause(); odtwStan('error');
+  }
+  // patch128: błąd także po rozpoczęciu filmu, ale nie po świadomej pauzie.
+  function odtwAwaria() {
+    if (zamkniety || !uzytkownikGra) return;
+    if (!proba) { proba = true; odtwPonow(v.currentTime || seek || 0); }
+    else odtwBlad();
+  }
+  function odtwOdmowa(e) {
+    if (zamkniety || !chceGrac) return;
+    if (e && e.name === 'NotAllowedError') {
+      clearTimeout(timerStart); chceGrac = false; uzytkownikGra = false; odtwStan(''); odtwPokaz();
+    }
+  }
+  function odtwPlay() {
+    if (zamkniety || !chceGrac) return;
+    try {
+      var wynik = v.play();
+      if (wynik && wynik.catch) wynik.catch(odtwOdmowa);
+    } catch (e) { odtwOdmowa(e); }
+  }
+  function odtwPilnuj() {
+    clearTimeout(timerStart);
+    timerStart = setTimeout(function () {
+      if (!chceGrac || zamkniety || !v.paused) return;
+      if (!proba) { proba = true; odtwPonow(v.currentTime || seek || 0); }
+      else odtwBlad();
+    }, 8000);
+  }
+  function odtwGraj(klik) {
+    if (klik) proba = false;
+    chceGrac = true; uzytkownikGra = true;
+    odtwStan('loading'); odtwPlay(); odtwPilnuj(); odtwPokaz();
+  }
+  // patch128: starszy iPhone może użyć natywnego HLS bez biblioteki z CDN.
+  function odtwNatywnie() {
+    if (!v.canPlayType('application/vnd.apple.mpegurl')) return false;
+    v.src = src; v.load(); if (chceGrac) odtwPlay();
+    return true;
+  }
+  function odtwZrodlo() {
+    if (zamkniety) return;
+    var moja = ++generacja; // patch128: tylko najnowsze wywołanie może utworzyć Hls
+    if (!window.MediaSource && !window.ManagedMediaSource && odtwNatywnie()) return;
+    odtwBiblioteka().then(function (H) {
+      if (zamkniety || moja !== generacja) return;
+      if (H.isSupported()) {
+        hls = new H({ autoStartLoad: false, enableWorker: true });
+        o.hls = hls;
+        hls.on(H.Events.MEDIA_ATTACHED, function () { if (!zamkniety) hls.loadSource(src); });
+        hls.on(H.Events.MANIFEST_PARSED, function () {
+          if (zamkniety) return;
+          var poziomy = hls.levels, najlepszy = 0, i;
+          for (i = 1; i < poziomy.length; i++)
+            if (Math.abs(odtwBok(poziomy[i]) - 360) < Math.abs(odtwBok(poziomy[najlepszy]) - 360)) najlepszy = i;
+          if (poziomy.length) hls.startLevel = najlepszy;
+          hls.startLoad(seek === null ? -1 : seek);
+          if (chceGrac) odtwPlay();
+          if (strona) odtwMenu();
+        });
+        hls.on(H.Events.LEVEL_SWITCHED, function () { if (strona) odtwMenu(); });
+        hls.on(H.Events.ERROR, function (zdarzenie, dane) {
+          if (dane.fatal) odtwAwaria(); // patch128
+        });
+        hls.attachMedia(v);
+      } else if (!odtwNatywnie()) odtwBlad();
+    }).catch(function () {
+      if (zamkniety || moja !== generacja) return;
+      if (!odtwNatywnie()) odtwBlad(); // patch128: CDN niedostępny
+    });
+  }
+  function odtwPonow(t) {
+    if (zamkniety) return;
+    ++generacja; // patch128: unieważnij opóźnione ładowanie
+    clearTimeout(timerStart); seek = t; chceGrac = true; uzytkownikGra = true;
+    v.pause();
+    if (hls) { hls.destroy(); hls = null; o.hls = null; }
+    v.removeAttribute('src'); v.load();
+    odtwStan('loading'); odtwZrodlo(); odtwPilnuj();
+  }
+  function odtwPrzelacz() {
+    if (v.paused || v.ended) {
+      if (v.ended) v.currentTime = 0;
+      odtwGraj(true);
+    } else {
+      chceGrac = false; uzytkownikGra = false; clearTimeout(timerStart);
+      v.pause(); odtwStan(''); odtwPokaz();
+    }
+  }
+  function odtwJakosc() {
+    if (!hls) return 'HD';
+    var i = hls.currentLevel >= 0 ? hls.currentLevel : hls.loadLevel;
+    return hls.levels[i] ? odtwBok(hls.levels[i]) + 'p' : 'HD';
+  }
+  function odtwPozycja() {
+    if (recznie >= 0 && hls && hls.levels[recznie]) return odtwBok(hls.levels[recznie]) + 'p';
+    return 'Auto (' + odtwJakosc() + ')';
+  }
+  function odtwPozycjaMenu(tekst, szczegol, akcja, wybrane) {
+    var b = document.createElement('button');
+    b.type = 'button'; b.className = 'yp-item';
+    b.textContent = tekst;
+    if (szczegol || wybrane) {
+      var s = document.createElement('span');
+      s.className = 'yp-detail';
+      s.textContent = wybrane ? '✓' : szczegol;
+      b.appendChild(s);
+    }
+    b.onclick = akcja; menu.appendChild(b);
+  }
+  function odtwMenu() {
+    if (!strona || zamkniety) return;
+    menu.innerHTML = '';
+    var nag = document.createElement('div');
+    nag.className = 'yp-menu-head';
+    nag.textContent = strona === 'main' ? 'Ustawienia' : strona === 'speed' ? 'Szybkość odtwarzania' : 'Jakość';
+    menu.appendChild(nag);
+    if (strona !== 'main') odtwPozycjaMenu('‹  Wstecz', '', function () { odtwOtworzMenu('main'); }, false);
+    if (strona === 'main') {
+      odtwPozycjaMenu('Szybkość odtwarzania', v.playbackRate + '×', function () { odtwOtworzMenu('speed'); }, false);
+      odtwPozycjaMenu('Jakość', odtwPozycja(), function () { odtwOtworzMenu('quality'); }, false);
+    } else if (strona === 'speed') {
+      [0.5, 0.75, 1, 1.25, 1.5, 1.75, 2].forEach(function (szybkosc) {
+        odtwPozycjaMenu(szybkosc === 1 ? 'Normalna' : szybkosc + '×', '', function () {
+          v.playbackRate = szybkosc; odtwZamknijMenu();
+        }, v.playbackRate === szybkosc);
+      });
+    } else {
+      odtwPozycjaMenu(hls ? 'Auto (' + odtwJakosc() + ')' : 'Auto', '', function () {
+        recznie = -1;
+        if (hls) { hls.currentLevel = -1; hls.nextLevel = -1; }
+        odtwZamknijMenu();
+      }, recznie < 0);
+      if (hls) {
+        var opcje = {}, i, bok;
+        for (i = 0; i < hls.levels.length; i++) {
+          bok = odtwBok(hls.levels[i]);
+          if ((bok === 1080 || bok === 720 || bok === 480 || bok === 360) && !opcje[bok]) opcje[bok] = i + 1;
+        }
+        [1080, 720, 480, 360].forEach(function (j) {
+          if (!opcje[j]) return;
+          var indeks = opcje[j] - 1;
+          odtwPozycjaMenu(j + 'p', '', function () {
+            recznie = indeks; hls.currentLevel = indeks; hls.nextLevel = indeks; odtwZamknijMenu();
+          }, recznie === indeks);
+        });
+      }
+    }
+  }
+  function odtwOtworzMenu(s) { strona = s; menu.hidden = false; odtwMenu(); odtwPokaz(); }
+  function odtwZamknijMenu() { strona = ''; menu.hidden = true; odtwPokaz(); }
+  function odtwPelny() {
+    if (document.fullscreenElement === p) {
+      document.exitFullscreen();
+    } else if (p.classList.contains('yp-pseudo')) {
+      p.classList.remove('yp-pseudo'); document.body.style.overflow = stareOverflow;
+    } else if (p.requestFullscreen) {
+      try {
+        var wynik = p.requestFullscreen();
+        if (wynik && wynik.catch) wynik.catch(function () {
+          if (zamkniety) return;
+          stareOverflow = document.body.style.overflow;
+          p.classList.add('yp-pseudo'); document.body.style.overflow = 'hidden';
+        });
+      } catch (e) {
+        stareOverflow = document.body.style.overflow;
+        p.classList.add('yp-pseudo'); document.body.style.overflow = 'hidden';
+      }
+    } else {
+      stareOverflow = document.body.style.overflow;
+      p.classList.add('yp-pseudo'); document.body.style.overflow = 'hidden';
+    }
+    odtwPelnyOpis(); odtwPokaz();
+  }
+  function odtwPelnyOpis() {
+    var b = p.querySelector('[data-yp="full"]');
+    if (b) b.setAttribute('aria-label', document.fullscreenElement === p || p.classList.contains('yp-pseudo') ? 'Wyjdź z pełnego ekranu' : 'Pełny ekran');
+  }
+  function odtwPrzewin(t) {
+    var dl = odtwDlugosc(); if (!dl) return;
+    v.currentTime = Math.max(0, Math.min(dl, t)); odtwAktualizuj();
+  }
+  function odtwPunkt(e) {
+    var r = os.querySelector('.yp-track').getBoundingClientRect();
+    return odtwDlugosc() * Math.max(0, Math.min(1, (e.clientX - r.left) / r.width));
+  }
+  function odtwKlawiatura(e) {
+    if (zamkniety || !VP.el || !VP.el.contains(p)) return;
+    if (e.key === 'Escape') {
+      if (strona) {
+        e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
+        odtwZamknijMenu(); // patch128: drugi nasłuch na document nie dostaje Escape
+      }
+      else if (p.classList.contains('yp-pseudo')) {
+        e.preventDefault(); e.stopPropagation(); e.stopImmediatePropagation();
+        odtwPelny(); // patch128: Escape nie zamyka równocześnie #msheet
+      }
+      return;
+    }
+    if (e.target && /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return;
+    if (e.target && e.target.closest && e.target.closest('button, [role="button"]')) return; // patch128
+    if (e.key === ' ' || e.key === 'k' || e.key === 'K') {
+      e.preventDefault(); e.stopPropagation(); odtwPrzelacz();
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+      e.preventDefault(); e.stopPropagation(); odtwPrzewin(v.currentTime + (e.key === 'ArrowRight' ? 5 : -5));
+    } else if (e.key === 'f' || e.key === 'F') {
+      e.preventDefault(); e.stopPropagation(); odtwPelny();
+    }
+  }
+  function odtwZamknij() {
+    if (zamkniety) return;
+    zamkniety = true; ++generacja; uzytkownikGra = false; // patch128
+    clearTimeout(timerChowaj); clearTimeout(timerStart);
+    document.removeEventListener('keydown', odtwKlawiatura, true);
+    document.removeEventListener('fullscreenchange', odtwPelnyOpis);
+    if (document.fullscreenElement === p && document.exitFullscreen) document.exitFullscreen();
+    if (p.classList.contains('yp-pseudo')) document.body.style.overflow = stareOverflow;
+    p.classList.remove('yp-pseudo');
+    v.pause();
+    if (hls) { hls.destroy(); hls = null; o.hls = null; }
+    v.removeAttribute('src'); v.load();
+    p.remove();
+    if (ODT === o) ODT = null;
+  }
+
+  p.addEventListener('click', function (e) {
+    var b = e.target.closest ? e.target.closest('[data-yp]') : null;
+    if (b && p.contains(b)) {
+      e.stopPropagation();
+      if (b.dataset.yp === 'play') odtwPrzelacz();
+      else if (b.dataset.yp === 'settings') strona ? odtwZamknijMenu() : odtwOtworzMenu('main');
+      else if (b.dataset.yp === 'full') odtwPelny();
+      return;
+    }
+    if (ekran.contains(e.target) && !e.target.closest('.yp-timeline, .yp-menu, .yp-status')) {
+      if (strona) odtwZamknijMenu();
+      else odtwPrzelacz();
+      odtwPokaz();
+    }
+  });
+  ekran.addEventListener('pointermove', function (e) { if (e.pointerType === 'mouse') odtwPokaz(); });
+  os.addEventListener('pointerdown', function (e) {
+    if (!odtwDlugosc()) return;
+    e.stopPropagation(); przeciaga = true; os.setPointerCapture(e.pointerId);
+    os.classList.add('yp-drag'); odtwPrzewin(odtwPunkt(e)); odtwPokaz();
+  });
+  os.addEventListener('pointermove', function (e) {
+    if (przeciaga && os.hasPointerCapture(e.pointerId)) odtwPrzewin(odtwPunkt(e));
+  });
+  function odtwKoniecOsi(e) {
+    if (!przeciaga) return;
+    if (os.hasPointerCapture(e.pointerId)) odtwPrzewin(odtwPunkt(e));
+    przeciaga = false; os.classList.remove('yp-drag'); odtwPokaz();
+  }
+  os.addEventListener('pointerup', odtwKoniecOsi);
+  os.addEventListener('pointercancel', odtwKoniecOsi);
+  v.addEventListener('loadedmetadata', function () {
+    if (seek !== null) { odtwPrzewin(seek); seek = null; }
+    if (chceGrac) odtwPlay();
+    odtwAktualizuj();
+  });
+  v.addEventListener('timeupdate', odtwAktualizuj);
+  v.addEventListener('durationchange', odtwAktualizuj);
+  v.addEventListener('progress', odtwAktualizuj);
+  v.addEventListener('ratechange', odtwAktualizuj);
+  v.addEventListener('playing', function () {
+    clearTimeout(timerStart); chceGrac = false; odtwStan(''); odtwAktualizuj(); odtwPokaz();
+  });
+  v.addEventListener('pause', function () { odtwAktualizuj(); odtwPokaz(); });
+  v.addEventListener('ended', function () {
+    clearTimeout(timerStart); chceGrac = false; uzytkownikGra = false;
+    odtwStan('end'); odtwAktualizuj();
+  });
+  v.addEventListener('error', function () { odtwAwaria(); }); // patch128
+  document.addEventListener('keydown', odtwKlawiatura, true);
+  document.addEventListener('fullscreenchange', odtwPelnyOpis);
+  odtwAktualizuj(); odtwZrodlo(); odtwGraj(false);
+  return o;
+}
 function filmOtworz(u, em, tytul) {
   if (VP.el) return;
   var el = document.createElement('div'); el.className = 'vpan'; el.id = 'vpan';
-  el.innerHTML = '<div class="vtop"><b>' + esc(tytul) + '</b></div><div class="vbody"><div class="vbox' + (em.pion ? ' pion' : '') + '"><iframe src="' + esc(em.src) + '" title="' + esc(tytul) + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div><button class="vwroc" onclick="nakWroc()">‹ Wróć</button><a class="vyt" href="' + esc(u) + '" target="_blank" rel="noopener">Nie działa? Otwórz w ' + (em.yt ? 'YouTube' : 'nowym oknie') + '</a></div>';
+  if (em.hls) {
+    el.innerHTML = '<div class="vtop"><b>' + esc(tytul) + '</b></div><div class="vbody"><div class="vbox pion">'
+      + odtwHtml(em.poster) + '</div><button class="vwroc" onclick="nakWroc()">< Wróć</button></div>';
+  } else {
+    el.innerHTML = '<div class="vtop"><b>' + esc(tytul) + '</b></div><div class="vbody"><div class="vbox' + (em.pion ? ' pion' : '') + '"><iframe src="' + esc(em.src) + '" title="' + esc(tytul) + '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div><button class="vwroc" onclick="nakWroc()">< Wróć</button><a class="vyt" href="' + esc(u) + '" target="_blank" rel="noopener">Nie działa? Otwórz w ' + (em.yt ? 'YouTube' : 'nowym oknie') + '</a></div>';
+  }
   document.body.appendChild(el); VP.el = el; void el.offsetWidth; el.classList.add('on');
   nakOtworz(filmUsun);
+  if (em.hls) odtwStart(el, em.src);
 }
-function filmUsun() { var el = VP.el || document.getElementById('vpan'); VP.el = null; if (!el) return; el.style.transition = 'transform .22s ease-in'; el.style.transform = 'translateX(105%)'; setTimeout(function () { el.remove(); }, 240); }
+function filmUsun() {
+  var el = VP.el || document.getElementById('vpan');
+  VP.el = null;
+  if (ODT) ODT.zamknij();
+  if (!el) return;
+  el.style.transition = 'transform .22s ease-in';
+  el.style.transform = 'translateX(105%)';
+  setTimeout(function () { el.remove(); }, 240);
+}
 document.addEventListener('click', function (e) {
   var a = e.target && e.target.closest ? e.target.closest('a.mfilm, a.pbtn.rz, a.v') : null; if (!a || a.classList.contains('off')) return;
   var u = a.getAttribute('href') || '', em = filmEmbed(u); if (!em) return;
@@ -960,7 +1394,11 @@ function gestStart(e) {
   if (!e.touches || e.touches.length !== 1 || MV.arkusz) return;
   var p = e.touches[0], tg = e.target, w = function (s) { return tg && tg.closest ? tg.closest(s) : null; };
   var g = { x0: p.clientX, y0: p.clientY, t0: Date.now(), dx: 0, dy: 0, lock: null };
-  if (VP.el) { if (w('#vpan')) { g.typ = 'film'; GEST = g; } return; }
+  if (VP.el) {
+    if (w('.yp-player')) return; // patch128: przewijanie osi nie przesuwa panelu
+    if (w('#vpan')) { g.typ = 'film'; GEST = g; }
+    return;
+  }
   if (document.getElementById('lbox')) return;
   if (MENU) { if (w('#menu') || w('#tlo')) { g.typ = 'zamknij'; GEST = g; } return; }
   if (p.clientX <= 24) { g.typ = 'menu'; GEST = g; return; }
