@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="2a1ab095ed"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="50d27b72e1"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>/* patch124: odtwarzacz cofnięty (zachowany w webapp/odtwarzacz_zachowany), widok tylko mobilny zostaje */
 
@@ -256,7 +256,7 @@ body.tel .top{display:none}
 .rp2{background:#141414;border:1px solid #2C2C2C;border-radius:12px;overflow:hidden}.rp2 .rh2{display:grid;grid-template-columns:1fr auto 16px;align-items:center;gap:8px;padding:8px 12px;cursor:pointer}.rp2 .rh2 b{font-size:13px;color:var(--iv)}.rp2 .rh2 b small{color:var(--ivd);font-weight:500;font-size:11px;margin-right:6px}.rp2 .rh2 .dt{font-size:11px;color:var(--ivd)}.rp2 .rh2 .chev{color:var(--ivd);font-size:12px;text-align:right}
 .rp2.open{border:2px solid var(--gl);background:#1E1A10}.rp2 .rt{padding:0 12px 10px;font-size:13px;line-height:1.5;white-space:pre-wrap}.rp2 .rt textarea{width:100%;min-height:110px;background:#0F0F0F;color:var(--iv);border:1px solid var(--gm);border-radius:8px;padding:8px;font:13px/1.5 Poppins;box-sizing:border-box}
 .rp2 .rf{display:flex;flex-wrap:wrap;gap:8px;padding:0 12px 10px}.rp2 .rf .f{border:1px solid #2C2C2C;border-radius:8px;background:#0F0F0F;padding:6px 10px;font-size:12px;color:var(--iv);cursor:pointer;display:flex;gap:8px;align-items:center}.rp2 .rakc{display:flex;gap:8px;justify-content:flex-end;padding:0 12px 10px}
-.menu .mhd .wk.ro{cursor:default}.rsub .pm{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border:1px solid var(--gm);border-radius:6px;color:#E6CB80;font-size:14px;cursor:pointer;margin:0 3px;vertical-align:2px;background:#0F0F0F}
+/* patch132: kwadraty tygodni są klikalne dla obu ról */.rsub .pm{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border:1px solid var(--gm);border-radius:6px;color:#E6CB80;font-size:14px;cursor:pointer;margin:0 3px;vertical-align:2px;background:#0F0F0F}
 .menu .mi .czeka{color:#E6CB80;font-weight:600}
 .mrap{margin:10px 14px 0;background:#141414;border:2px solid var(--gl);border-radius:12px;padding:10px 12px;display:flex;align-items:center;gap:10px;font-size:13px;line-height:1.35}.mrap b{color:#E6CB80}.mrap .go{margin-left:auto;white-space:nowrap;border:2px solid var(--gl);border-radius:10px;padding:6px 10px;color:#E6CB80;font-weight:700;font-size:12px;cursor:pointer}
 .zalw{padding-bottom:20px}.zalTel .zalw{padding:0 0 24px}.zlh{display:flex;justify-content:space-between;align-items:center;padding:14px 14px 0;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ivd);font-weight:600}.zlh b{color:var(--gl);font-size:15px;letter-spacing:0;text-transform:none;font-weight:700}
@@ -491,6 +491,8 @@ body.tel .kalk{padding:16px 16px 30px}
 .atl-wakc .pbtn{font-size:10px;padding:2px 5px;white-space:nowrap}
 .atl-wstan{font-size:10px;color:var(--ivd)}
 .atl-wakc [hidden]{display:none!important}
+/* patch132: przypomnienie nad dolną nawigacją kart */
+.przyp-tydz{position:fixed;left:50%;bottom:160px;transform:translateX(-50%);z-index:60;box-sizing:border-box;width:calc(100vw - 32px);max-width:360px;padding:12px 15px;border:1px solid var(--gm);border-radius:12px;background:#1a1a1a;color:var(--iv);box-shadow:0 8px 24px rgba(0,0,0,.55);font:600 13px/1.45 Poppins,Arial,sans-serif;text-align:center;cursor:pointer}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
 .pinbox.lg{max-width:1060px;margin:0 auto;padding:24px 16px;min-height:100vh;display:flex;align-items:center;box-sizing:border-box}.pinbox.lg .card{width:100%;box-sizing:border-box;padding:60px;border-radius:14px}.pinbox.lg .sub{font-size:24px}.pinbox.lg h1{margin:8px 0 26px;font-size:56px}.pinbox.lg input{height:96px;font-size:32px}.pinbox.lg .btn{height:96px;font-size:34px}.pinbox.lg .mut{font-size:24px}
 body.lgmob .pinbox.lg{padding:16px;min-height:100vh}body.lgmob .pinbox.lg .card{padding:26px 20px;border-radius:14px}body.lgmob .pinbox.lg .sub{font-size:12px}body.lgmob .pinbox.lg h1{font-size:30px;margin:6px 0 18px}body.lgmob .pinbox.lg input{height:54px;font-size:17px;padding:0 14px;margin-bottom:10px;border-radius:10px}body.lgmob .pinbox.lg .btn{height:56px;font-size:18px;border-radius:10px;margin-top:4px}body.lgmob .pinbox.lg .err{font-size:15px;min-height:20px;margin-top:10px}body.lgmob .pinbox.lg .mut{font-size:15px;margin:14px 0 0;line-height:1.5}
@@ -605,7 +607,7 @@ function menuNaglowek() {
   var w = ostWaga(); var last = w.length ? n(w[w.length - 1].waga) : null, prev = w.length > 1 ? n(w[w.length - 2].waga) : null, d = last != null && prev != null ? last - prev : null;
   var h = '<div class="mhd"><div class="celk"><div class="cel">Cel</div><div class="celv' + (U('cel') ? '' : ' pusty') + '">' + (U('cel') ? esc(U('cel')) : (TR ? 'wpisz cel bloku w nagłówku' : 'Kuba jeszcze nie wpisał celu')) + '</div></div>';
   h += '<div class="blok"><span class="lb">Blok <b>' + blok + '</b> tyg. · zaliczone <b>' + zal + '</b></span><span class="wks">';
-  for (var i = 0; i < blok; i++) h += '<i class="wk' + (i < zal ? ' on' : '') + (TR ? '' : ' ro') + '" onclick="' + (TR ? 'klikTydzien(' + i + ')' : 'status(\'Tydzień odhacza Kuba po przeczytaniu raportu.\', true)') + '">' + (i < zal ? '✓' : '') + '</i>';
+  for (var i = 0; i < blok; i++) h += '<i class="wk' + (i < zal ? ' on' : '') + '" onclick="klikTydzien(' + i + ')">' + (i < zal ? '✓' : '') + '</i>'; // patch132
   h += '</span></div><div class="k3"><div><b>' + serieT + '</b><span>Serie / tydzień</span></div><div><b>' + (U('kcal') !== '' ? esc(U('kcal')) : '–') + '</b><span>Aktualne kcal</span>' + (makroTxt() ? '<small class="mk">' + makroTxt() + '</small>' : '') + '</div>';
   h += '<div><b>' + (last != null ? fmt(last) : '–') + (d != null && d !== 0 ? '<small style="color:' + (d < 0 ? '#5FBF7A' : '#E0684A') + '">' + (d < 0 ? '▼' : '▲') + fmt(Math.round(Math.abs(d) * 10) / 10) + '</small>' : '') + '</b><span>Aktualna waga</span></div></div></div>';
   return h;
@@ -875,6 +877,65 @@ function wpisane(c) { var s = Math.max(0, Math.min(6, n(c.sets))), k = 0; for (v
 function krokZrobiony(st) { var w = wpisane(st.a), ok = w.s > 0 && w.k >= w.s; if (st.b) { var w2 = wpisane(st.b); ok = ok && (w2.s === 0 || w2.k >= w2.s); } return ok; }
 function idxMob(t) { var k = krokiMob(t), i = MV.idx[t]; if (i == null) { try { i = parseInt(localStorage.getItem('mobIdx' + t), 10); } catch (e) {} } if (!(i >= 0 && i < k.length)) i = 0; MV.idx[t] = i; return i; }
 function idzMob(t, i) { var k = krokiMob(t); if (!k.length) return; i = Math.max(0, Math.min(k.length - 1, i)); MV.idx[t] = i; try { localStorage.setItem('mobIdx' + t, i); } catch (e) {} schowajHint(); zamknijArkusz(); render(); window.scrollTo(0, 0); }
+// patch132: jeden dymek dziennie na bazę, także gdy localStorage jest niedostępny.
+var PRZYP_TYDZIEN_WIDZIANE = {}, PRZYP_TYDZIEN_TIMER = null;
+function przypTydzienSchowaj() {
+  clearTimeout(PRZYP_TYDZIEN_TIMER);
+  PRZYP_TYDZIEN_TIMER = null;
+  var el = document.getElementById('przypTydz');
+  if (el) el.remove();
+}
+function przypTydzienData() {
+  var d = new Date();
+  return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2)
+    + '-' + ('0' + d.getDate()).slice(-2);
+}
+function przypTydzienOstatniTrening() {
+  var t = Math.floor(n(U('treningi')));
+  if (t > 0 && cw(t).length) return t;
+  t = 0;
+  (D.cwiczenia || []).forEach(function (c) {
+    var nr = Math.floor(n(c.trening));
+    if (nr > t && !pusteCw(c)) t = nr;
+  });
+  return t;
+}
+function przypTydzienSprawdz() {
+  if (TR || !kartyAktywne() || !document.getElementById('mswipe')) {
+    przypTydzienSchowaj(); return;
+  }
+  var blok = Math.max(1, Math.min(8, n(U('blok')) || 6));
+  var ostatni = przypTydzienOstatniTrening(), kroki = krokiMob(mobT);
+  if (n(U('zaliczone')) >= blok || !ostatni || mobT !== ostatni ||
+      !kroki.length || idxMob(mobT) !== kroki.length - 1) {
+    przypTydzienSchowaj(); return;
+  }
+  if (document.getElementById('przypTydz')) return;
+
+  var klucz = 'przyp_tydz_' + D.bazaId + '_' + przypTydzienData();
+  if (PRZYP_TYDZIEN_WIDZIANE[klucz]) return;
+  try {
+    if (localStorage.getItem(klucz) === '1') {
+      PRZYP_TYDZIEN_WIDZIANE[klucz] = true; return;
+    }
+    localStorage.setItem(klucz, '1');
+  } catch (e) {}
+  PRZYP_TYDZIEN_WIDZIANE[klucz] = true;
+
+  var el = document.createElement('button');
+  el.type = 'button';
+  el.id = 'przypTydz';
+  el.className = 'przyp-tydz';
+  el.textContent = 'Po treningu nie zapomnij odhaczyć tygodnia i wysłać raportu.';
+  var nav = document.querySelector('.mnav');
+  if (nav) el.style.bottom = Math.ceil(window.innerHeight - nav.getBoundingClientRect().top + 12) + 'px';
+  el.onclick = function () {
+    przypTydzienSchowaj();
+    if (!MENU) togMenu();
+  };
+  document.body.appendChild(el);
+  PRZYP_TYDZIEN_TIMER = setTimeout(przypTydzienSchowaj, 6000);
+}
 function hintMob() { if (MV.hint == null) { try { MV.hint = localStorage.getItem('mobHint') !== '1'; } catch (e) { MV.hint = true; } } return MV.hint; }
 function schowajHint() { if (!MV.hint) return; MV.hint = false; try { localStorage.setItem('mobHint', '1'); } catch (e) {} var h = document.getElementById('mhint'); if (h) h.remove(); }
 function kgIn(c, pole, mala) { return '<input class="mc" data-f="' + pole + '" inputmode="decimal" value="' + esc(c[pole]) + '" placeholder="–">' + (mala ? '' : '<span>kg</span>'); }
@@ -1632,6 +1693,7 @@ function render() {
   renderMob();
   przywrocFokus(fokus);
   rysujMenu();
+  przypTydzienSprawdz(); // patch132: sprawdź kartę pokazaną po renderze
 }
 function widokInny() {
   var w = WIDOK, h = '<div class="widok">';
@@ -2352,7 +2414,7 @@ function bindAll() {
     clearTimeout(window._pm); window._pm = setTimeout(render, cb ? 60 : 900); } }); });
   document.querySelectorAll('.tile textarea').forEach(function (ta) { var fit = function () { ta.style.height = 'auto'; ta.style.height = (ta.scrollHeight || 18) + 'px'; }; fit(); ta.addEventListener('input', fit); });
   document.querySelectorAll('.tile [data-f]').forEach(function (el) { var name = el.closest('.tile').dataset.p; var o = D.partie.filter(function (p) { return p.partia === name; })[0]; if (o) bind(el, o, el.dataset.f, 'Partie', { after: function () { clearTimeout(window._pt); window._pt = setTimeout(render, 900); } }); });
-  document.querySelectorAll('.top .wk').forEach(function (el) { el.onclick = function () { if (TR) klikTydzien(n(el.dataset.i)); else status('Tydzień odhacza Kuba po przeczytaniu raportu.', true); }; });
+  document.querySelectorAll('.top .wk').forEach(function (el) { el.onclick = function () { klikTydzien(n(el.dataset.i)); }; }); // patch132
   var cel = document.getElementById('cel'); if (cel) bind(cel, D.ustawienia, 'cel', 'Ustawienia');
   var blok = document.getElementById('blok'); if (blok) bind(blok, D.ustawienia, 'blok', 'Ustawienia', { change: true, after: render });
   var kcal = document.getElementById('kcal'); if (kcal) bind(kcal, D.ustawienia, 'kcal', 'Ustawienia');
