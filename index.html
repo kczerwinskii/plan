@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="bd2a9df7fb"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="be2f4d3184"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>/* patch124: odtwarzacz cofnięty (zachowany w webapp/odtwarzacz_zachowany), widok tylko mobilny zostaje */
 
@@ -807,7 +807,27 @@ function wywolaj(nazwa, params) { var b = { akcja: nazwa }; (params || []).forEa
 function poleEdyt(el) { return el && (el.tagName === 'INPUT' && el.type !== 'checkbox' && el.type !== 'date' || el.tagName === 'SELECT' || el.tagName === 'TEXTAREA'); }
 function skoczDo(el) { if (!el) return; el.focus(); if (el.select && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA')) el.select(); }
 document.addEventListener('keydown', function (e) {
-  var el = document.activeElement; if (!poleEdyt(el) || !el.closest('#app')) return;
+  var el = document.activeElement;
+  // patch134: Tab tylko w tabeli treningu trenera; na granicy zostaje zwykły Tab.
+  if (e.key === 'Tab' && !e.altKey && !e.ctrlKey && !e.metaKey && el && el.closest && el.closest('.desk table.tpl.tr')) {
+    var trTab = el.closest('tr[data-id]');
+    var fTab = el.classList.contains('ntw') ? 'notatka' : el.matches('input.nr[data-nr]') ? 'nr' : el.dataset.f;
+    if (trTab && fTab && (el.classList.contains('ntw') || el.matches('input.nr[data-nr]') || poleEdyt(el))) {
+      var rTab = trTab, dirTab = e.shiftKey ? 'previousElementSibling' : 'nextElementSibling', celTab = null;
+      while ((rTab = rTab[dirTab])) {
+        var polaTab = fTab === 'notatka' ? rTab.querySelectorAll('.ntw') :
+          fTab === 'nr' ? rTab.querySelectorAll('input.nr[data-nr]') : rTab.querySelectorAll('[data-f]');
+        celTab = Array.prototype.filter.call(polaTab, function (x) {
+          return (fTab === 'notatka' || fTab === 'nr' || x.dataset.f === fTab && poleEdyt(x)) &&
+            x.getClientRects().length && getComputedStyle(x).visibility !== 'hidden';
+        })[0];
+        if (celTab) break;
+      }
+      if (celTab) { e.preventDefault(); skoczDo(celTab); }
+    }
+    return;
+  }
+  if (!poleEdyt(el) || !el.closest('#app')) return;
   var k = e.key; if (['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown', 'Enter'].indexOf(k) < 0) return;
   if (el.tagName === 'SELECT' && (k === 'ArrowUp' || k === 'ArrowDown')) return;
   var mc = el.closest('#mobcards'); if (mc) { if (k !== 'Enter') return; var wsz0 = Array.prototype.slice.call(mc.querySelectorAll('input')).filter(poleEdyt), i0 = wsz0.indexOf(el); e.preventDefault(); if (wsz0[i0 + 1]) skoczDo(wsz0[i0 + 1]); else el.blur(); return; }
@@ -2071,8 +2091,20 @@ function tabela(t) {
   return out;
 }
 function legenda() { return '<div class="legend"><span><i class="leg GOLD" onclick="tip(\'P\',event)"></i>Priorytet ' + I('P') + '</span><span><i class="leg NAVY" onclick="tip(\'N\',event)"></i>Neutral ' + I('N') + '</span><span><i class="leg BORDO" onclick="tip(\'U\',event)"></i>Utrzymanie ' + I('U') + '</span></div>'; }
+// patch135: stare zaznaczenia bez numeru zostają na końcu w dotychczasowej kolejności.
+function partieKolejnosc(t) {
+  return D.partie.map(function (p, i) { return { p: p, i: i }; })
+    .filter(function (x) { return wTr(x.p, t); })
+    .sort(function (a, b) {
+      var ak = Number(a.p['t' + t + '_k']), bk = Number(b.p['t' + t + '_k']);
+      var av = isFinite(ak) && ak > 0 && Math.floor(ak) === ak;
+      var bv = isFinite(bk) && bk > 0 && Math.floor(bk) === bk;
+      if (av !== bv) return av ? -1 : 1;
+      return av && ak !== bk ? ak - bk : a.i - b.i;
+    }).map(function (x) { return x.p; });
+}
 function partieTreningu(t) {
-  var rows = D.partie.filter(function (p) { return p['t' + t + '_w'] === true || p['t' + t + '_w'] === 'TRUE'; });
+  var rows = partieKolejnosc(t);
   var out = '<div style="padding:10px 14px"><table class="small"><tr><th class="l">Partie · Trening ' + t + '</th><th>Plan</th><th>Rozc.</th><th>Skr.</th><th>Rozpisane</th></tr>';
   var sum = 0;
   rows.forEach(function (p) { var r = n(p['t' + t + '_r']), s = n(p['t' + t + '_s']); sum += r + s; out += '<tr><td class="ex l">' + esc(p.partia) + '</td><td style="color:#E6CB80;font-weight:700">' + (p.plan || '–') + '</td><td>' + (r || '') + '</td><td>' + (s || '') + '</td><td>' + rozpisane(p) + '</td></tr>'; });
@@ -2083,7 +2115,7 @@ function partieTreningu(t) {
 function partiaCw(c) { return c.partia || (atlasDlaNazwy(c.nazwa) || {}).partia || ''; }
 function dlugoscCw(c) { var d = String(((atlasDlaNazwy(c.nazwa) || {}).dlugosc) || '').toLowerCase(); return d.indexOf('rozci') === 0 ? 'r' : d.indexOf('skr') === 0 ? 's' : ''; }
 function planSum(t) {
-  var rows = D.partie.filter(function (p) { return wTr(p, t); });
+  var rows = partieKolejnosc(t); // patch135
   if (!rows.length) return '';
   function linia(lb, roz, plan) { if (!plan) return '<div class="sub2 brak"><span class="lb">' + lb + '</span><span class="n">–</span><div class="psb"></div></div>'; var pr = Math.min(100, Math.round(roz / plan * 100)); return '<div class="sub2"><span class="lb">' + lb + '</span><span class="n' + (roz >= plan ? ' ok' : '') + '">' + roz + ' / ' + plan + '</span><div class="psb"><i style="width:' + pr + '%"></i></div></div>'; }
   var h = '<div class="plansum" id="plansum-t' + t + '"><div class="tt">Plan na ten trening</div><div class="siatka" style="grid-template-rows:repeat(' + Math.ceil(rows.length / 2) + ',auto)">';
@@ -2412,7 +2444,23 @@ function bindAll() {
     if (tab === 'Cwiczenia' && el.dataset.f === 'nazwa' && el.parentNode.classList.contains('nzw')) el.addEventListener('input', function () { el.previousElementSibling.textContent = o.nazwa == null ? '' : o.nazwa; });
   });
   document.querySelectorAll('.pm [data-p] [data-f]').forEach(function (el) { var name = el.closest('[data-p]').dataset.p; var o = D.partie.filter(function (p) { return p.partia === name; })[0]; if (!o) return; var cb = el.type === 'checkbox'; bind(el, o, el.dataset.f, 'Partie', { change: cb, after: function () {
-    if (cb && !el.checked) { var t = el.dataset.f.replace(/\D/g, ''); ['_r', '_s'].forEach(function (suf) { var f = 't' + t + suf; if (o[f] !== '' && o[f] != null) { o[f] = ''; push({ tab: 'Partie', id: name, pole: f, wartosc: '' }); } }); }
+    if (cb) {
+      var t = el.dataset.f.replace(/\D/g, ''), poleK = 't' + t + '_k';
+      // patch135: numer nadajemy po zapisie stanu checkboxa w obiekcie.
+      if (el.checked) {
+        var maxK = 0;
+        D.partie.forEach(function (p) {
+          if (!wTr(p, t) || p === o) return;
+          var k = Number(p[poleK]);
+          if (isFinite(k) && k > maxK && Math.floor(k) === k) maxK = k;
+        });
+        o[poleK] = maxK + 1;
+      } else {
+        o[poleK] = '';
+        ['_r', '_s'].forEach(function (suf) { var f = 't' + t + suf; if (o[f] !== '' && o[f] != null) { o[f] = ''; push({ tab: 'Partie', id: name, pole: f, wartosc: '' }); } });
+      }
+      push({ tab: 'Partie', id: name, pole: poleK, wartosc: o[poleK] });
+    }
     clearTimeout(window._pm); window._pm = setTimeout(render, cb ? 60 : 900); } }); });
   document.querySelectorAll('.tile textarea').forEach(function (ta) { var fit = function () { ta.style.height = 'auto'; ta.style.height = (ta.scrollHeight || 18) + 'px'; }; fit(); ta.addEventListener('input', fit); });
   document.querySelectorAll('.tile [data-f]').forEach(function (el) { var name = el.closest('.tile').dataset.p; var o = D.partie.filter(function (p) { return p.partia === name; })[0]; if (o) bind(el, o, el.dataset.f, 'Partie', { after: function () { clearTimeout(window._pt); window._pt = setTimeout(render, 900); } }); });
