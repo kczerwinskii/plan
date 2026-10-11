@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="fc2b3f1b7a"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="c1dbf2ef62"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>/* patch124: odtwarzacz cofnięty (zachowany w webapp/odtwarzacz_zachowany), widok tylko mobilny zostaje */
 
@@ -495,6 +495,9 @@ body.tel .kalk{padding:16px 16px 30px}
 .przyp-tydz{position:fixed;left:50%;bottom:160px;transform:translateX(-50%);z-index:60;box-sizing:border-box;width:calc(100vw - 32px);max-width:360px;padding:12px 15px;border:1px solid var(--gm);border-radius:12px;background:#1a1a1a;color:var(--iv);box-shadow:0 8px 24px rgba(0,0,0,.55);font:600 13px/1.45 Poppins,Arial,sans-serif;text-align:center;cursor:pointer}
 /* patch133: podpowiedź „powtórzenia” w pustych polach serii, wyśrodkowana */
 .mbox::placeholder{font-size:9px;font-weight:500;color:#77705f;letter-spacing:0;opacity:1}.mbox:placeholder-shown{padding-bottom:10px}.msets .mbox:placeholder-shown{padding-bottom:8px}
+/* patch137: dzień przy treningu */
+.dzienTrIn{display:block;width:78%;margin:5px auto 0;resize:none;background:#141414;border:1px solid #333;border-radius:8px;color:var(--iv);font:500 12px/1.35 inherit;font-family:inherit;padding:5px 9px;box-sizing:border-box;text-align:center;letter-spacing:0;text-transform:none}.dzienTrIn:focus{outline:0;border-color:var(--gm)}
+.dzienT{margin-left:10px;font-size:13px;font-weight:600;color:#E6CB80;letter-spacing:.3px;text-transform:none;vertical-align:middle}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
 .pinbox.lg{max-width:1060px;margin:0 auto;padding:24px 16px;min-height:100vh;display:flex;align-items:center;box-sizing:border-box}.pinbox.lg .card{width:100%;box-sizing:border-box;padding:60px;border-radius:14px}.pinbox.lg .sub{font-size:24px}.pinbox.lg h1{margin:8px 0 26px;font-size:56px}.pinbox.lg input{height:96px;font-size:32px}.pinbox.lg .btn{height:96px;font-size:34px}.pinbox.lg .mut{font-size:24px}
 body.lgmob .pinbox.lg{padding:16px;min-height:100vh}body.lgmob .pinbox.lg .card{padding:26px 20px;border-radius:14px}body.lgmob .pinbox.lg .sub{font-size:12px}body.lgmob .pinbox.lg h1{font-size:30px;margin:6px 0 18px}body.lgmob .pinbox.lg input{height:54px;font-size:17px;padding:0 14px;margin-bottom:10px;border-radius:10px}body.lgmob .pinbox.lg .btn{height:56px;font-size:18px;border-radius:10px;margin-top:4px}body.lgmob .pinbox.lg .err{font-size:15px;min-height:20px;margin-top:10px}body.lgmob .pinbox.lg .mut{font-size:15px;margin:14px 0 0;line-height:1.5}
@@ -619,7 +622,7 @@ function rysujMenu() {
   if (!MENU) return;
   var akt = aktywne(), h = '<div class="tlo" id="tlo" onclick="togMenu()"></div><div class="menu' +(/^ins\d$/.test(WIDOK) ? ' jkon' : '') + '" id="menu"><div class="mtt">Menu<span class="x" onclick="togMenu()">✕</span></div>' + menuNaglowek();
   h += !TR ? '<div class="mgr zt">Treningi</div>' : '<div class="mgr zt">Treningi<span class="wt" onclick="ustawKarty(' + (trybKart() ? 'false' : 'true') + ')" title="' + (trybKart() ? 'Pokaż trening jako tabelę, jak w arkuszu' : 'Pokaż trening jako karty na telefon') + '">' + (trybKart() ? '<i>⊞</i>Widok tabeli' : '<i>▯</i>Widok mobilny') + '</span></div>';
-  for (var t = 1; t <= akt; t++) h += '<span class="mi' + (WIDOK === 'treningi' && mobT === t ? ' on' : '') + '" onclick="idz(\'t\',' + t + ')">Trening ' + t + '<small>' + cw(t).length + ' ćwiczeń · ' + serie(t) + ' serii</small></span>';
+  for (var t = 1; t <= akt; t++) h += '<span class="mi' + (WIDOK === 'treningi' && mobT === t ? ' on' : '') + '" onclick="idz(\'t\',' + t + ')">Trening ' + t + '<small>' + (dzienTr(t) ? esc(dzienTr(t)) + ' · ' : '') + cw(t).length + ' ćwiczeń · ' + serie(t) + ' serii</small></span>'; // dzień: patch137
 
   if (TR) h += '<div class="mgr">Trener</div><span class="mi' + mAkt('plan') + '" onclick="idz(\'plan\')">Tryb planowania<small>objętość, partie × treningi</small></span><span class="mi' + mAkt('atlas') + '" onclick="idz(\'atlas\')">Atlas ćwiczeń<small>' + ((D.atlas || []).filter(function (a) { return a.nazwa; }).length || 'pusty') + ' ćwiczeń</small></span><span class="mi' + mAkt('hist') + '" onclick="idz(\'hist\')">Historia bloków</span>';
   h += '<div class="mgr">Ciało i dieta</div><span class="mi' + mAkt('waz') + '" onclick="idz(\'waz\')">Ważenia i kalorie' + (ostWaga().length ? '<small>ostatnie ' + fmt(ostWaga().slice(-1)[0].waga) + ' kg</small>' : '') + '</span><span class="mi' + mAkt('kalk') + '" onclick="idz(\'kalk\')">Kalkulator kalorii</span><span class="mi' + mAkt('zal') + '" onclick="idz(\'zal\')">Zalecenia i suplementy</span>';
@@ -1026,7 +1029,7 @@ function kartaMob(st, t) {
 function postepMob(t) { var rows = cw(t), k = 0, s = 0; rows.forEach(function (c) { var w = wpisane(c); k += w.k; s += w.s; }); return { k: k, s: s }; }
 function widokMobilny(t) {
   var kroki = krokiMob(t), i = idxMob(t), st = kroki[i], p = postepMob(t);
-  var h = '<div id="mobv"><div class="mhead"><h1>Trening ' + t + '</h1><a class="pbtn rz" target="_blank" rel="noopener" href="' + esc(D.rozgrzewka) + '"><span class="ico">' + playIkona(20) + '</span>Rozgrzewka</a></div>';
+  var h = '<div id="mobv"><div class="mhead"><h1>Trening ' + t + dzienTrNag(t) + '</h1><a class="pbtn rz" target="_blank" rel="noopener" href="' + esc(D.rozgrzewka) + '"><span class="ico">' + playIkona(20) + '</span>Rozgrzewka</a></div>';
   if (!st) return h + '<div class="mut" style="padding:20px 14px">' + (TR ? 'Ten trening nie ma jeszcze ćwiczeń. Dodaj je w widoku tabeli.' : 'Kuba jeszcze nie dodał ćwiczeń do tego treningu.') + '</div></div>';
   var progH = '<div class="mprog" id="mprog"><span>' + (st.b ? 'Ćwiczenia <b>' + st.nr[0] + ' i ' + st.nr[1] + '</b>' : 'Ćwiczenie <b>' + st.nr[0] + '</b>') + ' / ' + cw(t).length + '</span><div class="psb"><i style="width:' + (p.s ? Math.round(p.k / p.s * 100) : 0) + '%"></i></div></div>';
   h += '<div id="mswipe">' + kartaMob(st, t) + '</div>';
@@ -1701,7 +1704,7 @@ function render() {
   html += '<div class="wrap desk solo"><div>';
   var t3 = mobT;
   {
-    html += '<div class="card" id="sek-t' + t3 + '"><h2 class="metal"><span class="ttl">Trening ' + t3 + '</span><a class="pbtn rz" target="_blank" href="' + esc(D.rozgrzewka) + '"><span class="ico">' + playIkona(20) + '</span>Rozgrzewka</a><span style="margin-left:auto"></span><span style="font-size:12px;color:var(--ivd);font-weight:600">' + cw(t3).length + ' ćwiczeń · ' + serie(t3) + ' serii</span></h2>';
+    html += '<div class="card" id="sek-t' + t3 + '"><h2 class="metal"><span class="ttl">Trening ' + t3 + '</span>' + dzienTrNag(t3) + '<a class="pbtn rz" target="_blank" href="' + esc(D.rozgrzewka) + '"><span class="ico">' + playIkona(20) + '</span>Rozgrzewka</a><span style="margin-left:auto"></span><span style="font-size:12px;color:var(--ivd);font-weight:600">' + cw(t3).length + ' ćwiczeń · ' + serie(t3) + ' serii</span></h2>';
     html += tabela(t3);
     html += '</div>' + (TR ? planSum(t3) : '');
   }
@@ -2263,7 +2266,7 @@ function planowanie() {
   out += '<div class="pm-sekcja"><span class="step">2</span>Partie × treningi<span class="trSel">treningi w tygodniu <select id="treningi" class="c" title="Ile treningów w tygodniu ma ten plan">' + [1, 2, 3, 4, 5].map(function (x) { return '<option' + (x === akt ? ' selected' : '') + '>' + x + '</option>'; }).join('') + '</select></span></div>';
   var szer = akt >= 4 ? '100%' : (190 + 200 * akt + 90) + 'px', tw = 78 / akt;
   out += '<div class="pm-wrap"><table class="pm" style="width:' + szer + ';max-width:100%;table-layout:fixed">' + (akt >= 4 ? '<colgroup><col style="width:15%"><col style="width:7%">' + ('<col style="width:' + (tw * 0.25).toFixed(2) + '%"><col style="width:' + (tw * 0.375).toFixed(2) + '%"><col style="width:' + (tw * 0.375).toFixed(2) + '%">').repeat(akt) + '</colgroup>' : '<colgroup><col style="width:190px"><col style="width:90px">' + '<col style="width:56px"><col style="width:72px"><col style="width:72px">'.repeat(akt) + '</colgroup>') + '<tr><th class="l tt" rowspan="2">Partia</th><th class="tt sep" rowspan="2">Rozpisane</th>';
-  for (var t = 1; t <= akt; t++) out += '<th class="tt sep" colspan="3">Trening ' + t + '</th>';
+  for (var t = 1; t <= akt; t++) out += '<th class="tt sep" colspan="3">Trening ' + t + '<input id="ust-dzien_t' + t + '" class="dzienTrIn" maxlength="40" enterkeyhint="done" placeholder="dzień" value="' + esc(dzienTr(t)) + '"></th>'; // pole: patch137
   out += '</tr><tr>';
   for (var t2 = 1; t2 <= akt; t2++) out += '<th class="sep">w tr.</th><th>Rozc.</th><th>Skr.</th>';
   out += '</tr>';
@@ -2328,6 +2331,9 @@ function wagaBlok() {
   return '<span class="pbtn" style="margin-left:10px;font-size:12px;color:' + (d < 0 ? 'var(--green)' : d > 0 ? 'var(--red)' : 'var(--iv)') + '">od startu bloku: ' + fmt(a0) + ' → ' + fmt(a1) + ' kg (' + (d > 0 ? '+' : '') + fmt(d.toFixed(1)) + ')</span>';
 }
 // patch111: dni ważenia (FUNKCJE.md B). Pisze tylko trener, podopieczny czyta.
+// patch137: dzień treningu (ustawienie dzien_tN, wpisywane w planowaniu)
+function dzienTr(t) { return String(U('dzien_t' + t) || '').trim(); }
+function dzienTrNag(t) { var d = dzienTr(t); return d ? '<span class="dzienT">' + esc(d) + '</span>' : ''; }
 function dniWazeniaPole() { return '<input id="ust-dni_wazenia" maxlength="120" enterkeyhint="done" value="' + esc(U('dni_wazenia')) + '" placeholder="np. środa i sobota, rano, na czysto">'; }
 function dniWazeniaNag() { if (TR) return '<span class="dniw"><label for="ust-dni_wazenia">Dni ważenia</label>' + dniWazeniaPole() + '</span>'; var t = String(U('dni_wazenia')).trim(); return t ? '<span class="dniwt">Ważenie: ' + esc(t) + '</span>' : ''; } // patch115: z etykietą jak na telefonie
 function dniWazeniaTel() { if (TR) return '<div class="wdni ed"><label for="ust-dni_wazenia">Dni ważenia</label>' + dniWazeniaPole() + '</div>'; var t = String(U('dni_wazenia')).trim(); return t ? '<div class="wdni">Ważenie: ' + esc(t) + '</div>' : ''; }
@@ -2477,6 +2483,7 @@ function bindAll() {
   var cel = document.getElementById('cel'); if (cel) bind(cel, D.ustawienia, 'cel', 'Ustawienia');
   var blok = document.getElementById('blok'); if (blok) bind(blok, D.ustawienia, 'blok', 'Ustawienia', { change: true, after: render });
   var kcal = document.getElementById('kcal'); if (kcal) bind(kcal, D.ustawienia, 'kcal', 'Ustawienia');
+  for (var tdz = 1; tdz <= 5; tdz++) (function (k) { var e = document.getElementById('ust-' + k); if (!e) return; bind(e, D.ustawienia, k, 'Ustawienia'); e.addEventListener('keydown', function (ev) { if (ev.key === 'Enter') { ev.preventDefault(); e.blur(); } }); })('dzien_t' + tdz); // patch137
   var dwz = document.getElementById('ust-dni_wazenia'); if (dwz) { bind(dwz, D.ustawienia, 'dni_wazenia', 'Ustawienia'); dwz.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); dwz.blur(); } }); } // patch111
   ['kcal', 'wegle', 'bialko', 'tluszcze'].forEach(function (k) { var e = document.getElementById('ust-' + k); if (e) bind(e, D.ustawienia, k, 'Ustawienia', { after: function () { clearTimeout(window._mk); window._mk = setTimeout(function () { var f = zapamietajFokus(); render(); przywrocFokus(f); }, 700); } }); });
   var trn = document.getElementById('treningi'); if (trn) bind(trn, D.ustawienia, 'treningi', 'Ustawienia', { change: true, after: render });
