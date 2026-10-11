@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="be2f4d3184"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="fc2b3f1b7a"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>/* patch124: odtwarzacz cofnięty (zachowany w webapp/odtwarzacz_zachowany), widok tylko mobilny zostaje */
 
@@ -2103,6 +2103,15 @@ function partieKolejnosc(t) {
       return av && ak !== bk ? ak - bk : a.i - b.i;
     }).map(function (x) { return x.p; });
 }
+// patch136: pastylki „Partie w treningu” w kolejności zaznaczania (tN_k), bez numeru na końcu w kolejności tabeli
+function chipyKolejnosc(lista) {
+  var dobry = function (k) { k = Number(k); return isFinite(k) && k > 0 && Math.floor(k) === k; };
+  return lista.slice().sort(function (a, b) {
+    var av = dobry(a.k), bv = dobry(b.k);
+    if (av !== bv) return av ? -1 : 1;
+    return av && Number(a.k) !== Number(b.k) ? Number(a.k) - Number(b.k) : a.i - b.i;
+  });
+}
 function partieTreningu(t) {
   var rows = partieKolejnosc(t);
   var out = '<div style="padding:10px 14px"><table class="small"><tr><th class="l">Partie · Trening ' + t + '</th><th>Plan</th><th>Rozc.</th><th>Skr.</th><th>Rozpisane</th></tr>';
@@ -2266,7 +2275,7 @@ function planowanie() {
     var tc = '';
     for (var t3 = 1; t3 <= akt; t3++) {
       var w = wTr(p, t3), r = w ? p['t' + t3 + '_r'] : '', s = w ? p['t' + t3 + '_s'] : '', rs = n(r) + n(s); roz += rs;
-      if (t3 <= akt && w) { sumR[t3] += n(r); sumS[t3] += n(s); if (!nieuzyta(p)) chips[t3].push({ name: name, kl: kl, n: rs }); }
+      if (t3 <= akt && w) { sumR[t3] += n(r); sumS[t3] += n(s); if (!nieuzyta(p)) chips[t3].push({ name: name, kl: kl, n: rs, k: p['t' + t3 + '_k'], i: chips[t3].length }); } // k, i: patch136
       if (t3 > akt) { tc += '<td class="off sep"></td><td class="off"></td><td class="off"></td>'; continue; }
       if (w) tc += '<td class="sep ' + kl + '"><input type="checkbox" data-f="t' + t3 + '_w" checked></td><td class="' + kl + '"><input class="c" data-f="t' + t3 + '_r" inputmode="numeric" placeholder="?" value="' + esc(r) + '"></td><td class="' + kl + '"><input class="c" data-f="t' + t3 + '_s" inputmode="numeric" placeholder="?" value="' + esc(s) + '"></td>';
       else tc += '<td class="sep dk"><input type="checkbox" data-f="t' + t3 + '_w"></td><td class="dk"></td><td class="dk"></td>';
@@ -2281,7 +2290,7 @@ function planowanie() {
   for (var t5 = 1; t5 <= akt; t5++) { var tot = sumR[t5] + sumS[t5]; out += '<td class="sep" colspan="3"><span class="gt ' + (t5 > akt || !tot ? 'off' : '') + '">' + (t5 > akt ? '–' : (tot || '–')) + '</span></td>'; }
   out += '</tr>';
   out += '<tr class="tot"><td class="pn">Partie w treningu</td><td class="sep"></td>';
-  for (var t6 = 1; t6 <= akt; t6++) { out += '<td class="sep" colspan="3"><div class="chips">' + (t6 > akt ? '<span class="mut">–</span>' : (chips[t6].length ? chips[t6].map(function (c) { return '<span class="chip ' + c.kl + '">' + esc(c.name) + '<b' + (c.n ? '' : ' class="q"') + '>' + (c.n || '?') + '</b></span>'; }).join('') : '<span class="mut">brak</span>')) + '</div></td>'; }
+  for (var t6 = 1; t6 <= akt; t6++) { out += '<td class="sep" colspan="3"><div class="chips">' + (t6 > akt ? '<span class="mut">–</span>' : (chips[t6].length ? chipyKolejnosc(chips[t6]).map(function (c) { return '<span class="chip ' + c.kl + '">' + esc(c.name) + '<b' + (c.n ? '' : ' class="q"') + '>' + (c.n || '?') + '</b></span>'; }).join('') : '<span class="mut">brak</span>')) + '</div></td>'; }
   out += '</tr></table></div>';
   out += '</div></div><div class="zkol">' + makroPanel() + zalPanel() + supPanel() + '</div></div>';
   return out;
