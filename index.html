@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="d08a6cd6c1"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="8b72c56e91"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>/* patch124: odtwarzacz cofnięty (zachowany w webapp/odtwarzacz_zachowany), widok tylko mobilny zostaje */
 
@@ -2198,14 +2198,14 @@ function historiaSekcja() {
 function zamknijBlok() {
   if (BLOK_ZAMYKANY) return;
   var zal = n(U('zaliczone')), blok = n(U('blok'));
-  var msg = 'Zamknąć bieżący blok (' + zal + ' / ' + blok + ' tyg.) i zacząć nowy?\n\nDo archiwum trafi wszystko z tego bloku. W nowym: ciężar początkowy = aktualny, powtórzenia i notatki podopiecznego wyczyszczone, kratki tygodni od zera.';
+  var msg = 'Zamknąć bieżący blok (' + zal + ' / ' + blok + ' tyg.) i zacząć nowy?\n\nDo archiwum trafi wszystko z tego bloku. Nowy blok zaczyna się z czystym arkuszem, bez ćwiczeń, a kratki tygodni od zera. Zostają dni treningów, partie, liczba treningów w tygodniu i długość bloku.'; // patch139
   if (!confirm(msg)) return;
   var notatka = prompt('Krótka notatka do archiwum, nieobowiązkowa: jak poszedł blok, co zmieniasz w następnym.', '') || '';
   BLOK_ZAMYKANY = true;
   status('zapisuję zmiany przed zamknięciem bloku…');
   czekajNaZapis().then(function () { status('zamykam blok…'); return wywolaj('zamknijBlok', [D.bazaId, notatka]); }).then(function (hist) {
     D.historia = hist || [];
-    D.cwiczenia.forEach(function (c) { if (c.ciezar_akt !== '' && c.ciezar_akt != null) c.ciezar_start = c.ciezar_akt; for (var p = 1; p <= 6; p++) c['p' + p] = ''; c.notatka = ''; });
+    D.cwiczenia = []; // patch139: czysty arkusz (serwer usunął ćwiczenia)
     D.ustawienia.zaliczone = 0; open.hist = true; render(); status('blok zamknięty, nowy rozpoczęty', true);
   }).catch(function (e) { var m = String(e && e.message || e); status('Nie udało się zamknąć bloku: ' + m.replace(/^Error:\s*/, ''), false, true); }).finally(function () { BLOK_ZAMYKANY = false; });
 }
