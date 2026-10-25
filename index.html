@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="c87ca39395"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="216a565067"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>/* patch124: odtwarzacz cofnięty (zachowany w webapp/odtwarzacz_zachowany), widok tylko mobilny zostaje */
 
@@ -498,6 +498,10 @@ body.tel .kalk{padding:16px 16px 30px}
 /* patch137: dzień przy treningu */
 .dzienTrIn{display:block;width:78%;margin:5px auto 0;resize:none;background:#141414;border:1px solid #333;border-radius:8px;color:var(--iv);font:500 12px/1.35 inherit;font-family:inherit;padding:5px 9px;box-sizing:border-box;text-align:center;letter-spacing:0;text-transform:none}.dzienTrIn:focus{outline:0;border-color:var(--gm)}
 .dzienT{margin-left:10px;font-size:13px;font-weight:600;color:#E6CB80;letter-spacing:.3px;text-transform:none;vertical-align:middle}
+/* patch141: notatka podopiecznego w tabeli w całości (wariant C) */
+.tpl td.note .ntt.ukl{display:flex;gap:28px;align-items:flex-start;-webkit-line-clamp:unset;overflow:visible;white-space:normal}
+.tpl td.note .ntt.ukl .ntl{flex:none;min-width:120px;white-space:pre-line}
+.tpl td.note .ntt.ukl .nts{flex:1;min-width:0;color:#EFE9DA;white-space:pre-line;overflow-wrap:anywhere}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
 .pinbox.lg{max-width:1060px;margin:0 auto;padding:24px 16px;min-height:100vh;display:flex;align-items:center;box-sizing:border-box}.pinbox.lg .card{width:100%;box-sizing:border-box;padding:60px;border-radius:14px}.pinbox.lg .sub{font-size:24px}.pinbox.lg h1{margin:8px 0 26px;font-size:56px}.pinbox.lg input{height:96px;font-size:32px}.pinbox.lg .btn{height:96px;font-size:34px}.pinbox.lg .mut{font-size:24px}
 body.lgmob .pinbox.lg{padding:16px;min-height:100vh}body.lgmob .pinbox.lg .card{padding:26px 20px;border-radius:14px}body.lgmob .pinbox.lg .sub{font-size:12px}body.lgmob .pinbox.lg h1{font-size:30px;margin:6px 0 18px}body.lgmob .pinbox.lg input{height:54px;font-size:17px;padding:0 14px;margin-bottom:10px;border-radius:10px}body.lgmob .pinbox.lg .btn{height:56px;font-size:18px;border-radius:10px;margin-top:4px}body.lgmob .pinbox.lg .err{font-size:15px;min-height:20px;margin-top:10px}body.lgmob .pinbox.lg .mut{font-size:15px;margin:14px 0 0;line-height:1.5}
@@ -2087,7 +2091,7 @@ function tabela(t) {
     ['sets', 'reps', 'przerwa', 'rir', 'tempo'].forEach(function (f) { if (f === 'przerwa' && isB) return; out += '<td' + (f === 'przerwa' && isA ? ' class="przSS" rowspan="2"' : '') + '>' + (TR ? '<input class="c" data-f="' + f + '" value="' + esc(c[f]) + '" style="width:56px">' : esc(c[f])) + '</td>'; });
     out += '<td>' + (TR ? '<span class="vw' + (bezpUrl(c.wideo) ? '' : ' ed') + '"><a class="v" data-t="' + esc(c.nazwa) + '" target="_blank" rel="noopener" href="' + esc(bezpUrl(c.wideo) || '#') + '">' + playIkona(24) + '</a><i class="ved" title="Zmień link do filmu" onclick="vwEdytuj(this)">✎</i><input class="c" data-f="wideo" placeholder="link" title="Wklej link do filmu" value="' + esc(c.wideo) + '" style="width:64px;font-size:10px;text-overflow:ellipsis" onblur="vwKoniec(this)" onkeydown="if(event.key===\'Enter\')this.blur()"></span>' : '<a class="v ' + (bezpUrl(c.wideo) ? '' : 'off') + '" data-t="' + esc(c.nazwa) + '" target="_blank" rel="noopener" href="' + esc(bezpUrl(c.wideo) || '#') + '">' + playIkona(24) + '</a>') + '</td>';
     var nt = String(c.notatka || '').trim(); // patch126
-    out += '<td class="note"><div class="ntw' + (nt ? '' : ' pusta') + '" tabindex="0" role="button" onclick="arkuszNotatki(\'' + c.id + '\', null, event.detail ? 1 : 2)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();this.click()}"><span class="ntt">' + (nt ? esc(nt) : '…') + '</span></div></td>';
+    out += '<td class="note"><div class="ntw' + (nt ? '' : ' pusta') + '" tabindex="0" role="button" onclick="arkuszNotatki(\'' + c.id + '\', null, event.detail ? 1 : 2)" onkeydown="if(event.key===\'Enter\'||event.key===\' \'){event.preventDefault();this.click()}"><span class="ntt' + (nt ? ' ukl' : '') + '">' + (nt ? notatkaUklad(nt) : '…') + '</span></div></td>'; // układ: patch141
     out += '</tr>';
   }
   out += '</table>' + (TR ? '<div class="dodaj-cw"><span class="split"><button class="btn" onclick="dodajCw(' + t + ',' + (rows.length + 1) + ')" title="Dodaje pusty wiersz na końcu">+ dodaj</button><button class="btn usun" onclick="usunOstatni(' + t + ')" title="Usuwa ostatni wiersz tego treningu"' + (rows.length ? '' : ' disabled') + '>− usuń</button></span>' + legenda() + '</div>' : (rows.length ? '' : '<div class="mut" style="padding:14px">Kuba jeszcze nie dodał ćwiczeń do tego treningu.</div>') + legenda());
@@ -2331,6 +2335,13 @@ function wagaBlok() {
   return '<span class="pbtn" style="margin-left:10px;font-size:12px;color:' + (d < 0 ? 'var(--green)' : d > 0 ? 'var(--red)' : 'var(--iv)') + '">od startu bloku: ' + fmt(a0) + ' → ' + fmt(a1) + ' kg (' + (d > 0 ? '+' : '') + fmt(d.toFixed(1)) + ')</span>';
 }
 // patch111: dni ważenia (FUNKCJE.md B). Pisze tylko trener, podopieczny czyta.
+// patch141: notatka w tabeli w całości: linie z liczbami z lewej (.ntl), linie ze słowami z prawej (.nts)
+function notatkaUklad(nt) {
+  var l = String(nt).split('\n').map(function (x) { return x.trim(); }).filter(Boolean);
+  var slowo = function (x) { return /[a-ząćęłńóśźż]{3}/i.test(x); };
+  var lz = l.filter(function (x) { return !slowo(x); }), sl = l.filter(slowo);
+  return (lz.length ? '<span class="ntl">' + esc(lz.join('\n')) + '</span>' : '') + (sl.length ? '<span class="nts">' + esc(sl.join('\n')) + '</span>' : '');
+}
 // patch137: dzień treningu (ustawienie dzien_tN, wpisywane w planowaniu)
 function dzienTr(t) { return String(U('dzien_t' + t) || '').trim(); }
 function dzienTrNag(t) { var d = dzienTr(t); return d ? '<span class="dzienT">' + esc(d) + '</span>' : ''; }
