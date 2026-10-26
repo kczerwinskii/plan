@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="216a565067"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="0847d7bc80"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>/* patch124: odtwarzacz cofnięty (zachowany w webapp/odtwarzacz_zachowany), widok tylko mobilny zostaje */
 
@@ -1456,8 +1456,13 @@ function odtwStart(el, src) {
   odtwAktualizuj(); odtwZrodlo(); odtwGraj(false);
   return o;
 }
+// patch142: sesja dźwięku na iPhonie (Audio Session API). Poza filmem 'ambient', w trakcie filmu 'playback'.
+function sesjaAudio(typ) { try { if (navigator.audioSession && navigator.audioSession.type !== typ) navigator.audioSession.type = typ; } catch (e) {} }
+function sesjaMediowWyczysc() { try { if (navigator.mediaSession) { navigator.mediaSession.metadata = null; navigator.mediaSession.playbackState = 'none'; } } catch (e) {} }
+sesjaAudio('ambient');
 function filmOtworz(u, em, tytul) {
   if (VP.el) return;
+  sesjaAudio('playback'); // patch142
   var el = document.createElement('div'); el.className = 'vpan'; el.id = 'vpan';
   if (em.hls) {
     el.innerHTML = '<div class="vtop"><b>' + esc(tytul) + '</b></div><div class="vbody"><div class="vbox pion">'
@@ -1473,6 +1478,7 @@ function filmUsun() {
   var el = VP.el || document.getElementById('vpan');
   VP.el = null;
   if (ODT) ODT.zamknij();
+  sesjaMediowWyczysc(); sesjaAudio('ambient'); // patch142: zwolnij dźwięk po filmie
   if (!el) return;
   el.style.transition = 'transform .22s ease-in';
   el.style.transform = 'translateX(105%)';
@@ -2452,7 +2458,7 @@ function minutnik(id, sek) {
   }, 250);
 }
 function zatrzymajMinutnik(cicho) { if (TM.tick) clearInterval(TM.tick); TM.tick = null; try { if (TM.wl) { TM.wl.release(); TM.wl = null; } } catch (e) {} var el = TM.id ? document.getElementById('tm-' + TM.id) : null; var sek = TM.sek; TM.id = null; TM.koniec = 0; if (el && !cicho) { el.className = ''; el.textContent = '⏱ przerwa ' + fmtCzas(sek); } else if (el) { el.className = ''; el.textContent = '⏱ przerwa ' + fmtCzas(sek); } }
-function dzwonek() { try { var AC = window.AudioContext || window.webkitAudioContext; if (!AC) return; var ctx = TM.ctx || new AC(); if (ctx.state === 'suspended') ctx.resume(); [0, 0.25, 0.5].forEach(function (t) { var o = ctx.createOscillator(), g = ctx.createGain(); o.type = 'sine'; o.frequency.value = 880; g.gain.value = 0.25; o.connect(g); g.connect(ctx.destination); o.start(ctx.currentTime + t); o.stop(ctx.currentTime + t + 0.15); }); } catch (e) {} }
+function dzwonek() { try { var AC = window.AudioContext || window.webkitAudioContext; if (!AC) return; var ctx = TM.ctx || new AC(); if (ctx.state === 'suspended') ctx.resume(); [0, 0.25, 0.5].forEach(function (t) { var o = ctx.createOscillator(), g = ctx.createGain(); o.type = 'sine'; o.frequency.value = 880; g.gain.value = 0.25; o.connect(g); g.connect(ctx.destination); o.start(ctx.currentTime + t); o.stop(ctx.currentTime + t + 0.15); }); setTimeout(function () { try { if (ctx.state === 'running') ctx.suspend(); } catch (e) {} }, 1200); /* patch142: nie trzymać dźwięku po dzwonku */ } catch (e) {} }
 function bindAll() {
   document.querySelectorAll('.desk tr[data-id] [data-f], .widok tr[data-id] [data-f], .widok .wz[data-id] [data-f], .zk .rw[data-id] [data-f]').forEach(function (el) {
     var id = el.closest('[data-id]').dataset.id; var o = D.cwiczenia.filter(function (c) { return c.id === id; })[0]; var tab = 'Cwiczenia';
