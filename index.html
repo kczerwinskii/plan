@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="54ec2df83e"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="dc47b70261"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>/* patch124: odtwarzacz cofnięty (zachowany w webapp/odtwarzacz_zachowany), widok tylko mobilny zostaje */
 
@@ -533,6 +533,15 @@ body.tel .kalk{padding:16px 16px 30px}
 .acw .aci{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:7px 10px;border-radius:7px;color:#F4F1EA;white-space:nowrap;cursor:pointer}
 .acw .aci.on{background:rgba(217,165,32,.16)}.acw .aci em{font-style:normal;color:#E6CB80;font-weight:700}
 .acw .aci span{flex:0 0.2 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}.acw .aci small{flex:0 1 auto;min-width:0;color:#8A8272;font-size:11px;overflow:hidden;text-overflow:ellipsis}
+/* patch148: szacowany czas treningu: kafelek-zakładka na telefonie, pigułka na komputerze, biały zegar */
+.mhead.ztab{padding-bottom:0;align-items:center}
+.ttab{display:inline-flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:4px;flex:0 1 auto;min-width:0;padding:9px 12px;margin-bottom:-1px;background:#161616;border:1px solid #2C2C2C;border-bottom:0;border-radius:12px 12px 0 0;box-sizing:border-box;position:relative;z-index:2}
+.mhead .ttab h1{flex:none;max-width:100%;font-size:19px;line-height:1.2;overflow:hidden;text-overflow:ellipsis}
+.ttab .cz{display:inline-flex;align-items:center;gap:5px;max-width:100%;min-width:0;font:600 12px/1.1 Poppins,Arial,sans-serif;color:#F4F1EA;white-space:nowrap}.ttab .cz svg{color:#fff;flex:none}
+.ttab .cz .dzienT{margin:0;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ttab .cz .kr{font-style:normal;color:#8A8272;flex:none}.ttab .czt{display:inline-flex;align-items:center;gap:5px;flex:none}
+.mhead.ztab .pbtn.rz{margin-left:auto;flex:none}
+.mhead.ztab + #mswipe #mkarta{border-top-left-radius:0}
+.czasT{display:inline-flex;align-items:center;gap:6px;margin-left:12px;padding:4px 10px;border:1px solid var(--gm);border-radius:999px;font:600 12px/1 Poppins,Arial,sans-serif;color:#EFE9DA;letter-spacing:0;text-transform:none;vertical-align:middle;white-space:nowrap}.czasT svg{color:#fff;flex:none}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
 .pinbox.lg{max-width:1060px;margin:0 auto;padding:24px 16px;min-height:100vh;display:flex;align-items:center;box-sizing:border-box}.pinbox.lg .card{width:100%;box-sizing:border-box;padding:60px;border-radius:14px}.pinbox.lg .sub{font-size:24px}.pinbox.lg h1{margin:8px 0 26px;font-size:56px}.pinbox.lg input{height:96px;font-size:32px}.pinbox.lg .btn{height:96px;font-size:34px}.pinbox.lg .mut{font-size:24px}
 body.lgmob .pinbox.lg{padding:16px;min-height:100vh}body.lgmob .pinbox.lg .card{padding:26px 20px;border-radius:14px}body.lgmob .pinbox.lg .sub{font-size:12px}body.lgmob .pinbox.lg h1{font-size:30px;margin:6px 0 18px}body.lgmob .pinbox.lg input{height:54px;font-size:17px;padding:0 14px;margin-bottom:10px;border-radius:10px}body.lgmob .pinbox.lg .btn{height:56px;font-size:18px;border-radius:10px;margin-top:4px}body.lgmob .pinbox.lg .err{font-size:15px;min-height:20px;margin-top:10px}body.lgmob .pinbox.lg .mut{font-size:15px;margin:14px 0 0;line-height:1.5}
@@ -933,6 +942,19 @@ function viewportMob(karty) { var m = document.querySelector('meta[name="viewpor
 function nazwaPrio(k) { return k === 'P' ? 'Priorytet' : k === 'U' ? 'Utrzymanie' : 'Neutral'; }
 function klasaPrio(k) { return k === 'P' ? 'GOLD' : k === 'U' ? 'BORDO' : 'NAVY'; }
 function krokiMob(t) { var rows = cw(t), out = []; for (var i = 0; i < rows.length; i++) { var c = rows[i]; if (jestSS(c) && i + 1 < rows.length) { out.push({ a: c, b: rows[i + 1], nr: [i + 1, i + 2] }); i++; } else out.push({ a: c, nr: [i + 1] }); } return out; }
+// patch148: szacowany czas treningu t (tekst albo '' bez serii)
+var ZEGAR_SVG = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5"/><path d="M9.5 2.5h5"/></svg>';
+function czasTr(t) {
+  var sek = 0, ost = 0;
+  krokiMob(t).forEach(function (st) {
+    var a = Math.max(0, n(st.a.sets)), p = sekundy(st.a.przerwa) || 0, b = st.b ? Math.max(0, n(st.b.sets)) : 0, r = Math.max(a, b);
+    sek += (a + b) * 60 + r * p; if (r > 0) ost = p;
+  });
+  sek -= ost; if (sek <= 0) return '';
+  var m = Math.max(5, Math.round(sek / 300) * 5);
+  return m < 60 ? 'ok. ' + m + ' min' : 'ok. ' + Math.floor(m / 60) + ' h' + (m % 60 ? ' ' + (m % 60) + ' min' : '');
+}
+function czasPill(t) { var c = czasTr(t); return c ? '<span class="czasT" title="Szacowany czas: 1 min na serię + przerwy">' + ZEGAR_SVG + '<span>' + c + '</span></span>' : ''; }
 // patch147: tydzień od poniedziałku; TYDZ_CW = { w: data poniedziałku, c: { idĆwiczenia: { nrSerii: 1 } } } (wpisane w tym tygodniu)
 function tydzienPon() { var d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() - (d.getDay() + 6) % 7); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
 var TYDZ_CW = null, TYDZ_START = '2026-10-26'; // tydzień wdrożenia patch147
@@ -1078,7 +1100,7 @@ function kartaMob(st, t) {
 function postepMob(t) { var rows = cw(t), k = 0, s = 0; rows.forEach(function (c) { var w = wpisane(c); k += w.k; s += w.s; }); return { k: k, s: s }; }
 function widokMobilny(t) {
   var kroki = krokiMob(t), i = idxMob(t), st = kroki[i], p = postepMob(t);
-  var h = '<div id="mobv"><div class="mhead"><h1>Trening ' + t + dzienTrNag(t) + '</h1><a class="pbtn rz" target="_blank" rel="noopener" href="' + esc(D.rozgrzewka) + '"><span class="ico">' + playIkona(20) + '</span>Rozgrzewka</a></div>';
+  var czT = czasTr(t), dzT = dzienTrNag(t), h = '<div id="mobv"><div class="mhead ztab"><div class="ttab"><h1>Trening ' + t + '</h1>' + (dzT || czT ? '<span class="cz">' + dzT + (dzT && czT ? '<i class="kr">·</i>' : '') + (czT ? '<span class="czt" title="Szacowany czas: 1 min na serię + przerwy">' + ZEGAR_SVG + '<span>' + czT + '</span></span>' : '') + '</span>' : '') + '</div><a class="pbtn rz" target="_blank" rel="noopener" href="' + esc(D.rozgrzewka) + '"><span class="ico">' + playIkona(20) + '</span>Rozgrzewka</a></div>';
   if (!st) return h + '<div class="mut" style="padding:20px 14px">' + (TR ? 'Ten trening nie ma jeszcze ćwiczeń. Dodaj je w widoku tabeli.' : 'Kuba jeszcze nie dodał ćwiczeń do tego treningu.') + '</div></div>';
   var progH = '<div class="mprog" id="mprog"><span>' + (st.b ? 'Ćwiczenia <b>' + st.nr[0] + ' i ' + st.nr[1] + '</b>' : 'Ćwiczenie <b>' + st.nr[0] + '</b>') + ' / ' + cw(t).length + '</span><div class="psb"><i style="width:' + (p.s ? Math.round(p.k / p.s * 100) : 0) + '%"></i></div></div>';
   h += '<div id="mswipe">' + kartaMob(st, t) + '</div>';
@@ -1759,7 +1781,7 @@ function render() {
   html += '<div class="wrap desk solo"><div>';
   var t3 = mobT;
   {
-    html += '<div class="card" id="sek-t' + t3 + '"><h2 class="metal"><span class="ttl">Trening ' + t3 + '</span>' + dzienTrNag(t3) + '<a class="pbtn rz" target="_blank" href="' + esc(D.rozgrzewka) + '"><span class="ico">' + playIkona(20) + '</span>Rozgrzewka</a><span style="margin-left:auto"></span><span style="font-size:12px;color:var(--ivd);font-weight:600">' + cw(t3).length + ' ćwiczeń · ' + serie(t3) + ' serii</span></h2>';
+    html += '<div class="card" id="sek-t' + t3 + '"><h2 class="metal"><span class="ttl">Trening ' + t3 + '</span>' + dzienTrNag(t3) + czasPill(t3) + '<a class="pbtn rz" target="_blank" href="' + esc(D.rozgrzewka) + '"><span class="ico">' + playIkona(20) + '</span>Rozgrzewka</a><span style="margin-left:auto"></span><span style="font-size:12px;color:var(--ivd);font-weight:600">' + cw(t3).length + ' ćwiczeń · ' + serie(t3) + ' serii</span></h2>';
     html += tabela(t3);
     html += '</div>' + (TR ? planSum(t3) : '');
   }
