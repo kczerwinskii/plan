@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="fa30ebef08"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="aa53eb5944"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>/* patch124: odtwarzacz cofnięty (zachowany w webapp/odtwarzacz_zachowany), widok tylko mobilny zostaje */
 
@@ -521,6 +521,18 @@ body.tel .kalk{padding:16px 16px 30px}
 }
 .drgZ{opacity:.4}body.drgOn,body.drgOn *{cursor:grabbing!important;user-select:none!important;-webkit-user-select:none!important}
 #drgL{position:fixed;height:3px;background:#D9A520;border-radius:2px;box-shadow:0 0 6px rgba(217,165,32,.6);pointer-events:none;z-index:9999}
+/* patch146: kafelki w Historii bloków, „POPRZ.” w kafelku planowania, własna lista podpowiedzi nazw ćwiczeń */
+.hbkw{width:760px;max-width:100%;margin:0 auto}.hbk{padding:6px 0 4px}
+.hbk .tile b .hbn{display:inline-block;min-width:24px;font-size:22px;font-weight:700;line-height:28px}.hbk .prio i{cursor:default;pointer-events:none}
+.hbk .kfr .hbr{display:block;box-sizing:border-box;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:5px 9px;font:600 12px/16px Poppins,Arial,sans-serif;color:#F4F1EA;min-height:28px;overflow-wrap:anywhere}
+.hbk .tile.GREY .kfr .hbr{color:#8A8272}
+.hb2-sekk{display:flex;align-items:center;gap:8px;margin:16px 0 2px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gl)}.hb2-sekc{margin-top:18px}
+.kfh .poprz{position:absolute;right:max(0px,calc((50% - 33px - 40px) / 2));top:50%;transform:translateY(-50%);width:40px;display:flex;flex-direction:column;align-items:center;justify-content:center;font:600 8px/1.1 Poppins,Arial,sans-serif;color:#A7A49C;text-transform:uppercase;letter-spacing:.4px;pointer-events:none}
+.kfh .poprz b{display:block;font-size:13px!important;line-height:1.1!important;color:#EFE9DA;font-weight:700;letter-spacing:0}.tile.GREY .kfh .poprz{color:#6F6A5E}.tile.GREY .kfh .poprz b{color:#8A8272}
+.acw{display:none;position:fixed;z-index:60;min-width:min(420px,calc(100vw - 16px));max-width:min(680px,calc(100vw - 16px));max-height:320px;overflow-y:auto;box-sizing:border-box;background:#161616;border:1px solid var(--gm);border-radius:10px;box-shadow:0 10px 28px rgba(0,0,0,.7);padding:4px;font:500 13px/1.3 Poppins,Arial,sans-serif}
+.acw .aci{display:flex;justify-content:space-between;align-items:center;gap:18px;padding:7px 10px;border-radius:7px;color:#F4F1EA;white-space:nowrap;cursor:pointer}
+.acw .aci.on{background:rgba(217,165,32,.16)}.acw .aci em{font-style:normal;color:#E6CB80;font-weight:700}
+.acw .aci span{flex:0 0.2 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}.acw .aci small{flex:0 1 auto;min-width:0;color:#8A8272;font-size:11px;overflow:hidden;text-overflow:ellipsis}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
 .pinbox.lg{max-width:1060px;margin:0 auto;padding:24px 16px;min-height:100vh;display:flex;align-items:center;box-sizing:border-box}.pinbox.lg .card{width:100%;box-sizing:border-box;padding:60px;border-radius:14px}.pinbox.lg .sub{font-size:24px}.pinbox.lg h1{margin:8px 0 26px;font-size:56px}.pinbox.lg input{height:96px;font-size:32px}.pinbox.lg .btn{height:96px;font-size:34px}.pinbox.lg .mut{font-size:24px}
 body.lgmob .pinbox.lg{padding:16px;min-height:100vh}body.lgmob .pinbox.lg .card{padding:26px 20px;border-radius:14px}body.lgmob .pinbox.lg .sub{font-size:12px}body.lgmob .pinbox.lg h1{font-size:30px;margin:6px 0 18px}body.lgmob .pinbox.lg input{height:54px;font-size:17px;padding:0 14px;margin-bottom:10px;border-radius:10px}body.lgmob .pinbox.lg .btn{height:56px;font-size:18px;border-radius:10px;margin-top:4px}body.lgmob .pinbox.lg .err{font-size:15px;min-height:20px;margin-top:10px}body.lgmob .pinbox.lg .mut{font-size:15px;margin:14px 0 0;line-height:1.5}
@@ -2110,7 +2122,7 @@ function tabela(t) {
     var isB = wB; wB = false; var isA = !isB && jestSS(c) && i + 1 < rows.length; if (isA) wB = true;
     var moznaPolaczyc = TR && !isA && !isB && i + 1 < rows.length && !jestSS(rows[i + 1]);
     var nrCell = isB ? '' : '<td class="' + (TR ? 'nrc' : '') + (isA ? ' nrSS' : '') + '"' + (isA ? ' rowspan="2"' : '') + '>' + (TR ? '<i class="drg" title="Przeciągnij, żeby przenieść ćwiczenie"><svg width="8" height="14" viewBox="0 0 8 14" aria-hidden="true"><g fill="currentColor"><circle cx="2" cy="2" r="1.3"/><circle cx="6" cy="2" r="1.3"/><circle cx="2" cy="7" r="1.3"/><circle cx="6" cy="7" r="1.3"/><circle cx="2" cy="12" r="1.3"/><circle cx="6" cy="12" r="1.3"/></g></svg></i><input class="c nr" data-nr="' + c.id + '" inputmode="numeric" value="' + (i + 1) + '">' : (i + 1)) + (isA ? '<span class="ssg">SS</span>' : '') + (isA ? '<i class="ssl" title="Rozłącz superserię" onclick="togSS(\'' + c.id + '\')">✕</i>' : '') + (moznaPolaczyc ? '<i class="ssl" title="Połącz z następnym ćwiczeniem w superserię" onclick="togSS(\'' + c.id + '\')">⛓</i>' : '') + '</td>';
-    out += '<tr class="r' + k + (TR && SEL[c.id] ? ' sel' : '') + (isA ? ' ssa' : '') + (isB ? ' ssb2' : '') + '" data-id="' + c.id + '">' + nrCell + '<td class="ex">' + (TR ? '<div class="nzw"><span class="nzt">' + esc(c.nazwa) + '</span><input class="c" data-f="nazwa" list="nazwy" autocomplete="off" value="' + esc(c.nazwa) + '"></div>' : esc(c.nazwa)) + (isA ? '<span class="tag" title="Superseria: dwa ćwiczenia robisz jedno po drugim, bez przerwy między nimi. Przerwę robisz dopiero po obu.">superseria</span>' : '') + '</td>';
+    out += '<tr class="r' + k + (TR && SEL[c.id] ? ' sel' : '') + (isA ? ' ssa' : '') + (isB ? ' ssb2' : '') + '" data-id="' + c.id + '">' + nrCell + '<td class="ex">' + (TR ? '<div class="nzw"><span class="nzt">' + esc(c.nazwa) + '</span><input class="c" data-f="nazwa" autocomplete="off" value="' + esc(c.nazwa) + '"></div>' : esc(c.nazwa)) + (isA ? '<span class="tag" title="Superseria: dwa ćwiczenia robisz jedno po drugim, bez przerwy między nimi. Przerwę robisz dopiero po obu.">superseria</span>' : '') + '</td>';
     for (var p = 1; p <= 6; p++) out += '<td class="rep ' + (p <= sets ? 'plan' : '') + '">' + (p <= sets ? '<input class="c" data-f="p' + p + '" inputmode="numeric" value="' + esc(c['p' + p]) + '">' : '') + '</td>';
     out += '<td class="w"><input class="c" data-f="ciezar_akt" inputmode="decimal" value="' + esc(c.ciezar_akt) + '"></td><td class="w"><input class="c" data-f="ciezar_start" inputmode="decimal" value="' + esc(c.ciezar_start) + '"></td>';
     ['sets', 'reps', 'przerwa', 'rir', 'tempo'].forEach(function (f) { if (f === 'przerwa' && isB) return; out += '<td' + (f === 'przerwa' && isA ? ' class="przSS" rowspan="2"' : '') + '>' + (TR ? '<input class="c" data-f="' + f + '" value="' + esc(c[f]) + '" style="width:56px">' : esc(c[f])) + '</td>'; });
@@ -2173,15 +2185,26 @@ function odswiezPlanSum(t) { var el = document.getElementById('plansum-t' + t); 
 function serieP(p) { var s = 0; for (var t = 1; t <= 5; t++) if (wTr(p, t)) s += n(p['t' + t + '_r']) + n(p['t' + t + '_s']); return s; }
 function rozpisane(p) { var s = serieP(p); return p.plan ? s + ' / ' + p.plan : '–'; }
 function kafelki() {
-  var out = '<div class="grid g4">';
+  var out = '<div class="grid g4">', HP = (function () { var H = D.historia || [], d = H.length ? H[H.length - 1].dane || {} : {}; return d.partie || []; })(); // HP: patch146
   D.partieLista.forEach(function (name) {
     var p = D.partie.filter(function (x) { return x.partia === name; })[0]; if (!p) return;
     var pr = prio(name), kl = klasaP(p), wyk = p.wykorzystane === true || p.wykorzystane === 'TRUE' || p.wykorzystane === 'true';
-    var szara = nieuzyta(p);
-    out += '<div class="tile kf2 ' + pr + ' ' + kl + '" data-p="' + esc(name) + '"' + (szara ? ' title="Partia bez planu w tym bloku"' : '') + '><div class="kfh"><b><input data-f="plan" inputmode="numeric" value="' + esc(p.plan) + '" placeholder="–"></b><div class="prio"><i class="GOLD ' + (pr === 'P' ? 'on' : '') + '" title="Priorytet" onclick="setPrio(\'' + esc(name) + '\',\'P\')"></i><i class="NAVY ' + (pr === 'N' ? 'on' : '') + '" title="Neutral" onclick="setPrio(\'' + esc(name) + '\',\'N\')"></i><i class="BORDO ' + (pr === 'U' ? 'on' : '') + '" title="Utrzymanie" onclick="setPrio(\'' + esc(name) + '\',\'U\')"></i></div></div><span>' + esc(name) + '</span><small class="kfr"><textarea data-f="region" rows="1" aria-label="region">' + esc(p.region) + '</textarea></small></div>';
+    var szara = nieuzyta(p), pp = HP.filter(function (x) { return x.partia === name; })[0]; if (pp && nieuzyta(pp)) pp = null;
+    out += '<div class="tile kf2 ' + pr + ' ' + kl + '" data-p="' + esc(name) + '"' + (szara ? ' title="Partia bez planu w tym bloku"' : '') + '><div class="kfh"><b><input data-f="plan" inputmode="numeric" value="' + esc(p.plan) + '" placeholder="–"></b><div class="prio"><i class="GOLD ' + (pr === 'P' ? 'on' : '') + '" title="Priorytet" onclick="setPrio(\'' + esc(name) + '\',\'P\')"></i><i class="NAVY ' + (pr === 'N' ? 'on' : '') + '" title="Neutral" onclick="setPrio(\'' + esc(name) + '\',\'N\')"></i><i class="BORDO ' + (pr === 'U' ? 'on' : '') + '" title="Utrzymanie" onclick="setPrio(\'' + esc(name) + '\',\'U\')"></i></div>' + (pp ? '<span class="poprz" title="Liczba serii w poprzednim bloku">poprz.<b>' + esc(pp.plan) + '</b></span>' : '') + '</div><span>' + esc(name) + '</span><small class="kfr"><textarea data-f="region" rows="1" aria-label="region">' + esc(p.region) + '</textarea></small></div>';
   });
   out += '</div>';
   return out;
+}
+function kafelkiHist(d) { // patch146: kafelki objętości zamkniętego bloku (archiwum: partie i priorytety z chwili zamknięcia), tylko do odczytu
+  var P = d.partie || [], u = d.ustawienia || {}; if (!P.length) return '';
+  var nazwy = D.partieLista.concat(P.map(function (p) { return p.partia; }).filter(function (nm) { return D.partieLista.indexOf(nm) < 0; }));
+  var out = '<div class="hbkw"><div class="hb2-sekk">Objętość na partię</div><div class="grid g4 hbk">';
+  nazwy.forEach(function (name) {
+    var p = P.filter(function (x) { return x.partia === name; })[0]; if (!p) return;
+    var v = u['prio_' + name], pr = v === 'P' || v === 'U' ? v : 'N', kl = nieuzyta(p) ? 'GREY' : pr === 'P' ? 'GOLD' : pr === 'U' ? 'BORDO' : 'NAVY';
+    out += '<div class="tile kf2 ' + pr + ' ' + kl + '"><div class="kfh"><b><span class="hbn">' + esc(p.plan == null || p.plan === '' ? '–' : p.plan) + '</span></b><div class="prio"><i class="GOLD' + (pr === 'P' ? ' on' : '') + '"></i><i class="NAVY' + (pr === 'N' ? ' on' : '') + '"></i><i class="BORDO' + (pr === 'U' ? ' on' : '') + '"></i></div></div><span>' + esc(name) + '</span><small class="kfr"><span class="hbr">' + esc(p.region || '') + '</span></small></div>';
+  });
+  return out + '</div></div>';
 }
 function historiaSekcja() {
   var H = D.historia || [];
@@ -2205,9 +2228,10 @@ function historiaSekcja() {
       if (h.tygodnie) kaf.push('<div><b>' + esc(h.tygodnie) + '</b><span>tygodni zaliczonych</span></div>');
       if (h.kcal) kaf.push('<div><b>' + esc(h.kcal) + ' kcal</b><span>kalorie w bloku</span></div>');
       if (kaf.length) out += '<div class="hb2-kaf">' + kaf.join('') + '</div>';
+      var kafH = kafelkiHist(d); out += kafH; // patch146
       var cw = (d.cwiczenia || []).slice().sort(function (x, y) { return n(x.trening) - n(y.trening) || n(x.nr) - n(y.nr); });
       if (cw.length) {
-        out += '<div class="hb2-w hb2-h"><span class="hb2-ex">Ćwiczenie</span><span>Serie × powt.</span><span>Ciężar</span><span>Zmiana</span></div>';
+        out += (kafH ? '<div class="hb2-sekk hb2-sekc">Ćwiczenia</div>' : '') + '<div class="hb2-w hb2-h"><span class="hb2-ex">Ćwiczenie</span><span>Serie × powt.</span><span>Ciężar</span><span>Zmiana</span></div>';
         var ost = null;
         cw.forEach(function (c) {
           if (String(c.trening) !== ost) { ost = String(c.trening); out += '<div class="hb2-tr">Trening ' + esc(c.trening) + '</div>'; }
@@ -2343,6 +2367,83 @@ function koloruj(typ) {
   ids.forEach(function (id) { var c = D.cwiczenia.filter(function (x) { return x.id === id; })[0]; if (!c) return; c.typ = typ; push({ tab: 'Cwiczenia', id: id, pole: 'typ', wartosc: typ }); });
   SEL = {}; render();
 }
+// patch146: własna lista podpowiedzi nazw ćwiczeń (tabela trenera) zamiast <datalist>. AC: pole, wiersz, źródło,
+// widoczne pozycje, zaznaczona (-1 = brak). Źródło jak w datalist(): atlas (albo NAZWY_BAZA) i nazwy z planu, bez
+// bieżącego wiersza (jego nazwa zmienia się przy pisaniu).
+var AC = null;
+function acZrodlo(rid) {
+  var seen = {}, out = [], atl = D.atlas || [];
+  (atl.length ? atl.map(function (a) { return String(a.nazwa || '').trim(); }) : NAZWY_BAZA).concat(D.cwiczenia.filter(function (c) { return c.id !== rid; }).map(function (c) { return String(c.nazwa || '').trim(); })).forEach(function (nm) {
+    var k = norm(nm); if (!nm || seen[k]) return; seen[k] = 1;
+    var m = atl.filter(function (a) { return norm(a.nazwa) === k; }).map(function (a) { return [a.miesien, a.partia].filter(Boolean).join(', '); }).filter(Boolean)[0] || '';
+    out.push({ n: nm, k: k, m: m, km: norm(m) });
+  });
+  return out;
+}
+function acFiltr(q) { var a = [], b = [], c = []; AC.src.forEach(function (it) { var i = it.k.indexOf(q); if (i === 0) a.push(it); else if (i > 0) b.push(it); else if (it.km.indexOf(q) >= 0) c.push(it); }); return a.concat(b, c); }
+function acHl(t, v) { var q = String(v || '').trim().toLowerCase(), i = q ? t.toLowerCase().indexOf(q) : -1; return i < 0 ? esc(t) : esc(t.slice(0, i)) + '<em>' + esc(t.slice(i, i + q.length)) + '</em>' + esc(t.slice(i + q.length)); }
+function acBox() {
+  var b = document.getElementById('acw'); if (b) return b;
+  b = document.createElement('div'); b.id = 'acw'; b.className = 'acw'; b.setAttribute('role', 'listbox');
+  b.addEventListener('pointerdown', function (e) { e.preventDefault(); }); // fokus zostaje w polu nazwy
+  b.addEventListener('mousedown', function (e) { e.preventDefault(); });
+  b.addEventListener('click', function (e) { var d = e.target.closest('.aci'); if (d) acWybierz(+d.dataset.i); });
+  b.addEventListener('mousemove', function (e) { var d = e.target.closest('.aci'); if (d && AC && AC.act !== +d.dataset.i) { AC.act = +d.dataset.i; acZaznacz(); } });
+  document.body.appendChild(b); return b;
+}
+function acOtwarta() { var b = document.getElementById('acw'); return !!(AC && AC.items.length && b && b.style.display === 'block'); }
+function acSchowaj() { var b = document.getElementById('acw'); if (b) b.style.display = 'none'; if (AC) { AC.items = []; AC.act = -1; } }
+function acZamknij() { acSchowaj(); AC = null; }
+function acPokaz(el) {
+  var tr = el.closest('tr[data-id]'), rid = tr ? tr.dataset.id : '';
+  if (!AC || AC.el !== el) AC = { el: el, rid: rid, src: acZrodlo(rid), items: [], act: -1 };
+  var q = norm(el.value), lista = q ? acFiltr(q) : [];
+  if (!lista.length || (lista.length === 1 && lista[0].k === q)) { acSchowaj(); return; }
+  AC.items = lista.slice(0, 50); AC.act = -1;
+  var b = acBox();
+  b.innerHTML = AC.items.map(function (it, i) { return '<div class="aci" role="option" data-i="' + i + '"><span>' + acHl(it.n, el.value) + '</span>' + (it.m ? '<small>' + esc(it.m) + '</small>' : '') + '</div>'; }).join('');
+  b.scrollTop = 0; b.style.display = 'block'; acPozycja();
+}
+function acZaznacz() {
+  var b = document.getElementById('acw'); if (!b || !AC) return;
+  [].forEach.call(b.children, function (d, i) { d.classList.toggle('on', i === AC.act); });
+  var on = b.children[AC.act]; if (on) { if (on.offsetTop < b.scrollTop) b.scrollTop = on.offsetTop; else if (on.offsetTop + on.offsetHeight > b.scrollTop + b.clientHeight) b.scrollTop = on.offsetTop + on.offsetHeight - b.clientHeight; }
+}
+function acPozycja() {
+  if (!acOtwarta()) return;
+  if (!document.body.contains(AC.el)) { // po render(): to samo pole w nowym wierszu, jeśli ma fokus
+    var nw = document.activeElement, ntr = nw && nw.closest ? nw.closest('tr[data-id]') : null;
+    if (nw && nw.matches && nw.matches('input[data-f="nazwa"]') && ntr && ntr.dataset.id === AC.rid) AC.el = nw; else { acZamknij(); return; }
+  }
+  var b = document.getElementById('acw'), r = (AC.el.closest('td') || AC.el).getBoundingClientRect();
+  b.style.left = Math.max(8, Math.min(r.left, innerWidth - b.offsetWidth - 8)) + 'px';
+  b.style.top = (r.bottom + b.offsetHeight > innerHeight - 8 && r.top - b.offsetHeight > 8 ? r.top - b.offsetHeight : r.bottom) + 'px';
+}
+function acWybierz(i) {
+  var it = AC && AC.items[i]; if (!it) return; var el = AC.el; acZamknij();
+  el.value = it.n; el.dispatchEvent(new Event('input', { bubbles: true }));
+  try { el.setSelectionRange(it.n.length, it.n.length); } catch (x) {}
+}
+function acPole(el) { return TR && el && el.matches && el.matches('#app table.tpl input[data-f="nazwa"]'); }
+document.addEventListener('input', function (e) { if (acPole(e.target)) acPokaz(e.target); });
+document.addEventListener('focusin', function (e) {
+  if (!AC || e.target === AC.el) return;
+  var tr = e.target.closest ? e.target.closest('tr[data-id]') : null;
+  if (acPole(e.target) && tr && tr.dataset.id === AC.rid) { AC.el = e.target; acPozycja(); } else acZamknij();
+});
+document.addEventListener('focusout', function (e) {
+  if (!AC || e.target !== AC.el) return;
+  setTimeout(function () { var a = document.activeElement, tr = a && a.closest ? a.closest('tr[data-id]') : null; if (AC && a !== AC.el && !(acPole(a) && tr && tr.dataset.id === AC.rid)) acZamknij(); }, 0);
+});
+window.addEventListener('keydown', function (e) { // przed nawigacją strzałkami po tabeli (document, faza bąbelkowania)
+  if (!AC || e.target !== AC.el || !acOtwarta()) return;
+  var k = e.key;
+  if (k === 'ArrowDown' || k === 'ArrowUp') { e.preventDefault(); e.stopPropagation(); AC.act = k === 'ArrowDown' ? Math.min(AC.act + 1, AC.items.length - 1) : Math.max(AC.act - 1, -1); acZaznacz(); }
+  else if (k === 'Enter') { if (AC.act >= 0) { e.preventDefault(); e.stopPropagation(); acWybierz(AC.act); } else acSchowaj(); }
+  else if (k === 'Escape') { e.preventDefault(); e.stopPropagation(); acSchowaj(); }
+  else if (k === 'Tab') acSchowaj();
+}, true);
+window.addEventListener('scroll', acPozycja, true); window.addEventListener('resize', acPozycja);
 function datalist() {
   var seen = {}, out = '<datalist id="nazwy">';
   (D.atlas && D.atlas.length ? D.atlas.map(function (a) { return String(a.nazwa || '').trim(); }) : NAZWY_BAZA).concat(D.cwiczenia.map(function (c) { return String(c.nazwa || '').trim(); })).forEach(function (nm) { if (!nm || seen[nm.toLowerCase()]) return; seen[nm.toLowerCase()] = 1; var miesnie = (D.atlas || []).filter(function (a) { return norm(a.nazwa) === norm(nm); }).map(function (a) { return [a.miesien, a.partia].filter(Boolean).join(' '); }).join(' '); out += '<option value="' + esc(nm) + '"' + (miesnie ? ' label="' + esc(nm + ' · ' + miesnie) + '"' : '') + '>'; });
