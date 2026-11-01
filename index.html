@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="aa53eb5944"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="54ec2df83e"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>/* patch124: odtwarzacz cofnięty (zachowany w webapp/odtwarzacz_zachowany), widok tylko mobilny zostaje */
 
@@ -933,10 +933,24 @@ function viewportMob(karty) { var m = document.querySelector('meta[name="viewpor
 function nazwaPrio(k) { return k === 'P' ? 'Priorytet' : k === 'U' ? 'Utrzymanie' : 'Neutral'; }
 function klasaPrio(k) { return k === 'P' ? 'GOLD' : k === 'U' ? 'BORDO' : 'NAVY'; }
 function krokiMob(t) { var rows = cw(t), out = []; for (var i = 0; i < rows.length; i++) { var c = rows[i]; if (jestSS(c) && i + 1 < rows.length) { out.push({ a: c, b: rows[i + 1], nr: [i + 1, i + 2] }); i++; } else out.push({ a: c, nr: [i + 1] }); } return out; }
-function wpisane(c) { var s = Math.max(0, Math.min(6, n(c.sets))), k = 0; for (var i = 1; i <= s; i++) if (c['p' + i] !== '' && c['p' + i] != null) k++; return { k: k, s: s }; }
+// patch147: tydzień od poniedziałku; TYDZ_CW = { w: data poniedziałku, c: { idĆwiczenia: { nrSerii: 1 } } } (wpisane w tym tygodniu)
+function tydzienPon() { var d = new Date(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() - (d.getDay() + 6) % 7); return d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2); }
+var TYDZ_CW = null, TYDZ_START = '2026-10-26'; // tydzień wdrożenia patch147
+function tydzCw() {
+  var w = tydzienPon(); if (TYDZ_CW && TYDZ_CW.w === w) return TYDZ_CW;
+  var z = null, jest = false; try { var raw = localStorage.getItem('tydzCw_' + D.bazaId); jest = raw != null; z = JSON.parse(raw || 'null'); } catch (e) {}
+  TYDZ_CW = z && z.w === w && z.c ? z : { w: w, c: {}, start: !jest && w === TYDZ_START };
+  return TYDZ_CW;
+}
+function tydzZaznacz(id, i) {
+  var t = tydzCw(), zaz = function (cid, j) { (t.c[cid] = t.c[cid] || {})[j] = 1; };
+  if (t.start) { D.cwiczenia.forEach(function (c) { for (var j = 1; j <= 6; j++) if (c['p' + j] !== '' && c['p' + j] != null) zaz(c.id, j); }); t.start = false; } // tydzień wdrożenia: wpisy sprzed wdrożenia zostają zrobione
+  zaz(id, i); try { localStorage.setItem('tydzCw_' + D.bazaId, JSON.stringify({ w: t.w, c: t.c })); } catch (e) {} }
+document.addEventListener('input', function (e) { var el = e.target, m = el && el.dataset ? /^p([1-6])$/.exec(el.dataset.f || '') : null; if (!m || TR || !el.closest('#mobv')) return; var r = el.closest('[data-id]'); if (r) tydzZaznacz(r.dataset.id, m[1]); }, true);
+function wpisane(c) { var s = Math.max(0, Math.min(6, n(c.sets))), k = 0, t = TR ? null : tydzCw(), z = t && !t.start ? t.c[c.id] || {} : null; for (var i = 1; i <= s; i++) if (c['p' + i] !== '' && c['p' + i] != null && (!z || z[i])) k++; return { k: k, s: s }; }
 function krokZrobiony(st) { var w = wpisane(st.a), ok = w.s > 0 && w.k >= w.s; if (st.b) { var w2 = wpisane(st.b); ok = ok && (w2.s === 0 || w2.k >= w2.s); } return ok; }
-function idxMob(t) { var k = krokiMob(t), i = MV.idx[t]; if (i == null) { try { i = parseInt(localStorage.getItem('mobIdx' + t), 10); } catch (e) {} } if (!(i >= 0 && i < k.length)) i = 0; MV.idx[t] = i; return i; }
-function idzMob(t, i) { var k = krokiMob(t); if (!k.length) return; i = Math.max(0, Math.min(k.length - 1, i)); MV.idx[t] = i; try { localStorage.setItem('mobIdx' + t, i); } catch (e) {} schowajHint(); zamknijArkusz(); render(); window.scrollTo(0, 0); }
+function idxMob(t) { var k = krokiMob(t), i = MV.idx[t]; if (i == null) { try { i = localStorage.getItem('mobIdxW' + t) === tydzienPon() ? parseInt(localStorage.getItem('mobIdx' + t), 10) : 0; } catch (e) {} } /* tydzień: patch147 */ if (!(i >= 0 && i < k.length)) i = 0; MV.idx[t] = i; return i; }
+function idzMob(t, i) { var k = krokiMob(t); if (!k.length) return; i = Math.max(0, Math.min(k.length - 1, i)); MV.idx[t] = i; try { localStorage.setItem('mobIdx' + t, i); localStorage.setItem('mobIdxW' + t, tydzienPon()); } catch (e) {} schowajHint(); zamknijArkusz(); render(); window.scrollTo(0, 0); }
 // patch132: jeden dymek dziennie na bazę, także gdy localStorage jest niedostępny.
 var PRZYP_TYDZIEN_WIDZIANE = {}, PRZYP_TYDZIEN_TIMER = null;
 function przypTydzienSchowaj() {
