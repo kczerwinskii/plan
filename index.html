@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="c2dc519399"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="fa30ebef08"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>/* patch124: odtwarzacz cofnięty (zachowany w webapp/odtwarzacz_zachowany), widok tylko mobilny zostaje */
 
@@ -512,6 +512,15 @@ body.tel .kalk{padding:16px 16px 30px}
 .kbtn12{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;box-sizing:border-box;width:calc((100% - 30px) / 4);min-height:104px;padding:12px 14px;background:linear-gradient(180deg,#6E2231,#3B1220);border:2px solid #8E3140;border-radius:12px;color:#F4F1EA;font:700 13px/1.25 Poppins,Arial,sans-serif;text-align:center;cursor:pointer}
 .kbtn12 svg{color:#F5E3A6;flex:none}.kbtn12 span{display:block}.kbtn12 small{display:block;font:500 11px/1.3 Poppins,Arial,sans-serif;color:#D9B9C0}
 .kbtn12:hover{border-color:#C9A455}.kbtn12:focus-visible{outline:2px solid #F5E3A6;outline-offset:2px}
+/* patch145: przeciąganie myszką: uchwyt przy numerze ćwiczenia, pastylki partii, złota linia miejsca upuszczenia */
+.drg{display:none}
+@media (hover:hover) and (pointer:fine){
+.tpl.tr td.nrc .drg{display:flex;align-items:center;justify-content:center;position:absolute;left:1px;top:50%;transform:translateY(-50%);width:12px;height:24px;color:rgba(244,241,234,.6);cursor:grab;opacity:0;transition:opacity .15s;z-index:1}
+.tpl.tr tr:hover td.nrc .drg,.tpl.tr td.nrc:hover .drg{opacity:1}.tpl.tr td.nrc .drg:hover{color:#F5E3A6}
+.pm .chips[data-t] .chip[data-ch]{cursor:grab}
+}
+.drgZ{opacity:.4}body.drgOn,body.drgOn *{cursor:grabbing!important;user-select:none!important;-webkit-user-select:none!important}
+#drgL{position:fixed;height:3px;background:#D9A520;border-radius:2px;box-shadow:0 0 6px rgba(217,165,32,.6);pointer-events:none;z-index:9999}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
 .pinbox.lg{max-width:1060px;margin:0 auto;padding:24px 16px;min-height:100vh;display:flex;align-items:center;box-sizing:border-box}.pinbox.lg .card{width:100%;box-sizing:border-box;padding:60px;border-radius:14px}.pinbox.lg .sub{font-size:24px}.pinbox.lg h1{margin:8px 0 26px;font-size:56px}.pinbox.lg input{height:96px;font-size:32px}.pinbox.lg .btn{height:96px;font-size:34px}.pinbox.lg .mut{font-size:24px}
 body.lgmob .pinbox.lg{padding:16px;min-height:100vh}body.lgmob .pinbox.lg .card{padding:26px 20px;border-radius:14px}body.lgmob .pinbox.lg .sub{font-size:12px}body.lgmob .pinbox.lg h1{font-size:30px;margin:6px 0 18px}body.lgmob .pinbox.lg input{height:54px;font-size:17px;padding:0 14px;margin-bottom:10px;border-radius:10px}body.lgmob .pinbox.lg .btn{height:56px;font-size:18px;border-radius:10px;margin-top:4px}body.lgmob .pinbox.lg .err{font-size:15px;min-height:20px;margin-top:10px}body.lgmob .pinbox.lg .mut{font-size:15px;margin:14px 0 0;line-height:1.5}
@@ -2100,7 +2109,7 @@ function tabela(t) {
     var k = kolorCw(c), sets = n(c.sets);
     var isB = wB; wB = false; var isA = !isB && jestSS(c) && i + 1 < rows.length; if (isA) wB = true;
     var moznaPolaczyc = TR && !isA && !isB && i + 1 < rows.length && !jestSS(rows[i + 1]);
-    var nrCell = isB ? '' : '<td class="' + (TR ? 'nrc' : '') + (isA ? ' nrSS' : '') + '"' + (isA ? ' rowspan="2"' : '') + '>' + (TR ? '<input class="c nr" data-nr="' + c.id + '" inputmode="numeric" value="' + (i + 1) + '">' : (i + 1)) + (isA ? '<span class="ssg">SS</span>' : '') + (isA ? '<i class="ssl" title="Rozłącz superserię" onclick="togSS(\'' + c.id + '\')">✕</i>' : '') + (moznaPolaczyc ? '<i class="ssl" title="Połącz z następnym ćwiczeniem w superserię" onclick="togSS(\'' + c.id + '\')">⛓</i>' : '') + '</td>';
+    var nrCell = isB ? '' : '<td class="' + (TR ? 'nrc' : '') + (isA ? ' nrSS' : '') + '"' + (isA ? ' rowspan="2"' : '') + '>' + (TR ? '<i class="drg" title="Przeciągnij, żeby przenieść ćwiczenie"><svg width="8" height="14" viewBox="0 0 8 14" aria-hidden="true"><g fill="currentColor"><circle cx="2" cy="2" r="1.3"/><circle cx="6" cy="2" r="1.3"/><circle cx="2" cy="7" r="1.3"/><circle cx="6" cy="7" r="1.3"/><circle cx="2" cy="12" r="1.3"/><circle cx="6" cy="12" r="1.3"/></g></svg></i><input class="c nr" data-nr="' + c.id + '" inputmode="numeric" value="' + (i + 1) + '">' : (i + 1)) + (isA ? '<span class="ssg">SS</span>' : '') + (isA ? '<i class="ssl" title="Rozłącz superserię" onclick="togSS(\'' + c.id + '\')">✕</i>' : '') + (moznaPolaczyc ? '<i class="ssl" title="Połącz z następnym ćwiczeniem w superserię" onclick="togSS(\'' + c.id + '\')">⛓</i>' : '') + '</td>';
     out += '<tr class="r' + k + (TR && SEL[c.id] ? ' sel' : '') + (isA ? ' ssa' : '') + (isB ? ' ssb2' : '') + '" data-id="' + c.id + '">' + nrCell + '<td class="ex">' + (TR ? '<div class="nzw"><span class="nzt">' + esc(c.nazwa) + '</span><input class="c" data-f="nazwa" list="nazwy" autocomplete="off" value="' + esc(c.nazwa) + '"></div>' : esc(c.nazwa)) + (isA ? '<span class="tag" title="Superseria: dwa ćwiczenia robisz jedno po drugim, bez przerwy między nimi. Przerwę robisz dopiero po obu.">superseria</span>' : '') + '</td>';
     for (var p = 1; p <= 6; p++) out += '<td class="rep ' + (p <= sets ? 'plan' : '') + '">' + (p <= sets ? '<input class="c" data-f="p' + p + '" inputmode="numeric" value="' + esc(c['p' + p]) + '">' : '') + '</td>';
     out += '<td class="w"><input class="c" data-f="ciezar_akt" inputmode="decimal" value="' + esc(c.ciezar_akt) + '"></td><td class="w"><input class="c" data-f="ciezar_start" inputmode="decimal" value="' + esc(c.ciezar_start) + '"></td>';
@@ -2313,7 +2322,7 @@ function planowanie() {
   for (var t5 = 1; t5 <= akt; t5++) { var tot = sumR[t5] + sumS[t5]; out += '<td class="sep" colspan="3"><span class="gt ' + (t5 > akt || !tot ? 'off' : '') + '">' + (t5 > akt ? '–' : (tot || '–')) + '</span></td>'; }
   out += '</tr>';
   out += '<tr class="tot"><td class="pn">Partie w treningu</td><td class="sep"></td>';
-  for (var t6 = 1; t6 <= akt; t6++) { out += '<td class="sep" colspan="3"><div class="chips">' + (t6 > akt ? '<span class="mut">–</span>' : (chips[t6].length ? chipyKolejnosc(chips[t6]).map(function (c) { return '<span class="chip ' + c.kl + '">' + esc(c.name) + '<b' + (c.n ? '' : ' class="q"') + '>' + (c.n || '?') + '</b></span>'; }).join('') : '<span class="mut">brak</span>')) + '</div></td>'; }
+  for (var t6 = 1; t6 <= akt; t6++) { out += '<td class="sep" colspan="3"><div class="chips" data-t="' + t6 + '">' + (t6 > akt ? '<span class="mut">–</span>' : (chips[t6].length ? chipyKolejnosc(chips[t6]).map(function (c) { return '<span class="chip ' + c.kl + '" data-ch="' + esc(c.name) + '">' + esc(c.name) + '<b' + (c.n ? '' : ' class="q"') + '>' + (c.n || '?') + '</b></span>'; }).join('') : '<span class="mut">brak</span>')) + '</div></td>'; }
   out += '</tr></table></div>';
   out += '</div></div><div class="zkol">' + makroPanel() + zalPanel() + supPanel() + '</div></div>';
   return out;
@@ -2584,6 +2593,80 @@ function przestawCw(id, poz) {
   lista.forEach(function (x, i) { if (n(x.nr) !== i + 1) { x.nr = i + 1; push({ tab: 'Cwiczenia', id: x.id, pole: 'nr', wartosc: i + 1 }); } });
   render();
 }
+// patch145: przeciąganie myszką (tylko komputer): ćwiczenia w tabeli treningu (para superserii razem) i pastylki
+// „Partie w treningu” w planowaniu (kolejność w tN_k). DRG: stan bieżącego przeciągania.
+var DRG = null;
+function blokiCw(lista) { var b = [], wB = false; lista.forEach(function (c, i) { var isB = wB; wB = false; if (isB) { b[b.length - 1].push(c); return; } if (jestSS(c) && i + 1 < lista.length) wB = true; b.push([c]); }); return b; }
+function paryA(lista) { var a = {}; blokiCw(lista).forEach(function (bl) { if (bl.length === 2) a[bl[0].id] = 1; }); return a; }
+function drgEl(d, it) {
+  if (d.typ === 'cw') return it.map(function (id) { return document.querySelector('#sek-t' + d.t + ' table.tpl tr[data-id="' + id + '"]'); }).filter(Boolean);
+  var box = drgPojemnik(d); return box ? [].filter.call(box.querySelectorAll('.chip[data-ch]'), function (x) { return x.dataset.ch === it; }) : [];
+}
+function drgPojemnik(d) { return document.querySelector(d.typ === 'cw' ? '#sek-t' + d.t + ' table.tpl' : '.pm .chips[data-t="' + d.t + '"]'); }
+function drgProst(els) { return els.length ? { top: els[0].getBoundingClientRect().top, bottom: els[els.length - 1].getBoundingClientRect().bottom } : null; }
+function drgCzysc() { document.body.classList.remove('drgOn'); [].forEach.call(document.querySelectorAll('.drgZ'), function (x) { x.classList.remove('drgZ'); }); var l = document.getElementById('drgL'); if (l) l.parentNode.removeChild(l); }
+function drgKoniec(zastosuj) {
+  var d = DRG; DRG = null; if (!d) return; drgCzysc();
+  if (d.ruszyl) { var st = function (e) { e.stopPropagation(); e.preventDefault(); }; window.addEventListener('click', st, true); setTimeout(function () { window.removeEventListener('click', st, true); }, 0); }
+  if (!zastosuj || !d.ruszyl || d.idx == null || d.idx === d.z) return;
+  var it = d.items.slice(), m = it.splice(d.z, 1)[0]; it.splice(d.idx, 0, m);
+  if (d.typ === 'cw') {
+    var bl = d.bloki.slice(), mb = bl.splice(d.z, 1)[0]; bl.splice(d.idx, 0, mb);
+    var lista = [].concat.apply([], bl), stare = paryA(d.lista);
+    for (var g = 0; g < lista.length; g++) { var nowe = paryA(lista), zly = lista.filter(function (c) { return nowe[c.id] && !stare[c.id]; })[0]; if (!zly) break; zly.ss = false; push({ tab: 'Cwiczenia', id: zly.id, pole: 'ss', wartosc: false }); }
+    lista.forEach(function (x, i) { if (n(x.nr) !== i + 1) { x.nr = i + 1; push({ tab: 'Cwiczenia', id: x.id, pole: 'nr', wartosc: i + 1 }); } });
+  } else {
+    var f = 't' + d.t + '_k', poz = it.map(function (nm) { return D.partie.filter(function (p) { return p.partia === nm; })[0]; }).filter(Boolean);
+    poz = poz.concat(partieKolejnosc(d.t).filter(function (p) { return poz.indexOf(p) < 0; }));
+    poz.forEach(function (p, i) { if (Number(p[f]) !== i + 1) { p[f] = i + 1; push({ tab: 'Partie', id: p.partia, pole: f, wartosc: i + 1 }); } });
+  }
+  render();
+}
+document.addEventListener('pointerdown', function (e) {
+  if (DRG || e.pointerType !== 'mouse' || e.button !== 0 || !TR || BLOK_ZAMYKANY || !e.target.closest) return;
+  var g = e.target.closest('table.tpl .drg, .pm .chips[data-t] .chip[data-ch]'); if (!g) return;
+  e.preventDefault();
+  if (g.classList.contains('drg')) {
+    var tr = g.closest('tr[data-id]'), c = tr && D.cwiczenia.filter(function (x) { return x.id === tr.dataset.id; })[0]; if (!c) return;
+    var t = n(c.trening), lista = cw(t), bloki = blokiCw(lista), z = -1;
+    bloki.forEach(function (bl, i) { if (bl.indexOf(c) >= 0) z = i; });
+    DRG = { typ: 'cw', t: t, lista: lista, bloki: bloki, z: z, items: bloki.map(function (bl) { return bl.map(function (x) { return x.id; }); }) };
+  } else {
+    var box = g.closest('.chips'), nz = [].map.call(box.querySelectorAll('.chip[data-ch]'), function (x) { return x.dataset.ch; });
+    DRG = { typ: 'ch', t: n(box.dataset.t), items: nz, z: nz.indexOf(g.dataset.ch) };
+  }
+  if (DRG.z < 0) { DRG = null; return; }
+  DRG.x0 = e.clientX; DRG.y0 = e.clientY; DRG.ruszyl = false; DRG.idx = null;
+});
+document.addEventListener('pointermove', function (e) {
+  var d = DRG; if (!d) return;
+  if (!d.ruszyl) { if (Math.abs(e.clientX - d.x0) + Math.abs(e.clientY - d.y0) < 5) return; d.ruszyl = true; document.body.classList.add('drgOn'); }
+  e.preventDefault();
+  if (e.clientY < 50) window.scrollBy(0, -14); else if (e.clientY > innerHeight - 50) window.scrollBy(0, 14);
+  [].forEach.call(document.querySelectorAll('.drgZ'), function (x) { x.classList.remove('drgZ'); });
+  drgEl(d, d.items[d.z]).forEach(function (x) { x.classList.add('drgZ'); });
+  var inne = d.items.filter(function (x, i) { return i !== d.z; }).map(function (it) { return drgProst(drgEl(d, it)); }), p = drgPojemnik(d);
+  if (!inne.length || !p || inne.some(function (r) { return !r; })) return;
+  var idx = 0; inne.forEach(function (r) { if (e.clientY > (r.top + r.bottom) / 2) idx++; });
+  var y = idx === 0 ? inne[0].top : idx === inne.length ? inne[idx - 1].bottom : (inne[idx - 1].bottom + inne[idx].top) / 2, pr = p.getBoundingClientRect();
+  var l = document.getElementById('drgL'); if (!l) { l = document.createElement('div'); l.id = 'drgL'; document.body.appendChild(l); }
+  l.style.left = pr.left + 'px'; l.style.width = pr.width + 'px'; l.style.top = (y - 1.5) + 'px';
+  d.idx = idx;
+});
+document.addEventListener('pointerup', function () { if (DRG) drgKoniec(true); });
+document.addEventListener('pointercancel', function () { if (DRG) drgKoniec(false); });
+document.addEventListener('keydown', function (e) { if (DRG && e.key === 'Escape') drgKoniec(false); });
+window.addEventListener('blur', function () { if (DRG) drgKoniec(false); });
+// patch145: telefon, karty treningu: dotknięcie pola serii albo ciężaru stawia kursor na końcu (od razu kasowanie).
+// Przesunięcie palca (przewijanie, przesuwanie kart) zostawia zwykłe zachowanie.
+var KURSOR = null;
+document.addEventListener('touchstart', function (e) { var el = e.target; KURSOR = el && el.matches && e.touches.length === 1 && el.matches('.mcard input.mbox, .mcard input[data-f^="ciezar_"]') && !el.readOnly && !el.disabled ? { el: el, x: e.touches[0].clientX, y: e.touches[0].clientY } : null; }, { passive: true });
+document.addEventListener('touchend', function (e) {
+  var k = KURSOR; KURSOR = null; if (!k || e.target !== k.el || e.changedTouches.length !== 1) return;
+  var t = e.changedTouches[0]; if (Math.abs(t.clientX - k.x) > 10 || Math.abs(t.clientY - k.y) > 10) return;
+  e.preventDefault(); var el = k.el; if (document.activeElement !== el) el.focus();
+  var naKoniec = function () { try { var l = (el.value || '').length; el.setSelectionRange(l, l); } catch (x) {} }; naKoniec(); setTimeout(naKoniec, 0);
+}, { passive: false });
 function renumeruj(t) { cw(t).forEach(function (c, i) { if (n(c.nr) !== i + 1) { c.nr = i + 1; push({ tab: 'Cwiczenia', id: c.id, pole: 'nr', wartosc: i + 1 }); } }); }
 function ruszCw(id, dir) {
   var c = D.cwiczenia.filter(function (x) { return x.id === id; })[0]; if (!c) return;
