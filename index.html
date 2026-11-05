@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="0e970b8877"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="9ccb10967f"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>/* patch124: odtwarzacz cofnięty (zachowany w webapp/odtwarzacz_zachowany), widok tylko mobilny zostaje */
 
@@ -570,8 +570,11 @@ body.tel .kalk{padding:16px 16px 30px}
 .mkp,.kalk{touch-action:pan-y}
 /* patch154: Safari na iPhonie nie przybliża po dotknięciu pola: czcionka powyżej progu 16 px, strona bez wystawania w bok */
 .mkp-f,.kalk .kk-f{font-size:18px}body.mobw,body.karty{overflow-x:clip}
-/* patch155 TYMCZASOWE: podgląd pomiarów */
-#mkpdiag{position:fixed;left:6px;right:6px;top:6px;z-index:99999;background:rgba(0,0,0,.94);color:#7FD08C;border:1px solid #C9A455;border-radius:8px;padding:6px 8px;font:11px/1.35 Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;pointer-events:none}
+/* patch156: górny pasek trenera w widokach telefonu poza treningiem: kolumna, bez wychodzenia poza ekran */
+body.mobw .selbar.desk{display:flex;flex-direction:column;align-items:stretch;gap:8px;padding:10px 14px 0}
+body.mobw .selbar.desk .sbl{width:100%;min-width:0;flex-wrap:wrap}body.mobw .selbar.desk select{flex:1;min-width:0}body.mobw .selbar.desk .pbtn{flex:none}
+body.mobw .selbar.desk #notaTr{margin-left:0;flex:1 0 100%;min-width:0;max-width:none}
+body.mobw .selbar.desk .sbc{display:flex;justify-content:center}body.mobw .selbar.desk>div:last-child{display:none}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
 .pinbox.lg{max-width:1060px;margin:0 auto;padding:24px 16px;min-height:100vh;display:flex;align-items:center;box-sizing:border-box}.pinbox.lg .card{width:100%;box-sizing:border-box;padding:60px;border-radius:14px}.pinbox.lg .sub{font-size:24px}.pinbox.lg h1{margin:8px 0 26px;font-size:56px}.pinbox.lg input{height:96px;font-size:32px}.pinbox.lg .btn{height:96px;font-size:34px}.pinbox.lg .mut{font-size:24px}
 body.lgmob .pinbox.lg{padding:16px;min-height:100vh}body.lgmob .pinbox.lg .card{padding:26px 20px;border-radius:14px}body.lgmob .pinbox.lg .sub{font-size:12px}body.lgmob .pinbox.lg h1{font-size:30px;margin:6px 0 18px}body.lgmob .pinbox.lg input{height:54px;font-size:17px;padding:0 14px;margin-bottom:10px;border-radius:10px}body.lgmob .pinbox.lg .btn{height:56px;font-size:18px;border-radius:10px;margin-top:4px}body.lgmob .pinbox.lg .err{font-size:15px;min-height:20px;margin-top:10px}body.lgmob .pinbox.lg .mut{font-size:15px;margin:14px 0 0;line-height:1.5}
@@ -2497,17 +2500,7 @@ function mkpWnetrze() {
     + '<div class="mkp-raz' + (mkpOk(st) ? '' : ' zle') + '" id="mkp-raz">' + raz + '</div>';
 }
 function makroPanel() { return '<div class="zk mkp"><div class="pm-sekcja"><span class="step">3</span>Kcal i makro</div>' + mkpWnetrze() + '</div>'; }
-// patch155 TYMCZASOWE: podgląd pomiarów (5 szybkich dotknięć w tytuł panelu), do usunięcia po diagnozie
-var MD = { n: 0, t: 0, el: null, tick: null, min: 9, max: 0, ost: null, slad: [] };
-function mkpDiagDotyk() { var t = Date.now(); MD.n = t - MD.t < 700 ? MD.n + 1 : 1; MD.t = t; if (MD.n < 5) return; MD.n = 0; if (MD.el) { clearInterval(MD.tick); MD.el.parentNode.removeChild(MD.el); MD.el = null; return; } MD.el = document.createElement('div'); MD.el.id = 'mkpdiag'; document.body.appendChild(MD.el); MD.min = 9; MD.max = 0; MD.ost = null; MD.slad = []; MD.tick = setInterval(mkpDiagRys, 300); mkpDiagRys(); }
-function mkpDiagRys() {
-  var v = window.visualViewport || {}, d = document.documentElement, ae = document.activeElement, sk = v.scale == null ? 1 : Math.round(v.scale * 1000) / 1000, m = document.querySelector('meta[name=viewport]'), pole = ae && ae.tagName === 'INPUT' ? (ae.id || ae.dataset.f || 'input') + ' ' + getComputedStyle(ae).fontSize : '-';
-  MD.min = Math.min(MD.min, sk); MD.max = Math.max(MD.max, sk);
-  if (MD.ost !== sk) { MD.slad.push((MD.ost == null ? '' : MD.ost + ' -> ') + sk + ' (' + pole + ', w bok ' + Math.round(v.offsetLeft || 0) + ', x ' + Math.round(window.scrollX) + ')'); if (MD.slad.length > 4) MD.slad.shift(); MD.ost = sk; }
-  var wyj = [].filter.call(document.querySelectorAll('body *'), function (e) { if (e.closest('#mkpdiag') || e.closest('#menu')) return false; var b = e.getBoundingClientRect(), st = getComputedStyle(e); return b.width > 0 && st.display !== 'none' && st.visibility !== 'hidden' && st.position !== 'fixed' && b.right + window.scrollX > d.clientWidth + 0.5; }).slice(0, 6).map(function (e) { return e.tagName.toLowerCase() + '.' + String(e.className.baseVal == null ? e.className : e.className.baseVal).slice(0, 18) + ' ' + Math.round(e.getBoundingClientRect().right + window.scrollX); });
-  MD.el.textContent = ['skala ' + sk + ' (min ' + MD.min + ', max ' + MD.max + ')', 'widok ' + Math.round(v.width || 0) + 'x' + Math.round(v.height || 0) + ', w bok ' + Math.round(v.offsetLeft || 0) + ', w dol ' + Math.round(v.offsetTop || 0), 'okno ' + innerWidth + 'x' + innerHeight + ', klient ' + d.clientWidth + ', szer. strony ' + d.scrollWidth + ', x ' + Math.round(window.scrollX) + ', y ' + Math.round(window.scrollY), 'ekran ' + screen.width + 'x' + screen.height + ', ikona ' + (navigator.standalone ? 'tak' : 'nie'), m ? m.getAttribute('content') : 'brak meta', 'pole: ' + pole, 'wystaje: ' + (wyj.join(', ') || 'nic'), 'zmiany skali: ' + MD.slad.join(' | ')].join('\n');
-}
-function mkpTel() { return '<div class="mkp mkpTel"><div class="mkp-n" onclick="mkpDiagDotyk()">Kalorie i makro</div>' + mkpWnetrze() + '</div>'; }
+function mkpTel() { return '<div class="mkp mkpTel"><div class="mkp-n">Kalorie i makro</div>' + mkpWnetrze() + '</div>'; }
 function mkpOdswiez(st) {
   var ae = document.activeElement, ust = function (id, v) { var e = document.getElementById(id); if (e && e !== ae) e.value = v; };
   ust('mkp-kcal', st.kcal); ust('kcal', st.kcal);
