@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="6a5f29ce51"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="28b53f2acc"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>/* patch124: odtwarzacz cofnięty (zachowany w webapp/odtwarzacz_zachowany), widok tylko mobilny zostaje */
 
@@ -563,6 +563,9 @@ body.tel .kalk{padding:16px 16px 30px}
 .kk-su input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px rgba(245,227,166,.45)}
 .kk-su .kr{display:flex;justify-content:space-between;font:500 11px Poppins,Arial,sans-serif;color:#8A8272}.kk-su .ile{margin-top:6px;font:600 13px Poppins,Arial,sans-serif;color:#A7A49C}.kk-su .ile b{color:#F4F1EA}
 .kalk .kk-kr{margin-top:10px}.kalk .kk-kr span{text-align:left}.kalk .kk-kr .kk-kcin{grid-column:2 / 5;width:100%;height:52px;margin:0;font-size:28px}
+/* patch152: suwak: większy obszar dotyku, wygląd bez zmian */
+.kk-su{touch-action:pan-y}.kk-su input[type=range]{height:44px;margin:0}.kk-su .kr{margin-top:-8px}
+@media (hover:none) and (pointer:coarse){.kk-su input[type=range]{pointer-events:none}}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
 .pinbox.lg{max-width:1060px;margin:0 auto;padding:24px 16px;min-height:100vh;display:flex;align-items:center;box-sizing:border-box}.pinbox.lg .card{width:100%;box-sizing:border-box;padding:60px;border-radius:14px}.pinbox.lg .sub{font-size:24px}.pinbox.lg h1{margin:8px 0 26px;font-size:56px}.pinbox.lg input{height:96px;font-size:32px}.pinbox.lg .btn{height:96px;font-size:34px}.pinbox.lg .mut{font-size:24px}
 body.lgmob .pinbox.lg{padding:16px;min-height:100vh}body.lgmob .pinbox.lg .card{padding:26px 20px;border-radius:14px}body.lgmob .pinbox.lg .sub{font-size:12px}body.lgmob .pinbox.lg h1{font-size:30px;margin:6px 0 18px}body.lgmob .pinbox.lg input{height:54px;font-size:17px;padding:0 14px;margin-bottom:10px;border-radius:10px}body.lgmob .pinbox.lg .btn{height:56px;font-size:18px;border-radius:10px;margin-top:4px}body.lgmob .pinbox.lg .err{font-size:15px;min-height:20px;margin-top:10px}body.lgmob .pinbox.lg .mut{font-size:15px;margin:14px 0 0;line-height:1.5}
@@ -1610,6 +1613,7 @@ function gestStart(e) {
   if (!e.touches || e.touches.length !== 1 || MV.arkusz) return;
   var p = e.touches[0], tg = e.target, w = function (s) { return tg && tg.closest ? tg.closest(s) : null; };
   var g = { x0: p.clientX, y0: p.clientY, t0: Date.now(), dx: 0, dy: 0, lock: null };
+  if (w('.kk-su')) return; // patch152: suwak kalkulatora nie wysuwa menu
   if (VP.el) {
     if (w('.yp-player')) return; // patch128: przewijanie osi nie przesuwa panelu
     if (w('#vpan')) { g.typ = 'film'; GEST = g; }
@@ -1933,6 +1937,16 @@ function kalkSuwak(v) { // patch151: bez przerysowania, żeby nie przerwać prze
 }
 function kalkBind() {
   var el = document.getElementById('kalk'); if (!el) return;
+  // patch152: palcem: dotknięcie paska ustawia wartość, przeciąganie poziome działa z całego obszaru suwaka, pionowe przewija stronę
+  var dot = null, ustawX = function (r, x) { var b = r.getBoundingClientRect(), v = Math.max(0, Math.min(20, Math.round((x - b.left - 13) / (b.width - 26) * 20))); if (String(r.value) !== String(v)) { r.value = v; kalkSuwak(v); } };
+  el.addEventListener('touchstart', function (e) { var su = e.target.closest ? e.target.closest('.kk-su') : null, r = su ? document.getElementById('kk-su-r') : null; dot = r && e.touches.length === 1 ? { r: r, x: e.touches[0].clientX, y: e.touches[0].clientY, kier: null } : null; if (dot) { var b = r.getBoundingClientRect(); dot.pasek = dot.y >= b.top && dot.y <= b.bottom; } }, { passive: true });
+  el.addEventListener('touchmove', function (e) {
+    if (!dot) return; var t = e.touches[0], dx = Math.abs(t.clientX - dot.x), dy = Math.abs(t.clientY - dot.y);
+    if (!dot.kier) { if (dx + dy < 6) return; dot.kier = dx > dy ? 'x' : 'y'; }
+    if (dot.kier === 'x') { e.preventDefault(); ustawX(dot.r, t.clientX); }
+  }, { passive: false });
+  el.addEventListener('touchend', function (e) { if (dot && !dot.kier && dot.pasek) { e.preventDefault(); ustawX(dot.r, dot.x); } dot = null; });
+  el.addEventListener('touchcancel', function () { dot = null; });
   el.addEventListener('input', function (e) {
     var t = e.target; if (!t || !t.dataset) return;
     if (t.dataset.pr) { kalkSuwak(t.value); return; }
