@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="868462fcca"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="27429e21aa"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>/* patch124: odtwarzacz cofnięty (zachowany w webapp/odtwarzacz_zachowany), widok tylko mobilny zostaje */
 
@@ -542,6 +542,16 @@ body.tel .kalk{padding:16px 16px 30px}
 .mhead.ztab .pbtn.rz{margin-left:auto;flex:none}
 .mhead.ztab + #mswipe #mkarta{border-top-left-radius:0}
 .czasT{display:inline-flex;align-items:center;gap:6px;margin-left:12px;padding:4px 10px;border:1px solid var(--gm);border-radius:999px;font:600 12px/1 Poppins,Arial,sans-serif;color:#EFE9DA;letter-spacing:0;text-transform:none;vertical-align:middle;white-space:nowrap}.czasT svg{color:#fff;flex:none}
+/* patch150: panel „Kalorie i makro”: kalorie wyśrodkowane nad dwoma kafelkami makro; pole kalorii w kalkulatorze */
+.mkp{background:#141414;border:2px solid var(--gl);border-radius:14px;padding:12px 14px;box-sizing:border-box}.mkpTel{margin:12px 14px 0}
+.mkp .pm-sekcja{justify-content:center}.mkp-n{font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--gl);text-align:center}
+.mkp-kc,.mkp-r{display:grid;grid-template-columns:1fr 70px 14px 58px 14px;align-items:center;gap:6px;font:600 14px Poppins,Arial,sans-serif;color:#F4F1EA}.mkp-kc{margin-top:10px}.mkp-r{margin-top:8px}.mkp-r i{font-style:normal;color:#A7A49C;font-size:12px}
+.mkp-kc input,.mkp-f,.kalk .kk-kcin{box-sizing:border-box;min-width:0;background:linear-gradient(180deg,#2E3F66,#1E2A47);border:1px solid #3B4F80;box-shadow:0 0 0 1.5px #C9A455 inset;text-align:center;color:#F4F1EA;outline:0;padding:0 4px}
+.mkp-kc input{grid-column:2 / 5;width:100%;height:48px;border-radius:12px;font:800 26px Poppins,Arial,sans-serif}.mkp-f{width:100%;height:40px;border-radius:10px;font:700 16px Poppins,Arial,sans-serif}
+.mkp-raz{margin-top:10px;text-align:center;font:600 12px/1.35 Poppins,Arial,sans-serif;color:#A7A49C}.mkp-raz b{color:#7FD08C;font-weight:700}.mkp-raz small{display:block;font-size:11px;font-weight:500}.mkp-raz:empty{display:none}
+.mkp-raz.zle{padding:8px 10px;border-radius:10px;background:linear-gradient(180deg,#6E2231,#3B1220);color:#F4F1EA}.mkp-raz.zle b{color:#F4F1EA}
+.kalk .kk-kcin{display:block;width:176px;height:64px;margin:4px auto 2px;border-radius:12px;font:800 38px Poppins,Arial,sans-serif}.kalk .kk-kc i{display:block;margin:2px 0 4px;font-size:13px}
+.kalk .kk-f{text-align:center;padding:0 4px}.kalk .kk-raz .rr{justify-content:center}.kalk .kk-raz small{text-align:center}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
 .pinbox.lg{max-width:1060px;margin:0 auto;padding:24px 16px;min-height:100vh;display:flex;align-items:center;box-sizing:border-box}.pinbox.lg .card{width:100%;box-sizing:border-box;padding:60px;border-radius:14px}.pinbox.lg .sub{font-size:24px}.pinbox.lg h1{margin:8px 0 26px;font-size:56px}.pinbox.lg input{height:96px;font-size:32px}.pinbox.lg .btn{height:96px;font-size:34px}.pinbox.lg .mut{font-size:24px}
 body.lgmob .pinbox.lg{padding:16px;min-height:100vh}body.lgmob .pinbox.lg .card{padding:26px 20px;border-radius:14px}body.lgmob .pinbox.lg .sub{font-size:12px}body.lgmob .pinbox.lg h1{font-size:30px;margin:6px 0 18px}body.lgmob .pinbox.lg input{height:54px;font-size:17px;padding:0 14px;margin-bottom:10px;border-radius:10px}body.lgmob .pinbox.lg .btn{height:56px;font-size:18px;border-radius:10px;margin-top:4px}body.lgmob .pinbox.lg .err{font-size:15px;min-height:20px;margin-top:10px}body.lgmob .pinbox.lg .mut{font-size:15px;margin:14px 0 0;line-height:1.5}
@@ -1803,7 +1813,7 @@ function widokInny() {
   var kol = function (s, maks) { return '<div class="wrap solo"' + (maks ? ' style="max-width:' + maks + 'px;margin:0 auto"' : '') + '><div>' + s + '</div></div>'; };
   if (w === 'plan') { open.plan = true; h += kol(planowanie()); }
   else if (w === 'atlas') { h += kol(atlasWidok()); }
-  else if (w === 'waz') { open.waz = true; h += mobilny() ? '<div class="wazTel">' + wykresWagi() + wazeniaTel() + '</div>' : kol(wykresWagi() + wazenia(), 1100); }
+  else if (w === 'waz') { open.waz = true; h += mobilny() ? '<div class="wazTel">' + mkpTel() + wykresWagi() + wazeniaTel() + '</div>' : kol(wykresWagi() + wazenia(), 1100); }
   else if (w === 'kalk') { h += mobilny() ? '<div class="kalkTel">' + kalkulator() + '</div>' : kol(kalkulator(), 520); }
   else if (w === 'zal') { open.zal = true; h += mobilny() ? '<div class="zalTel">' + zalecenia() + '</div>' : kol(zalecenia(), 760); }
   else if (w === 'pwa') { h += kol(widokPwa(), 1100); }
@@ -1835,11 +1845,12 @@ function kalkMakro(kcal, kg) {
   var pB = Math.round(gB * 400 / kcal), pT = Math.round(gT * 900 / kcal);
   return { g: { B: gB, T: gT, W: gW }, p: { B: pB, T: pT, W: 100 - pB - pT } };
 }
-function kalkStan() { var kc = kalkKcal(KALK); if (kc == null) return null; if (!KALK.g) { var m = kalkMakro(kc, n(KALK.masa)); KALK.g = m.g; KALK.p = m.p; } return kc; }
+function kalkCel() { return KALK.kcE != null ? mkpLiczba(KALK.kcE) : kalkKcal(KALK); } // patch150
+function kalkStan() { var kc = kalkKcal(KALK); if (kc == null) return null; if (!KALK.g) { var m = kalkMakro(kc, n(KALK.masa)); KALK.g = m.g; KALK.p = m.p; } return kalkCel(); }
 function kalkSuma() { return KALK_MAK.reduce(function (s, x) { return s + (KALK.p && KALK.p[x[0]] !== '' ? n(KALK.p[x[0]]) : 0); }, 0); }
 // patch115: cel poniżej KALK_MIN kcal kalkulator pokazuje, ale go nie ustawia (serwer i tak przyjmuje od podopiecznego 1000..20000)
 var KALK_MIN = 1000;
-function kalkGotowe() { return KALK.g && kalkKcal(KALK) >= KALK_MIN && KALK_MAK.every(function (x) { return KALK.g[x[0]] !== '' && KALK.p[x[0]] !== '' && n(KALK.g[x[0]]) >= 0 && n(KALK.p[x[0]]) >= 0; }) && kalkSuma() === 100; }
+function kalkGotowe() { return KALK.g && kalkCel() >= KALK_MIN && kalkCel() <= 20000 && KALK_MAK.every(function (x) { return KALK.g[x[0]] !== '' && KALK.p[x[0]] !== '' && n(KALK.g[x[0]]) >= 0 && n(KALK.p[x[0]]) >= 0; }) && kalkSuma() === 100; }
 function kalkulator() { if (!KALK) KALK = kalkNowy(); return '<div class="kalk" id="kalk">' + kalkWnetrze() + '</div>'; }
 function kalkWnetrze() {
   var k = KALK, sg = function (pole, v, t, mala) { return '<span class="kk-sg' + (k[pole] === v ? ' on' : '') + '" onclick="kalkUstaw(\'' + pole + '\',\'' + v + '\')">' + t + (mala ? '<small>' + mala + '</small>' : '') + '</span>'; };
@@ -1857,17 +1868,17 @@ function kalkWynikHtml() {
   if (kc0 == null) return '<div class="kk-wyn pusty" id="kk-wyn">Uzupełnij płeć, wiek, wzrost, masę, aktywność i cel. Tu pojawią się kalorie i makro.</div>';
   if (kc0 < KALK_MIN) return '<div class="kk-wyn pusty kk-nisko" id="kk-wyn">Wynik poniżej ' + KALK_MIN + ' kcal. Sprawdź wiek, wzrost i masę' + (TR ? '.' : ' albo napisz do Kuby.') + '</div>'; // patch115
   var kc = kalkStan();
-  var h = '<div class="kk-wyn" id="kk-wyn"><div class="kk-cel">' + KALK_CEL[KALK.cel][0] + '</div><div class="kk-kc">' + kc + '<i>kcal</i></div><div class="kk-mt">';
+  var h = '<div class="kk-wyn" id="kk-wyn"><div class="kk-cel">' + KALK_CEL[KALK.cel][0] + '</div><div class="kk-kc"><input class="kk-kcin" id="kk-kcal" data-kc="1" aria-label="Kalorie" inputmode="numeric" maxlength="5" enterkeyhint="done" value="' + esc(kc == null ? '' : kc) + '"><i>kcal</i></div><div class="kk-mt">';
   KALK_MAK.forEach(function (x) { h += '<div class="kk-mr"><span>' + x[1] + '</span><input class="kk-f" data-m="' + x[0] + '" data-t="g" inputmode="numeric" maxlength="4" value="' + esc(KALK.g[x[0]]) + '"><i>g</i><input class="kk-f" data-m="' + x[0] + '" data-t="p" inputmode="numeric" maxlength="3" value="' + esc(KALK.p[x[0]]) + '"><i>%</i></div>'; });
   var ok = kalkGotowe();
   h += '<div class="kk-raz' + (ok ? '' : ' zle') + '" id="kk-raz"><div class="rr">Razem: <b>' + kalkSuma() + '%</b></div><small>Łączna wartość procentów makroskładników musi wynosić 100%.</small></div></div>';
   return h + '<button class="kk-btn" id="kk-zap" onclick="kalkZapisz()"' + (ok ? '' : ' disabled') + '>' + (TR ? 'Ustaw jako cel podopiecznego' : 'Ustaw jako mój cel') + '</button></div>';
 }
-function kalkUstaw(pole, v) { KALK[pole] = v; KALK.g = null; KALK.p = null; var el = document.getElementById('kalk'); if (el) el.innerHTML = kalkWnetrze(); }
+function kalkUstaw(pole, v) { KALK[pole] = v; KALK.g = null; KALK.p = null; KALK.kcE = null; var el = document.getElementById('kalk'); if (el) el.innerHTML = kalkWnetrze(); }
 function kalkWstecz() { if (KALK && KALK.z) { try { history.back(); return; } catch (e) {} } idz('t', mobT); }
 // zmiana gramów przelicza procent i odwrotnie; „Razem” i przycisk na bieżąco (bez przerysowania, żeby nie zgubić kursora)
 function kalkPole(m, t, v) {
-  var kc = kalkKcal(KALK), f = KALK_MAK.filter(function (x) { return x[0] === m; })[0][2], pusty = String(v).trim() === '', x = pusty ? '' : Math.max(0, Math.round(n(v)));
+  var kc = kalkCel(), f = KALK_MAK.filter(function (x) { return x[0] === m; })[0][2], pusty = String(v).trim() === '', x = pusty ? '' : Math.max(0, Math.round(n(v)));
   if (t === 'g') { KALK.g[m] = x; KALK.p[m] = pusty || !kc ? '' : Math.round(x * f * 100 / kc); }
   else { KALK.p[m] = x; KALK.g[m] = pusty || !kc ? '' : Math.round(x / 100 * kc / f); }
   var drugi = document.querySelector('#kalk .kk-f[data-m="' + m + '"][data-t="' + (t === 'g' ? 'p' : 'g') + '"]'); if (drugi) drugi.value = t === 'g' ? KALK.p[m] : KALK.g[m];
@@ -1875,17 +1886,25 @@ function kalkPole(m, t, v) {
   if (r) { r.classList.toggle('zle', !ok); r.querySelector('b').textContent = kalkSuma() + '%'; }
   if (b) b.disabled = !ok;
 }
+function kalkKcalPole(v) { // patch150: gramy idą za procentami, procenty bez zmian
+  KALK.kcE = String(v).trim(); var kc = mkpLiczba(KALK.kcE);
+  if (KALK.g && kc >= 100) KALK_MAK.forEach(function (x) { if (KALK.p[x[0]] === '') return; KALK.g[x[0]] = Math.round(n(KALK.p[x[0]]) / 100 * kc / x[2]); var e = document.querySelector('#kalk .kk-f[data-m="' + x[0] + '"][data-t="g"]'); if (e) e.value = KALK.g[x[0]]; });
+  var ok = kalkGotowe(), r = document.getElementById('kk-raz'), b = document.getElementById('kk-zap'), zlyKc = !(kc >= KALK_MIN && kc <= 20000);
+  if (r) { r.classList.toggle('zle', !ok); r.querySelector('small').textContent = zlyKc ? 'Kalorie: od ' + KALK_MIN + ' do 20 000.' : 'Łączna wartość procentów makroskładników musi wynosić 100%.'; }
+  if (b) b.disabled = !ok;
+}
 function kalkBind() {
   var el = document.getElementById('kalk'); if (!el) return;
   el.addEventListener('input', function (e) {
     var t = e.target; if (!t || !t.dataset) return;
-    if (t.dataset.k) { KALK[t.dataset.k] = t.value; KALK.g = null; KALK.p = null; var w = document.getElementById('kk-wyn'), b = document.getElementById('kk-zap'); if (b) b.remove(); if (w) w.outerHTML = kalkWynikHtml(); return; }
+    if (t.dataset.kc) { kalkKcalPole(t.value); return; }
+    if (t.dataset.k) { KALK[t.dataset.k] = t.value; KALK.g = null; KALK.p = null; KALK.kcE = null; var w = document.getElementById('kk-wyn'), b = document.getElementById('kk-zap'); if (b) b.remove(); if (w) w.outerHTML = kalkWynikHtml(); return; }
     if (t.dataset.m && KALK.g) kalkPole(t.dataset.m, t.dataset.t, t.value);
   });
   el.addEventListener('keydown', function (e) { if (e.key === 'Enter' && e.target.tagName === 'INPUT') { e.preventDefault(); e.target.blur(); } });
 }
 function kalkZapisz() {
-  var kc = kalkKcal(KALK); if (kc == null || !kalkGotowe()) return;
+  var kc = kalkCel(); if (kc == null || !kalkGotowe()) return; MKP = null;
   var v = { kcal: kc, bialko: KALK.g.B, tluszcze: KALK.g.T, wegle: KALK.g.W };
   Object.keys(v).forEach(function (k) { D.ustawienia[k] = String(v[k]); push({ tab: 'Ustawienia', klucz: k, wartosc: String(v[k]) }); });
   render(); // kafelki „Aktualne kcal” i „kcal zalecane” od razu z nowymi liczbami
@@ -1918,10 +1937,9 @@ function wykresWagi() {
 }
 function wazPodsumowanie() {
   var w = wazBloku(), a0 = w.length ? n(w[0].waga) : null, a1 = w.length ? n(w[w.length - 1].waga) : null, d = w.length > 1 ? a1 - a0 : null;
-  var mak = makroTxt();
   return '<div class="wsum"><div><b class="' + (d == null ? '' : d < 0 ? 'dn' : d > 0 ? 'up' : '') + '">' + zmianaTxt(d) + '</b><span>od startu bloku' + (w.length ? ' ' + fmtData(w[0].data) : '') + '</span></div>'
     + '<div><b>' + (a1 != null ? fmt(a1) : '–') + '</b><span>ostatnie' + (w.length ? ' (' + fmtData(w[w.length - 1].data) + ')' : '') + '</span></div>'
-    + '<div><b>' + (U('kcal') !== '' ? esc(U('kcal')) : '–') + '</b><span>kcal zalecane' + (mak ? '<br><i style="color:var(--iv);font-style:normal;font-weight:600">' + mak + '</i>' : '') + '</span></div></div>';
+    + '<div><b>' + (U('kcal') !== '' ? esc(U('kcal')) : '–') + '</b><span>kcal zalecane</span></div></div>';
 }
 function fmtData(d) { var m = String(d).match(/^(\d{4})-(\d{2})-(\d{2})/); return m ? m[3] + '.' + m[2] + '.' + m[1].slice(2) : String(d); }
 // ---------- atlas ćwiczeń (widok trenera) ----------
@@ -2388,10 +2406,67 @@ function planowanie() {
   out += '</div></div><div class="zkol">' + makroPanel() + zalPanel() + supPanel() + '</div></div>';
   return out;
 }
-function makroPanel() {
-  var pole = function (k, lbl, opis, big) { return '<label>' + lbl + '<i>' + opis + '</i><input id="ust-' + k + '" class="c' + (big ? ' big' : '') + '" inputmode="numeric" value="' + esc(U(k)) + '" placeholder="' + (big ? 'np. 2400' : 'g') + '"></label>'; };
-  return '<div class="makpanel"><div class="pm-sekcja"><span class="step">3</span>Kcal i makro</div>' + pole('kcal', 'Kcal', 'dziennie', true) + '<div class="mk3">' + pole('wegle', 'W:', 'węglowodany, g') + pole('bialko', 'B:', 'białko, g') + pole('tluszcze', 'T:', 'tłuszcze, g') + '</div></div>';
+// patch150: panel „Kalorie i makro” (ZADANIE NR 16). MKP: stan w trakcie edycji { kcal, g: {B,T,W}, p: {B,T,W} }; bez edycji z ustawień.
+var MKP = null, MAK_KLUCZ = { B: 'bialko', T: 'tluszcze', W: 'wegle' };
+function mkpLiczba(v) { var t = String(v == null ? '' : v).trim(); return /^\d+$/.test(t) ? parseInt(t, 10) : null; }
+function mkpGram(v) { var t = String(v == null ? '' : v).trim().replace(',', '.'); return /^\d+(\.\d+)?$/.test(t) ? Math.round(parseFloat(t)) : ''; }
+function mkpPzG(st) { // procenty z gramów: całkowite, reszta do węglowodanów
+  var kc = KALK_MAK.reduce(function (a, x) { return a + (st.g[x[0]] === '' ? 0 : st.g[x[0]] * x[2]); }, 0);
+  st.p = { B: '', T: '', W: '' }; if (!kc) return;
+  if (st.g.B !== '') st.p.B = Math.round(st.g.B * 400 / kc);
+  if (st.g.T !== '') st.p.T = Math.round(st.g.T * 900 / kc);
+  if (st.g.W !== '') st.p.W = st.g.B !== '' && st.g.T !== '' ? 100 - st.p.B - st.p.T : Math.round(st.g.W * 400 / kc);
 }
+function mkpZUstawien() { var st = { kcal: String(U('kcal')).trim(), g: { B: mkpGram(U('bialko')), T: mkpGram(U('tluszcze')), W: mkpGram(U('wegle')) }, p: {} }; mkpPzG(st); return st; }
+function mkpSuma(st) { return KALK_MAK.reduce(function (a, x) { return a + (st.p[x[0]] !== '' ? n(st.p[x[0]]) : 0); }, 0); }
+function mkpPuste(st) { return KALK_MAK.every(function (x) { return st.g[x[0]] === '' && st.p[x[0]] === ''; }); }
+function mkpKcalOk(st) { var kc = mkpLiczba(st.kcal); return TR ? st.kcal === '' || kc != null : kc != null && kc >= KALK_MIN && kc <= 20000; }
+function mkpOk(st) {
+  if (!mkpKcalOk(st)) return false;
+  if (mkpPuste(st)) return TR || KALK_MAK.every(function (x) { return String(U(MAK_KLUCZ[x[0]])).trim() === ''; }); // podopieczny nie kasuje makro: serwer odrzuciłby pustą wartość
+  return mkpSuma(st) === 100 && KALK_MAK.every(function (x) { var g = st.g[x[0]]; return g !== '' && st.p[x[0]] !== '' && g >= 0 && g <= 5000; });
+}
+function mkpRazHtml(st) {
+  if (!mkpKcalOk(st)) return (TR ? 'Kalorie wpisz jako liczbę.' : 'Kalorie: od ' + KALK_MIN + ' do 20 000.') + ' Nie zapisano.';
+  if (mkpPuste(st)) return mkpOk(st) ? '' : 'Uzupełnij makro. Nie zapisano.';
+  return mkpOk(st) ? 'Razem: <b>100%</b>' : 'Razem: <b>' + mkpSuma(st) + '%</b><small>Procenty muszą dać razem 100%. Nie zapisano.</small>';
+}
+function mkpWnetrze() {
+  var st = MKP || mkpZUstawien(), raz = mkpRazHtml(st);
+  return '<div class="mkp-kc"><span>Kcal</span><input id="mkp-kcal" aria-label="Kalorie" inputmode="numeric" maxlength="5" enterkeyhint="done" placeholder="–" value="' + esc(st.kcal) + '"></div>'
+    + KALK_MAK.map(function (x) { var m = x[0]; return '<div class="mkp-r"><span>' + x[1] + '</span><input class="mkp-f" id="mkp-g-' + m + '" aria-label="' + x[1] + ', gramy" data-m="' + m + '" data-t="g" inputmode="numeric" maxlength="4" enterkeyhint="done" value="' + esc(st.g[m]) + '"><i>g</i><input class="mkp-f" id="mkp-p-' + m + '" aria-label="' + x[1] + ', procent" data-m="' + m + '" data-t="p" inputmode="numeric" maxlength="3" enterkeyhint="done" value="' + esc(st.p[m]) + '"><i>%</i></div>'; }).join('')
+    + '<div class="mkp-raz' + (mkpOk(st) ? '' : ' zle') + '" id="mkp-raz">' + raz + '</div>';
+}
+function makroPanel() { return '<div class="zk mkp"><div class="pm-sekcja"><span class="step">3</span>Kcal i makro</div>' + mkpWnetrze() + '</div>'; }
+function mkpTel() { return '<div class="mkp mkpTel"><div class="mkp-n">Kalorie i makro</div>' + mkpWnetrze() + '</div>'; }
+function mkpOdswiez(st) {
+  var ae = document.activeElement, ust = function (id, v) { var e = document.getElementById(id); if (e && e !== ae) e.value = v; };
+  ust('mkp-kcal', st.kcal); ust('kcal', st.kcal);
+  KALK_MAK.forEach(function (x) { ust('mkp-g-' + x[0], st.g[x[0]]); ust('mkp-p-' + x[0], st.p[x[0]]); });
+  var r = document.getElementById('mkp-raz'); if (r) { r.className = 'mkp-raz' + (mkpOk(st) ? '' : ' zle'); r.innerHTML = mkpRazHtml(st); }
+}
+function mkpWpis(el) {
+  var st = MKP || (MKP = mkpZUstawien());
+  if (el.id === 'mkp-kcal' || el.id === 'kcal') {
+    st.kcal = el.value.trim(); var kc = mkpLiczba(st.kcal);
+    if (kc >= 100) { if (KALK_MAK.every(function (x) { return st.p[x[0]] === ''; })) mkpPzG(st); KALK_MAK.forEach(function (x) { if (st.p[x[0]] !== '') st.g[x[0]] = Math.round(n(st.p[x[0]]) / 100 * kc / x[2]); }); }
+  } else {
+    var m = el.dataset.m, f = KALK_MAK.filter(function (x) { return x[0] === m; })[0][2], pusty = el.value.trim() === '', v = pusty ? '' : Math.max(0, Math.round(n(el.value))), kc2 = mkpLiczba(st.kcal);
+    if (el.dataset.t === 'g') { st.g[m] = v; if (kc2) st.p[m] = pusty ? '' : Math.round(v * f * 100 / kc2); else mkpPzG(st); }
+    else { st.p[m] = v; if (pusty) st.g[m] = ''; else if (kc2) st.g[m] = Math.round(v / 100 * kc2 / f); }
+  }
+  mkpOdswiez(st);
+}
+function mkpZapisz() {
+  var st = MKP; if (!st) return; mkpOdswiez(st); if (!mkpOk(st)) return;
+  [['kcal', st.kcal]].concat(KALK_MAK.map(function (x) { return [MAK_KLUCZ[x[0]], st.g[x[0]]]; })).forEach(function (a) { var w = String(a[1]); if (String(U(a[0])).trim() !== w) { D.ustawienia[a[0]] = w; push({ tab: 'Ustawienia', klucz: a[0], wartosc: w }); } });
+  MKP = null; clearTimeout(window._mk); window._mk = setTimeout(function () { var f = zapamietajFokus(); render(); przywrocFokus(f); }, 700); // kafelki z kaloriami; z opóźnieniem jak dotąd, żeby nie zgubić kliknięcia
+}
+function mkpPole(el) { return el && el.matches && el.matches('#mkp-kcal, #kcal, input.mkp-f'); }
+document.addEventListener('input', function (e) { if (mkpPole(e.target) && !BLOK_ZAMYKANY) mkpWpis(e.target); });
+document.addEventListener('change', function (e) { if (mkpPole(e.target) && !BLOK_ZAMYKANY) mkpZapisz(); });
+document.addEventListener('focusin', function (e) { if (mkpPole(e.target)) { try { e.target.select(); } catch (x) {} } });
+window.addEventListener('keydown', function (e) { if (e.key === 'Enter' && mkpPole(e.target)) { e.preventDefault(); e.stopPropagation(); e.target.blur(); } }, true);
 function rozKom(roz, plan) {
   if (plan) { var pr = Math.min(100, Math.round(roz / plan * 100)); return '<td class="roz sep' + (roz >= plan ? ' ok' : '') + '"><div class="fill" style="width:' + pr + '%"></div><span class="rn">' + roz + '<small>/ ' + plan + '</small></span></td>'; }
   return '<td class="roz sep"><span class="rn">' + (roz ? roz + '<small>/ –</small>' : '–') + '</span></td>';
@@ -2668,10 +2743,8 @@ function bindAll() {
   document.querySelectorAll('.top .wk').forEach(function (el) { el.onclick = function () { klikTydzien(n(el.dataset.i)); }; }); // patch132
   var cel = document.getElementById('cel'); if (cel) bind(cel, D.ustawienia, 'cel', 'Ustawienia');
   var blok = document.getElementById('blok'); if (blok) bind(blok, D.ustawienia, 'blok', 'Ustawienia', { change: true, after: render });
-  var kcal = document.getElementById('kcal'); if (kcal) bind(kcal, D.ustawienia, 'kcal', 'Ustawienia');
   for (var tdz = 1; tdz <= 5; tdz++) (function (k) { var e = document.getElementById('ust-' + k); if (!e) return; bind(e, D.ustawienia, k, 'Ustawienia'); e.addEventListener('keydown', function (ev) { if (ev.key === 'Enter') { ev.preventDefault(); e.blur(); } }); })('dzien_t' + tdz); // patch137
   var dwz = document.getElementById('ust-dni_wazenia'); if (dwz) { bind(dwz, D.ustawienia, 'dni_wazenia', 'Ustawienia'); dwz.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); dwz.blur(); } }); } // patch111
-  ['kcal', 'wegle', 'bialko', 'tluszcze'].forEach(function (k) { var e = document.getElementById('ust-' + k); if (e) bind(e, D.ustawienia, k, 'Ustawienia', { after: function () { clearTimeout(window._mk); window._mk = setTimeout(function () { var f = zapamietajFokus(); render(); przywrocFokus(f); }, 700); } }); });
   var trn = document.getElementById('treningi'); if (trn) bind(trn, D.ustawienia, 'treningi', 'Ustawienia', { change: true, after: render });
   for (var ti = 1; ti <= 5; ti++) { var nt = document.getElementById('nazwa_t' + ti); if (nt) bind(nt, D.ustawienia, 'nazwa_t' + ti, 'Ustawienia'); }
   document.querySelectorAll('input.nr[data-nr]').forEach(function (el) { el.addEventListener('change', function () { przestawCw(el.dataset.nr, el.value); }); el.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); el.blur(); } }); });
