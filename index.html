@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="28b53f2acc"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="325cfa88b7"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>/* patch124: odtwarzacz cofnięty (zachowany w webapp/odtwarzacz_zachowany), widok tylko mobilny zostaje */
 
@@ -566,6 +566,8 @@ body.tel .kalk{padding:16px 16px 30px}
 /* patch152: suwak: większy obszar dotyku, wygląd bez zmian */
 .kk-su{touch-action:pan-y}.kk-su input[type=range]{height:44px;margin:0}.kk-su .kr{margin-top:-8px}
 @media (hover:none) and (pointer:coarse){.kk-su input[type=range]{pointer-events:none}}
+/* patch153: panel kalorii i kalkulator na telefonie: bez przybliżania podwójnym dotknięciem i przesuwania strony w bok */
+.mkp,.kalk{touch-action:pan-y}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
 .pinbox.lg{max-width:1060px;margin:0 auto;padding:24px 16px;min-height:100vh;display:flex;align-items:center;box-sizing:border-box}.pinbox.lg .card{width:100%;box-sizing:border-box;padding:60px;border-radius:14px}.pinbox.lg .sub{font-size:24px}.pinbox.lg h1{margin:8px 0 26px;font-size:56px}.pinbox.lg input{height:96px;font-size:32px}.pinbox.lg .btn{height:96px;font-size:34px}.pinbox.lg .mut{font-size:24px}
 body.lgmob .pinbox.lg{padding:16px;min-height:100vh}body.lgmob .pinbox.lg .card{padding:26px 20px;border-radius:14px}body.lgmob .pinbox.lg .sub{font-size:12px}body.lgmob .pinbox.lg h1{font-size:30px;margin:6px 0 18px}body.lgmob .pinbox.lg input{height:54px;font-size:17px;padding:0 14px;margin-bottom:10px;border-radius:10px}body.lgmob .pinbox.lg .btn{height:56px;font-size:18px;border-radius:10px;margin-top:4px}body.lgmob .pinbox.lg .err{font-size:15px;min-height:20px;margin-top:10px}body.lgmob .pinbox.lg .mut{font-size:15px;margin:14px 0 0;line-height:1.5}
@@ -1613,7 +1615,7 @@ function gestStart(e) {
   if (!e.touches || e.touches.length !== 1 || MV.arkusz) return;
   var p = e.touches[0], tg = e.target, w = function (s) { return tg && tg.closest ? tg.closest(s) : null; };
   var g = { x0: p.clientX, y0: p.clientY, t0: Date.now(), dx: 0, dy: 0, lock: null };
-  if (w('.kk-su')) return; // patch152: suwak kalkulatora nie wysuwa menu
+  if (w('.kk-su, .mkp, #kk-wyn')) return; // patch152, patch153: suwak i tabele kalorii nie wysuwają menu
   if (VP.el) {
     if (w('.yp-player')) return; // patch128: przewijanie osi nie przesuwa panelu
     if (w('#vpan')) { g.typ = 'film'; GEST = g; }
@@ -2518,7 +2520,7 @@ function mkpZapisz() {
 function mkpPole(el) { return el && el.matches && el.matches('#mkp-kcal, #kcal, input.mkp-f'); }
 document.addEventListener('input', function (e) { if (mkpPole(e.target) && !BLOK_ZAMYKANY) mkpWpis(e.target); });
 document.addEventListener('change', function (e) { if (mkpPole(e.target) && !BLOK_ZAMYKANY) mkpZapisz(); });
-document.addEventListener('focusin', function (e) { if (mkpPole(e.target)) { try { e.target.select(); } catch (x) {} } });
+document.addEventListener('focusin', function (e) { if (mkpPole(e.target) && !(window.matchMedia && matchMedia('(hover:none)').matches)) { try { e.target.select(); } catch (x) {} } }); // na dotyku kursor na końcu: patch153
 window.addEventListener('keydown', function (e) { if (e.key === 'Enter' && mkpPole(e.target)) { e.preventDefault(); e.stopPropagation(); e.target.blur(); } }, true);
 function rozKom(roz, plan) {
   if (plan) { var pr = Math.min(100, Math.round(roz / plan * 100)); return '<td class="roz sep' + (roz >= plan ? ' ok' : '') + '"><div class="fill" style="width:' + pr + '%"></div><span class="rn">' + roz + '<small>/ ' + plan + '</small></span></td>'; }
@@ -2924,7 +2926,7 @@ window.addEventListener('blur', function () { if (DRG) drgKoniec(false); });
 // patch145: telefon, karty treningu: dotknięcie pola serii albo ciężaru stawia kursor na końcu (od razu kasowanie).
 // Przesunięcie palca (przewijanie, przesuwanie kart) zostawia zwykłe zachowanie.
 var KURSOR = null;
-document.addEventListener('touchstart', function (e) { var el = e.target; KURSOR = el && el.matches && e.touches.length === 1 && el.matches('.mcard input.mbox, .mcard input[data-f^="ciezar_"]') && !el.readOnly && !el.disabled ? { el: el, x: e.touches[0].clientX, y: e.touches[0].clientY } : null; }, { passive: true });
+document.addEventListener('touchstart', function (e) { var el = e.target; KURSOR = el && el.matches && e.touches.length === 1 && el.matches('.mcard input.mbox, .mcard input[data-f^="ciezar_"], .mkp input, #kk-wyn input') && !el.readOnly && !el.disabled ? { el: el, x: e.touches[0].clientX, y: e.touches[0].clientY } : null; }, { passive: true });
 document.addEventListener('touchend', function (e) {
   var k = KURSOR; KURSOR = null; if (!k || e.target !== k.el || e.changedTouches.length !== 1) return;
   var t = e.changedTouches[0]; if (Math.abs(t.clientX - k.x) > 10 || Math.abs(t.clientY - k.y) > 10) return;
