@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="27429e21aa"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="6a5f29ce51"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>/* patch124: odtwarzacz cofnięty (zachowany w webapp/odtwarzacz_zachowany), widok tylko mobilny zostaje */
 
@@ -552,6 +552,17 @@ body.tel .kalk{padding:16px 16px 30px}
 .mkp-raz.zle{padding:8px 10px;border-radius:10px;background:linear-gradient(180deg,#6E2231,#3B1220);color:#F4F1EA}.mkp-raz.zle b{color:#F4F1EA}
 .kalk .kk-kcin{display:block;width:176px;height:64px;margin:4px auto 2px;border-radius:12px;font:800 38px Poppins,Arial,sans-serif}.kalk .kk-kc i{display:block;margin:2px 0 4px;font-size:13px}
 .kalk .kk-f{text-align:center;padding:0 4px}.kalk .kk-raz .rr{justify-content:center}.kalk .kk-raz small{text-align:center}
+/* patch151: suwak deficytu i nadwyżki w kalkulatorze; kalorie nad dwoma kafelkami makro */
+.kk-su{margin-top:14px;text-align:center}.kk-su:empty{display:none}
+.kk-su .gl{display:flex;align-items:baseline;justify-content:center;gap:8px;font:600 14px Poppins,Arial,sans-serif;color:#F4F1EA}.kk-su .gl b{font:800 24px Poppins,Arial,sans-serif;color:var(--gl)}
+.kk-su input[type=range]{-webkit-appearance:none;appearance:none;display:block;width:100%;height:28px;margin:6px 0 0;padding:0;background:transparent;border:0;outline:0;touch-action:pan-y;cursor:pointer}
+.kk-su input[type=range]::-webkit-slider-runnable-track{height:8px;border-radius:4px;background:linear-gradient(90deg,#C9A455 0 var(--pr),#2C2C2C var(--pr) 100%)}
+.kk-su input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;margin-top:-9px;border-radius:50%;background:linear-gradient(180deg,#E6CB80,#C9A455 55%,#8E6B2E);border:2px solid #F5E3A6}
+.kk-su input[type=range]::-moz-range-track{height:8px;border-radius:4px;background:linear-gradient(90deg,#C9A455 0 var(--pr),#2C2C2C var(--pr) 100%)}
+.kk-su input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:linear-gradient(180deg,#E6CB80,#C9A455 55%,#8E6B2E);border:2px solid #F5E3A6}
+.kk-su input[type=range]:focus-visible::-webkit-slider-thumb{box-shadow:0 0 0 3px rgba(245,227,166,.45)}
+.kk-su .kr{display:flex;justify-content:space-between;font:500 11px Poppins,Arial,sans-serif;color:#8A8272}.kk-su .ile{margin-top:6px;font:600 13px Poppins,Arial,sans-serif;color:#A7A49C}.kk-su .ile b{color:#F4F1EA}
+.kalk .kk-kr{margin-top:10px}.kalk .kk-kr span{text-align:left}.kalk .kk-kr .kk-kcin{grid-column:2 / 5;width:100%;height:52px;margin:0;font-size:28px}
 .lg input{display:block;width:100%;height:84px;font:600 28px Poppins;background:#1A1A24;color:var(--iv);border:2px solid var(--gm);border-radius:8px;padding:0 22px;margin-bottom:14px;box-sizing:border-box;text-align:left;letter-spacing:0}.lg input::placeholder{color:#7C7462}.lg .btn{width:100%;height:84px;font-size:30px;margin-top:6px}.lg .err{color:var(--red);min-height:30px;margin-top:14px;font-weight:600;font-size:22px}.lg .mut{font-size:20px;margin:18px 0 0}.lg .lnk,.pinbox .lnk{color:var(--gl);cursor:pointer;text-decoration:underline}body.prosty .lg input{height:52px;font-size:17px;margin-bottom:10px;padding:0 14px}body.prosty .lg .btn{height:54px;font-size:18px}body.prosty .lg .err{font-size:15px;min-height:20px}body.prosty .lg .mut{font-size:14px;margin-top:12px}body.prosty .pinbox.lg{margin:30px auto!important}
 .pinbox.lg{max-width:1060px;margin:0 auto;padding:24px 16px;min-height:100vh;display:flex;align-items:center;box-sizing:border-box}.pinbox.lg .card{width:100%;box-sizing:border-box;padding:60px;border-radius:14px}.pinbox.lg .sub{font-size:24px}.pinbox.lg h1{margin:8px 0 26px;font-size:56px}.pinbox.lg input{height:96px;font-size:32px}.pinbox.lg .btn{height:96px;font-size:34px}.pinbox.lg .mut{font-size:24px}
 body.lgmob .pinbox.lg{padding:16px;min-height:100vh}body.lgmob .pinbox.lg .card{padding:26px 20px;border-radius:14px}body.lgmob .pinbox.lg .sub{font-size:12px}body.lgmob .pinbox.lg h1{font-size:30px;margin:6px 0 18px}body.lgmob .pinbox.lg input{height:54px;font-size:17px;padding:0 14px;margin-bottom:10px;border-radius:10px}body.lgmob .pinbox.lg .btn{height:56px;font-size:18px;border-radius:10px;margin-top:4px}body.lgmob .pinbox.lg .err{font-size:15px;min-height:20px;margin-top:10px}body.lgmob .pinbox.lg .mut{font-size:15px;margin:14px 0 0;line-height:1.5}
@@ -861,7 +872,7 @@ function bind(el, obj, pole, tab, opts) {
 function wywolaj(nazwa, params) { var b = { akcja: nazwa }; (params || []).forEach(function (v, i) { b['a' + i] = v; }); return api(b); }
 // ---------- nawigacja strzałkami ----------
 // kafelki: pola o tym samym data-f w kolejnych kafelkach (4 kolumny); tabele: pola w tym samym wierszu / tej samej kolumnie
-function poleEdyt(el) { return el && (el.tagName === 'INPUT' && el.type !== 'checkbox' && el.type !== 'date' || el.tagName === 'SELECT' || el.tagName === 'TEXTAREA'); }
+function poleEdyt(el) { return el && (el.tagName === 'INPUT' && el.type !== 'checkbox' && el.type !== 'date' && el.type !== 'range' || el.tagName === 'SELECT' || el.tagName === 'TEXTAREA'); }
 function skoczDo(el) { if (!el) return; el.focus(); if (el.select && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA')) el.select(); }
 document.addEventListener('keydown', function (e) {
   var el = document.activeElement;
@@ -1827,26 +1838,29 @@ function widokInny() {
 var KALK = null;
 function kalkNowy() { return { wzor: 'M', plec: '', wiek: '', wzrost: '', masa: '', akt: '', cel: '', g: null, p: null }; }
 var KALK_AKT = [['Mała', 1.2, 'Praca siedząca, bez treningów'], ['Lekka', 1.375, 'Trening 1–3 razy w tygodniu'], ['Umiarkowana', 1.55, 'Trening 3–5 razy w tygodniu'], ['Wysoka', 1.725, 'Trening 6–7 razy w tygodniu'], ['Bardzo wysoka', 1.9, 'Praca fizyczna i treningi']];
-var KALK_CEL = { red: ['Redukcja', 'deficyt', -350], utrz: ['Utrzymanie', 'bez zmian', 0], bud: ['Budowa', 'nadwyżka', 350] };
+var KALK_CEL = { red: ['Redukcja', 'deficyt'], utrz: ['Utrzymanie', 'bez zmian'], bud: ['Budowa', 'nadwyżka'] };
 var KALK_MAK = [['B', 'Białko', 4], ['T', 'Tłuszcze', 9], ['W', 'Węglowodany', 4]]; // 1 g białka = 4 kcal, 1 g tłuszczu = 9 kcal, 1 g węglowodanów = 4 kcal
-// kcal na dzień albo null, gdy brakuje danych: zero kaloryczne = round(BMR × aktywność), cel −350 / 0 / +350
-function kalkKcal(k) {
+// zero kaloryczne = round(BMR × aktywność) albo null, gdy brakuje danych
+function kalkZero(k) {
   var wiek = n(k.wiek), cm = n(k.wzrost), kg = n(k.masa), a = KALK_AKT[k.akt], c = KALK_CEL[k.cel], M = k.plec === 'M';
   if (!k.plec || !a || !c || !(wiek >= 10 && wiek <= 100) || !(cm >= 100 && cm <= 250) || !(kg >= 30 && kg <= 300)) return null;
   var bmr = k.wzor === 'H' ? (M ? 88.362 + 13.397 * kg + 4.799 * cm - 5.677 * wiek : 447.593 + 9.247 * kg + 3.098 * cm - 4.330 * wiek) : 10 * kg + 6.25 * cm - 5 * wiek + (M ? 5 : -161);
-  return Math.round(bmr * a[1]) + c[2];
+  return Math.round(bmr * a[1]);
 }
-// makro domyślne: białko = min(2,5 g/kg, 30% kcal), tłuszcz = max(25% kcal, 0,8 g/kg), węglowodany = reszta (co najmniej 40% kcal kosztem białka).
-// Białko zaokrąglane połówką w dół (nie przekracza progu 30%), węglowodany liczone od zaokrąglonego białka; procenty całkowite, reszta do węglowodanów.
-function kalkMakro(kcal, kg) {
-  var B = Math.min(2.5 * kg, 0.3 * kcal / 4), T = Math.max(0.25 * kcal / 9, 0.8 * kg);
-  if (kcal - 4 * B - 9 * T < 0.4 * kcal) B = Math.max(0, (0.6 * kcal - 9 * T) / 4);
+// patch151: procent deficytu lub nadwyżki: wybrany suwakiem (k.pr), a na start najbliższy 300 kcal dla tej osoby
+function kalkProc(k, z) { if (k.cel !== 'red' && k.cel !== 'bud') return 0; return k.pr != null ? k.pr : Math.max(0, Math.min(20, Math.round(300 / z * 100))); }
+function kalkKcal(k) { var z = kalkZero(k); if (z == null) return null; var ile = Math.round(z * kalkProc(k, z) / 100); return k.cel === 'red' ? z - ile : k.cel === 'bud' ? z + ile : z; }
+// makro domyślne (Kuba, 05.11.2026): białko na kg masy zależnie od celu, najwyżej 40% kcal; tłuszcz = max(25% kcal, 0,8 g/kg); węglowodany = reszta.
+// Białko zaokrąglane połówką w dół (nie przekracza progu 40%), węglowodany liczone od zaokrąglonego białka; procenty całkowite, reszta do węglowodanów.
+var KALK_BIALKO = { red: 2.5, utrz: 2.2, bud: 2 };
+function kalkMakro(kcal, kg, cel) {
+  var B = Math.min(KALK_BIALKO[cel] * kg, 0.4 * kcal / 4), T = Math.max(0.25 * kcal / 9, 0.8 * kg);
   var gB = Math.ceil(B - 0.5), gW = Math.max(0, Math.round((kcal - 4 * gB - 9 * T) / 4)), gT = Math.round(T);
   var pB = Math.round(gB * 400 / kcal), pT = Math.round(gT * 900 / kcal);
   return { g: { B: gB, T: gT, W: gW }, p: { B: pB, T: pT, W: 100 - pB - pT } };
 }
 function kalkCel() { return KALK.kcE != null ? mkpLiczba(KALK.kcE) : kalkKcal(KALK); } // patch150
-function kalkStan() { var kc = kalkKcal(KALK); if (kc == null) return null; if (!KALK.g) { var m = kalkMakro(kc, n(KALK.masa)); KALK.g = m.g; KALK.p = m.p; } return kalkCel(); }
+function kalkStan() { var kc = kalkKcal(KALK); if (kc == null) return null; if (!KALK.g) { var m = kalkMakro(kc, n(KALK.masa), KALK.cel); KALK.g = m.g; KALK.p = m.p; } return kalkCel(); }
 function kalkSuma() { return KALK_MAK.reduce(function (s, x) { return s + (KALK.p && KALK.p[x[0]] !== '' ? n(KALK.p[x[0]]) : 0); }, 0); }
 // patch115: cel poniżej KALK_MIN kcal kalkulator pokazuje, ale go nie ustawia (serwer i tak przyjmuje od podopiecznego 1000..20000)
 var KALK_MIN = 1000;
@@ -1861,23 +1875,29 @@ function kalkWnetrze() {
   h += '<div class="kk-lb">Wiek, wzrost, masa</div><div class="kk-p3">' + pl('wiek', 'lat', '–', 'numeric') + pl('wzrost', 'cm', '–', 'numeric') + pl('masa', 'kg', '–', 'decimal') + '</div>';
   h += '<div class="kk-lb">Aktywność</div><div class="kk-akt">' + KALK_AKT.map(function (a, i) { return '<div class="kk-ak' + (k.akt === i ? ' on' : '') + '" onclick="kalkUstaw(\'akt\',' + i + ')"><b>' + a[0] + '</b><span>' + a[2] + '</span></div>'; }).join('') + '</div>';
   h += '<div class="kk-lb">Cel</div><div class="kk-seg s3">' + ['red', 'utrz', 'bud'].map(function (c) { return sg('cel', c, KALK_CEL[c][0], KALK_CEL[c][1]); }).join('') + '</div>';
-  return h + kalkWynikHtml();
+  return h + kalkSuwakHtml() + kalkWynikHtml();
+}
+function kalkSuwakHtml() { // patch151
+  var z = KALK.cel === 'red' || KALK.cel === 'bud' ? kalkZero(KALK) : null; if (z == null) return '<div class="kk-su" id="kk-su"></div>';
+  var pr = kalkProc(KALK, z), red = KALK.cel === 'red', nz = red ? 'Deficyt' : 'Nadwyżka';
+  return '<div class="kk-su" id="kk-su"><div class="gl"><span>' + nz + '</span><b id="kk-pr">' + pr + '%</b></div><input type="range" id="kk-su-r" data-pr="1" min="0" max="20" step="1" value="' + pr + '" aria-label="' + nz + ' w procentach" style="--pr:' + (pr * 5) + '%"><div class="kr"><span>0%</span><span>20%</span></div><div class="ile" id="kk-ile"><b>' + Math.round(z * pr / 100) + ' kcal</b> ' + (red ? 'poniżej' : 'powyżej') + ' zapotrzebowania</div></div>';
 }
 function kalkWynikHtml() {
   var kc0 = kalkKcal(KALK);
   if (kc0 == null) return '<div class="kk-wyn pusty" id="kk-wyn">Uzupełnij płeć, wiek, wzrost, masę, aktywność i cel. Tu pojawią się kalorie i makro.</div>';
   if (kc0 < KALK_MIN) return '<div class="kk-wyn pusty kk-nisko" id="kk-wyn">Wynik poniżej ' + KALK_MIN + ' kcal. Sprawdź wiek, wzrost i masę' + (TR ? '.' : ' albo napisz do Kuby.') + '</div>'; // patch115
   var kc = kalkStan();
-  var h = '<div class="kk-wyn" id="kk-wyn"><div class="kk-cel">' + KALK_CEL[KALK.cel][0] + '</div><div class="kk-kc"><input class="kk-kcin" id="kk-kcal" data-kc="1" aria-label="Kalorie" inputmode="numeric" maxlength="5" enterkeyhint="done" value="' + esc(kc == null ? '' : kc) + '"><i>kcal</i></div><div class="kk-mt">';
+  var h = '<div class="kk-wyn" id="kk-wyn"><div class="kk-cel">' + KALK_CEL[KALK.cel][0] + '</div><div class="kk-mr kk-kr"><span>Kcal</span><input class="kk-kcin" id="kk-kcal" data-kc="1" aria-label="Kalorie" inputmode="numeric" maxlength="5" enterkeyhint="done" value="' + esc(kc == null ? '' : kc) + '"></div><div class="kk-mt">';
   KALK_MAK.forEach(function (x) { h += '<div class="kk-mr"><span>' + x[1] + '</span><input class="kk-f" data-m="' + x[0] + '" data-t="g" inputmode="numeric" maxlength="4" value="' + esc(KALK.g[x[0]]) + '"><i>g</i><input class="kk-f" data-m="' + x[0] + '" data-t="p" inputmode="numeric" maxlength="3" value="' + esc(KALK.p[x[0]]) + '"><i>%</i></div>'; });
   var ok = kalkGotowe();
   h += '<div class="kk-raz' + (ok ? '' : ' zle') + '" id="kk-raz"><div class="rr">Razem: <b>' + kalkSuma() + '%</b></div><small>Łączna wartość procentów makroskładników musi wynosić 100%.</small></div></div>';
   return h + '<button class="kk-btn" id="kk-zap" onclick="kalkZapisz()"' + (ok ? '' : ' disabled') + '>' + (TR ? 'Ustaw jako cel podopiecznego' : 'Ustaw jako mój cel') + '</button></div>';
 }
-function kalkUstaw(pole, v) { KALK[pole] = v; KALK.g = null; KALK.p = null; KALK.kcE = null; var el = document.getElementById('kalk'); if (el) el.innerHTML = kalkWnetrze(); }
+function kalkUstaw(pole, v) { KALK[pole] = v; KALK.g = null; KALK.p = null; KALK.kcE = null; KALK.mr = false; if (pole === 'cel') KALK.pr = null; var el = document.getElementById('kalk'); if (el) el.innerHTML = kalkWnetrze(); }
 function kalkWstecz() { if (KALK && KALK.z) { try { history.back(); return; } catch (e) {} } idz('t', mobT); }
 // zmiana gramów przelicza procent i odwrotnie; „Razem” i przycisk na bieżąco (bez przerysowania, żeby nie zgubić kursora)
 function kalkPole(m, t, v) {
+  KALK.mr = true; // patch151: ręcznie zmienione makro: suwak trzyma procenty
   var kc = kalkCel(), f = KALK_MAK.filter(function (x) { return x[0] === m; })[0][2], pusty = String(v).trim() === '', x = pusty ? '' : Math.max(0, Math.round(n(v)));
   if (t === 'g') { KALK.g[m] = x; KALK.p[m] = pusty || !kc ? '' : Math.round(x * f * 100 / kc); }
   else { KALK.p[m] = x; KALK.g[m] = pusty || !kc ? '' : Math.round(x / 100 * kc / f); }
@@ -1889,16 +1909,35 @@ function kalkPole(m, t, v) {
 function kalkKcalPole(v) { // patch150: gramy idą za procentami, procenty bez zmian
   KALK.kcE = String(v).trim(); var kc = mkpLiczba(KALK.kcE);
   if (KALK.g && kc >= 100) KALK_MAK.forEach(function (x) { if (KALK.p[x[0]] === '') return; KALK.g[x[0]] = Math.round(n(KALK.p[x[0]]) / 100 * kc / x[2]); var e = document.querySelector('#kalk .kk-f[data-m="' + x[0] + '"][data-t="g"]'); if (e) e.value = KALK.g[x[0]]; });
+  kalkStanPol(kc);
+}
+function kalkStanPol(kc) {
   var ok = kalkGotowe(), r = document.getElementById('kk-raz'), b = document.getElementById('kk-zap'), zlyKc = !(kc >= KALK_MIN && kc <= 20000);
-  if (r) { r.classList.toggle('zle', !ok); r.querySelector('small').textContent = zlyKc ? 'Kalorie: od ' + KALK_MIN + ' do 20 000.' : 'Łączna wartość procentów makroskładników musi wynosić 100%.'; }
+  if (r) { r.classList.toggle('zle', !ok); r.querySelector('b').textContent = kalkSuma() + '%'; r.querySelector('small').textContent = zlyKc ? 'Kalorie: od ' + KALK_MIN + ' do 20 000.' : 'Łączna wartość procentów makroskładników musi wynosić 100%.'; }
   if (b) b.disabled = !ok;
+}
+function kalkSuwak(v) { // patch151: bez przerysowania, żeby nie przerwać przeciągania
+  var z = kalkZero(KALK); if (z == null) return;
+  var pr = Math.max(0, Math.min(20, Math.round(n(v)))), red = KALK.cel === 'red', ile = Math.round(z * pr / 100), kc = red ? z - ile : z + ile;
+  KALK.pr = pr; KALK.kcE = null;
+  if (KALK.mr && KALK.p) KALK_MAK.forEach(function (x) { if (KALK.p[x[0]] !== '') KALK.g[x[0]] = Math.round(n(KALK.p[x[0]]) / 100 * kc / x[2]); });
+  else { var m = kalkMakro(kc, n(KALK.masa), KALK.cel); KALK.g = m.g; KALK.p = m.p; }
+  var s = document.getElementById('kk-su-r'), b = document.getElementById('kk-pr'), il = document.getElementById('kk-ile'), f = document.getElementById('kk-kcal');
+  if (s) s.style.setProperty('--pr', (pr * 5) + '%');
+  if (b) b.textContent = pr + '%';
+  if (il) il.innerHTML = '<b>' + ile + ' kcal</b> ' + (red ? 'poniżej' : 'powyżej') + ' zapotrzebowania';
+  if (!f) { var w = document.getElementById('kk-wyn'); if (w) w.outerHTML = kalkWynikHtml(); return; }
+  f.value = kc;
+  KALK_MAK.forEach(function (x) { ['g', 'p'].forEach(function (t) { var e = document.querySelector('#kalk .kk-f[data-m="' + x[0] + '"][data-t="' + t + '"]'); if (e) e.value = KALK[t][x[0]]; }); });
+  kalkStanPol(kc);
 }
 function kalkBind() {
   var el = document.getElementById('kalk'); if (!el) return;
   el.addEventListener('input', function (e) {
     var t = e.target; if (!t || !t.dataset) return;
+    if (t.dataset.pr) { kalkSuwak(t.value); return; }
     if (t.dataset.kc) { kalkKcalPole(t.value); return; }
-    if (t.dataset.k) { KALK[t.dataset.k] = t.value; KALK.g = null; KALK.p = null; KALK.kcE = null; var w = document.getElementById('kk-wyn'), b = document.getElementById('kk-zap'); if (b) b.remove(); if (w) w.outerHTML = kalkWynikHtml(); return; }
+    if (t.dataset.k) { KALK[t.dataset.k] = t.value; KALK.g = null; KALK.p = null; KALK.kcE = null; KALK.mr = false; var w = document.getElementById('kk-wyn'), b = document.getElementById('kk-zap'), su = document.getElementById('kk-su'); if (b) b.remove(); if (su) su.outerHTML = kalkSuwakHtml(); if (w) w.outerHTML = kalkWynikHtml(); return; }
     if (t.dataset.m && KALK.g) kalkPole(t.dataset.m, t.dataset.t, t.value);
   });
   el.addEventListener('keydown', function (e) { if (e.key === 'Enter' && e.target.tagName === 'INPUT') { e.preventDefault(); e.target.blur(); } });
