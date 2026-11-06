@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="0e2a22f39e"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="6f42cf38b2"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>/* patch124: odtwarzacz cofnięty (zachowany w webapp/odtwarzacz_zachowany), widok tylko mobilny zostaje */
 
@@ -2777,7 +2777,7 @@ function bindAll() {
     if (!o) return;
     var after = null;
     if (tab === 'Cwiczenia' && (el.dataset.f === 'typ' || el.dataset.f === 'sets' || el.dataset.f === 'partia')) after = function () { var f = zapamietajFokus(); render(); przywrocFokus(f); };
-    if (tab === 'Cwiczenia' && el.dataset.f === 'nazwa') after = function () { var zm = zAtlasu(o) || !!NAZWA_ZM.get(o); NAZWA_ZM.set(o, zm); clearTimeout(NAZWA_TIMERY.get(o)); NAZWA_TIMERY.set(o, setTimeout(function () { NAZWA_ZM.delete(o); podpowiedzCiezar(o); if (zm) { var f = zapamietajFokus(); render(); przywrocFokus(f); } }, 400)); };
+    if (tab === 'Cwiczenia' && el.dataset.f === 'nazwa') after = function () { var cz = ciezarCofnij(o), zm = zAtlasu(o) || cz || !!NAZWA_ZM.get(o); NAZWA_ZM.set(o, zm); clearTimeout(NAZWA_TIMERY.get(o)); NAZWA_TIMERY.set(o, setTimeout(function () { NAZWA_ZM.delete(o); podpowiedzCiezar(o); if (zm) { var f = zapamietajFokus(); render(); przywrocFokus(f); } }, 400)); };
     if (tab === 'Wazenia' && (el.dataset.f === 'waga' || el.dataset.f === 'data')) after = function () { clearTimeout(window._kt); window._kt = setTimeout(function () { var f = zapamietajFokus(); render(); przywrocFokus(f); }, 900); };
     if (tab === 'Cwiczenia' && el.dataset.f === 'przerwa') after = function () { przerwaPary(o); czasOdswiez(n(o.trening)); };
     bind(el, o, el.dataset.f, tab, { change: el.tagName === 'SELECT' || el.type === 'date', after: after });
@@ -2844,12 +2844,21 @@ function ciezarZHistorii(nazwa) {
   }
   return null;
 }
+// patch158: ciężar wstawiony z archiwum pamiętany przy ćwiczeniu; po zmianie nazwy znika, inna wartość (wpisana ręcznie) zostaje
+var CIEZ_AUTO = new WeakMap();
+function ciezarCofnij(c) {
+  var a = CIEZ_AUTO.get(c), zm = false; if (!a || a.nazwa === norm(c.nazwa)) return false; CIEZ_AUTO.delete(c);
+  ['ciezar_start', 'ciezar_akt'].forEach(function (f) { if (a[f] != null && String(c[f]) === String(a[f])) { c[f] = ''; push({ tab: 'Cwiczenia', id: c.id, pole: f, wartosc: '' }); zm = true; } });
+  return zm;
+}
 function podpowiedzCiezar(c) {
   if (BLOK_ZAMYKANY) return;
   if (c.ciezar_start !== '' && c.ciezar_start != null) return;
   var z = ciezarZHistorii(c.nazwa); if (!z) return;
+  var au = { nazwa: norm(c.nazwa), ciezar_start: z.w };
   c.ciezar_start = z.w; push({ tab: 'Cwiczenia', id: c.id, pole: 'ciezar_start', wartosc: z.w });
-  if (c.ciezar_akt === '' || c.ciezar_akt == null) { c.ciezar_akt = z.w; push({ tab: 'Cwiczenia', id: c.id, pole: 'ciezar_akt', wartosc: z.w }); }
+  if (c.ciezar_akt === '' || c.ciezar_akt == null) { c.ciezar_akt = z.w; au.ciezar_akt = z.w; push({ tab: 'Cwiczenia', id: c.id, pole: 'ciezar_akt', wartosc: z.w }); }
+  CIEZ_AUTO.set(c, au);
   var fokus = zapamietajFokus(); render(); przywrocFokus(fokus);
   status('ciężar ' + fmt(z.w) + ' kg pobrany z bloku ' + z.blok + ', to samo ćwiczenie', true);
 }
