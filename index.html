@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="9c27a70f07"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="1601d2dabf"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>/* patch124: odtwarzacz cofnięty (zachowany w webapp/odtwarzacz_zachowany), widok tylko mobilny zostaje */
 
@@ -1172,7 +1172,7 @@ function filmEmbed(u) {
   var d = driveId(u); if (d) return { src: 'https://drive.google.com/file/d/' + d + '/preview', pion: false, yt: false };
   return null;
 }
-var ODT = null, ODT_HLS_PROMISE = null;
+var ODT = null, ODT_HLS_PROMISE = null, ODT_START = 1080; /* patch161: jakość startowa filmów */
 function odtwBiblioteka() {
   if (window.Hls) return Promise.resolve(window.Hls);
   if (ODT_HLS_PROMISE) return ODT_HLS_PROMISE;
@@ -1332,9 +1332,13 @@ function odtwStart(el, src) {
         hls.on(H.Events.MEDIA_ATTACHED, function () { if (!zamkniety) hls.loadSource(src); });
         hls.on(H.Events.MANIFEST_PARSED, function () {
           if (zamkniety) return;
-          var poziomy = hls.levels, najlepszy = 0, i;
-          for (i = 1; i < poziomy.length; i++)
-            if (Math.abs(odtwBok(poziomy[i]) - 360) < Math.abs(odtwBok(poziomy[najlepszy]) - 360)) najlepszy = i;
+          var poziomy = hls.levels, najlepszy = -1, i, bok;
+          /* patch161: start w najwyższej jakości do ODT_START (1080p), dalej tryb Auto */
+          for (i = 0; i < poziomy.length; i++) {
+            bok = odtwBok(poziomy[i]);
+            if (bok <= ODT_START && (najlepszy < 0 || bok > odtwBok(poziomy[najlepszy]))) najlepszy = i;
+          }
+          if (najlepszy < 0) najlepszy = 0;
           if (poziomy.length) hls.startLevel = najlepszy;
           hls.startLoad(seek === null ? -1 : seek);
           if (chceGrac) odtwPlay();
