@@ -1,4 +1,4 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="1601d2dabf"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
+<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="wersja" content="033cc0e560"><meta name="viewport" content="width=1280"><title>Plan treningowy</title><link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0B0B0B"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Plan"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="apple-touch-icon" href="icon-180.png"><title>Plan treningowy</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>/* patch124: odtwarzacz cofnięty (zachowany w webapp/odtwarzacz_zachowany), widok tylko mobilny zostaje */
 
@@ -601,6 +601,11 @@ body:not(.tel) .zgs{align-items:center}body.tel .zgk.zgv{background:none;border:
 button.lnk,button.zgwr{background:none;border:0;padding:0;margin:0;font:inherit;color:inherit;cursor:pointer;text-align:inherit}button.lnk{color:var(--gl);text-decoration:underline}button.zgwr{color:var(--ivd);font-size:14px;font-weight:600;margin-bottom:2px}button.lnk:focus-visible,button.zgwr:focus-visible{outline:2px solid var(--gl);outline-offset:2px}
 .pinbox.lg .card.stk{text-align:center}.pinbox.lg .card.stk h1{justify-content:center;white-space:normal}.pinbox.lg .card.stk p.st-t{margin:0 0 22px}body.lgmob .pinbox.lg .card.stk p.st-t{margin:0 0 18px}
 .zgst{margin-top:20px;font-size:14px;color:var(--ivd);line-height:1.6}.zgst button.lnk{color:var(--ivd)}.pinbox.lg .zgst{font-size:20px}body.lgmob .pinbox.lg .zgst{font-size:14px}body:not(.tel) .dkon .zgst{font-size:15px}
+.zgr ul{margin:0;padding-left:18px}.zgr li{font-size:14px;color:#D9D5CC;margin-bottom:6px}.zgr li:last-child{margin-bottom:0}
+.zgc{position:relative;display:flex;gap:12px;align-items:flex-start;margin:16px 0 0;cursor:pointer;font-size:14px;font-weight:400;line-height:1.55;letter-spacing:0;text-transform:none;color:#D9D5CC}.zgc input{position:absolute;opacity:0;width:0;height:0;margin:0;padding:0;border:0}
+.zgc i{flex:none;box-sizing:border-box;width:24px;height:24px;margin-top:calc((1.55 * 14px - 24px) / 2);border-radius:4px;border:2px solid var(--gm);background:#1E1E28;display:flex;align-items:center;justify-content:center;font-style:normal}.zgc i svg{display:none}
+.zgc input:checked + i{background:var(--gm)}.zgc input:checked + i svg{display:block}.zgc input:focus-visible + i{outline:2px solid var(--gl);outline-offset:2px}
+.zgp.reg p,.zgp.reg li{font-size:16px}.zgp.reg h3{font-size:16px;margin:24px 0 8px}.zgp.reg p.zgm{font-size:13px}
 </style></head><body>
 <div id="app"></div>
 <div id="tipbox" class="tip hidden"><span class="x" onclick="hideTip()">✕</span><div id="tipc"></div></div>
@@ -611,7 +616,7 @@ button.lnk,button.zgwr{background:none;border:0;padding:0;margin:0;font:inherit;
 var D = {}, TR = false, AUTH = null, TSESJA = null, URL_STRONY = location.pathname;
 var BRAK_SIECI = 'Brak połączenia z serwerem. Sprawdź internet i spróbuj ponownie.';
 function api(b, opts) {
-  opts = opts || {}; if (TSESJA && !b.sesja) { try { TSESJA = localStorage.getItem('trener_sesja') || TSESJA; } catch (e) {} b.sesja = TSESJA; }
+  opts = opts || {}; b.frontReg = 1; if (TSESJA && !b.sesja) { try { TSESJA = localStorage.getItem('trener_sesja') || TSESJA; } catch (e) {} b.sesja = TSESJA; }
   var ac = window.AbortController ? new AbortController() : null, tm = ac ? setTimeout(function () { ac.abort(); }, opts.timeout || 60000) : null;
   var body = JSON.stringify(b);
   var init = { method: 'POST', body: body, redirect: 'follow' }; if (ac) init.signal = ac.signal; if (opts.keepalive && body.length < 60000) init.keepalive = true;
@@ -751,7 +756,7 @@ function widokPwa() {
   return h + '</div></div>';
 }
 // ---------- widoki (menu ≡ przełącza ekrany, adres w #hash) ----------
-var WIDOKI = ['treningi', 'plan', 'atlas', 'hist', 'waz', 'kalk', 'zal', 'pwa', 'ins0', 'ins1', 'ins2', 'ins3', 'ins4', 'zgody', 'polityka']; // patch118: zgody i polityka tylko w wersji hostowanej (host.js)
+var WIDOKI = ['treningi', 'plan', 'atlas', 'hist', 'waz', 'kalk', 'zal', 'pwa', 'ins0', 'ins1', 'ins2', 'ins3', 'ins4', 'zgody', 'polityka', 'regulamin']; // patch118: zgody i polityka tylko w wersji hostowanej (host.js)
 function widokZHash() { var h = (location.hash || '').replace('#', ''); return WIDOKI.indexOf(h) >= 0 ? h : 'treningi'; }
 var WIDOK = widokZHash();
 function ustawWidok(w) { if (WIDOKI.indexOf(w) < 0) w = 'treningi'; WIDOK = w; try { if (location.hash !== '#' + w && !(w === 'treningi' && !location.hash)) location.hash = w; } catch (e) {} }
@@ -862,7 +867,7 @@ function flush(sila) {
     cells.forEach(function (c) { markDot(c, 'err'); });
     if (!TR && /Dostęp się skończył/.test(String(e && e.message || e))) { clearTimeout(timer); status('Dostęp się skończył. Napisz do Kuby.', false, true); D.dostepKoniec = true; render(); return false; }
     // patch118: bez aktywnej zgody serwer odrzuca zapis; bez ponawiania, kolejka czeka na zgodę (host.js: ekran zgody)
-    if (!TR && /zaakceptuj zgodę/.test(String(e && e.message || e)) && typeof zgodaPoBledzie === 'function') { clearTimeout(timer); status('Najpierw zaakceptuj zgodę na dane o zdrowiu.', false, true); zgodaPoBledzie(); return false; }
+    if (!TR && /zaakceptuj (zgodę|regulamin)/.test(String(e && e.message || e)) && typeof zgodaPoBledzie === 'function') { clearTimeout(timer); status(/regulamin/.test(String(e && e.message || e)) ? 'Najpierw zaakceptuj regulamin prowadzenia.' : 'Najpierw zaakceptuj zgodę na dane o zdrowiu.', false, true); zgodaPoBledzie(); return false; } // patch162: także regulamin
     status('nie zapisano (' + String(e.message || e).replace(/^Error:\s*/, '') + '). Próbuję ponownie za ' + Math.round(op / 1000) + ' s…', false, true);
     clearTimeout(timer); timer = setTimeout(flush, op);
     return false;
@@ -1793,7 +1798,7 @@ function render() {
   var app = document.getElementById('app');
   if (D && D.zgodaEkran && !TR && typeof ekranZgody === 'function') { ekranZgody(); return; } // patch118: bez aktywnej zgody ekran zgody
   if (D && D.dostepKoniec && !TR) { ekranDostepKoniec(); return; }
-  if ((WIDOK === 'zgody' || WIDOK === 'polityka') && (TR || !D.zgoda || typeof widokZgody !== 'function')) WIDOK = 'treningi';
+  if ((WIDOK === 'zgody' || WIDOK === 'polityka' || WIDOK === 'regulamin') && (TR || !D.zgoda || typeof widokZgody !== 'function')) WIDOK = 'treningi';
   var fokus = zapamietajFokus();
   if (TR && open.planAuto == null) { open.planAuto = true; open.plan = true; } // wersja hostowana: TR znane dopiero po wczytaniu
   var akt = aktywne(); if (mobT > akt || mobT < 1) mobT = 1; if (WIDOK === 'hist' && !TR) WIDOK = 'treningi';
@@ -1818,7 +1823,7 @@ function render() {
   }
   html += zgodaPasekTr();
   if (WIDOK === 'treningi') html += dostepPasek();
-  var KARTY = kartyAktywne(), MOBW = (WIDOK === 'pwa' && trybKart()) || ((WIDOK === 'waz' || WIDOK === 'kalk' || WIDOK === 'zal' || WIDOK === 'zgody' || WIDOK === 'polityka' || /^ins\d$/.test(WIDOK)) && mobilny()); document.body.classList.toggle('karty', KARTY); document.body.classList.toggle('pmob', !TR && (KARTY || MOBW)); document.body.classList.toggle('mobw', MOBW); document.body.classList.toggle('tel', telefon()); document.body.classList.remove('lgmob'); viewportMob(KARTY || MOBW);
+  var KARTY = kartyAktywne(), MOBW = (WIDOK === 'pwa' && trybKart()) || ((WIDOK === 'waz' || WIDOK === 'kalk' || WIDOK === 'zal' || WIDOK === 'zgody' || WIDOK === 'polityka' || WIDOK === 'regulamin' || /^ins\d$/.test(WIDOK)) && mobilny()); document.body.classList.toggle('karty', KARTY); document.body.classList.toggle('pmob', !TR && (KARTY || MOBW)); document.body.classList.toggle('mobw', MOBW); document.body.classList.toggle('tel', telefon()); document.body.classList.remove('lgmob'); viewportMob(KARTY || MOBW);
   if (WIDOK !== 'treningi') html += widokInny(); else if (KARTY) { html += widokMobilny(mobT); } else {
   // ----- telefon: wybór treningu + karty
   html += '<div class="mob"><div class="selbar">Trening: <select id="mobSel">'; for (var t2 = 1; t2 <= akt; t2++) html += '<option value="' + t2 + '"' + (t2 === mobT ? ' selected' : '') + '>Trening ' + t2 + '</option>'; html += '</select><a class="v" style="margin-left:auto" target="_blank" href="' + esc(D.rozgrzewka) + '" title="Rozgrzewka">' + playIkona(24) + '</a></div><div id="mobcards" style="padding-top:10px"></div></div>';
@@ -1851,7 +1856,7 @@ function widokInny() {
   else if (w === 'kalk') { h += mobilny() ? '<div class="kalkTel">' + kalkulator() + '</div>' : kol(kalkulator(), 520); }
   else if (w === 'zal') { open.zal = true; h += mobilny() ? '<div class="zalTel">' + zalecenia() + '</div>' : kol(zalecenia(), 760); }
   else if (w === 'pwa') { h += kol(widokPwa(), 1100); }
-  else if ((w === 'zgody' || w === 'polityka') && typeof widokZgody === 'function') { h += kol(widokZgody(w), 620); }
+  else if ((w === 'zgody' || w === 'polityka' || w === 'regulamin') && typeof widokZgody === 'function') { h += kol(widokZgody(w), 620); }
   else if (w === 'hist') { open.hist = true; h += kol(historiaSekcja()); }
   else if (/^ins\d$/.test(w)) { var i = +w.slice(3); var x = INSTR()[i]; h += kol(x ? '<div class="card" id="sek-ins' + i + '"><h2 class="metal"><span class="ttl" style="font-size:15px">' + esc(x[0]) + '</span></h2><div class="ibody">' + x[1] + '</div></div>' : '', 1100); }
   return h + '</div>';
@@ -3071,7 +3076,7 @@ function odswiezCicho() {
     if (pending || BLOK_ZAMYKANY || ZAPIS_REV !== rew || D.bazaId !== baza || (typeof MV !== 'undefined' && MV && MV.arkusz)) return; // MV.arkusz: patch126 (odpowiedź przyszła przy otwartym panelu)
     if (kon) { if (D.dostepKoniec) dostepWrocil(dane); return; }
     if (queue.length) return;
-    if (dane.zgodaWymagana) { pokazZgode(dane); return; }
+    if ((dane.zgodaWymagana || dane.regulaminWymagany)) { pokazZgode(dane); return; }
     dane.url = URL_STRONY; D = dane; render(); status('odświeżono', true); if (AUTH) { try { localStorage.setItem('cache_sesja', JSON.stringify({ t: Date.now(), sesja: SESJA, d: dane })); } catch (e) {} }
   }).catch(function () {});
 }
@@ -3080,7 +3085,7 @@ function odswiezCicho() {
 // pusta (ekran przyszedł z wczytaj), przywracamy szkic z tej karty; bez planu (np. zakończone prowadzenie) = ekran statusu.
 function dostepWrocil(dane) {
   if (dane.dostepKoniec) return;
-  if (dane.zgodaWymagana) { pokazZgode(dane); return; }
+  if ((dane.zgodaWymagana || dane.regulaminWymagany)) { pokazZgode(dane); return; }
   if (dane.bezPlanu) { queue = []; clearTimeout(timer); ekranStatusu(dane.konto, dane.zgoda); return; }
   var q = queue, blokPrzed = D.bazaId ? szkicBlok() : null;
   dane.url = URL_STRONY; D = dane; queue = []; clearTimeout(timer);
@@ -3116,7 +3121,7 @@ function ekranStatusu(konto, zgoda) {
 function wczytajSesja() {
   api({ akcja: 'wczytaj', sesja: SESJA, frontZgody: 1 }).then(function (dane) {
     if (dane.bezPlanu) { ekranStatusu(dane.konto, dane.zgoda); return; }
-    if (dane.zgodaWymagana) { pokazZgode(dane); return; }
+    if ((dane.zgodaWymagana || dane.regulaminWymagany)) { pokazZgode(dane); return; }
     wczytano(dane);
   }).catch(function (e) {
     var msg = String(e.message || e).replace(/^Error:\s*/, '');
@@ -3135,23 +3140,23 @@ function wylogujKonto(cicho) {
 }
 // ---------- patch118: zgoda na dane o zdrowiu i polityka prywatności (ZGODY.md) ----------
 // Jedno źródło treści. Każda zmiana choćby słowa zgody = nowa wersja (Z2) także w ZGODA_WERSJA na serwerze.
-var ZGODA_WERSJA = 'Z1';
+var ZGODA_WERSJA = 'Z2'; // patch162: Z2 = ta sama treść, nowa wersja, żeby każdy przeszedł regulamin i zgodę od nowa (REGULAMIN.md)
 var ZGODA_TEKST = 'Wyrażam wyraźną zgodę na przetwarzanie moich danych dotyczących zdrowia, takich jak waga ciała, kalorie i makroskładniki, cel sylwetkowy oraz notatki o samopoczuciu i dolegliwościach, przez Kubę Czerwińskiego w celu prowadzenia współpracy treningowej: w aplikacji, w raportach przesyłanych mailem i w wiadomościach. Zgodę mogę wycofać w każdej chwili w menu, w „Twoje zgody”. Wycofanie nie wpływa na to, co było przed nim.';
 // Polityka prywatności: tylko zdania prawdziwe dla aplikacji w tej wersji (szkic: Obsidian, Sprawy/RODO dokumenty).
-var POLITYKA_WERSJA = 'P1', POLITYKA_DATA = '3.10.2026';
+var POLITYKA_WERSJA = 'P2', POLITYKA_DATA = '15.11.2026'; // P2: dopisany zapis akceptacji regulaminu
 var POLITYKA = [
   ['Kto odpowiada za Twoje dane', '<p>Administratorem Twoich danych jestem ja, Kuba Czerwiński, trener personalny. W sprawach danych napisz na adres <b>kczerwinski033@gmail.com</b>.</p>'],
   ['Jakie dane są w aplikacji', '<p><b>Wpisuję ja</b>, gdy zakładam konto i prowadzę współpracę: imię i nazwisko, login i hasło, datę końca dostępu, dni ważenia, plan treningowy, cel sylwetkowy, zalecane kalorie i makroskładniki, zalecenia i suplementy oraz moją notatkę o Tobie, której nie widzisz w aplikacji.</p>'
     + '<p><b>Wpisujesz Ty:</b> ciężary i powtórzenia, notatki do ćwiczeń i ważeń, ważenia (masa ciała i data), zjedzone kalorie i makroskładniki.</p>'
-    + '<p><b>Powstają same:</b> historia zamkniętych bloków, zapis zgody (data, godzina i wersja treści), sesje logowania oraz licznik błędnych prób logowania (przy loginie i przy skrócie adresu IP, bez samego adresu), który wygasa po 15 minutach.</p>'
+    + '<p><b>Powstają same:</b> historia zamkniętych bloków, zapis zgody i akceptacji regulaminu (data, godzina i wersja treści), sesje logowania oraz licznik błędnych prób logowania (przy loginie i przy skrócie adresu IP, bez samego adresu), który wygasa po 15 minutach.</p>'
     + '<p><b>Z wcześniejszej wersji aplikacji</b> mogą być zapisane raporty tygodniowe (tekst, zdjęcia i filmy) i moje odpowiedzi na nie. Przechowuję je razem z resztą danych. Nowych raportów nie wysyła się już przez aplikację.</p>'
     + '<p>Hasło jest zapisane tak, że nie da się go odczytać. Dane wpisane w kalkulatorze kalorii (płeć, wiek, wzrost, masa, aktywność) nie są zapisywane. Zapisuje się tylko cel kalorii i makroskładników, gdy go ustawisz.</p>'],
   ['Dane o zdrowiu', '<p>Masa ciała, kalorie i makroskładniki, cel sylwetkowy, notatki o samopoczuciu i dolegliwościach oraz zdjęcia sylwetki w raportach to dane o zdrowiu. Zbieram je w aplikacji na podstawie Twojej wyraźnej zgody, którą wyrażasz, wpisując słowo Akceptuję. Zgoda obejmuje też raporty przesyłane mailem i wiadomości.</p>'
     + '<p>Bez zgody aplikacja nie pokazuje planu i nie przyjmuje od Ciebie nowych wpisów. Zgodę możesz wycofać w każdej chwili w menu, w „Twoje zgody”. Wycofanie nie wpływa na to, co było przed nim.</p>'
     + '<p>Dane zapisane wcześniej zostają na Twoim koncie także po wycofaniu zgody i zanim ją wyrazisz. Nadal je widzę i mogę prowadzić Twój plan, ale nie dostaję od Ciebie nowych wpisów w aplikacji. Gdy znów wyrazisz zgodę, wszystko wraca. Jeśli chcesz, żebym usunął Twoje dane, napisz do mnie.</p>'],
-  ['Po co i na jakiej podstawie', '<p>Konto, logowanie, plan i prowadzenie współpracy: na podstawie naszej umowy o współpracę treningową (art. 6 ust. 1 lit. b RODO).</p>'
+  ['Po co i na jakiej podstawie', '<p>Konto, logowanie, plan i prowadzenie współpracy: na podstawie naszej umowy o współpracę treningową, której zasady opisuje regulamin prowadzenia (art. 6 ust. 1 lit. b RODO).</p>'
     + '<p>Dane o zdrowiu: na podstawie Twojej wyraźnej zgody (art. 9 ust. 2 lit. a RODO).</p>'
-    + '<p>Zapis zgody i jej wycofania przechowuję, żeby móc wykazać, kiedy i na jaką treść zgoda została wyrażona. Licznik błędnych prób logowania chroni konto przed zgadywaniem hasła. Podstawą obu jest mój prawnie uzasadniony interes: wykazanie, że działam zgodnie z prawem, i bezpieczeństwo kont (art. 6 ust. 1 lit. f RODO).</p>'],
+    + '<p>Zapis zgody i jej wycofania oraz zapis akceptacji regulaminu przechowuję, żeby móc wykazać, kiedy i jakiej treści dotyczyły. Licznik błędnych prób logowania chroni konto przed zgadywaniem hasła. Podstawą obu jest mój prawnie uzasadniony interes: wykazanie, że działam zgodnie z prawem, i bezpieczeństwo kont (art. 6 ust. 1 lit. f RODO).</p>'],
   ['Czy musisz podać dane', '<p>Podanie danych jest dobrowolne, ale bez nich nie poprowadzę współpracy w aplikacji: bez imienia i loginu nie założę konta, a bez zgody na dane o zdrowiu nie da się korzystać z aplikacji. Notatki do ćwiczeń i ważeń są zawsze dobrowolne.</p>'],
   ['Komu przekazuję dane', '<ul><li><b>Supabase</b> przechowuje bazę aplikacji na serwerach we Frankfurcie (UE).</li>'
     + '<li><b>GitHub</b> udostępnia stronę aplikacji i przy każdym wejściu widzi adres IP oraz dane przeglądarki.</li>'
@@ -3197,9 +3202,10 @@ function pokazZgode(dane) {
 }
 function ekranZgody(wymus) {
   var z = D && D.zgodaEkran; if (!z) return;
+  if (z.regulaminWymagany) { ekranRegulaminu(wymus); return; } // patch162: najpierw regulamin prowadzenia (krok 1), potem zgoda
   if (!wymus && document.querySelector('.zgx')) return; // render() w trakcie: ekran zgody albo polityka już jest
   var st = (z.zgoda || {}).stan, lo = z.konto ? (z.konto.login || z.konto.email || '') : '';
-  zgEkran('<div class="zgn">' + (st === 'stara_wersja' ? 'Nowa wersja zgody' : st === 'wycofana' ? 'Zgoda wycofana' : 'Pierwsze logowanie') + '</div>', 'Zanim zaczniesz',
+  zgEkran('<div class="zgn">' + (REG_KROK2 ? 'Krok 2 z 2' : st === 'stara_wersja' ? 'Nowa wersja zgody' : st === 'wycofana' ? 'Zgoda wycofana' : 'Pierwsze logowanie') + '</div>', 'Zanim zaczniesz',
     '<p>W aplikacji zapisujesz plan, ciężary, ważenia i kalorie. Kto i po co przetwarza te dane, opisuje <button type="button" class="lnk" id="zg-pol">polityka prywatności</button>.</p>'
     + '<div class="zgr"><b>Zgoda na dane o zdrowiu</b><p>' + esc(ZGODA_TEKST) + '</p></div>'
     + '<label class="zgl" for="zg-slowo">Aby potwierdzić, wpisz słowo Akceptuję</label><input id="zg-slowo" class="zgi" autocomplete="off" autocorrect="off" spellcheck="false" value="' + esc(ZG_SLOWO) + '">'
@@ -3213,7 +3219,7 @@ function ekranZgody(wymus) {
   btn.onclick = function () {
     if (!slowoPasuje(inp.value, 'akceptuję')) return;
     btn.disabled = true; btn.textContent = 'Zapisuję…'; msg.textContent = '';
-    api({ akcja: 'zgodaWyraz', sesja: SESJA, wersja: ZGODA_WERSJA, slowo: inp.value.trim() }).then(zgodaWyrazona).catch(function (e) {
+    api({ akcja: 'zgodaWyraz', sesja: SESJA, wersja: ZGODA_WERSJA, slowo: inp.value.trim() }).then(function (d) { REG_KROK2 = false; zgodaWyrazona(d); }).catch(function (e) {
       var m = String(e.message || e).replace(/^Error:\s*/, '');
       if (/sesja|zaloguj|hasło/i.test(m)) { D = {}; wylogujKonto(true); ekranLogowania(m); return; }
       btn.textContent = 'Dalej'; spr(); msg.textContent = m;
@@ -3224,9 +3230,85 @@ function ekranPolityki(wroc) {
   zgEkran('<button type="button" class="zgwr" id="zg-wr1">‹ Wróć</button>', 'Polityka prywatności', politykaHtml() + '<button class="zgb2" id="zg-wr2" style="margin-top:16px">Wróć</button>');
   document.getElementById('zg-wr1').onclick = wroc; document.getElementById('zg-wr2').onclick = wroc;
 }
+// ---------- patch162: regulamin prowadzenia (REGULAMIN.md, makieta mock_regulamin.html) ----------
+// Jedno źródło treści. Każda zmiana choćby słowa regulaminu = nowa wersja (R2) także w REGULAMIN_WERSJA na serwerze.
+var REGULAMIN_WERSJA = 'R1', REGULAMIN_DATA = '15.11.2026';
+var KONTAKT_MAIL = POLITYKA[0][1].split('<b>')[1].split('</b>')[0]; // ten sam adres co w polityce prywatności
+var REG_ZASADY = ['Okres prowadzenia liczy się od dnia wpłaty i biegnie bez przerw.', 'Urlop, choroba ani przerwa w treningach nie przesuwają jego końca.', 'Po akceptacji wpłata nie podlega zwrotowi.', 'Efekt zależy od realizacji zaleceń, kontaktu ze mną i współpracy.'];
+var REG_ODSTAPIENIE = 'Chcę zacząć prowadzenie od razu, przed upływem 14 dni. Wiem, że po uzyskaniu dostępu do planu i aplikacji tracę prawo odstąpienia od umowy.';
+var REG_ZNAK = '<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8.5l3.2 3.2L13 4.8" fill="none" stroke="#0E0E12" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+var REGULAMIN = [
+  ['Kto i co', '<p>Prowadzenie online realizuję ja, Kuba Czerwiński, trener personalny. Kontakt: ' + KONTAKT_MAIL + '. Ten regulamin opisuje, na co się umawiamy. Chroni obie strony: Ciebie i mnie.</p>'],
+  ['Co dostajesz', '<p>Prowadzenie to moja opieka trenerska przez ustalony czas, a nie określona liczba treningów. Obejmuje:</p>'
+    + '<ul><li>wprowadzenie: ustalamy cel i odpowiadam na pytania,</li>'
+    + '<li>plan treningowy ułożony dla Ciebie, gotowy najpóźniej 3 dni po wpłacie i wypełnieniu ankiety,</li>'
+    + '<li>raport raz w tygodniu: wysyłasz go mailem najpóźniej w piątek do 23:59, a ja odpisuję do niedzieli 23:59,</li>'
+    + '<li>zmiany i korekty ćwiczeń, gdy coś nie pasuje albo nie wychodzi,</li>'
+    + '<li>ocenę techniki na nagraniach, które mi wyślesz,</li>'
+    + '<li>stały kontakt: odpowiadam najpóźniej w ciągu 24 godzin, zwykle szybciej,</li>'
+    + '<li>dostęp do aplikacji z planem i filmami.</li></ul>'
+    + '<p>Bonus: orientacyjne zapotrzebowanie na kalorie i makroskładniki.</p>'
+    + '<p>Prowadzenie nie zastępuje lekarza ani fizjoterapeuty.</p>'],
+  ['Ile trwa', '<p>Prowadzenie trwa 30 albo 90 dni, zależnie od tego, co ustalimy przed wpłatą. Okres liczy się od dnia wpłaty i biegnie bez przerw. Urlop, choroba ani przerwa w treningach nie przesuwają jego końca, a niewykorzystane dni nie przechodzą na później.</p>'
+    + '<p>Po zakończeniu okresu dostęp do aplikacji się wyłącza. Twój plan i wyniki zostają zapisane i wracają po przedłużeniu.</p>'],
+  ['Płatność, akceptacja i rezygnacja', '<p>Cenę ustalamy przed wpłatą. Płacisz z góry za cały okres.</p>'
+    + '<p>Regulamin akceptujesz przy pierwszym logowaniu do aplikacji. Dopóki go nie zaakceptujesz, możesz zrezygnować i odzyskać całą wpłatę. Wystarczy do mnie napisać.</p>'
+    + '<p>Przy zakupie na odległość masz 14 dni na odstąpienie od umowy. Prowadzenie zaczyna się jednak od razu, dlatego przy akceptacji osobno potwierdzasz, że chcesz zacząć przed upływem 14 dni i że po uzyskaniu dostępu do planu i aplikacji tracisz prawo odstąpienia.</p>'
+    + '<p>Po akceptacji wpłata nie podlega zwrotowi, także wtedy, gdy zrezygnujesz przed końcem albo nie wykorzystasz całego okresu.</p>'],
+  ['Twoja część', '<p>Przed startem wypełniasz ankietę. Na jej podstawie układam plan, dlatego informacje o zdrowiu muszą być prawdziwe i pełne, a o każdej zmianie dajesz mi znać od razu.</p>'
+    + '<p>Trenujesz samodzielnie. Jeśli ćwiczenie boli, przerywasz je i piszesz do mnie.</p>'
+    + '<p>Raport jest warunkiem dalszych wskazówek treningowych. Wysłany po terminie bez ważnego powodu może dostać odpowiedź później niż w niedzielę.</p>'
+    + '<p>Efekt zależy od realizacji zaleceń, kontaktu ze mną i współpracy.</p>'],
+  ['Moje materiały', '<p>Plan, filmy i aplikacja są tylko dla Ciebie. Nie udostępniasz ich innym i nie przekazujesz nikomu swojego loginu.</p>'],
+  ['Osoby niepełnoletnie', '<p>Osoby poniżej 18 lat prowadzę tylko za pisemną zgodą rodzica lub opiekuna, przekazaną przed startem.</p>'],
+  ['Reklamacje', '<p>Jeśli coś jest nie tak z prowadzeniem, napisz do mnie.</p>'],
+  ['Dane', '<p>Zasady przetwarzania danych opisuje polityka prywatności w aplikacji. Zgodę na dane o zdrowiu wyrażasz osobno.</p>'],
+  ['Zmiany regulaminu', '<p>Obowiązuje Cię wersja, którą akceptujesz. Nowa wersja zaczyna Cię dotyczyć dopiero wtedy, gdy zaakceptujesz ją w aplikacji, na przykład przy przedłużeniu.</p>']
+];
+function regulaminHtml() { return '<div class="zgp reg">' + REGULAMIN.map(function (x) { return '<h3>' + x[0] + '</h3>' + x[1]; }).join('') + '<p class="zgm">Wersja ' + REGULAMIN_WERSJA + ' z ' + REGULAMIN_DATA + '.</p></div>'; }
+function regulaminOpis(r) { var c = String(r.czas || ''), d = c.slice(0, 10).split('-'); return 'Zaakceptowany ' + (d.length === 3 && c.length >= 16 ? d[2] + '.' + d[1] + '.' + d[0] + ', ' + c.slice(11, 16) + ' ' : '') + '(wersja ' + esc(r.wersja || REGULAMIN_WERSJA) + ').'; }
+// ramka w „Twoje zgody”: data akceptacji i przycisk do pełnej treści
+function regulaminRamka() { var r = D && D.regulamin; return r && r.stan === 'zaakceptowany' ? '<div class="zgr"><b>Regulamin prowadzenia</b><p>' + regulaminOpis(r) + '</p><button class="zgb2" onclick="menuRegulamin()">Pokaż regulamin</button></div>' : ''; }
+// zaznaczone pole i wpisane słowo zostają przy przejściu do pełnej treści i z powrotem; REG_KROK2: ekran zgody zaraz po regulaminie
+var REG_SLOWO = '', REG_POLE = false, REG_KROK2 = false;
+// Ekran regulaminu (D.zgodaEkran z odpowiedzi regulaminWymagany): „Dalej” działa po zaznaczeniu pola i wpisaniu słowa.
+// Zdanie o zwrocie wpłaty widzi tylko nowe konto (z.nowy z serwera), obecni podopieczni zwykłe „W razie pytań…”.
+function ekranRegulaminu(wymus) {
+  var z = D && D.zgodaEkran; if (!z || !z.regulaminWymagany) return;
+  if (!wymus && document.querySelector('.zgx')) return; // render() w trakcie: ekran regulaminu albo jego treść już jest
+  var rg = z.regulamin || {}, zg = z.zgoda || {}, lo = z.konto ? (z.konto.login || z.konto.email || '') : '';
+  zgEkran('<div class="zgn">' + (zg.stan !== 'wyrazona' ? 'Krok 1 z 2' : rg.stan === 'stara_wersja' ? 'Nowy regulamin' : 'Pierwsze logowanie') + '</div>', 'Regulamin prowadzenia',
+    '<p>To zasady naszej współpracy. Chronią obie strony. Pełna treść: <button type="button" class="lnk" id="rg-tresc">regulamin prowadzenia</button>.</p>'
+    + '<div class="zgr"><b>Najważniejsze zasady</b><ul>' + REG_ZASADY.map(function (t) { return '<li>' + t + '</li>'; }).join('') + '</ul></div>'
+    + '<label class="zgc"><input type="checkbox" id="rg-pole"' + (REG_POLE ? ' checked' : '') + '><i>' + REG_ZNAK + '</i><span>' + REG_ODSTAPIENIE + '</span></label>'
+    + '<label class="zgl" for="rg-slowo">Aby zaakceptować regulamin, wpisz słowo Akceptuję</label><input id="rg-slowo" class="zgi" autocomplete="off" autocorrect="off" spellcheck="false" value="' + esc(REG_SLOWO) + '">'
+    + '<button class="zgb" id="rg-btn" disabled>Dalej</button><div class="zge" id="rg-msg"></div>'
+    + '<p class="zgm">' + (z.nowy ? 'Nie akceptujesz? Napisz do Kuby, wpłata wraca w całości.' : 'W razie pytań napisz do Kuby.') + '</p><p class="zgm zgwy"><button type="button" class="lnk" id="rg-wyl">Wyloguj</button>' + (lo ? ' · ' + esc(lo) : '') + '</p>');
+  var pole = document.getElementById('rg-pole'), inp = document.getElementById('rg-slowo'), btn = document.getElementById('rg-btn'), msg = document.getElementById('rg-msg');
+  var spr = function () { REG_SLOWO = inp.value; REG_POLE = pole.checked; btn.disabled = !(pole.checked && slowoPasuje(inp.value, 'akceptuję')); };
+  pole.addEventListener('change', spr); inp.addEventListener('input', spr); inp.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !btn.disabled) btn.click(); }); spr();
+  document.getElementById('rg-tresc').onclick = function () { ekranRegulaminTresc(function () { ekranRegulaminu(true); }); };
+  document.getElementById('rg-wyl').onclick = zgWyloguj;
+  btn.onclick = function () {
+    if (!pole.checked || !slowoPasuje(inp.value, 'akceptuję')) return;
+    btn.disabled = true; btn.textContent = 'Zapisuję…'; msg.textContent = '';
+    api({ akcja: 'regulaminAkceptuj', sesja: SESJA, wersja: REGULAMIN_WERSJA, slowo: inp.value.trim(), odstapienie: true }).then(function (dane) {
+      REG_SLOWO = ''; REG_POLE = false; REG_KROK2 = !!dane.zgodaWymagana;
+      zgodaWyrazona(dane); // odpowiedź jak wczytaj: ekran zgody (krok 2) albo plan
+    }).catch(function (e) {
+      var m = String(e.message || e).replace(/^Error:\s*/, '');
+      if (/sesja|zaloguj|hasło/i.test(m)) { D = {}; wylogujKonto(true); ekranLogowania(m); return; }
+      btn.textContent = 'Dalej'; spr(); msg.textContent = m;
+    });
+  };
+}
+function ekranRegulaminTresc(wroc) {
+  zgEkran('<button type="button" class="zgwr" id="zg-wr1">‹ Wróć</button>', 'Regulamin prowadzenia', regulaminHtml() + '<button class="zgb2" id="zg-wr2" style="margin-top:16px">Wróć</button>');
+  document.getElementById('zg-wr1').onclick = wroc; document.getElementById('zg-wr2').onclick = wroc;
+}
 function zgWyloguj() {
   if (queue.length && !confirm('Na tym urządzeniu są zmiany, których nie udało się zapisać. Po wylogowaniu mogą przepaść. Wylogować mimo to?')) return;
-  var s = SESJA; queue = []; clearTimeout(timer); D = {}; ZG_SLOWO = ''; wylogujKonto(true);
+  var s = SESJA; queue = []; clearTimeout(timer); D = {}; ZG_SLOWO = ''; REG_SLOWO = ''; REG_POLE = false; REG_KROK2 = false; wylogujKonto(true);
   if (s) api({ akcja: 'wyloguj', sesja: s }).catch(function () {});
   ekranLogowania();
 }
@@ -3237,9 +3319,9 @@ function wczytano(dane) {
 // po zgodzie (odpowiedź jak wczytaj): plan od razu; kolejka odrzucona bez zgody nakładana i zapisywana jak po przedłużeniu dostępu
 function zgodaWyrazona(dane) {
   ZG_SLOWO = '';
-  if (dane.zgodaWymagana) { pokazZgode(dane); return; }
+  if ((dane.zgodaWymagana || dane.regulaminWymagany)) { pokazZgode(dane); return; }
   if (dane.bezPlanu) { D = {}; ekranStatusu(dane.konto, dane.zgoda); return; }
-  if (WIDOK === 'zgody' || WIDOK === 'polityka') ustawWidok('treningi');
+  if (WIDOK === 'zgody' || WIDOK === 'polityka' || WIDOK === 'regulamin') ustawWidok('treningi');
   if (D) delete D.zgodaEkran;
   if (D && D.bazaId && queue.length && !dane.dostepKoniec) { dostepWrocil(dane); return; }
   wczytano(dane);
@@ -3248,16 +3330,18 @@ function zgodaWyrazona(dane) {
 function zgodaPoBledzie() {
   if (D && D.zgodaEkran) return;
   api({ akcja: 'wczytaj', sesja: SESJA, frontZgody: 1 }).then(function (dane) {
-    if (dane.zgodaWymagana) { pokazZgode(dane); return; }
+    if ((dane.zgodaWymagana || dane.regulaminWymagany)) { pokazZgode(dane); return; }
     clearTimeout(timer); timer = setTimeout(flush, 3000);
   }).catch(function () { clearTimeout(timer); timer = setTimeout(flush, 15000); });
 }
 // widoki w menu (app.html: WIDOK „zgody” i „polityka”)
 function menuZgody() { idz('zgody'); }
 function menuPolityka() { idz('polityka'); }
+function menuRegulamin() { idz('regulamin'); } // patch162
 function widokZgody(w) {
   if (w === 'polityka') return '<div class="zgk zgv"><button type="button" class="zgwr" onclick="menuZgody()">‹ Twoje zgody</button><h2>Polityka prywatności</h2>' + politykaHtml() + '</div>';
-  return '<div class="zgk zgv"><div class="zgn">Konto</div><h2>Twoje zgody</h2><div class="zgr"><b>Zgoda na dane o zdrowiu</b><p>' + zgodaOpis(D.zgoda || {}) + '</p><button class="zgb2" id="zg-wyc" onclick="zgodaWycofajPanel()">Wycofaj zgodę</button></div>'
+  if (w === 'regulamin') return '<div class="zgk zgv"><button type="button" class="zgwr" onclick="menuZgody()">‹ Twoje zgody</button><h2>Regulamin prowadzenia</h2>' + regulaminHtml() + '</div>';
+  return '<div class="zgk zgv"><div class="zgn">Konto</div><h2>Twoje zgody</h2>' + regulaminRamka() + '<div class="zgr"><b>Zgoda na dane o zdrowiu</b><p>' + zgodaOpis(D.zgoda || {}) + '</p><button class="zgb2" id="zg-wyc" onclick="zgodaWycofajPanel()">Wycofaj zgodę</button></div>'
     + '<p class="zgm"><button type="button" class="lnk" onclick="menuPolityka()">Polityka prywatności</button></p></div>';
 }
 // panel wycofania (jak panel notatki): przycisk działa dopiero po wpisaniu słowa „Wycofuję”
@@ -3280,7 +3364,7 @@ function zgodaWycofajPanel() {
         zamknijArkusz(); ZG_SLOWO = ''; dane = dane || {};
         if (dane.bezPlanu) { queue = []; clearTimeout(timer); D = {}; ekranStatusu(dane.konto, dane.zgoda); return; }
         if (dane.dostepKoniec && D && D.dostepKoniec && D.bazaId) { D.zgoda = dane.zgoda; render(); return; } // kolejka czeka na przedłużenie
-        if (dane.zgodaWymagana) pokazZgode(dane); else wczytano(dane);
+        if ((dane.zgodaWymagana || dane.regulaminWymagany)) pokazZgode(dane); else wczytano(dane);
       });
     }).catch(function (e) {
       var m = String(e.message || e).replace(/^Error:\s*/, '');
